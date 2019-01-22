@@ -1,0 +1,52 @@
+version: "2"
+
+volumes:
+  mongo-data:
+    external: false
+  redis-data:
+    external: false
+
+services:
+  nginx-local:
+    image: bootlegger/nginx-local
+    ports:
+      - "80:80"
+    volumes:
+      - "/c/ourstory_content:/usr/src/app/upload"
+    volumes_from:
+      - web
+
+  redis:
+    image: redis:alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+
+  mongo:
+    image: mvertes/alpine-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  beanstalk:
+    image: kusmierz/beanstalkd
+
+  worker:
+    image: bootlegger/ourstory-worker:latest
+    depends_on:
+      - mongo
+      - beanstalk
+    volumes_from:
+      - web
+    volumes:
+      - "/c/ourstory_content:/usr/src/app/upload"
+
+  web:
+    image: bootlegger/ourstory-server:latest
+    depends_on: 
+      - redis
+      - mongo
+      - beanstalk
+    volumes:
+      - "/c/ourstory_content:/usr/src/app/upload"
