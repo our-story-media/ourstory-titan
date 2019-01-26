@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls.Dialogs;
 using System.Threading;
+using Bootlegger.App.Lib;
 
 namespace Bootlegger.App.Win
 {
@@ -35,7 +36,11 @@ namespace Bootlegger.App.Win
         private void InstallDocker_Loaded(object sender, RoutedEventArgs e)
         {
             cancel = new CancellationTokenSource();
-            
+
+            BootleggerApplication.Log.Info("Install started");
+
+            BootleggerApplication.Log.Info("Has cache", App.BootleggerApp.HasCachedContent);
+
             needswifi.Visibility = (!App.BootleggerApp.HasCachedContent) ? Visibility.Visible : Visibility.Hidden;
         }
 

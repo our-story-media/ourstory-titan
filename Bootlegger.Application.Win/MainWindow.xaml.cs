@@ -69,12 +69,12 @@ namespace Bootlegger.App.Win
             }
         }
 
-        private async void MainWindow_Initialized(object sender, EventArgs e)
+        private void MainWindow_Initialized(object sender, EventArgs e)
         {
             progress.Visibility = Visibility.Hidden;
 
             //HACK FOR DEGUB
-            //App.BootleggerApp.IsInstalled = false; 
+            App.BootleggerApp.IsInstalled = false;
 
             if (App.BootleggerApp.IsInstalled)
             {

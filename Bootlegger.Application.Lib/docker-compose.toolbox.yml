@@ -9,44 +9,51 @@ volumes:
 services:
   nginx-local:
     image: bootlegger/nginx-local
+    restart: on-failure
     ports:
       - "80:80"
     volumes:
-      - "/c/ourstory_content:/usr/src/app/upload"
+      - "/c/Users/public/ourstorycontent:/usr/src/app/upload"
     volumes_from:
       - web
 
   redis:
     image: redis:alpine
+    restart: on-failure
     command: redis-server --appendonly yes
     volumes:
       - redis-data:/data
 
   mongo:
     image: mvertes/alpine-mongo
+    restart: on-failure
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
 
   beanstalk:
+    restart: on-failure
     image: kusmierz/beanstalkd
 
   worker:
     image: bootlegger/ourstory-worker:latest
+    command: nodemon --watch false --exitcrash index.js
+    restart: on-failure
     depends_on:
       - mongo
       - beanstalk
     volumes_from:
       - web
     volumes:
-      - "/c/ourstory_content:/usr/src/app/upload"
+      - "/c/Users/public/ourstorycontent:/usr/src/app/upload"
 
   web:
     image: bootlegger/ourstory-server:latest
+    restart: on-failure
     depends_on: 
       - redis
       - mongo
       - beanstalk
     volumes:
-      - "/c/ourstory_content:/usr/src/app/upload"
+      - "/c/Users/public/ourstorycontent:/usr/src/app/upload"

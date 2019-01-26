@@ -7,9 +7,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Net.Sockets;
-using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using YamlDotNet.RepresentationModel;
@@ -20,11 +17,15 @@ using System.Security.Cryptography.X509Certificates;
 using CertificatesToDBandBack;
 using System.Security.Cryptography;
 using System.Security.AccessControl;
+using NLog;
 
 namespace Bootlegger.App.Lib
 {
     public class BootleggerApplication : IProgress<JSONMessage>
     {
+
+        public static Logger Log {get => LogManager.GetCurrentClassLogger(); }
+
         public enum INSTALL_STATE { NOT_SUPPORTED, NEED_DOWNLOAD, NEED_IMAGES, INSTALLED }
 
         public enum RUNNING_STATE { READY, RUNNING, NOWIFICONFIG }
@@ -39,8 +40,6 @@ namespace Bootlegger.App.Lib
 
         Docker.DotNet.DockerClient dockerclient;
 
-        //private SsdpDevicePublisher _Publisher;
-
         #region Installer
         
         public bool IsInstalled
@@ -48,7 +47,6 @@ namespace Bootlegger.App.Lib
             get
             {
                 return Plugin.Settings.CrossSettings.Current.GetValueOrDefault("ourstory_installed", false);
-                //return Xamarin.Essentials.Preferences.Get("ourstory.installed", false);
             }
 
             set
@@ -101,6 +99,7 @@ namespace Bootlegger.App.Lib
 
         public async Task DownloadInstaller(CancellationToken cancel)
         {
+            Log.Info("Starting download");
             string src = "";
             string dst = "";
             switch (CurrentInstallerType)
@@ -118,9 +117,15 @@ namespace Bootlegger.App.Lib
 
             if (!File.Exists(Path.Combine("downloads",dst)))
             {
+                Log.Info($"Initiating download of {src}");
                 await DownloadFileInBackground(src,Path.Combine("downloads",dst + ".download"),cancel);
+                Log.Info("Download complete");
                 File.Move(Path.Combine("downloads", dst + ".download"), Path.Combine("downloads", dst));
+                Log.Info("Moving download file to correct name");
             }
+            else
+                Log.Info($"Download not required for {src}");
+
         }
 
         public event Action<DownloadProgressChangedEventArgs> OnFileDownloadProgress;
@@ -142,20 +147,40 @@ namespace Bootlegger.App.Lib
             await client.DownloadFileTaskAsync(uri, dst);
         }
 
-        static Task<int> RunProcessAsync(string fileName, string arg)
+        static Task<int> RunProcessAsync(string fileName, string arg, bool show = false)
         {
+            Log.Info($"{fileName} {arg}");
+             
             var tcs = new TaskCompletionSource<int>();
 
             var process = new Process
             {
-                StartInfo = { FileName = fileName, Arguments = arg },
+                StartInfo = {
+                    FileName = fileName,
+                    Arguments = arg,
+                    RedirectStandardError = (show)? false : true,
+                    RedirectStandardOutput = (show)? false : true,
+                    UseShellExecute = (show)? true: false,
+                    WindowStyle = (show)? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden
+                },
                 EnableRaisingEvents = true
             };
 
             process.Exited += (sender, args) =>
             {
+
                 tcs.SetResult(process.ExitCode);
                 process.Dispose();
+            };
+
+            process.OutputDataReceived += (sender, args) =>
+             {
+                 Log.Info($"{fileName}",args.Data);
+             };
+
+            process.ErrorDataReceived += (sender, args) =>
+            {
+                Log.Error($"{fileName}", args.Data);
             };
 
             process.Start();
@@ -165,6 +190,7 @@ namespace Bootlegger.App.Lib
 
         public async Task RunInstaller(CancellationToken cancel)
         {
+            Log.Info("Installing docker");
             string args = "";
             string file = "";
             switch (CurrentInstallerType)
@@ -176,11 +202,11 @@ namespace Bootlegger.App.Lib
 
                 case InstallerType.NO_HYPER_V:
                     file = Path.Combine(Environment.CurrentDirectory, "downloads", INSTALLER_LOCAL);
-                    args = "/SP- /SILENT /SUPPRESSMSGBOXES /NORESTART";
+                    args = "/SP- /SILENT /NOCANCEL /SUPPRESSMSGBOXES /NORESTART";
                     break;
             }
 
-            await RunProcessAsync(file,args);
+            await RunProcessAsync(file,args,true);
         }
 
         #endregion
@@ -193,10 +219,13 @@ namespace Bootlegger.App.Lib
                 switch (CurrentInstallerType)
                 {
                     case InstallerType.HYPER_V:
+                        Log.Info("Starting HyperV Docker");
+
                         dockerclient = new DockerClientConfiguration(new Uri("npipe://./pipe/docker_engine")).CreateClient();
                         break;
 
                     case InstallerType.NO_HYPER_V:
+                        Log.Info("Starting Toolbox Docker");
 
                         var info = await Process.Start(new ProcessStartInfo("docker-machine", "env --shell=cmd")
                         //var info = await Process.Start(new ProcessStartInfo("cmd.exe","/C @FOR / f \"tokens=*\" % i IN('docker-machine env') DO @% i")
@@ -367,7 +396,7 @@ namespace Bootlegger.App.Lib
                     break;
 
                 case InstallerType.NO_HYPER_V:
-                    System.Diagnostics.Process.Start(@"C:\ourstory_content");
+                    System.Diagnostics.Process.Start(@"C:\Users\Public\ourstorycontent");
                     break;
 
             }
@@ -408,21 +437,27 @@ namespace Bootlegger.App.Lib
 
         public async Task BackupDatabase()
         {
-            var dirname = DateTime.Now.ToFileTime();
-            Directory.CreateDirectory($"backup\\{dirname}");
-            var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("bootlegger");
-            var tables = await database.ListCollectionNamesAsync();
-            foreach (var col in tables.ToList())
+            try
             {
-                StreamWriter writer = new StreamWriter($"backup\\{dirname}\\{col}.json");
-                var collection = database.GetCollection<BsonDocument>(col);
-                await collection.Find(new BsonDocument()).ForEachAsync(d =>
-                    writer.WriteLine(d.ToJson())
-                );
-                //Console.WriteLine("DONE " + col);
-                await writer.FlushAsync();
-                writer.Close();
+                var dirname = DateTime.Now.ToFileTime();
+                Directory.CreateDirectory($"backup\\{dirname}");
+                var client = new MongoClient("mongodb://localhost:27017");
+                var database = client.GetDatabase("bootlegger");
+                var tables = await database.ListCollectionNamesAsync();
+                foreach (var col in tables.ToList())
+                {
+                    StreamWriter writer = new StreamWriter($"backup\\{dirname}\\{col}.json");
+                    var collection = database.GetCollection<BsonDocument>(col);
+                    await collection.Find(new BsonDocument()).ForEachAsync(d =>
+                        writer.WriteLine(d.ToJson())
+                    );
+                    //Console.WriteLine("DONE " + col);
+                    await writer.FlushAsync();
+                    writer.Close();
+                }
+            }
+            catch (Exception e)
+            {
 
             }
         }
@@ -451,8 +486,10 @@ namespace Bootlegger.App.Lib
                 //check if the local version of the images exists:
                 if (File.Exists(Path.Combine("downloads","images.tar")))
                 {
+                    Log.Info("Using local images.tar file");
                     doonline = false;
                     await dockerclient.Images.LoadImageAsync(new ImageLoadParameters(), File.OpenRead(Path.Combine("downloads","images.tar")),this,cancel);
+                    Log.Info("Local cached docker load complete");
                     OnNextDownload?.Invoke(1, 1, 1);
                 }
             }
@@ -487,9 +524,7 @@ namespace Bootlegger.App.Lib
                                 FromImage = img[0],
                                 Tag = (img.Length > 1) ? img[1] : "latest"
                             });
-                            //Console.WriteLine(image);
                         }
-                        //output.WriteLine(((YamlScalarNode)entry.Key).Value);
                     }
                 }
 
@@ -505,10 +540,8 @@ namespace Bootlegger.App.Lib
                         try
                         {
                             if (forceupdate)
-                                throw new Exception("Must update");
+                                throw new Exception($"Forcing image pull: {im.FromImage}");
                             var exists = await dockerclient.Images.InspectImageAsync(im.FromImage, cancel);
-                            //CurrentDownload++;
-                            //OnNextDownload(CurrentDownload, imagestodownload.Count, CurrentDownload / (double)imagestodownload.Count);
                         }
                         catch (Exception e)
                         {
@@ -632,71 +665,35 @@ namespace Bootlegger.App.Lib
 
         public async Task StartDocker(CancellationToken cancel)
         {
+            Log.Info("Starting docker");
+
             switch (CurrentInstallerType)
             {
                 case InstallerType.HYPER_V:
+                    Log.Info("Starting Docker for Windows");
+
                     Process.Start(@"C:\Program Files\Docker\Docker\Docker for Windows.exe");
                     break;
 
                 case InstallerType.NO_HYPER_V:
+                    const string name = "PATH";
+                    string pathvar = System.Environment.GetEnvironmentVariable(name);
+                    var value = pathvar + @";C:\Program Files\Docker Toolbox;C:\Program Files\Oracle\VirtualBox\";
+                    Environment.SetEnvironmentVariable(name, value);
+                    Environment.SetEnvironmentVariable("DOCKER_TOOLBOX_INSTALL_PATH", @"C:\Program Files\Docker Toolbox");
+                    Environment.SetEnvironmentVariable("VBOX_MSI_INSTALL_PATH", @"C:\Program Files\Oracle\VirtualBox\");
 
-                    try
-                    {
-                        if (!Directory.Exists(@"C:\ourstory_content"))
-                            Directory.CreateDirectory(@"C:\ourstory_content");
-                        //Directory.SetAccessControl(@"C:\Users\ourstory_content",
-                        AddDirectorySecurity(@"C:\ourstory_content", "Everyone", FileSystemRights.FullControl, AccessControlType.Allow);
-                    }
-                    catch (Exception e)
-                    {
+                    Log.Info($"Starting docker-toolbox");
+                    
+                    await RunProcessAsync(@"C:\Program Files\Git\bin\bash.exe", "-c \" \\\"/c/Program Files/Docker Toolbox/start.sh\\\" \\\"%*\\\"\"",true);
 
-                    }
+                    Log.Info($"Port forward 80");
 
-                    //SET DOCKER BINARY ENV FOR WHEN INSTALLER HAS ONLY JUST RUN...
-                    if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOCKER_TOOLBOX_INSTALL_PATH")))
-                    {
-                        //Environment.SetEnvironmentVariable("DOCKER_TOOLBOX_INSTALL", @"C:\Program Files\Docker Toolbox");
-                        const string name = "PATH";
-                        string pathvar = System.Environment.GetEnvironmentVariable(name);
-                        var value = pathvar + @";C:\Program Files\Docker Toolbox;C:\Program Files\Oracle\VirtualBox\";
-                        Environment.SetEnvironmentVariable(name, value);
-                        Environment.SetEnvironmentVariable("DOCKER_TOOLBOX_INSTALL_PATH", @"C:\Program Files\Docker Toolbox");
-                        Environment.SetEnvironmentVariable("VBOX_MSI_INSTALL_PATH", @"C:\Program Files\Oracle\VirtualBox\");
-                    }
+                    await RunProcessAsync("VBoxManage.exe", "controlvm default natpf1 \"rule1, tcp,, 80,, 80\"");
 
-                    var startinfo = new ProcessStartInfo(@"C:\Program Files\Git\bin\bash.exe")
-                    {
-                        Arguments = "-c \" \\\"/c/Program Files/Docker Toolbox/start.sh\\\" \\\"%*\\\"\"",
-                        CreateNoWindow = true,
-                        WindowStyle = ProcessWindowStyle.Hidden
-                    };
+                    Log.Info($"Port forward 27017");
 
-                    //wait for docker to start...
-                    var process = Process.Start(startinfo);
-                    await Task.Factory.StartNew(() =>
-                    {
-                        process.WaitForExit();
-                    });
-
-                    //set port forwarding...
-                    Process.Start(new ProcessStartInfo("VBoxManage.exe", "controlvm default natpf1 \"rule1, tcp,, 80,, 80\"")
-                    {
-                        CreateNoWindow = true,
-                        WindowStyle = ProcessWindowStyle.Hidden
-                    }).WaitForExit();
-                    Process.Start(new ProcessStartInfo("VBoxManage.exe", "controlvm default natpf1 \"rule2, tcp,, 27107,, 27017\"")
-                    {
-                        CreateNoWindow = true,
-                        WindowStyle = ProcessWindowStyle.Hidden
-                    }).WaitForExit();
-                    Process.Start(new ProcessStartInfo("VBoxManage.exe", "sharedfolder add default --name \"c/ourstory_content\" --hostpath \"C:\\ourstory_content\\\" --transient --automount")
-                    {
-                        //RedirectStandardOutput = true,
-                        //RedirectStandardError = true,
-                        //UseShellExecute = false
-                        CreateNoWindow = true,
-                        WindowStyle = ProcessWindowStyle.Hidden
-                    }).WaitForExit();
+                    await RunProcessAsync("VBoxManage.exe", "controlvm default natpf1 \"rule2, tcp,, 27017,, 27017\"");
 
                     DockerStarted = true;
                     break;
@@ -717,7 +714,7 @@ namespace Bootlegger.App.Lib
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.Message);
+                        Log.Error(e);
                     }
                     Thread.Sleep(5000);
                 }
@@ -729,6 +726,7 @@ namespace Bootlegger.App.Lib
             }
             else
             {
+                Log.Error(new TimeoutException());
                 throw new TimeoutException();
             }
         }
@@ -756,6 +754,10 @@ namespace Bootlegger.App.Lib
                 }
             }
 
+            if (!connected)
+               Log.Error($"Cannot connect to local server");
+
+
             return connected;
         }
 
@@ -769,20 +771,12 @@ namespace Bootlegger.App.Lib
             
             try
             {
-                currentProcess = new Process();
-                currentProcess.StartInfo = new ProcessStartInfo("docker-compose");
-                currentProcess.StartInfo.Arguments = "-p bootleggerlocal stop";
-                currentProcess.StartInfo.UseShellExecute = false;
-                currentProcess.StartInfo.CreateNoWindow = true;
-                currentProcess.Start();
-                await Task.Run(() =>
-                {
-                    currentProcess.WaitForExit();
-                });
+                await RunProcessAsync("docker-compose", $"-f {DockerComposeFile} -p bootleggerlocal stop");
             }
-            catch
+            catch (Exception e)
             {
                 //cant stop?
+                Log.Error(e);
             }
 
             //stop docker??
@@ -797,16 +791,10 @@ namespace Bootlegger.App.Lib
 
         public void Report(JSONMessage value)
         {
-            //Debug.WriteLine(value.From);
-            
-            //Debug.WriteLine(value.Status);
-            //Debug.WriteLine(value.ProgressMessage);
             if (value.ProgressMessage != null)
             {
                 Debug.WriteLine(value.Progress.Current);
-                //Debug.WriteLine(value.ProgressMessage);
                 Layers[value.ID] = value.Progress.Current / (double)value.Progress.Total;
-                //Console.WriteLine(CurrentDownload);
                 OnDownloadProgress?.Invoke("Downloading", CurrentDownload, imagestodownload.Count, Layers, CurrentDownload / (double)imagestodownload.Count);
             }
         }
