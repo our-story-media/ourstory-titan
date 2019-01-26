@@ -263,3 +263,4 @@ paket-files/
 *.exe
 *.tar
 !install/
+!setup.exe
