@@ -19,13 +19,17 @@
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
+    <UpdateMode>Background</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdatePeriodically>true</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>https://raw.githubusercontent.com/digitalinteraction/ourstory-titan/master/install/</InstallUrl>
+    <UpdateUrl>https://raw.githubusercontent.com/digitalinteraction/ourstory-titan/master/install/</UpdateUrl>
+    <SupportUrl>https://guide.ourstory.video</SupportUrl>
+    <ProductName>Our Story</ProductName>
+    <PublisherName>Newcastle University</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.0</ApplicationVersion>
