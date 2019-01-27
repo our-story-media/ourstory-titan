@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:Bootlegger.App.Win.Installer"
+"ProjectName" = "8:Bootlegger.App.Win.InstallerOffline"
 "LanguageId" = "3:1033"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1033"
@@ -27,8 +27,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_05AD97DF6A194BDE95F5EB8ACA207A89"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_06632125C8EBF0047B38404153EB91E0"
         "OwnerKey" = "8:_65E10826A838486CB805AE80584177EE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_07A21EFB977F4D4AAC5B52D889517E64"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -310,13 +322,13 @@
         "Entry"
         {
         "MsmKey" = "8:_41EC58A78ECB936234D884C5A587B50E"
-        "OwnerKey" = "8:_65E10826A838486CB805AE80584177EE"
+        "OwnerKey" = "8:_9C97CE02F0D1E86BD12627054458DE2B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_41EC58A78ECB936234D884C5A587B50E"
-        "OwnerKey" = "8:_9C97CE02F0D1E86BD12627054458DE2B"
+        "OwnerKey" = "8:_65E10826A838486CB805AE80584177EE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1546,13 +1558,13 @@
         "Entry"
         {
         "MsmKey" = "8:_D7E393B4B5505DEDED174673095C5F1A"
-        "OwnerKey" = "8:_65E10826A838486CB805AE80584177EE"
+        "OwnerKey" = "8:_887FBA5841D713D8F960A365766C6E7E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_D7E393B4B5505DEDED174673095C5F1A"
-        "OwnerKey" = "8:_887FBA5841D713D8F960A365766C6E7E"
+        "OwnerKey" = "8:_65E10826A838486CB805AE80584177EE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1816,12 +1828,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_41EC58A78ECB936234D884C5A587B50E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_6CA2CCDFDED14D54CF68ABEC12DCFE95"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2014,6 +2020,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_41EC58A78ECB936234D884C5A587B50E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_F06D9C0779E95DFE0518503A21A77A71"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2117,7 +2129,7 @@
             {
             "Enabled" = "11:TRUE"
             "PromptEnabled" = "11:TRUE"
-            "PrerequisitesLocation" = "2:1"
+            "PrerequisitesLocation" = "2:2"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
                 "Items"
@@ -2135,11 +2147,11 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\OurStoryStandalone.msi"
+        "OutputFilename" = "8:Release\\OurStoryTitan.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
-        "Compression" = "3:2"
+        "Compression" = "3:3"
         "SignOutput" = "11:FALSE"
         "CertificateFile" = "8:"
         "PrivateKeyFile" = "8:"
@@ -2149,7 +2161,7 @@
             {
             "Enabled" = "11:TRUE"
             "PromptEnabled" = "11:TRUE"
-            "PrerequisitesLocation" = "2:1"
+            "PrerequisitesLocation" = "2:2"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
                 "Items"
@@ -2167,6 +2179,20 @@
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_E708D093C0BD40C3A54B71B9E09B1780"
+            {
+            "Name" = "8:Primary output from Bootlegger.App.Win (Active)"
+            "Condition" = "8:"
+            "Object" = "8:_65E10826A838486CB805AE80584177EE"
+            "FileType" = "3:2"
+            "InstallAction" = "3:1"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_080DDD28_3847_464E_B1AB_2FB9C750D1A9"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
         }
         "DefaultFeature"
         {
@@ -2221,6 +2247,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_05AD97DF6A194BDE95F5EB8ACA207A89"
+            {
+            "SourcePath" = "8:..\\Bootlegger.Application.Win\\Readme.rtf"
+            "TargetName" = "8:Readme.rtf"
+            "Tag" = "8:"
+            "Folder" = "8:_B214B1B3EBA84645BABEF370A996E37D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_06632125C8EBF0047B38404153EB91E0"
             {
             "AssemblyRegister" = "3:1"
@@ -2250,6 +2296,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_07A21EFB977F4D4AAC5B52D889517E64"
+            {
+            "SourcePath" = "8:C:\\Users\\Tom Bartindale\\Pictures\\logo_install.bmp"
+            "TargetName" = "8:logo_install.bmp"
+            "Tag" = "8:"
+            "Folder" = "8:_B214B1B3EBA84645BABEF370A996E37D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:TRUE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0820990C1655142B607E20FA329B2771"
@@ -6257,7 +6323,7 @@
                 {
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_935C7CEBF87D43A0BF3CD8EA7C29ADC6"
                     {
-                    "Name" = "8:Our Story Standalone"
+                    "Name" = "8:Our Story Titan"
                     "AlwaysCreate" = "11:FALSE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
@@ -6281,7 +6347,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_B214B1B3EBA84645BABEF370A996E37D"
             {
-            "DefaultLocation" = "8:C:\\[Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -6308,28 +6374,28 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Our Story Titan"
         "ProductCode" = "8:{34A7C04E-CB8F-445F-BA64-2B79185309C4}"
-        "PackageCode" = "8:{3CB50919-738E-4255-96D3-DE284AF9E4A0}"
+        "PackageCode" = "8:{D3FA5153-F985-491D-AB1B-AE4D1547805D}"
         "UpgradeCode" = "8:{7016BCA9-4D43-4C42-80A9-04D1C6DA2405}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
         "ProductVersion" = "8:1.0.0"
         "Manufacturer" = "8:Newcastle University"
         "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:"
-        "Title" = "8:Our Story Standalone"
+        "ARPHELPLINK" = "8:https://guide.ourstory.video"
+        "Title" = "8:Our Story Titan"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Newcastle University"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_DF432F15B64C4496A42B6C450C29A2C9"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:1"
+        "TargetPlatform" = "3:0"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
@@ -6444,7 +6510,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_426A6223CF934D25986B3A1CD2D4F9F5"
             {
-            "Name" = "8:Our Story Standalone"
+            "Name" = "8:Our Story Titan"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
@@ -6483,7 +6549,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_07A21EFB977F4D4AAC5B52D889517E64"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "UpdateText"
@@ -6494,8 +6561,8 @@
                             "Type" = "3:15"
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1258"
+                            "Setting" = "3:2"
+                            "Value" = "8:Please run the application to install additional required software before entering the field."
                             "DefaultValue" = "8:#1258"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -6671,7 +6738,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_07A21EFB977F4D4AAC5B52D889517E64"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "ShowProgress"
@@ -6742,9 +6810,57 @@
             "Attributes" = "3:1"
                 "Dialogs"
                 {
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_238ECF6DA7564A5A870BC284172921F2"
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_08C52E1E4068486B85BE7486D2E92164"
                     {
-                    "Sequence" = "3:200"
+                    "Sequence" = "3:300"
+                    "DisplayName" = "8:Read Me"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdReadmeDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:2"
+                            "Value" = "8:_07A21EFB977F4D4AAC5B52D889517E64"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "ReadmeText"
+                            {
+                            "Name" = "8:ReadmeText"
+                            "DisplayName" = "8:#1010"
+                            "Description" = "8:#1110"
+                            "Type" = "3:6"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:2"
+                            "Value" = "8:_05AD97DF6A194BDE95F5EB8ACA207A89"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Sunken"
+                            {
+                            "Name" = "8:Sunken"
+                            "DisplayName" = "8:#1007"
+                            "Description" = "8:#1107"
+                            "Type" = "3:5"
+                            "ContextData" = "8:4;True=4;False=0"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:0"
+                            "Value" = "3:0"
+                            "DefaultValue" = "3:4"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_3C6EC9FC3EB54C618BA2F1C100FB52B9"
+                    {
+                    "Sequence" = "3:400"
                     "DisplayName" = "8:Installation Folder"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
@@ -6759,7 +6875,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_07A21EFB977F4D4AAC5B52D889517E64"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "InstallAllUsersVisible"
@@ -6773,6 +6890,29 @@
                             "Setting" = "3:0"
                             "Value" = "3:1"
                             "DefaultValue" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_7B6E806BDF224EBDB1EA67056A3F89C4"
+                    {
+                    "Sequence" = "3:500"
+                    "DisplayName" = "8:Confirm Installation"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdConfirmDlg.wid"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:2"
+                            "Value" = "8:_07A21EFB977F4D4AAC5B52D889517E64"
                             "UsePlugInResources" = "11:TRUE"
                             }
                         }
@@ -6794,7 +6934,8 @@
                             "Type" = "3:8"
                             "ContextData" = "8:Bitmap"
                             "Attributes" = "3:4"
-                            "Setting" = "3:1"
+                            "Setting" = "3:2"
+                            "Value" = "8:_07A21EFB977F4D4AAC5B52D889517E64"
                             "UsePlugInResources" = "11:TRUE"
                             }
                             "CopyrightWarning"
@@ -6805,8 +6946,8 @@
                             "Type" = "3:3"
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
-                            "Setting" = "3:1"
-                            "Value" = "8:#1202"
+                            "Setting" = "3:2"
+                            "Value" = "8:This product is Open Source  (MIT) and comes with no warranty."
                             "DefaultValue" = "8:#1202"
                             "UsePlugInResources" = "11:TRUE"
                             }
@@ -6825,28 +6966,6 @@
                             }
                         }
                     }
-                    "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_BF619901FFC444EE8A9B7A5839D2FD0E"
-                    {
-                    "Sequence" = "3:300"
-                    "DisplayName" = "8:Confirm Installation"
-                    "UseDynamicProperties" = "11:TRUE"
-                    "IsDependency" = "11:FALSE"
-                    "SourcePath" = "8:<VsdDialogDir>\\VsdConfirmDlg.wid"
-                        "Properties"
-                        {
-                            "BannerBitmap"
-                            {
-                            "Name" = "8:BannerBitmap"
-                            "DisplayName" = "8:#1001"
-                            "Description" = "8:#1101"
-                            "Type" = "3:8"
-                            "ContextData" = "8:Bitmap"
-                            "Attributes" = "3:4"
-                            "Setting" = "3:1"
-                            "UsePlugInResources" = "11:TRUE"
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -6857,7 +6976,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_65E10826A838486CB805AE80584177EE"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\Bootlegger.Application.Win\\obj\\Debug\\Our Story Titan.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_B214B1B3EBA84645BABEF370A996E37D"

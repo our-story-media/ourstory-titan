@@ -24,7 +24,7 @@ namespace Bootlegger.App.Lib
     public class BootleggerApplication : IProgress<JSONMessage>
     {
 
-        public static Logger Log {get => LogManager.GetCurrentClassLogger(); }
+        public static Logger Log { get => LogManager.GetLogger(typeof(BootleggerApplication).FullName); }
 
         public enum INSTALL_STATE { NOT_SUPPORTED, NEED_DOWNLOAD, NEED_IMAGES, INSTALLED }
 
@@ -161,6 +161,7 @@ namespace Bootlegger.App.Lib
                     RedirectStandardError = (show)? false : true,
                     RedirectStandardOutput = (show)? false : true,
                     UseShellExecute = (show)? true: false,
+                    CreateNoWindow = (show)? false: true,
                     WindowStyle = (show)? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden
                 },
                 EnableRaisingEvents = true
