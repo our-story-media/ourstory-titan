@@ -26,7 +26,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>https://raw.githubusercontent.com/digitalinteraction/ourstory-titan/master/install/online/</InstallUrl>
-    <UpdateUrl>https://raw.githubusercontent.com/digitalinteraction/ourstory-titan/master/install/</UpdateUrl>
+    <UpdateUrl>https://raw.githubusercontent.com/digitalinteraction/ourstory-titan/master/install/online/</UpdateUrl>
     <SupportUrl>https://guide.ourstory.video</SupportUrl>
     <ProductName>Our Story</ProductName>
     <PublisherName>Newcastle University</PublisherName>
