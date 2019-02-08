@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+	<Bundle Name="Our Story Titan" Version="1.0.0.0" Manufacturer="Newcastle University" UpgradeCode="baea7c67-a469-4b75-b01e-c69c5e81205b">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLargeLicense">
+      <bal:WixStandardBootstrapperApplication
+                  LicenseFile="$(var.SolutionDir)\Bootlegger.Application.Win\Readme.rtf"
+                  LogoFile="$(var.SolutionDir)\Bootlegger.Application.Win\logo.bmp"
+                  SuppressOptionsUI="yes"
+                  ShowVersion="no"
+            />
+    </BootstrapperApplicationRef>
+
+    <PayloadGroup Id="NetFx461RedistPayload">
+      <Payload Name="redist\NDP461-KB3102436-x86-x64-AllOS-ENU.exe"
+               SourceFile="$(var.SolutionDir)Bootlegger.Application.Lib\downloads\NDP461-KB3102436-x86-x64-AllOS-ENU.exe"/>
+    </PayloadGroup>
+    
+		<Chain>
+      <PackageGroupRef Id="NetFx461Redist"/>
+      <MsiPackage Visible="yes" Id="OurStory" SourceFile="$(var.Installer.TargetPath)"/>
+		</Chain>
+	</Bundle>
+</Wix>

@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDER">
+            <Directory Id="dir00122602D311392A9D483BE33FE17DEF" Name="app.publish" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="ProductFilesComponentGroup">
+            <Component Id="cmp0719C104AFBDCF5066A91818FEA7A97C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filA433A5926E3411648E744E1DF88D5347" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\.env" />
+            </Component>
+            <Component Id="cmp0511108755B90AB859364DF73D32156B" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil0393EF7068B5F2BC841C1F58EF7E89BE" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\AvalonLibrary.dll" />
+            </Component>
+            <Component Id="cmp9761A581F56C13DF87104C3A3398591C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filBC6E5D5916F7D2563BCF8503F65F0A9B" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\AvalonLibrary.xml" />
+            </Component>
+            <Component Id="cmp9110E4565D76564E9BC2F34625854902" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filAC751AB8116CEF372F8CFDA54B395D08" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\ControlzEx.dll" />
+            </Component>
+            <Component Id="cmp4DE861D215883636FECF0D07B8D443D7" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil3206B90EA5541C5442934CA10AD49FF3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\ControlzEx.pdb" />
+            </Component>
+            <Component Id="cmp73F5E8FBB8791D910527DDD7786C1F56" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filEB8214371A71B894A4EDE52135CFC9A4" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\DnsClient.dll" />
+            </Component>
+            <Component Id="cmp192934A067225EB42452B26BA12E45E5" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filA229F8F78740FBFBFC75888FC3E4ADBA" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\DnsClient.xml" />
+            </Component>
+            <Component Id="cmp247F7E4BC6A9AD1F8EDA11657F30A6B9" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil02C75B905ACE6488582C7B2615663D71" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\docker-compose.toolbox.yml" />
+            </Component>
+            <Component Id="cmpFC104E466817F550392DBD8D35399D3C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil930855C8C62553F5BF53E6A33B3F81C6" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\docker-compose.windows.yml" />
+            </Component>
+            <Component Id="cmp66C40B7E58E4A434BE0E676699DA1577" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil350546A008B6EC9539C604E01722D214" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Docker.DotNet.dll" />
+            </Component>
+            <Component Id="cmp4DB50D9CEC073BC170ECFD29DD85D114" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil2F4A157B7EC40AE551D4CAA02E513E6E" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Docker.DotNet.X509.dll" />
+            </Component>
+            <Component Id="cmp00F70D74F64848C1781B2FF5436EC1CB" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filB09665B9622DF25B739264D859F596ED" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\log.txt" />
+            </Component>
+            <Component Id="cmp223D4754378C01052DA8253A843FD297" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filBC562C5B3D9848A2114F0AF7275FF1E6" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\MahApps.Metro.dll" />
+            </Component>
+            <Component Id="cmp31541C871E68AFBC70137561BF857C7B" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil109901354A5E9C0DB4A287ECF7B10D9E" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\MahApps.Metro.pdb" />
+            </Component>
+            <Component Id="cmp43D899344ED173B0DAFCD84946D02788" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil7FCB3B29476FFB610381CD77013296AD" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\MahApps.Metro.xml" />
+            </Component>
+            <Component Id="cmpC089979D7EDD0520871FCF59E4512F6A" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil69885EF287CDAEE15C09BE435AEC1160" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Microsoft.Win32.Primitives.dll" />
+            </Component>
+            <Component Id="cmpB2FD5994A10C9AB460E9CE508B691E19" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil9DF7A4C3A0C0BBE3B78B521AF41EA5AC" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\MongoDB.Bson.dll" />
+            </Component>
+            <Component Id="cmp7A825ED40FDDA8A24C042898E7AD2A16" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filFC8B32438AF6814E716120E8705946DF" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\MongoDB.Bson.xml" />
+            </Component>
+            <Component Id="cmpC0C6F8882F5B69FEEE9CCC8888A0E052" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filF2623ADDD482D112A495A2DD71875ACB" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\MongoDB.Driver.Core.dll" />
+            </Component>
+            <Component Id="cmpE5A7C60CB538143C1511C42DC251F9E6" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil3252C9DED4E4F780B1FC363661DE881C" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\MongoDB.Driver.Core.xml" />
+            </Component>
+            <Component Id="cmpE56A6DE4388D93370F9D1B4BB25D346E" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil4683BCC54192F605ACA72D0DD85BF7EA" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\MongoDB.Driver.dll" />
+            </Component>
+            <Component Id="cmp488EC312C9F084ECC476F027D0386B70" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil344A5E839AD949BE21D346E2115D9C27" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\MongoDB.Driver.xml" />
+            </Component>
+            <Component Id="cmp2D22C362F8F0B3B68D8A335DB9874738" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil0C7258C62EED04D203F333E1383578C2" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\netstandard.dll" />
+            </Component>
+            <Component Id="cmpBC4FC00A26E7D32479D42D3411317FC5" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil90A8AAD9FC612906D405476D61CEA3F4" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Newtonsoft.Json.dll" />
+            </Component>
+            <Component Id="cmp125C379E185231EFADA4CB4301BD0A9E" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil3A2F44A7730E98D18E0948B3261DFABD" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Newtonsoft.Json.xml" />
+            </Component>
+            <Component Id="cmp42CE9AE95732AA34478329FB9DE90B9C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filD7AACEE505C0A6D9F0953957C6B91C28" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\NLog.config" />
+            </Component>
+            <Component Id="cmpB7F1EBE42DCB1051B92D42C1EF84E2F9" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filA09ADF42C6343B9B7C7780D266455CC4" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\NLog.dll" />
+            </Component>
+            <Component Id="cmpAF162B14FA6391E4D0D34D9485A3CBEB" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil938BF1D1B479C73F0CECCBD51683AA0E" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\NLog.xml" />
+            </Component>
+            <Component Id="cmpAB03451DC27B8A39B1FF4658986A7B39" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil03DF1C9C7ED2EFDE04DCA9EC290DE7C8" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Our Story Titan.application" />
+            </Component>
+            <Component Id="cmp1F8720F5B8DAAA40D4A8326CC518E91C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil10DA0E1233BB7897C7E5C30E724463B3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Our Story Titan.exe" />
+            </Component>
+            <Component Id="cmp1BCC96BB71A74DBD392CF9E5D374A77D" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil7F72573306AB7FC6C8401FE7325C79A3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Our Story Titan.exe.config" />
+            </Component>
+            <Component Id="cmpCF609AE28BB3BB3D9EE8E3853BD35FDD" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil2C12DBBA62BBB3FC470EBE08F78BCB3D" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Our Story Titan.exe.manifest" />
+            </Component>
+            <Component Id="cmp90DC23B5A811714FF91DF30083456181" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil6F591C232FCD875613A5D6A78916D6B9" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Our Story Titan.pdb" />
+            </Component>
+            <Component Id="cmp0D5C48EF079E77130CE3AD09F12D9108" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil984AB1273B9303F7E2436858049B29D1" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Plugin.Connectivity.Abstractions.dll" />
+            </Component>
+            <Component Id="cmpB580D7B01653F73E9A21292506D262F8" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filE38092BD719217165333A6F9DC16E74C" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Plugin.Connectivity.Abstractions.pdb" />
+            </Component>
+            <Component Id="cmp6B66F2653B02AB6886A6617575D200EA" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil5A24998724063FB5F5AC12D2B9CE95B4" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Plugin.Connectivity.Abstractions.xml" />
+            </Component>
+            <Component Id="cmpE9A6E0C65F4170F779A616BC86B9F836" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil77ED13D8DFD6624CB4892D9BDCC599EB" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Plugin.Connectivity.dll" />
+            </Component>
+            <Component Id="cmp30EFF9D6F083BA0FBAC94FD057F24A87" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil2A928AF4DCC0A9B8C7AD125C753C1006" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Plugin.Connectivity.pdb" />
+            </Component>
+            <Component Id="cmp6AFAAD0D1AC183504C5E0B66E8515FBE" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil308DF68B0B12B27DA2B5BD572235B5BF" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Plugin.Connectivity.xml" />
+            </Component>
+            <Component Id="cmpFB29C806E33A6CA1BDEB31AECC89A325" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filFF903F904F13F3975667BFDF59A1F6D3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Plugin.Settings.Abstractions.dll" />
+            </Component>
+            <Component Id="cmp02891FB3C4F3BDD73C6DB60302146BC0" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil35D82027670B1C1FCFAEB161E5F8B367" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Plugin.Settings.Abstractions.pdb" />
+            </Component>
+            <Component Id="cmp2A655157BC042A04D3C8CFFDA92C447D" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil8244EF4FC9F69777BF42F9E59085DA7E" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Plugin.Settings.Abstractions.xml" />
+            </Component>
+            <Component Id="cmpB0EA33A0F6D3B9037F81C784E628A480" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil29877329A87FA59966AD85086E521C46" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Plugin.Settings.dll" />
+            </Component>
+            <Component Id="cmpAD6BDB09C95874B0F7D3760EE8EDA42C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filA02A1492C9DC2B4DEB7036A2DBA57787" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Plugin.Settings.pdb" />
+            </Component>
+            <Component Id="cmp5DB7B041EB0D571973C7DEBDDC029295" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil16C2583416E0CD5F3C61C9965A758957" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Plugin.Settings.xml" />
+            </Component>
+            <Component Id="cmp7F9ECC4D6E6D6BF2F824CA146F65E639" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil7CC19367A9B4C8416E978BFFE18F1062" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Readme.rtf" />
+            </Component>
+            <Component Id="cmp5BF82A49794EF8CA80B3603A0E77FC35" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filAFD0CC30CB2E6DD52C314025EFBB3EF7" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.AppContext.dll" />
+            </Component>
+            <Component Id="cmpA748C45814948C0E47F0962CF5A9E2C5" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filAF63FF48A59E0E5E7F49BFD1CBBB0CC3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Buffers.dll" />
+            </Component>
+            <Component Id="cmp43B367B7670D98D184AF521921EF1F06" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil847587E301997E5BCE3BEE66F570E914" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Buffers.xml" />
+            </Component>
+            <Component Id="cmp602E8F2B93FE6578A846F762EC68A1D9" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil8A8EC4001DD8F96250E301ED6A1E3783" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Collections.Concurrent.dll" />
+            </Component>
+            <Component Id="cmp3DA1940FB9C385E5772FD6B27D952566" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil61FB0EF6F8353D5D25E080C4B6E602C0" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Collections.dll" />
+            </Component>
+            <Component Id="cmp1340CAF41213E899D78462CF580BF2AD" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filE68AB55348C2F39BA40CC24DA31D4211" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Collections.NonGeneric.dll" />
+            </Component>
+            <Component Id="cmp4CA8A8377EC5F30AF1C8BF2ABE2B916B" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filF574BF00EFD9442D9E5911559F8D7CB3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Collections.Specialized.dll" />
+            </Component>
+            <Component Id="cmp912EE5CA7F0C138422055A3D0C240C38" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil8084AE81753074831DC96EB13423F40D" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.ComponentModel.dll" />
+            </Component>
+            <Component Id="cmp9DD02050EE6C7C34C1B0689DE491114C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil1E5C558F899E13FD4A03E9ACF14B5065" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.ComponentModel.EventBasedAsync.dll" />
+            </Component>
+            <Component Id="cmp0E07B6458918A72AFC17E557DDF86BE9" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil757C2B539CEF8E96C5DAF1634B560D0F" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.ComponentModel.Primitives.dll" />
+            </Component>
+            <Component Id="cmp9CD588F7BA24625E3D5679886E12AD98" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil057857F4AB9C19007F7BB13F6DAB4F8E" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.ComponentModel.TypeConverter.dll" />
+            </Component>
+            <Component Id="cmp1A01EFD00F1DAF10CE06F8196357F24C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil08A6ABF18A6A31D6C7924DD13873F17E" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Console.dll" />
+            </Component>
+            <Component Id="cmp5C82A05FA23F935F2AF47CD1A8E11EF5" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filE0AB56016BACB84E3B4D8920E3BC3B88" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Data.Common.dll" />
+            </Component>
+            <Component Id="cmp18D7BFB3BE8790A76D7469ACDB6FF184" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filF5EC28734B29A9D0741ED65730786D83" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Diagnostics.Contracts.dll" />
+            </Component>
+            <Component Id="cmp16EF400B22B4D8375CD56E7168F49BBB" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filC5A135B91631EDD63E03635FE5DB1528" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Diagnostics.Debug.dll" />
+            </Component>
+            <Component Id="cmp7E39F1A13DA5F3678F3102B85106204A" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filE669E7EEC097516D4E9BE57F87820A6F" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Diagnostics.FileVersionInfo.dll" />
+            </Component>
+            <Component Id="cmpD23621427F9427EADECDFB75824E8F4E" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filA2202346FF26F0ADE22443C43E9EA3EA" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Diagnostics.Process.dll" />
+            </Component>
+            <Component Id="cmpB3E27F13800A8FF984F132723F98897C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filDBF3A4F1AEA58FEDB0007DD546ADD630" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Diagnostics.StackTrace.dll" />
+            </Component>
+            <Component Id="cmp36E12B3A84F72D19A05AB3898848297D" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil21EE5D64D21C91238861B7873377CB07" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Diagnostics.TextWriterTraceListener.dll" />
+            </Component>
+            <Component Id="cmp167D1C5C6A974604FBBFEDD39E2FDF84" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil589087C30E15FFAD786A80C79F228C31" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Diagnostics.Tools.dll" />
+            </Component>
+            <Component Id="cmpBDFBFA929E7957E9AB4B89B1C6BBCD7A" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil51DF554AB19C81BD826675A139E6342C" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Diagnostics.TraceSource.dll" />
+            </Component>
+            <Component Id="cmp804ACD73DC5E4AF51ACF260299491EAE" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filE457FA9EC2AE98FDC3C82D976418C363" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Diagnostics.Tracing.dll" />
+            </Component>
+            <Component Id="cmp08477E3E9CCCB3373C6D6B557560F00D" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filB3F994E499D6B2658F4935DB290BBD4C" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Drawing.Primitives.dll" />
+            </Component>
+            <Component Id="cmpA142100C3F0BB7810ABB24189CCE1D0D" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filC724FD793DE9BFA79CD7FB6C9ADD74B0" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Dynamic.Runtime.dll" />
+            </Component>
+            <Component Id="cmpF2CFC77F0487C42E6C597124620175D0" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filB1DA3C706CDD3EB9DD5FAEE10E17A1EC" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Globalization.Calendars.dll" />
+            </Component>
+            <Component Id="cmp38992D30F99BD043E10383498A731822" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil302011DAA4997DB8B141168A984D0E89" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Globalization.dll" />
+            </Component>
+            <Component Id="cmp2ECBD4EE80FB56B111EAB04A7922F75E" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filBCE4D84B0CA5B233C74110483CAD4D62" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Globalization.Extensions.dll" />
+            </Component>
+            <Component Id="cmpC8D343DED6ECA227B78780388C7AA77C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil8C21BB6ED9A67550B3F3EE8EF35E5A89" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.IO.Compression.dll" />
+            </Component>
+            <Component Id="cmpD40621D43FCB57C24FE91D5292CDCA60" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil58D577100F63265F0448602DFD48190C" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.IO.Compression.ZipFile.dll" />
+            </Component>
+            <Component Id="cmp06E205989506C503C7B11F6FE4B449C6" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil1585A04883FF89B289FC2454E8EDC783" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.IO.dll" />
+            </Component>
+            <Component Id="cmp2BF489548413875B5E6C82837FCD954F" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filB910A291C5575D86F028725A2C33BF2D" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.IO.FileSystem.dll" />
+            </Component>
+            <Component Id="cmp1AB9ED2F24CD7F4C14BBC93CA838C6B0" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil574A395F5B89705022FDCE55CD01B148" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.IO.FileSystem.DriveInfo.dll" />
+            </Component>
+            <Component Id="cmpC96839737F0D0575D352C1AE13A73E26" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil02F9A4228ADE0C77AF34898B47FD1723" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.IO.FileSystem.Primitives.dll" />
+            </Component>
+            <Component Id="cmp43533F1C6D869598C6A682154C94696E" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filBF4695E38CC21BF49BBCA04E77D36710" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.IO.FileSystem.Watcher.dll" />
+            </Component>
+            <Component Id="cmpBEA123016451982E36F3B409E9D6426F" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil4018AFAC307CEA6BC7FCB7A5B8BCA075" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.IO.IsolatedStorage.dll" />
+            </Component>
+            <Component Id="cmp27E36B7C8DB5461A9579366D20E5DD16" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil7F43DE255F0B70BD8014CC9F0611E6A9" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.IO.MemoryMappedFiles.dll" />
+            </Component>
+            <Component Id="cmpB23C66A8B8F46E3F568C19DFB6A6E1A4" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil8EAA03164AF160196E835AAF613219D0" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.IO.Pipes.dll" />
+            </Component>
+            <Component Id="cmp5338A7F671CC8A6B5D8355578A8A889A" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filA25C390E7FAA5E8406CA4A02BBBCC33A" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.IO.UnmanagedMemoryStream.dll" />
+            </Component>
+            <Component Id="cmpC0FA693A1C79F59FC93C10CFD37D42F2" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil598A363D5498D9DDBAFE6880F82F75CA" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Linq.dll" />
+            </Component>
+            <Component Id="cmpE2761380A2AA89636D5B95A135451B7F" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil33155AE23C9BC1A3E340E9A8ABDE1D42" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Linq.Expressions.dll" />
+            </Component>
+            <Component Id="cmp1C1E90C62AB1B0C4B75A0C8670A93BF5" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil3F3DFA5907492425703385E53974B104" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Linq.Parallel.dll" />
+            </Component>
+            <Component Id="cmpA89B897A857FCF03B6B2373DF3AC3D44" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil7169F7E92FBFDB99FD71D763F2E780C7" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Linq.Queryable.dll" />
+            </Component>
+            <Component Id="cmpBA5ABAFBBC1B2CC2232B3287ABE89965" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil7D48B04FDEE4653060C375A94010A762" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Net.Http.dll" />
+            </Component>
+            <Component Id="cmp8487DBCD10F6EA164525782F92DE4F4F" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil69D9F4812C174BFB653C73FDA9A444E0" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Net.NameResolution.dll" />
+            </Component>
+            <Component Id="cmpA79F27EC312D0A6A5E914E2D5E6EAAFB" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filC663E3CB9E88525B42D5B8916035A2EE" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Net.NetworkInformation.dll" />
+            </Component>
+            <Component Id="cmp8E66472F03923A37D938729AEED0ABF6" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil8C39D1E2631D6844BB01F4F3D4309095" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Net.Ping.dll" />
+            </Component>
+            <Component Id="cmp7F3C257977DAD545E41C24AEEBA5F3D7" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil9E23EE919E61291572A9E7A02358BE0B" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Net.Primitives.dll" />
+            </Component>
+            <Component Id="cmp1F98307E0E8546CD03283A275A109E29" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filABF76F5E8887AC62C808D141EEE7F90D" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Net.Requests.dll" />
+            </Component>
+            <Component Id="cmp661DE9832C6188B3A05455224EB65C4A" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil1D7AB309A4579D55C17E387F8DFFAE30" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Net.Security.dll" />
+            </Component>
+            <Component Id="cmp35FB771C91E6D09AC7AD31EA6BD82D48" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil823B0C5D79C138C9B43DE503AE851AF3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Net.Sockets.dll" />
+            </Component>
+            <Component Id="cmpBD3081A75FFFB18E0F831CA90BB02A51" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil56CADEAFFCFAFECB7B1BDB9CFD8987F1" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Net.WebHeaderCollection.dll" />
+            </Component>
+            <Component Id="cmp68954BEF36096052C3124B7F9EF02351" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filBE4907C935596CA9CAA2A7AA9AB25169" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Net.WebSockets.Client.dll" />
+            </Component>
+            <Component Id="cmpA3D72A47568CFB72A8579DA365A9694A" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil21106B04138595285E4063BA0375F731" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Net.WebSockets.dll" />
+            </Component>
+            <Component Id="cmp89AE5ECEB789ECF60BE6CC568D60B2F9" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil07CC506FCE6F39AF87379627460A5FFB" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Numerics.Vectors.dll" />
+            </Component>
+            <Component Id="cmp7F4E1743772CD37619404A9AC36DC178" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil38F381E638DECC1D77506EC6574A8C81" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Numerics.Vectors.xml" />
+            </Component>
+            <Component Id="cmpF02258D9C1CDC79ADE6BED7D7E27B7F8" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil9A7CC4FBC706133927299AE792CF930C" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.ObjectModel.dll" />
+            </Component>
+            <Component Id="cmpA232CC5CBB9F7FC0C83CBF6E9889AEA2" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filA974C5A92C285D01E798C45F066066E6" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Reflection.dll" />
+            </Component>
+            <Component Id="cmpBBE9705F8359FDCA711FD64D14D92D29" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filBF34301359DFDB004DA5653ADCF77EA8" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Reflection.Extensions.dll" />
+            </Component>
+            <Component Id="cmp673F5FD19E1447A9E9517732D5099C50" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil8C7FE5693A485A6EC5DB4F983E211310" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Reflection.Primitives.dll" />
+            </Component>
+            <Component Id="cmp70FC17596CC6D6081664CEA3F1370618" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filA1280936EE48F816F9935AC5D8CC2135" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Resources.Reader.dll" />
+            </Component>
+            <Component Id="cmp0D6DF42F2B6440373438F26D08393D7E" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil0A8B8FDA1F690B6521438D46937A3A6B" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Resources.ResourceManager.dll" />
+            </Component>
+            <Component Id="cmp9CA91C7958AD8878AF60199DC48CD573" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil230BE30D15C956EF11744774D5E2748A" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Resources.Writer.dll" />
+            </Component>
+            <Component Id="cmpBC6ED153615307A014F39AD878C11A6F" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil06F091C33B00CEE32ABF1D23BFFCF153" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Runtime.CompilerServices.VisualC.dll" />
+            </Component>
+            <Component Id="cmp5535623A0957F12A580F2E0AE9AB7F24" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil1F7505072F9E81ACFDD7E6910787823E" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Runtime.dll" />
+            </Component>
+            <Component Id="cmp1F804D02F421408F7E20267C22EA6672" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil46F95A243148C958E6F1AB4B4F561CB1" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Runtime.Extensions.dll" />
+            </Component>
+            <Component Id="cmpC9E0DEEB7CF98154C06B2056C911EFFB" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil7F78E91219FBF02ABACD6059011A3487" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Runtime.Handles.dll" />
+            </Component>
+            <Component Id="cmpDD067213D9C6C74C7DEE2A7AAB0FAEEC" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil853E903EAF99997C9E803CAE3ACFBF5A" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Runtime.InteropServices.dll" />
+            </Component>
+            <Component Id="cmp11FDD7837E3686618A8029176A611E38" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil43FDDFACC38DCF385E1070ABFC9FF8BD" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Runtime.InteropServices.RuntimeInformation.dll" />
+            </Component>
+            <Component Id="cmpCCD6C0BE895B4EC8ED6FCEECB4A871C3" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil02EF2737879749E35F209C9B7DCA391D" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Runtime.Numerics.dll" />
+            </Component>
+            <Component Id="cmp41A90A30E3B6DE65B53B94DD925F5178" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filC968DB2890AADD4FA67468C2A7B10151" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Runtime.Serialization.Formatters.dll" />
+            </Component>
+            <Component Id="cmpD90C1CD2102284F981F3D046E35CA13E" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filD0901858A2CBFDA1564A60620AE9B302" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Runtime.Serialization.Json.dll" />
+            </Component>
+            <Component Id="cmp552DDD4A29039B8C3A99A908722A24F8" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil4EF07533CCADC5D11E070B55437037C4" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Runtime.Serialization.Primitives.dll" />
+            </Component>
+            <Component Id="cmp844E0AB3F4C9BC342C04985D37DDFEB2" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filEA5BDF8BC27AFF8E7E096CB7FADA4669" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Runtime.Serialization.Xml.dll" />
+            </Component>
+            <Component Id="cmp184FC0E5FAD15B9D8278A9A58F76ABE4" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filF9336650B5D207916A83BC080A440D23" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Security.Claims.dll" />
+            </Component>
+            <Component Id="cmpFF30060800C65B79967082C32327291C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filAB211F3F0ECB04AF6C2378C73893A0C8" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Security.Cryptography.Algorithms.dll" />
+            </Component>
+            <Component Id="cmp77638A88DFF018673C9539C4C63849F1" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filA76FAFC53D43269049D637292976CF51" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Security.Cryptography.Csp.dll" />
+            </Component>
+            <Component Id="cmp29603EF04B0BDD3AB6C82CAA97838E8B" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filED8707AB753EEF87C2288DCB64CF7A12" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Security.Cryptography.Encoding.dll" />
+            </Component>
+            <Component Id="cmp0136E6693E0DF16DBA25B9082AEA0615" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil25474CD58A18AB4C2CD00F08A6BC9775" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Security.Cryptography.Primitives.dll" />
+            </Component>
+            <Component Id="cmp5A1F20CF9AD2DA0DF26622F317779E8C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil442CB099348F299818A47DAF4107BAD6" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Security.Cryptography.X509Certificates.dll" />
+            </Component>
+            <Component Id="cmp82F2DB94B35989B5500883F0A3BD8505" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filD2D8BE6ECEE6993CF4F1FF23EB2E93BB" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Security.Principal.dll" />
+            </Component>
+            <Component Id="cmp2A096C150C80DB6CCD87D4C38C958489" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filFB2A4DE274D08F22C08A1322C26E75AC" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Security.SecureString.dll" />
+            </Component>
+            <Component Id="cmp06F6E0D21752727B7ACAD0B512A6023D" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil701E2765A9E92F8724B2DE3CCDB46360" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Text.Encoding.dll" />
+            </Component>
+            <Component Id="cmp3874A45D344B330AFBCC3A8F554FA9E4" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filCE8884160ED3E0EC381AFA6BE7E9D787" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Text.Encoding.Extensions.dll" />
+            </Component>
+            <Component Id="cmp0B61CF5FB51B4607DDD38343361694DD" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filDF47AF6394D3BCA07F18B1B1DED956F6" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Text.RegularExpressions.dll" />
+            </Component>
+            <Component Id="cmpC0197A786E74E0C6CC67B1F2BF47A69D" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil36048FD39C076898D35F88983802BDEF" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Threading.dll" />
+            </Component>
+            <Component Id="cmp1847EF90CD4FF710D3FD7F535A04B4FF" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filE727C34A4C970EEE21C677C885EC28B8" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Threading.Overlapped.dll" />
+            </Component>
+            <Component Id="cmp174FEA916F072AFEF2DC68827B08C208" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil7F3C8D53605A91C20728F321E6100DC4" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Threading.Tasks.dll" />
+            </Component>
+            <Component Id="cmp9CBB1F7669BA2F45772EFFAF1C3C270D" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filFDA046DB7FA1CA15A62337B4F259E5FF" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Threading.Tasks.Parallel.dll" />
+            </Component>
+            <Component Id="cmpFB7FE4390A8C062AD58E42F7C37E1CBA" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filC3127284977EB9FDD14629243C84A2EE" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Threading.Thread.dll" />
+            </Component>
+            <Component Id="cmp152A2FECC9863B1FFDB0C5513DC288DD" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil809F8EEF88425034C1A71DE3AD93D6A4" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Threading.ThreadPool.dll" />
+            </Component>
+            <Component Id="cmp6677FF43E08DCC24B1D67EBAA25DABE0" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil4E367B544B133435C24048994E32C006" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Threading.Timer.dll" />
+            </Component>
+            <Component Id="cmp3A99A623A71A716A198559E0C9D59400" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filE6242AE03AF2509440ADF395C76688A4" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.ValueTuple.dll" />
+            </Component>
+            <Component Id="cmp3675421429B9A0E934C7B2D939AAF6EE" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filE33AE821547C33AB8A923BE4FFE628A7" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.ValueTuple.xml" />
+            </Component>
+            <Component Id="cmp017BFB3832A5B110A2B3A350E13F2A5C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil17E34524E8398461D615894C92558FE9" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Windows.Interactivity.dll" />
+            </Component>
+            <Component Id="cmpD98009700F9DCCB585336348A2CEBE64" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil59BFCC2292F134CBDC4AA4926AAAB976" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Xml.ReaderWriter.dll" />
+            </Component>
+            <Component Id="cmp93CA91D57F6251A2235F591E2C255B14" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filB8061B25037EA2CD370763F882C39C0A" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Xml.XDocument.dll" />
+            </Component>
+            <Component Id="cmp381A6662B7BE775E2AD4E35F205D99D1" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filFFB639F3D3E0F93F264FDFE3E81A5A62" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Xml.XmlDocument.dll" />
+            </Component>
+            <Component Id="cmp57336CA638C7E423596479419F1908F1" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filE7B8C062C7AE0B6604F0B9B573658E56" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Xml.XmlSerializer.dll" />
+            </Component>
+            <Component Id="cmp8B647EE9E403FBA68E5A3BA65BF324DF" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil3D1A64312153AD0A9A7D324647F1DEFA" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Xml.XPath.dll" />
+            </Component>
+            <Component Id="cmp74AD17100EF04DA9E0B6DB1AFA6D8D5C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filB19DBCF818AC2F26DEA82AF27E664FD3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\System.Xml.XPath.XDocument.dll" />
+            </Component>
+            <Component Id="cmp7C9089EB3A0835BEAD5FA24D2816F5B5" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filEDBD0836B44209DF49014707456796C0" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\YamlDotNet.dll" />
+            </Component>
+            <Component Id="cmp83BD19894EC15C0C2E31E9560E9907DE" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil34DC90438224002070A1516BFD40825F" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\YamlDotNet.xml" />
+            </Component>
+            <Component Id="cmp004F8AD0D41E864151AC4EA5BA912B3A" Directory="dir00122602D311392A9D483BE33FE17DEF" Guid="*">
+                <File Id="fil270E5546F184759F2118079D6E3BC470" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\app.publish\Our Story Titan.exe" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>
