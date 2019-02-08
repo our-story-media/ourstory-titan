@@ -7,4 +7,6 @@ docker pull bootlegger/ourstory-worker:latest
 docker pull bootlegger/ourstory-server:latest 
 docker pull bootlegger/nginx:latest
 echo "Exporting Images"
-docker save redis:alpine mvertes/alpine-mongo kusmierz/beanstalkd bootlegger/ourstory-worker:latest bootlegger/ourstory-server:latest bootlegger/nginx:latest -o images.tar
+docker save redis:alpine mvertes/alpine-mongo kusmierz/beanstalkd bootlegger/nginx:latest bootlegger/ourstory-worker:latest bootlegger/ourstory-server:latest -o images.tar
+rem docker save bootlegger/ourstory-worker:latest -o images2.tar
+rem docker save bootlegger/ourstory-server:latest -o images3.tar

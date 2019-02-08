@@ -37,11 +37,22 @@ namespace Bootlegger.App.Win
         {
             cancel = new CancellationTokenSource();
 
-            BootleggerApplication.Log.Info("Install started");
+            App.BootleggerApp.Log.Info("Install started");
 
-            BootleggerApplication.Log.Info("Has cache", App.BootleggerApp.HasCachedContent);
+            App.BootleggerApp.Log.Info("Has cache", App.BootleggerApp.HasCachedContent);
 
-            needswifi.Visibility = (!App.BootleggerApp.HasCachedContent) ? Visibility.Visible : Visibility.Hidden;
+            needswifi.Visibility = (!App.BootleggerApp.HasCachedContent) ? Visibility.Visible : Visibility.Collapsed;
+
+            if (App.BootleggerApp.HasCachedContent)
+            {
+                imagesbtn.Visibility = Visibility.Visible;
+                continuebtn.IsEnabled = false;
+                locatefiles.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                imagesbtn.Visibility = Visibility.Hidden;
+            }
         }
 
         private void continuebtn_Copy_Click(object sender, RoutedEventArgs e)
@@ -55,6 +66,7 @@ namespace Bootlegger.App.Win
         {
             try
             {
+                imagesbtn.IsEnabled = false;
                 continuebtn.IsEnabled = false;
                 progress.Visibility = Visibility.Visible;
                 status.Visibility = Visibility.Visible;
@@ -114,6 +126,19 @@ namespace Bootlegger.App.Win
 
             status.Text = $"Downloading Docker Installer {Math.Round((obj?.BytesReceived/(1024.0*1024.0)).Value,2)}MB of {Math.Round((double)(obj?.TotalBytesToReceive/(1024.0*1024.0)).Value,2)}MB...";
             progress.Value = obj.ProgressPercentage;
+        }
+
+        private void Imagesbtn_Click(object sender, RoutedEventArgs e)
+        {
+            var fileDialog = new System.Windows.Forms.OpenFileDialog();
+            fileDialog.Filter = "Tar File|*.tar";
+            var result = fileDialog.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                App.BootleggerApp.ImagesPath = fileDialog.FileName;
+                //continuebtn.IsEnabled = true;
+                continuebtn_Click(null, null);
+            }
         }
     }
 }

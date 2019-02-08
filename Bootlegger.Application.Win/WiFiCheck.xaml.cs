@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,8 @@ namespace Bootlegger.App.Win
         private async void Continuebtn_Click_1(object sender, RoutedEventArgs e)
         {
             App.BootleggerApp.ConfigureNetwork("10.10.10.1", "255.255.255.0");
+
+            await Task.Delay(1000);
 
             //check wifi config:
             if (App.BootleggerApp.WiFiSettingsOk)

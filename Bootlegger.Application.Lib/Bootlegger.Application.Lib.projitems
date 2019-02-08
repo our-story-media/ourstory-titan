@@ -30,16 +30,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="$(MSBuildThisFileDirectory)downloads\DockerForWindows.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="$(MSBuildThisFileDirectory)downloads\DockerToolbox.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="$(MSBuildThisFileDirectory)downloads\getimages.cmd" />
     <None Include="$(MSBuildThisFileDirectory)downloads\getinstallers.ps1" />
-    <None Include="$(MSBuildThisFileDirectory)downloads\images.tar">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)README.md" />
   </ItemGroup>
 </Project>

@@ -17,12 +17,14 @@ namespace Bootlegger.App.Win
         public static BootleggerApplication BootleggerApp { get; private set; }
         static App()
         {
-            AppDomain.CurrentDomain.FirstChanceException += (sender, eventArgs) =>
-            {
-                BootleggerApplication.Log.Error(eventArgs.Exception);
-            };
+            
 
             BootleggerApp = new BootleggerApplication();
+
+            AppDomain.CurrentDomain.UnhandledException += (sender, eventArgs) =>
+            {
+                BootleggerApp?.Log.Error(eventArgs.ExceptionObject);
+            };
         }
     }
 }

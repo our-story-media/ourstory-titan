@@ -18,13 +18,22 @@ using CertificatesToDBandBack;
 using System.Security.Cryptography;
 using System.Security.AccessControl;
 using NLog;
+using Plugin.Connectivity;
+using System.Net.NetworkInformation;
 
 namespace Bootlegger.App.Lib
 {
     public class BootleggerApplication : IProgress<JSONMessage>
     {
 
-        public static Logger Log { get => LogManager.GetLogger(typeof(BootleggerApplication).FullName); }
+        public BootleggerApplication()
+        {
+            CurrentPlatform = System.Environment.OSVersion;
+            Log = LogManager.GetLogger(typeof(BootleggerApplication).FullName);
+            ImagesPath = Path.Combine("downloads", "images.tar");
+        }
+
+        public Logger Log { get; set; }
 
         public enum INSTALL_STATE { NOT_SUPPORTED, NEED_DOWNLOAD, NEED_IMAGES, INSTALLED }
 
@@ -33,15 +42,11 @@ namespace Bootlegger.App.Lib
         public RUNNING_STATE CurrentState { get; private set; }
         public OperatingSystem CurrentPlatform { get; private set; }
 
-        public BootleggerApplication()
-        {
-            CurrentPlatform = System.Environment.OSVersion;
-        }
 
         Docker.DotNet.DockerClient dockerclient;
 
         #region Installer
-        
+
         public bool IsInstalled
         {
             get
@@ -76,7 +81,7 @@ namespace Bootlegger.App.Lib
             {
                 string installer = (CurrentInstallerType == InstallerType.HYPER_V) ? HYPER_V_INSTALLER_LOCAL : INSTALLER_LOCAL;
                 return
-                    File.Exists(Path.Combine("downloads", installer)) && File.Exists(Path.Combine("downloads", "images.tar"));
+                    File.Exists(Path.Combine("downloads", installer));
             }
         }
 
@@ -86,8 +91,8 @@ namespace Bootlegger.App.Lib
         }
 
         InstallerType CurrentInstallerType { get {
-            return (!HyperVSwitch.SafeNativeMethods.IsProcessorFeaturePresent(HyperVSwitch.ProcessorFeature.PF_VIRT_FIRMWARE_ENABLED))?InstallerType.HYPER_V : InstallerType.NO_HYPER_V;
-        } }
+                return (!HyperVSwitch.SafeNativeMethods.IsProcessorFeaturePresent(HyperVSwitch.ProcessorFeature.PF_VIRT_FIRMWARE_ENABLED)) ? InstallerType.HYPER_V : InstallerType.NO_HYPER_V;
+            } }
 
         //download the content:
         const string HYPER_V_INSTALLER_REMOTE = "https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe";
@@ -115,10 +120,10 @@ namespace Bootlegger.App.Lib
                     break;
             }
 
-            if (!File.Exists(Path.Combine("downloads",dst)))
+            if (!File.Exists(Path.Combine("downloads", dst)))
             {
                 Log.Info($"Initiating download of {src}");
-                await DownloadFileInBackground(src,Path.Combine("downloads",dst + ".download"),cancel);
+                await DownloadFileInBackground(src, Path.Combine("downloads", dst + ".download"), cancel);
                 Log.Info("Download complete");
                 File.Move(Path.Combine("downloads", dst + ".download"), Path.Combine("downloads", dst));
                 Log.Info("Moving download file to correct name");
@@ -130,7 +135,7 @@ namespace Bootlegger.App.Lib
 
         public event Action<DownloadProgressChangedEventArgs> OnFileDownloadProgress;
 
-        public async Task DownloadFileInBackground(string src,string dst, CancellationToken cancel)
+        public async Task DownloadFileInBackground(string src, string dst, CancellationToken cancel)
         {
             WebClient client = new WebClient();
             cancel.Register(client.CancelAsync);
@@ -140,17 +145,17 @@ namespace Bootlegger.App.Lib
             // when the download completes.
             //client.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCallback2);
             // Specify a progress notification handler.
-            client.DownloadProgressChanged += (o,e) =>
+            client.DownloadProgressChanged += (o, e) =>
             {
                 OnFileDownloadProgress?.Invoke(e);
             };
             await client.DownloadFileTaskAsync(uri, dst);
         }
 
-        static Task<int> RunProcessAsync(string fileName, string arg, bool show = false)
+        Task<int> RunProcessAsync(string fileName, string arg, bool show = false, bool runas = false)
         {
             Log.Info($"{fileName} {arg}");
-             
+
             var tcs = new TaskCompletionSource<int>();
 
             var process = new Process
@@ -162,7 +167,8 @@ namespace Bootlegger.App.Lib
                     RedirectStandardOutput = (show)? false : true,
                     UseShellExecute = (show)? true: false,
                     CreateNoWindow = (show)? false: true,
-                    WindowStyle = (show)? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden
+                    WindowStyle = (show)? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden,
+                    Verb = (runas)?"runas":"open"
                 },
                 EnableRaisingEvents = true
             };
@@ -176,7 +182,7 @@ namespace Bootlegger.App.Lib
 
             process.OutputDataReceived += (sender, args) =>
              {
-                 Log.Info($"{fileName}",args.Data);
+                 Log.Info($"{fileName}", args.Data);
              };
 
             process.ErrorDataReceived += (sender, args) =>
@@ -207,7 +213,7 @@ namespace Bootlegger.App.Lib
                     break;
             }
 
-            await RunProcessAsync(file,args,true);
+            await RunProcessAsync(file, args, true);
         }
 
         #endregion
@@ -251,8 +257,8 @@ namespace Bootlegger.App.Lib
                         var host = Environment.GetEnvironmentVariable("DOCKER_HOST");
                         var path = Environment.GetEnvironmentVariable("DOCKER_CERT_PATH");
 
-                        byte[] certBuffer = Helpers.GetBytesFromPEM(File.ReadAllText(Path.Combine(path,"cert.pem")), PemStringType.Certificate);
-                        byte[] keyBuffer = Helpers.GetBytesFromPEM(File.ReadAllText(Path.Combine(path,"key.pem")), PemStringType.RsaPrivateKey);
+                        byte[] certBuffer = Helpers.GetBytesFromPEM(File.ReadAllText(Path.Combine(path, "cert.pem")), PemStringType.Certificate);
+                        byte[] keyBuffer = Helpers.GetBytesFromPEM(File.ReadAllText(Path.Combine(path, "key.pem")), PemStringType.RsaPrivateKey);
 
                         X509Certificate2 certificate = new X509Certificate2(certBuffer);
 
@@ -264,7 +270,7 @@ namespace Bootlegger.App.Lib
 
                         var credentials = new CertificateCredentials(certificate);
 
-                        dockerclient = new DockerClientConfiguration(new Uri(host),credentials).CreateClient();
+                        dockerclient = new DockerClientConfiguration(new Uri(host), credentials).CreateClient();
                         break;
                 }
             });
@@ -288,7 +294,7 @@ namespace Bootlegger.App.Lib
                 //delete all entries
                 await table.DeleteManyAsync(new BsonDocument());
 
-                List <WriteModel<BsonDocument>> operations = new List<WriteModel<BsonDocument>>();
+                List<WriteModel<BsonDocument>> operations = new List<WriteModel<BsonDocument>>();
                 string line = "";
                 while ((line = writer.ReadLine()) != null)
                 {
@@ -300,90 +306,33 @@ namespace Bootlegger.App.Lib
                 var result = await table.BulkWriteAsync(operations);
             }
         }
-        
 
-        public void UnConfigureNetwork()
+
+        public async void UnConfigureNetwork()
         {
-            ManagementClass objMC =
-              new ManagementClass("Win32_NetworkAdapterConfiguration");
-            ManagementObjectCollection objMOC = objMC.GetInstances();
-
-            foreach (ManagementObject objMO in objMOC)
+            string networkName = "";
+            NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (NetworkInterface adapter in interfaces)
             {
-                if ((bool)objMO["IPEnabled"])
+                if (adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 && adapter.OperationalStatus == OperationalStatus.Up)
                 {
-                    var gateways = (objMO["DefaultIPGateway"] as string[]);
-                    var gateway = gateways?[0];
-
-                    if (gateway?.StartsWith("10.10.10") ?? false)
-                    {
-                        try
-                        {
-                            //ManagementBaseObject setIP;
-                            //ManagementBaseObject newIP = objMO.GetMethodParameters("EnableDHCP");
-
-                            //newIP["IPAddress"] = new string[] { ip_address };
-                            //newIP["SubnetMask"] = new string[] { subnet_mask };
-
-
-                            //ManagementBaseObject objNewGate = null;
-                            //objNewGate = objMO.GetMethodParameters("SetGateways");
-                            //Set DefaultGateway
-                            //objNewGate["DefaultIPGateway"] = gateways;
-                            //objNewGate["GatewayCostMetric"] = new int[] { 1 };
-
-                            objMO.InvokeMethod("EnableDHCP", null);
-                            //setIP = objMO.InvokeMethod("SetGateways", objNewGate, null);
-                        }
-                        catch (Exception ex)
-                        {
-
-                        }
-                    }
+                    networkName = adapter.Name;
+                    await RunProcessAsync("netsh", $"interface ip set address \"{networkName}\" dhcp", true, true);
                 }
+
             }
         }
 
-        public void ConfigureNetwork(string ip_address, string subnet_mask)
+        public async void ConfigureNetwork(string ip_address, string subnet_mask)
         {
-            ManagementClass objMC =
-              new ManagementClass("Win32_NetworkAdapterConfiguration");
-            ManagementObjectCollection objMOC = objMC.GetInstances();
-
-            foreach (ManagementObject objMO in objMOC)
+            string networkName = "";
+            NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (NetworkInterface adapter in interfaces)
             {
-                if ((bool)objMO["IPEnabled"])
+                if (adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 && adapter.OperationalStatus == OperationalStatus.Up)
                 {
-                    var gateways = (objMO["DefaultIPGateway"] as string[]);
-                    var gateway = gateways?[0];
-
-                    if (gateway?.StartsWith("10.10.10") ?? false)
-                    {
-                        try
-                        {
-                            ManagementBaseObject setIP;
-                            ManagementBaseObject newIP = objMO.GetMethodParameters("EnableStatic");
-
-                            newIP["IPAddress"] = new string[] { ip_address };
-                            newIP["SubnetMask"] = new string[] { subnet_mask };
-
-
-                            ManagementBaseObject objNewGate = null;
-                            objNewGate = objMO.GetMethodParameters("SetGateways");
-                            //Set DefaultGateway
-                            objNewGate["DefaultIPGateway"] = gateways;
-                            objNewGate["GatewayCostMetric"] = new int[] { 1 };
-
-
-                            setIP = objMO.InvokeMethod("EnableStatic", newIP, null);
-                            setIP = objMO.InvokeMethod("SetGateways", objNewGate, null);
-
-                        }
-                        catch (Exception ex)
-                        {
-
-                        }
-                    }
+                    networkName = adapter.Name;
+                    await RunProcessAsync("netsh", $"interface ip set address \"{networkName}\" static 10.10.10.1 255.255.255.0 10.10.10.254", true, true);
                 }
             }
         }
@@ -402,7 +351,7 @@ namespace Bootlegger.App.Lib
 
             }
         }
-        
+
         public bool WiFiSettingsOk { get
             {
                 ManagementClass objMC =
@@ -474,6 +423,8 @@ namespace Bootlegger.App.Lib
             }
         }
 
+        public string ImagesPath { get; set;}
+
         public async Task DownloadImages(bool forceupdate, CancellationToken cancel)
         {
             if (dockerclient == null)
@@ -485,14 +436,30 @@ namespace Bootlegger.App.Lib
             if (!forceupdate)
             {
                 //check if the local version of the images exists:
-                if (File.Exists(Path.Combine("downloads","images.tar")))
+                if (File.Exists(ImagesPath))
                 {
                     Log.Info("Using local images.tar file");
                     doonline = false;
-                    await dockerclient.Images.LoadImageAsync(new ImageLoadParameters(), File.OpenRead(Path.Combine("downloads","images.tar")),this,cancel);
+                    await dockerclient.Images.LoadImageAsync(new ImageLoadParameters(), File.OpenRead(ImagesPath),this,cancel);
                     Log.Info("Local cached docker load complete");
                     OnNextDownload?.Invoke(1, 1, 1);
                 }
+                //if (File.Exists(Path.Combine("downloads", "images2.tar")))
+                //{
+                //    Log.Info("Using local images2.tar file");
+                //    doonline = false;
+                //    await dockerclient.Images.LoadImageAsync(new ImageLoadParameters(), File.OpenRead(Path.Combine("downloads", "images2.tar")), this, cancel);
+                //    Log.Info("Local cached docker load complete");
+                //    OnNextDownload?.Invoke(1, 1, 2/3.0);
+                //}
+                //if (File.Exists(Path.Combine("downloads", "images3.tar")))
+                //{
+                //    Log.Info("Using local images3.tar file");
+                //    doonline = false;
+                //    await dockerclient.Images.LoadImageAsync(new ImageLoadParameters(), File.OpenRead(Path.Combine("downloads", "images3.tar")), this, cancel);
+                //    Log.Info("Local cached docker load complete");
+                //    OnNextDownload?.Invoke(1, 1, 1);
+                //}
             }
 
             if (doonline)
