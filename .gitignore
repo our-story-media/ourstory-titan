@@ -264,3 +264,4 @@ paket-files/
 *.tar
 !install/
 !setup.exe
+!OurStoryInstaller.exe
