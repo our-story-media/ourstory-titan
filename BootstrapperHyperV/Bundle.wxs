@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
-	<Bundle Name="Our Story Titan" Version="1.0.0.0" Manufacturer="Newcastle University" IconSourceFile="$(var.SolutionDir)Bootlegger.Application.Win\web_hi_res_512_icon.ico" UpgradeCode="baea7c67-a469-4b75-b01e-c69c5e81205b">
+  <Bundle Name="Our Story Titan" Version="1.0.0.0" Manufacturer="Newcastle University" IconSourceFile="$(var.SolutionDir)Bootlegger.Application.Win\web_hi_res_512_icon.ico" UpgradeCode="baea7c67-a469-4b75-b01e-c69c5e81205b">
     <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLargeLicense">
       <bal:WixStandardBootstrapperApplication
                   LaunchTarget="[ProgramFilesFolder]\Our Story Titan\Our Story Titan.exe"
@@ -18,12 +18,12 @@
                SourceFile="$(var.SolutionDir)Bootlegger.Application.Lib\downloads\NDP461-KB3102436-x86-x64-AllOS-ENU.exe"/>
     </PayloadGroup>
 
-		<Chain>
+    <Chain>
       <PackageGroupRef Id="NetFx461Redist"/>
-      <ExePackage InstallCommand="/VERYSILENT /SUPPRESSMSGBOXES" Id="Docker" SourceFile="$(var.SolutionDir)Bootlegger.Application.Lib\downloads\DockerToolbox.exe">
+      <ExePackage InstallCommand="install --quiet" Id="Docker" SourceFile="$(var.SolutionDir)Bootlegger.Application.Lib\downloads\DockerForWindows.exe">
       </ExePackage>
       <MsiPackage Visible="no" Id="OurStory" SourceFile="$(var.Installer.TargetPath)">
       </MsiPackage>
-		</Chain>
-	</Bundle>
+    </Chain>
+  </Bundle>
 </Wix>

@@ -28,7 +28,7 @@
     <InstallUrl>https://raw.githubusercontent.com/digitalinteraction/ourstory-titan/master/install/online/</InstallUrl>
     <UpdateUrl>https://raw.githubusercontent.com/digitalinteraction/ourstory-titan/master/install/online/</UpdateUrl>
     <SupportUrl>https://guide.ourstory.video</SupportUrl>
-    <ProductName>Our Story</ProductName>
+    <ProductName>Our Story Titan</ProductName>
     <PublisherName>Newcastle University</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>

@@ -4,11 +4,10 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>3.10</ProductVersion>
-    <ProjectGuid>baea7c67-a469-4b75-b01e-c69c5e81205b</ProjectGuid>
+    <ProjectGuid>435c6a20-1938-435a-a677-5ce2376b6ee9</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>OurStoryInstaller</OutputName>
+    <OutputName>OurStoryHyperV</OutputName>
     <OutputType>Bundle</OutputType>
-    <Name>Bootstrapper</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -48,7 +47,7 @@
     <Error Text="The WiX Toolset v3.11 (or newer) build tools must be installed to build this project. To download the WiX Toolset, see http://wixtoolset.org/releases/" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)install\offline\" /y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)install\" /y</PostBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

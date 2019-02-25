@@ -263,5 +263,6 @@ paket-files/
 *.exe
 *.tar
 !install/
-!setup.exe
-!OurStoryInstaller.exe
+# !install/OurStoryHyperV.exe
+# !install/OurStoryToolbox.exe
+# !install/images.tar

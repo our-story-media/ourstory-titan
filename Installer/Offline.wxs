@@ -10,8 +10,8 @@
       <ComponentGroupRef Id="ProductFilesComponentGroup" />
       <ComponentRef Id="ApplicationShortcut" />
 
-      <ComponentRef Id="dockerwin" />
-      <ComponentRef Id="dockertoolbox" />
+      <!--<ComponentRef Id="dockerwin" />-->
+      <!--<ComponentRef Id="dockertoolbox" />-->
       <!--<ComponentRef Id="images1" />
       <ComponentRef Id="images2" />
       <ComponentRef Id="images3" />-->
@@ -51,12 +51,12 @@
     </DirectoryRef>
 
     <DirectoryRef Id="DOWNLOADS">
-      <Component Id="dockerwin" Guid="*">
+      <!--<Component Id="dockerwin" Guid="*">
         <File Id="dockerwin" Source="$(var.Bootlegger.App.Win.ProjectDir)..\Bootlegger.Application.Lib\downloads\DockerForWindows.exe" KeyPath="yes"/>
       </Component>
       <Component Id="dockertoolbox" Guid="*">
         <File Id="dockertoolbox" Source="$(var.Bootlegger.App.Win.ProjectDir)..\Bootlegger.Application.Lib\downloads\DockerToolbox.exe" KeyPath="yes"/>
-      </Component>
+      </Component>-->
 
 
       <!--<Component Id="images1" Guid="*">

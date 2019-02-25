@@ -74,9 +74,9 @@ namespace Bootlegger.App.Win
             progress.Visibility = Visibility.Hidden;
 
             //HACK FOR DEGUB
-            App.BootleggerApp.IsInstalled = false;
+            //App.BootleggerApp.IsInstalled = false;
 
-            if (App.BootleggerApp.IsInstalled)
+            if (App.BootleggerApp.IsInstalled && App.BootleggerApp.IsDockerInstalled)
             {
                 if (App.BootleggerApp.WiFiSettingsOk)
                 {

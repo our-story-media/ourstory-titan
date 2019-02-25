@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Fragment>
-        <DirectoryRef Id="INSTALLFOLDER">
-            <Directory Id="dir00122602D311392A9D483BE33FE17DEF" Name="app.publish" />
-        </DirectoryRef>
+        <DirectoryRef Id="INSTALLFOLDER" />
     </Fragment>
     <Fragment>
         <ComponentGroup Id="ProductFilesComponentGroup">
@@ -91,17 +89,11 @@
             <Component Id="cmpAF162B14FA6391E4D0D34D9485A3CBEB" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil938BF1D1B479C73F0CECCBD51683AA0E" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\NLog.xml" />
             </Component>
-            <Component Id="cmpAB03451DC27B8A39B1FF4658986A7B39" Directory="INSTALLFOLDER" Guid="*">
-                <File Id="fil03DF1C9C7ED2EFDE04DCA9EC290DE7C8" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Our Story Titan.application" />
-            </Component>
             <Component Id="cmp1F8720F5B8DAAA40D4A8326CC518E91C" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil10DA0E1233BB7897C7E5C30E724463B3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Our Story Titan.exe" />
             </Component>
             <Component Id="cmp1BCC96BB71A74DBD392CF9E5D374A77D" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil7F72573306AB7FC6C8401FE7325C79A3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Our Story Titan.exe.config" />
-            </Component>
-            <Component Id="cmpCF609AE28BB3BB3D9EE8E3853BD35FDD" Directory="INSTALLFOLDER" Guid="*">
-                <File Id="fil2C12DBBA62BBB3FC470EBE08F78BCB3D" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Our Story Titan.exe.manifest" />
             </Component>
             <Component Id="cmp90DC23B5A811714FF91DF30083456181" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil6F591C232FCD875613A5D6A78916D6B9" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Our Story Titan.pdb" />
@@ -450,9 +442,6 @@
             </Component>
             <Component Id="cmp83BD19894EC15C0C2E31E9560E9907DE" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil34DC90438224002070A1516BFD40825F" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\YamlDotNet.xml" />
-            </Component>
-            <Component Id="cmp004F8AD0D41E864151AC4EA5BA912B3A" Directory="dir00122602D311392A9D483BE33FE17DEF" Guid="*">
-                <File Id="fil270E5546F184759F2118079D6E3BC470" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\app.publish\Our Story Titan.exe" />
             </Component>
         </ComponentGroup>
     </Fragment>

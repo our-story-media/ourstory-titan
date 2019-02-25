@@ -308,32 +308,46 @@ namespace Bootlegger.App.Lib
         }
 
 
-        public async void UnConfigureNetwork()
+        public async Task UnConfigureNetwork()
         {
-            string networkName = "";
-            NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
-            foreach (NetworkInterface adapter in interfaces)
+            try
             {
-                if (adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 && adapter.OperationalStatus == OperationalStatus.Up)
+                string networkName = "";
+                NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
+                foreach (NetworkInterface adapter in interfaces)
                 {
-                    networkName = adapter.Name;
-                    await RunProcessAsync("netsh", $"interface ip set address \"{networkName}\" dhcp", true, true);
-                }
+                    if (adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 && adapter.OperationalStatus == OperationalStatus.Up)
+                    {
+                        networkName = adapter.Name;
+                        await RunProcessAsync("netsh", $"interface ip set address \"{networkName}\" dhcp", true, true);
+                    }
 
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
             }
         }
 
         public async void ConfigureNetwork(string ip_address, string subnet_mask)
         {
-            string networkName = "";
-            NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
-            foreach (NetworkInterface adapter in interfaces)
+            try
             {
-                if (adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 && adapter.OperationalStatus == OperationalStatus.Up)
+                string networkName = "";
+                NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
+                foreach (NetworkInterface adapter in interfaces)
                 {
-                    networkName = adapter.Name;
-                    await RunProcessAsync("netsh", $"interface ip set address \"{networkName}\" static 10.10.10.1 255.255.255.0 10.10.10.254", true, true);
+                    if (adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 && adapter.OperationalStatus == OperationalStatus.Up)
+                    {
+                        networkName = adapter.Name;
+                        await RunProcessAsync("netsh", $"interface ip set address \"{networkName}\" static 10.10.10.1 255.255.255.0 10.10.10.254", true, true);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
             }
         }
 
@@ -584,7 +598,7 @@ namespace Bootlegger.App.Lib
 
                 bool connected = false;
                 int count = 0;
-                while (!connected && count < 12)
+                while (!connected && count < 12 && !cancel.IsCancellationRequested)
                 {
                     try
                     {
@@ -699,13 +713,13 @@ namespace Bootlegger.App.Lib
             }
         }
 
-        public async Task<bool> LiveServerCheck()
+        public async Task<bool> LiveServerCheck(CancellationToken cancel)
         {
             WebClient client = new WebClient();
 
             bool connected = false;
             int count = 0;
-            while (!connected && count < 3)
+            while (!connected && count < 3 && !cancel.IsCancellationRequested)
             {
                 try
                 {

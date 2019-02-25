@@ -53,7 +53,7 @@ namespace Bootlegger.App.Win
                 if (arg1 == arg2)
                 {
                     //do next steps...
-                    (Application.Current.MainWindow as MainWindow)._mainFrame.Content = new Running();
+                    (Application.Current.MainWindow as MainWindow)._mainFrame.Content = new WiFiCheck();
                 }
                 else
                 {
@@ -74,6 +74,10 @@ namespace Bootlegger.App.Win
                 doneOnce = true;
                 App.BootleggerApp.OnDownloadProgress += BootleggerApp_OnDownloadProgress;
                 App.BootleggerApp.OnNextDownload += BootleggerApp_OnNextDownload;
+
+                progresslabel.Content = "Resetting Network...";
+
+                await App.BootleggerApp.UnConfigureNetwork();
 
                 progresslabel.Content = "Stopping Applicaton...";
 

@@ -28,6 +28,7 @@ namespace Bootlegger.App.Win
         {
             InitializeComponent();
             Loaded += InstallDocker_Loaded;
+            //progress.Maximum = 100;
         }
 
         
@@ -39,20 +40,20 @@ namespace Bootlegger.App.Win
 
             App.BootleggerApp.Log.Info("Install started");
 
-            App.BootleggerApp.Log.Info("Has cache", App.BootleggerApp.HasCachedContent);
+            //App.BootleggerApp.Log.Info("Has cache", App.BootleggerApp.HasCachedContent);
 
-            needswifi.Visibility = (!App.BootleggerApp.HasCachedContent) ? Visibility.Visible : Visibility.Collapsed;
+            //needswifi.Visibility = (!App.BootleggerApp.HasCachedContent) ? Visibility.Visible : Visibility.Collapsed;
 
-            if (App.BootleggerApp.HasCachedContent)
-            {
-                imagesbtn.Visibility = Visibility.Visible;
-                continuebtn.IsEnabled = false;
-                locatefiles.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                imagesbtn.Visibility = Visibility.Hidden;
-            }
+            //if (App.BootleggerApp.HasCachedContent)
+            //{
+            imagesbtn.Visibility = Visibility.Visible;
+            //continuebtn.IsEnabled = false;
+            //locatefiles.Visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+                //imagesbtn.Visibility = Visibility.Hidden;
+            //}
         }
 
         private void continuebtn_Copy_Click(object sender, RoutedEventArgs e)
@@ -125,7 +126,7 @@ namespace Bootlegger.App.Win
             progress.IsIndeterminate = false;
 
             status.Text = $"Downloading Docker Installer {Math.Round((obj?.BytesReceived/(1024.0*1024.0)).Value,2)}MB of {Math.Round((double)(obj?.TotalBytesToReceive/(1024.0*1024.0)).Value,2)}MB...";
-            progress.Value = obj.ProgressPercentage;
+            progress.Value = obj.ProgressPercentage/100;
         }
 
         private void Imagesbtn_Click(object sender, RoutedEventArgs e)
