@@ -567,6 +567,7 @@ namespace Bootlegger.App.Lib
                 currentProcess.StartInfo = new ProcessStartInfo("docker-compose");
                 currentProcess.StartInfo.WorkingDirectory = Directory.GetCurrentDirectory();
                 currentProcess.StartInfo.Arguments = $"-f {DockerComposeFile} -p bootleggerlocal up -d";
+                //currentProcess.StartInfo.Verb = "RUNAS";
                 //currentProcess.StartInfo.Environment.Add("MYIP", GetLocalIPAddress());
                 currentProcess.StartInfo.UseShellExecute = false;
                 currentProcess.StartInfo.CreateNoWindow = true;
@@ -618,7 +619,7 @@ namespace Bootlegger.App.Lib
 
                 return connected;
             }
-            catch
+            catch (Exception e)
             {
                 return false;
             }
