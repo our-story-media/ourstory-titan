@@ -18,15 +18,10 @@ namespace Bootlegger.App.Win
         public static BootleggerApplication BootleggerApp { get; private set; }
         static App()
         {
-
-            //if (!IsUserAdministrator())
-            //{
-            //    MessageBox.Show("Please restart application as Administrator.");
-            //    Environment.Exit(1);
-            //}
-
+            
 
             BootleggerApp = new BootleggerApplication();
+           
 
             AppDomain.CurrentDomain.UnhandledException += (sender, eventArgs) =>
             {

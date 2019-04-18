@@ -52,12 +52,16 @@ namespace Bootlegger.App.Lib
         {
             get
             {
-                return Plugin.Settings.CrossSettings.Current.GetValueOrDefault("ourstory_installed", false);
+                return File.Exists("installed");
+                //return Plugin.Settings.CrossSettings.Current.GetValueOrDefault("ourstory_installed", false);
             }
 
             set
             {
-                Plugin.Settings.CrossSettings.Current.AddOrUpdateValue("ourstory_installed", value);
+                if (value)
+                    File.WriteAllText("installed", "");
+                else
+                    File.Delete("installed");
             }
         }
 
@@ -727,6 +731,13 @@ namespace Bootlegger.App.Lib
                     Environment.SetEnvironmentVariable(name, value);
                     Environment.SetEnvironmentVariable("DOCKER_TOOLBOX_INSTALL_PATH", @"C:\Program Files\Docker Toolbox");
                     Environment.SetEnvironmentVariable("VBOX_MSI_INSTALL_PATH", @"C:\Program Files\Oracle\VirtualBox\");
+
+                    Log.Info($"Moving boot2docker if does not exist");
+                    string userHomePath = Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+                    string dockercache = Path.Combine(userHomePath, ".docker", "machine", "cache", "boot2docker.iso");
+                    if (!File.Exists(dockercache)){
+                        File.Copy(@"C:\Program Files\Docker Toolbox\boot2docker.iso", dockercache,true);
+                    }
 
                     Log.Info($"Starting docker-toolbox");
                     
