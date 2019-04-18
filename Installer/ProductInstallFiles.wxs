@@ -38,8 +38,8 @@
             <Component Id="cmp4DB50D9CEC073BC170ECFD29DD85D114" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil2F4A157B7EC40AE551D4CAA02E513E6E" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Docker.DotNet.X509.dll" />
             </Component>
-            <Component Id="cmp00F70D74F64848C1781B2FF5436EC1CB" Directory="INSTALLFOLDER" Guid="*">
-                <File Id="filB09665B9622DF25B739264D859F596ED" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\log.txt" />
+            <Component Id="cmpD8B401D5A0C8D5AA0E9DF2AAC4C1A744" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filF5C580D4B3E1CB9EB18BA41D90AD8CDB" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\hypervshare.mp4" />
             </Component>
             <Component Id="cmp223D4754378C01052DA8253A843FD297" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="filBC562C5B3D9848A2114F0AF7275FF1E6" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\MahApps.Metro.dll" />
@@ -88,6 +88,9 @@
             </Component>
             <Component Id="cmpAF162B14FA6391E4D0D34D9485A3CBEB" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil938BF1D1B479C73F0CECCBD51683AA0E" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\NLog.xml" />
+            </Component>
+            <Component Id="cmp55A5B3F445AF3A217E89CF12969C1F9C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil752362D57B82E66E20BF92551B05FFA8" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\NlogViewer.dll" />
             </Component>
             <Component Id="cmp1F8720F5B8DAAA40D4A8326CC518E91C" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil10DA0E1233BB7897C7E5C30E724463B3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Our Story Titan.exe" />

@@ -31,6 +31,7 @@ namespace Bootlegger.App.Lib
             CurrentPlatform = System.Environment.OSVersion;
             Log = LogManager.GetLogger(typeof(BootleggerApplication).FullName);
             ImagesPath = Path.Combine("downloads", "images.tar");
+            Directory.CreateDirectory(Path.Combine("downloads"));
         }
 
         public Logger Log { get; set; }
@@ -94,17 +95,36 @@ namespace Bootlegger.App.Lib
                 return (!HyperVSwitch.SafeNativeMethods.IsProcessorFeaturePresent(HyperVSwitch.ProcessorFeature.PF_VIRT_FIRMWARE_ENABLED)) ? InstallerType.HYPER_V : InstallerType.NO_HYPER_V;
             } }
 
+       
+
         //download the content:
         const string HYPER_V_INSTALLER_REMOTE = "https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe";
         const string HYPER_V_INSTALLER_LOCAL = "DockerForWindows.exe";
         const string INSTALLER_REMOTE = "https://github.com/docker/toolbox/releases/download/v18.09.1/DockerToolbox-18.09.1.exe";
         const string INSTALLER_LOCAL = "DockerToolbox.exe";
+        const string TAR_FILE_LOCATION = "https://s3-eu-west-1.amazonaws.com/bootleggerlive/titan/images.tar";
 
         enum InstallerType { HYPER_V, NO_HYPER_V };
 
+        internal async Task DownloadImagesTar(CancellationToken token)
+        {
+            string src = TAR_FILE_LOCATION;
+            string dst = "images.tar";
+            if (!File.Exists(Path.Combine("downloads", dst)))
+            {
+                Log.Info($"Initiating download of {src}");
+                await DownloadFileInBackground(src, Path.Combine("downloads", dst + ".download"), token);
+                Log.Info("Download of installer complete");
+                File.Move(Path.Combine("downloads", dst + ".download"), Path.Combine("downloads", dst));
+                Log.Info("Moving download file to correct name");
+            }
+            else
+                Log.Info($"Download not required for {src}");
+        }
+
         public async Task DownloadInstaller(CancellationToken cancel)
         {
-            Log.Info("Starting download");
+            Log.Info("Starting download of installer");
             string src = "";
             string dst = "";
             switch (CurrentInstallerType)
@@ -124,7 +144,7 @@ namespace Bootlegger.App.Lib
             {
                 Log.Info($"Initiating download of {src}");
                 await DownloadFileInBackground(src, Path.Combine("downloads", dst + ".download"), cancel);
-                Log.Info("Download complete");
+                Log.Info("Download of installer complete");
                 File.Move(Path.Combine("downloads", dst + ".download"), Path.Combine("downloads", dst));
                 Log.Info("Moving download file to correct name");
             }
@@ -184,6 +204,44 @@ namespace Bootlegger.App.Lib
              {
                  Log.Info($"{fileName}", args.Data);
              };
+
+            process.ErrorDataReceived += (sender, args) =>
+            {
+                Log.Error($"{fileName}", args.Data);
+            };
+
+            process.Start();
+
+            return tcs.Task;
+        }
+
+        Task<string> RunProcessAsyncResult(string fileName, string arg, bool show = false, bool runas = false)
+        {
+            Log.Info($"{fileName} {arg}");
+
+            var tcs = new TaskCompletionSource<string>();
+
+            var process = new Process
+            {
+                StartInfo = {
+                    FileName = fileName,
+                    Arguments = arg,
+                    RedirectStandardError = (show)? false : true,
+                    RedirectStandardOutput = (show)? false : true,
+                    UseShellExecute = (show)? true: false,
+                    CreateNoWindow = (show)? false: true,
+                    WindowStyle = (show)? ProcessWindowStyle.Normal : ProcessWindowStyle.Hidden,
+                    Verb = (runas)?"runas":"open"
+                },
+                EnableRaisingEvents = true
+            };
+
+            process.Exited += (sender, args) =>
+            {
+
+                tcs.SetResult(process.StandardOutput.ReadToEnd());
+                process.Dispose();
+            };
 
             process.ErrorDataReceived += (sender, args) =>
             {
@@ -458,22 +516,6 @@ namespace Bootlegger.App.Lib
                     Log.Info("Local cached docker load complete");
                     OnNextDownload?.Invoke(1, 1, 1);
                 }
-                //if (File.Exists(Path.Combine("downloads", "images2.tar")))
-                //{
-                //    Log.Info("Using local images2.tar file");
-                //    doonline = false;
-                //    await dockerclient.Images.LoadImageAsync(new ImageLoadParameters(), File.OpenRead(Path.Combine("downloads", "images2.tar")), this, cancel);
-                //    Log.Info("Local cached docker load complete");
-                //    OnNextDownload?.Invoke(1, 1, 2/3.0);
-                //}
-                //if (File.Exists(Path.Combine("downloads", "images3.tar")))
-                //{
-                //    Log.Info("Using local images3.tar file");
-                //    doonline = false;
-                //    await dockerclient.Images.LoadImageAsync(new ImageLoadParameters(), File.OpenRead(Path.Combine("downloads", "images3.tar")), this, cancel);
-                //    Log.Info("Local cached docker load complete");
-                //    OnNextDownload?.Invoke(1, 1, 1);
-                //}
             }
 
             if (doonline)
@@ -554,8 +596,17 @@ namespace Bootlegger.App.Lib
                 if (!DockerStarted)
                     await StartDocker(cancel);
 
-                //TODO: Start Docker Client
+                //Start Docker Client
                 await StartDockerClient();
+
+                //check for drive share enabled
+                await CheckSharedDrives();
+
+
+                Log.Info("Stopping existing HTTP port 80 connections");
+
+                //close any existing http on port 80
+                await RunProcessAsync("net", "stop HTTP /y", false, true);
 
 
                 if (currentProcess != null && !currentProcess.HasExited)
@@ -581,13 +632,19 @@ namespace Bootlegger.App.Lib
                 currentProcess.OutputDataReceived += (s, o) =>
                 {
                     if (o.Data != null)
+                    {
+                        Log.Info(o.Data.Trim());
                         OnLog?.Invoke(o.Data.Trim());
+                    }
                 };
 
                 currentProcess.ErrorDataReceived += (s, o) =>
                 {
                     if (o.Data != null)
+                    {
+                        Log.Info(o.Data.Trim());
                         OnLog?.Invoke(o.Data.Trim());
+                    }
                 };
 
                 await Task.Run(() =>
@@ -603,6 +660,7 @@ namespace Bootlegger.App.Lib
                 {
                     try
                     {
+                        Log.Info("Attempting connection to localhost...");
                         var result = await client.DownloadStringTaskAsync($"http://localhost/status");
                         connected = true;
                     }
@@ -618,6 +676,10 @@ namespace Bootlegger.App.Lib
 
 
                 return connected;
+            }
+            catch (FileLoadException fe)
+            {
+                throw fe;
             }
             catch (Exception e)
             {
@@ -682,9 +744,23 @@ namespace Bootlegger.App.Lib
                     break;
             }
 
-            //wait until docker actually started...
-            var task = Task.Factory.StartNew(async () =>
+            var waitingtask = WaitForDockerToStart();
+
+            if (await Task.WhenAny(waitingtask, Task.Delay(TimeSpan.FromMinutes(4), cancel)) == waitingtask)
             {
+                await waitingtask;
+            }
+            else
+            {
+                Log.Error(new TimeoutException());
+                throw new TimeoutException();
+            }
+        }
+
+        async Task WaitForDockerToStart()
+        {
+            //wait until docker actually started...
+           
                 bool found = false;
                 while (!found)
                 {
@@ -693,24 +769,29 @@ namespace Bootlegger.App.Lib
 
                         await StartDockerClient();
                         var info = await dockerclient.System.GetSystemInfoAsync();
+
                         found = true;
                     }
                     catch (Exception e)
                     {
                         Log.Error(e);
                     }
-                    Thread.Sleep(5000);
+                    await Task.Delay(5000);
                 }
-            });
+           
+        }
 
-            if (await Task.WhenAny(task, Task.Delay(TimeSpan.FromMinutes(4), cancel)) == task)
+        public async Task CheckSharedDrives()
+        {
+            if (CurrentInstallerType == InstallerType.HYPER_V)
             {
-                await task;
-            }
-            else
-            {
-                Log.Error(new TimeoutException());
-                throw new TimeoutException();
+                Log.Info("Checking for shared drive");
+
+                var result = await RunProcessAsyncResult(@"C:\Program Files\Docker\Docker\DockerCli.exe", "-SharedDrives");
+                if (!result.Contains("C"))
+                {
+                    throw new FileLoadException();
+                }
             }
         }
 
@@ -778,7 +859,14 @@ namespace Bootlegger.App.Lib
             {
                 Debug.WriteLine(value.Progress.Current);
                 Layers[value.ID] = value.Progress.Current / (double)value.Progress.Total;
-                OnDownloadProgress?.Invoke("Downloading", CurrentDownload, imagestodownload.Count, Layers, CurrentDownload / (double)imagestodownload.Count);
+                try
+                {
+                    OnDownloadProgress?.Invoke("Downloading", CurrentDownload, imagestodownload.Count, Layers, CurrentDownload / (double)imagestodownload.Count);
+                }
+                catch
+                {
+                    //unknown message
+                }
             }
         }
     }

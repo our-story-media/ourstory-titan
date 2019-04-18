@@ -20,9 +20,13 @@
         <!--<requestedExecutionLevel  level="highestAvailable" uiAccess="false" />-->
         <!--<requestedExecutionLevel  level="asInvoker" uiAccess="false" />-->
       </requestedPrivileges>
-      <applicationRequestMinimum>
+      <!--<applicationRequestMinimum>
         <defaultAssemblyRequest permissionSetReference="Custom" />
         <PermissionSet ID="Custom" SameSite="site" Unrestricted="true" />
+      </applicationRequestMinimum>-->
+      <applicationRequestMinimum>
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
       </applicationRequestMinimum>
     </security>
   </trustInfo>

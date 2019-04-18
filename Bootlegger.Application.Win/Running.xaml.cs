@@ -2,6 +2,7 @@
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -29,7 +30,6 @@ namespace Bootlegger.App.Win
             InitializeComponent();
             Loaded += Running_Loaded;
             Unloaded += Running_Unloaded;
-
         }
 
         private void Running_Unloaded(object sender, RoutedEventArgs e)
@@ -39,34 +39,62 @@ namespace Bootlegger.App.Win
 
         CancellationTokenSource cts = new CancellationTokenSource();
 
+        async void Start()
+        {
+            progress.Content = "Starting application...";
+
+            try
+            {
+                if (await App.BootleggerApp.RunServer(cts.Token))
+                {
+                    progress.Content = "Running";
+                    sharewarning.Visibility = Visibility.Collapsed;
+                    progressring.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    progress.Content = "Problem starting application!";
+                    sharewarning.Visibility = Visibility.Collapsed;
+                    progressring.Visibility = Visibility.Collapsed;
+                }
+            }
+            catch (FileLoadException)
+            {
+                //show video panel
+                sharewarning.Visibility = Visibility.Visible;
+                video.Play();
+
+                // await check on if its enabled again:
+                //  await App.BootleggerApp.CheckSharedDrives();
+
+                await Task.Delay(10000);
+
+                Start();
+
+                //sharewarning.Visibility = Visibility.Collapsed;
+            }
+
+
+        }
+
         private async void Running_Loaded(object sender, RoutedEventArgs e)
         {
             App.BootleggerApp.OnLog += BootleggerApp_OnLog;
-            progress.Content = "Starting application...";
-
-            if (await App.BootleggerApp.RunServer(cts.Token))
-            {
-                progress.Content = "Running";
-                progressring.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                progress.Content = "Problem starting application!";
-                progressring.Visibility = Visibility.Collapsed;
-            }
+            
+            Start();
         }
 
         private void BootleggerApp_OnLog(string obj)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                obj = Regex.Replace(obj, @"[^\u0020-\u007F]+", string.Empty);
-                if (obj.Length > 0)
-                {
-                    log.AppendText($"{DateTime.Now.ToShortTimeString()} - {obj.Trim('\n', '\r')}\r");
-                    log.ScrollToEnd();
-                }
-            }));
+            //Dispatcher.BeginInvoke(new Action(() =>
+            //{
+            //    obj = Regex.Replace(obj, @"[^\u0020-\u007F]+", string.Empty);
+            //    if (obj.Length > 0)
+            //    {
+            //        log.AppendText($"{DateTime.Now.ToShortTimeString()} - {obj.Trim('\n', '\r')}\r");
+            //        log.ScrollToEnd();
+            //    }
+            //}));
         }
 
         private void continuebtn_Click(object sender, RoutedEventArgs e)
@@ -109,6 +137,12 @@ namespace Bootlegger.App.Win
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             (App.Current.MainWindow as MetroWindow).Close();
+        }
+
+        private void Video_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            video.Position = TimeSpan.FromSeconds(0);
+            video.Play();
         }
     }
 }

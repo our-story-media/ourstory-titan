@@ -40,20 +40,7 @@ namespace Bootlegger.App.Win
 
             App.BootleggerApp.Log.Info("Install started");
 
-            //App.BootleggerApp.Log.Info("Has cache", App.BootleggerApp.HasCachedContent);
-
-            //needswifi.Visibility = (!App.BootleggerApp.HasCachedContent) ? Visibility.Visible : Visibility.Collapsed;
-
-            //if (App.BootleggerApp.HasCachedContent)
-            //{
             imagesbtn.Visibility = Visibility.Visible;
-            //continuebtn.IsEnabled = false;
-            //locatefiles.Visibility = Visibility.Visible;
-            //}
-            //else
-            //{
-                //imagesbtn.Visibility = Visibility.Hidden;
-            //}
         }
 
         private void continuebtn_Copy_Click(object sender, RoutedEventArgs e)
@@ -62,11 +49,16 @@ namespace Bootlegger.App.Win
             cancel.Cancel();
             (Application.Current.MainWindow as MainWindow)._mainFrame.Content = new Intro();
         }
+        
+        enum filetype { DOCKER, TAR};
+        filetype CURRENTFILE;
 
         private async void continuebtn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                locationmsg.Visibility = Visibility.Collapsed;
+                buttons.Visibility = Visibility.Collapsed;
                 imagesbtn.IsEnabled = false;
                 continuebtn.IsEnabled = false;
                 progress.Visibility = Visibility.Visible;
@@ -80,6 +72,7 @@ namespace Bootlegger.App.Win
                 if (!App.BootleggerApp.IsDockerInstalled)
                 {
                     status.Text = "Downloading Docker Installer...";
+                    CURRENTFILE = filetype.DOCKER;
                     await App.BootleggerApp.DownloadInstaller(cancel.Token);
 
                     status.Text = "Installing Docker...";
@@ -96,6 +89,13 @@ namespace Bootlegger.App.Win
 
                 progress.IsIndeterminate = true;
 
+                if (remote_download)
+                {
+                    CURRENTFILE = filetype.TAR;
+                    await App.BootleggerApp.DownloadImagesTar(cancel.Token);
+                }
+
+                //load images into system:
                 await App.BootleggerApp.DownloadImages(false, cancel.Token);
 
                 App.BootleggerApp.IsInstalled = true;
@@ -111,7 +111,7 @@ namespace Bootlegger.App.Win
         private void BootleggerApp_OnNextDownload(int arg1, int arg2, double arg3)
         {
             progress.IsIndeterminate = false;
-            status.Text = $"Installing {arg1} of {arg2}...";
+            status.Text = $"Downloading {arg1} of {arg2}...\nThis may take some time...";
             progress.Value = arg3;
         }
 
@@ -125,19 +125,21 @@ namespace Bootlegger.App.Win
         {
             progress.IsIndeterminate = false;
 
-            status.Text = $"Downloading Docker Installer {Math.Round((obj?.BytesReceived/(1024.0*1024.0)).Value,2)}MB of {Math.Round((double)(obj?.TotalBytesToReceive/(1024.0*1024.0)).Value,2)}MB...";
+            status.Text = $"Downloading {((CURRENTFILE==filetype.DOCKER)? "Docker Installer" : "Our Story Components")}\n{Math.Round((obj?.BytesReceived/(1024.0*1024.0)).Value,2)}MB of {Math.Round((double)(obj?.TotalBytesToReceive/(1024.0*1024.0)).Value,2)}MB...";
             progress.Value = obj.ProgressPercentage/100;
         }
 
+        bool remote_download = true;
+
         private void Imagesbtn_Click(object sender, RoutedEventArgs e)
         {
+            remote_download = false;
             var fileDialog = new System.Windows.Forms.OpenFileDialog();
             fileDialog.Filter = "Tar File|*.tar";
             var result = fileDialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 App.BootleggerApp.ImagesPath = fileDialog.FileName;
-                //continuebtn.IsEnabled = true;
                 continuebtn_Click(null, null);
             }
         }

@@ -9,19 +9,22 @@
     <Feature Id="ProductFeature" Title="Our Story Titan" Level="1">
       <ComponentGroupRef Id="ProductFilesComponentGroup" />
       <ComponentRef Id="ApplicationShortcut" />
-
-      <!--<ComponentRef Id="dockerwin" />-->
-      <!--<ComponentRef Id="dockertoolbox" />-->
-      <!--<ComponentRef Id="images1" />
-      <ComponentRef Id="images2" />
-      <ComponentRef Id="images3" />-->
+      <ComponentRef Id="ApplicationShortcutDesktop" />
     </Feature>
 
     <WixVariable Id="WixUILicenseRtf" Value="$(var.Bootlegger.App.Win.ProjectDir)/Readme.rtf" />
     <WixVariable Id="WixUIBannerBmp" Value="$(var.Bootlegger.App.Win.ProjectDir)/logo_install.bmp" />
     <WixVariable Id="WixUIDialogBmp" Value="$(var.Bootlegger.App.Win.ProjectDir)/logo_back.bmp" />
 
-    <UIRef Id="WixUI_Minimal" />
+    <UI>
+      <UIRef Id="WixUI_Minimal" />
+      <!--<Publish Dialog="ExitDialog"
+            Control="Finish"
+            Event="DoAction"
+            Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Our Story Titan" />-->
+    </UI>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
@@ -35,6 +38,23 @@
       <Directory Id="ProgramMenuFolder">
         <Directory Id="ApplicationProgramsFolder" Name="Our Story Titan"/>
       </Directory>
+
+      <Directory Id="DesktopFolder" Name="Desktop">
+        <Component Id="ApplicationShortcutDesktop" Guid="*">
+          <Shortcut Id="ApplicationDesktopShortcut"
+              Name="Our Story"
+              Target="[INSTALLFOLDER]Our Story Titan.exe"
+              WorkingDirectory="INSTALLFOLDER"/>
+          <RemoveFolder Id="DesktopFolder" On="uninstall"/>
+          <RegistryValue
+              Root="HKCU"
+              Key="Software/MyAppName"
+              Name="installed"
+              Type="integer"
+              Value="1"
+              KeyPath="yes"/>
+        </Component>
+      </Directory>
     </Directory>
 
 
@@ -47,32 +67,24 @@
                   WorkingDirectory="INSTALLFOLDER"/>
         <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\Microsoft\OurStoryTitan" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\Windows\CurrentVersion\RunOnce" Name="ourstory-firstrun" Type="string" Value="[INSTALLFOLDER]Our Story Titan.exe"/>
+
       </Component>
     </DirectoryRef>
 
     <DirectoryRef Id="DOWNLOADS">
-      <!--<Component Id="dockerwin" Guid="*">
-        <File Id="dockerwin" Source="$(var.Bootlegger.App.Win.ProjectDir)..\Bootlegger.Application.Lib\downloads\DockerForWindows.exe" KeyPath="yes"/>
-      </Component>
-      <Component Id="dockertoolbox" Guid="*">
-        <File Id="dockertoolbox" Source="$(var.Bootlegger.App.Win.ProjectDir)..\Bootlegger.Application.Lib\downloads\DockerToolbox.exe" KeyPath="yes"/>
-      </Component>-->
-
-
-      <!--<Component Id="images1" Guid="*">
-        <File Id="images1" Source="$(var.Bootlegger.App.Win.ProjectDir)..\Bootlegger.Application.Lib\downloads\images1.tar" KeyPath="yes"/>
-
-      </Component>
-      <Component Id="images2" Guid="*">
-        <File Id="images2" Source="$(var.Bootlegger.App.Win.ProjectDir)..\Bootlegger.Application.Lib\downloads\images2.tar" KeyPath="yes" />
-      </Component>
-
-      <Component Id="images3" Guid="*">
-        <File Id="images3" Source="$(var.Bootlegger.App.Win.ProjectDir)..\Bootlegger.Application.Lib\downloads\images3.tar" KeyPath="yes" />
-      </Component>-->
     </DirectoryRef>
 
+    <!--
+    <Property Id="WixShellExecTarget" Value="[#Our Story Titan.exe]" />
+    <CustomAction Id="LaunchApplication"
+        BinaryKey="WixCA"
+        DllEntry="WixShellExec"
+        Impersonate="yes" />-->
 
+    <InstallExecuteSequence>
+      <ScheduleReboot After="InstallFinalize"/>
+    </InstallExecuteSequence>
 
   </Product>
 </Wix>

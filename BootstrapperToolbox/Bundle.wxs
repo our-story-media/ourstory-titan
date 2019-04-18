@@ -6,7 +6,7 @@
                   LaunchTarget="[ProgramFilesFolder]\Our Story Titan\Our Story Titan.exe"
                   LicenseFile="$(var.SolutionDir)\Bootlegger.Application.Win\Readme.rtf"
                   LogoFile="$(var.SolutionDir)\Bootlegger.Application.Win\logo.bmp"
-                  SuppressOptionsUI="no"
+                  SuppressOptionsUI="yes"
                   ShowVersion="no"
             />
     </BootstrapperApplicationRef>

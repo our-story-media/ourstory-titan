@@ -16,10 +16,10 @@
             <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFBDBDBD" FontFamily="Segoe UI Light" FontSize="18"><Run Text="Our Story"/><Run Text=" requires "/><Run Text="additional components"/><Run Text=" to be installe"/><Run Text="d."/></TextBlock>
             <!--<StackPanel Orientation="Vertical" x:Name="download"/>-->
             <TextBlock Visibility="Collapsed" x:Name="needswifi" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" FontSize="18" Text="Additional downloads are required, please make sure you have internet connectivity before continuing"/>
-            <TextBlock Visibility="Hidden" x:Name="status" TextWrapping="Wrap" VerticalAlignment="Top"  Foreground="#FFBDBDBD" FontFamily="Segoe UI Light" FontSize="18" Text="please wait..."/>
+            <TextBlock Visibility="Hidden" x:Name="status" TextWrapping="Wrap" VerticalAlignment="Top"  Foreground="#FFFF8E8E" FontFamily="Segoe UI Light" FontSize="18" Text="please wait..."/>
             <Custom:MetroProgressBar Visibility="Hidden" x:Name="progress" HorizontalAlignment="Stretch" VerticalAlignment="Top" Maximum="1" Margin="0,10,0,5"/>
-            <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,0,0,6" Foreground="#FFBDBDBD" FontFamily="Segoe UI Light" FontSize="16"><Run Text="Locate the "/><Run FontWeight="Bold" Text="images.tar"/><Run Text=" file that came with your installation files, or go online to download them."/></TextBlock>
-            <DockPanel>
+            <TextBlock x:Name="locationmsg" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,0,0,6" Foreground="#FFBDBDBD" FontFamily="Segoe UI Light" FontSize="16"><Run Text="Locate the "/><Run FontWeight="Bold" Text="images.tar"/><Run Text=" file that came with your installation files, or go online to download "/><Run Text="the remaining components"/><Run Text="."/></TextBlock>
+            <DockPanel x:Name="buttons">
                 <Button x:Name="imagesbtn" Style="{DynamicResource SquareButtonStyle}" DockPanel.Dock="Left" Content="LOCATE IMAGES.TAR FILE" HorizontalAlignment="Left" Custom:ControlsHelper.ContentCharacterCasing="Upper" BorderThickness="0.5" Padding="8" Click="Imagesbtn_Click"/>
             <Button x:Name="continuebtn" HorizontalAlignment="Right" Style="{DynamicResource SquareButtonStyle}" Content="Download Files" DockPanel.Dock="Right" Click="continuebtn_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper" BorderThickness="0.5" Padding="8"/>
                 <TextBlock Foreground="WhiteSmoke" HorizontalAlignment="Stretch" TextAlignment="Center" VerticalAlignment="Center">OR</TextBlock>
