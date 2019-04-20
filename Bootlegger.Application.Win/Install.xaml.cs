@@ -85,7 +85,7 @@ namespace Bootlegger.App.Win
 
                 await App.BootleggerApp.StartDocker(cancel.Token);
 
-                status.Text = "Getting Our Story Components...";
+                status.Text = "Loading Our Story Components...";
 
                 progress.IsIndeterminate = true;
 
@@ -104,7 +104,10 @@ namespace Bootlegger.App.Win
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                App.BootleggerApp.Log.Error(ex);
+                var tt = await (App.Current.MainWindow as MetroWindow).ShowMessageAsync("Error", $"There was a problem installing Our Story. {ex.Message}. Please restart and try again.", MessageDialogStyle.Affirmative);
+                Environment.Exit(1);
+                //Console.WriteLine(ex.Message);
             }
         }
 

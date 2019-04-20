@@ -123,14 +123,21 @@ namespace Bootlegger.App.Win
 
         private async void restorebtn_Click(object sender, RoutedEventArgs e)
         {
-            var diag = new Avalon.Windows.Dialogs.FolderBrowserDialog() { BrowseFiles = false };
-            var folder = diag.ShowDialog();
-
-            if (diag.SelectedPath != null)
+            try
             {
-                restorebtn.IsEnabled = false;
-                await App.BootleggerApp.RestoreDatabase(diag.SelectedPath);
-                restorebtn.IsEnabled = true;
+                var diag = new Avalon.Windows.Dialogs.FolderBrowserDialog() { BrowseFiles = false };
+                var folder = diag.ShowDialog();
+
+                if (diag.SelectedPath != null)
+                {
+                    restorebtn.IsEnabled = false;
+                    await App.BootleggerApp.RestoreDatabase(diag.SelectedPath);
+                    restorebtn.IsEnabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                App.BootleggerApp.Log.Error(ex);
             }
         }
 

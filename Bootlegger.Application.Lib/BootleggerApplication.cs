@@ -48,20 +48,22 @@ namespace Bootlegger.App.Lib
 
         #region Installer
 
+        private string InstallPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OurStoryTitan", "installed");
+
         public bool IsInstalled
         {
             get
             {
-                return File.Exists("installed");
+                return File.Exists(InstallPath);
                 //return Plugin.Settings.CrossSettings.Current.GetValueOrDefault("ourstory_installed", false);
             }
 
             set
             {
                 if (value)
-                    File.WriteAllText("installed", "");
+                    File.WriteAllText(InstallPath, "");
                 else
-                    File.Delete("installed");
+                    File.Delete(InstallPath);
             }
         }
 
@@ -200,7 +202,16 @@ namespace Bootlegger.App.Lib
             process.Exited += (sender, args) =>
             {
 
-                tcs.SetResult(process.ExitCode);
+                
+                if (process.ExitCode < 0)
+                {
+                    tcs.SetException(new Exception("Command failed"));
+                    Log.Error(new Exception($"Command failed {fileName}"));
+                }
+                else
+                {
+                    tcs.SetResult(process.ExitCode);
+                }
                 process.Dispose();
             };
 
@@ -607,11 +618,14 @@ namespace Bootlegger.App.Lib
                 await CheckSharedDrives();
 
 
-                Log.Info("Stopping existing HTTP port 80 connections");
 
-                //close any existing http on port 80
-                await RunProcessAsync("net", "stop HTTP /y", false, true);
 
+                if (CurrentInstallerType == InstallerType.HYPER_V)
+                {
+                    Log.Info("Stopping existing HTTP port 80 connections");
+                    //close any existing http on port 80
+                    await RunProcessAsync("net", "stop HTTP /y", false, true);
+                }
 
                 if (currentProcess != null && !currentProcess.HasExited)
                 {
@@ -735,21 +749,47 @@ namespace Bootlegger.App.Lib
                     Log.Info($"Moving boot2docker if does not exist");
                     string userHomePath = Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
                     string dockercache = Path.Combine(userHomePath, ".docker", "machine", "cache", "boot2docker.iso");
+                    Directory.CreateDirectory(Path.Combine(userHomePath, ".docker", "machine", "cache"));
                     if (!File.Exists(dockercache)){
                         File.Copy(@"C:\Program Files\Docker Toolbox\boot2docker.iso", dockercache,true);
                     }
+
+                    Log.Info($"Stopping docker-machine");
+
+                    await RunProcessAsync(@"docker-machine","stop");
+
+
+                    Log.Info($"Stopping Virtualbox VM");
+
+                    await RunProcessAsync("VBoxManage.exe", "controlvm default savestate");
+
+                    Log.Info($"Port forward 80");
+                    //port forward rules:
+                    await RunProcessAsync("VBoxManage.exe", "modifyvm \"default\" --natpf1 \"rule1, tcp,, 80,, 80\"");
+
+                    Log.Info($"Port forward 27017");
+
+                    await RunProcessAsync("VBoxManage.exe", "modifyvm \"default\" --natpf1 \"rule2, tcp,, 27017,, 27017\"");
+
+                    Log.Info("Stopping existing HTTP port 80 connections");
+                    await RunProcessAsync("net", "stop HTTP /y", true, true);
 
                     Log.Info($"Starting docker-toolbox");
                     
                     await RunProcessAsync(@"C:\Program Files\Git\bin\bash.exe", "-c \" \\\"/c/Program Files/Docker Toolbox/start.sh\\\" \\\"%*\\\"\"",true);
 
-                    Log.Info($"Port forward 80");
+                   
+                    //close any existing http on port 80
+                   
+                    //remove rule:
+                    //await RunProcessAsync("VBoxManage.exe", "controlvm default natpf1 \"rule1, tcp,, 80,, 80\"");
 
-                    await RunProcessAsync("VBoxManage.exe", "controlvm default natpf1 \"rule1, tcp,, 80,, 80\"");
+                    //Log.Info($"Port forward 27017");
 
-                    Log.Info($"Port forward 27017");
+                    //await RunProcessAsync("VBoxManage.exe", "controlvm default natpf1 \"rule2, tcp,, 27017,, 27017\"");
 
-                    await RunProcessAsync("VBoxManage.exe", "controlvm default natpf1 \"rule2, tcp,, 27017,, 27017\"");
+                    //add rule:
+                    // await RunProcessAsync("VBoxManage.exe", "controlvm default natpf1 \"delete rule1\"",true);
 
                     DockerStarted = true;
                     break;
