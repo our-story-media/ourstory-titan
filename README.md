@@ -11,7 +11,7 @@ Download the following files in this directory onto your machine or USB stick:
 > Tip: `Right Click` and then `Save Link As` to download the following files:
 
 - [images.tar](https://s3-eu-west-1.amazonaws.com/bootleggerlive/titan/images.tar)
-- [For Windows 7, 8.1, 10 Home (Toolbox)](https://s3-eu-west-1.amazonaws.com/bootleggerlive/titan/OurStoryToolbox.exe) or [For Windows 10 Pro (HyperV)](https://s3-eu-west-1.amazonaws.com/bootleggerlive/titan/OurStoryHyperV.exe)
+- [For Windows 7, 8.1, 10 Home (Toolbox)](https://s3-eu-west-1.amazonaws.com/bootleggerlive/titan/OurStoryToolbox.exe) or [For Windows 10 Pro (HyperV)](https://github.com/our-story-media/ourstory-titan/releases/download/v0.1-beta/OurStoryHyperV.exe)
 
 ----
 
