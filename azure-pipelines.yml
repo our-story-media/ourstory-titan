@@ -31,8 +31,13 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'install/**'
-    ArtifactName: 'install'
+    PathtoPublish: 'install/OurStoryToolbox.exe'
+    ArtifactName: 'Toolbox'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'install/OurStoryHyperV.exe'
+    ArtifactName: 'HyperV'
 
 # - task: GitHubRelease@0
 #   inputs:
