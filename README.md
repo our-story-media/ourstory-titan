@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/ourstorytitan/TitanInstaller/_apis/build/status/our-story-media.ourstory-titan?branchName=master)](https://dev.azure.com/ourstorytitan/TitanInstaller/_build/latest?definitionId=2&branchName=master)
+
 # Our Story Titan Installer
 
 Our Story depends on a technology called Virtualisation on Windows. If you are unsure whether your computer supports the never version (Called HyperV), download the `Toolbox` installer.
