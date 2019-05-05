@@ -11,7 +11,7 @@ pool:
 
 variables:
   solution: '**/*.sln'
-  buildPlatform: 'x64'
+  buildPlatform: 'x86'
   buildConfiguration: 'Release'
 
 steps:
@@ -27,12 +27,12 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: GitHubRelease@0
-  inputs:
-    gitHubConnection: 'OurStory GitHub'
-    action: 'create'
-    title: 'Our Story Titan'
-    addChangeLog: false
+# - task: GitHubRelease@0
+#   inputs:
+#     gitHubConnection: 'OurStory GitHub'
+#     action: 'create'
+#     title: 'Our Story Titan'
+#     addChangeLog: false
 
 # - task: VSTest@2
 #   inputs:
