@@ -27,7 +27,12 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-
+- task: GitHubRelease@0
+  inputs:
+    gitHubConnection: 'OurStory GitHub'
+    action: 'create'
+    title: 'Our Story Titan'
+    addChangeLog: false
 
 # - task: VSTest@2
 #   inputs:
