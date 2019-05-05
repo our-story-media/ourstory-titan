@@ -31,8 +31,8 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'installs/**'
-    ArtifactName: 'installs'
+    PathtoPublish: 'install/**'
+    ArtifactName: 'install'
 
 # - task: GitHubRelease@0
 #   inputs:
