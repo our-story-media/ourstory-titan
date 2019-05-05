@@ -21,6 +21,12 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: PowerShell@2
+  name: 'DownloadPrerequesits'
+  inputs:
+    filePath: 'Bootlegger.Application.Lib\\downloads\\getinstallers.ps1'
+    workingDirectory: 'Bootlegger.Application.Lib\\downloads'
+
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
