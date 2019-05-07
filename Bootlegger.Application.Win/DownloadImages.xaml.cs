@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls.Dialogs;
+using Bootlegger.App.Win.locale;
 
 namespace Bootlegger.App.Win
 {
@@ -60,7 +61,8 @@ namespace Bootlegger.App.Win
                     progresses.Clear();
                     layersstack.Children.Clear();
                     progress.Value = arg3;
-                    progresslabel.Content = "Downloading " + arg1 + " of " + arg2;
+
+                    progresslabel.Content = string.Format(Strings.DownloadingProgress, arg1, arg2);
                 }
             });
         }
@@ -75,15 +77,15 @@ namespace Bootlegger.App.Win
                 App.BootleggerApp.OnDownloadProgress += BootleggerApp_OnDownloadProgress;
                 App.BootleggerApp.OnNextDownload += BootleggerApp_OnNextDownload;
 
-                progresslabel.Content = "Resetting Network...";
+                progresslabel.Content = Strings.ResettingNetwork; ;
 
                 await App.BootleggerApp.UnConfigureNetwork();
 
-                progresslabel.Content = "Stopping Applicaton...";
+                progresslabel.Content = Strings.StoppingApplication;
 
                 await App.BootleggerApp.StopServer();
 
-                progresslabel.Content = "Initiating Download...";
+                progresslabel.Content = Strings.InitiatingDownload;
 
 
                 try
@@ -130,7 +132,7 @@ namespace Bootlegger.App.Win
                     }
                 }
 
-                progresslabel.Content = arg1 + " " + arg2 + " of " + arg3;
+                progresslabel.Content =string.Format(Strings.ProgressLabel,arg1, arg2 ,arg3);
             });
         }
 

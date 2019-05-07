@@ -1,4 +1,5 @@
 ﻿using Bootlegger.App.Lib;
+using Bootlegger.App.Win.locale;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -41,19 +42,19 @@ namespace Bootlegger.App.Win
 
         async void Start()
         {
-            progress.Content = "Starting application...";
+            progress.Content = Strings.StartingApplication;
 
             try
             {
                 if (await App.BootleggerApp.RunServer(cts.Token))
                 {
-                    progress.Content = "Running";
+                    progress.Content = Strings.Running;
                     sharewarning.Visibility = Visibility.Collapsed;
                     progressring.Visibility = Visibility.Collapsed;
                 }
                 else
                 {
-                    progress.Content = "Problem starting application!";
+                    progress.Content = Strings.ProblemStartingApplication;
                     sharewarning.Visibility = Visibility.Collapsed;
                     progressring.Visibility = Visibility.Collapsed;
                 }

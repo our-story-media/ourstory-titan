@@ -98,7 +98,10 @@ namespace Bootlegger.App.Lib
         }
 
         InstallerType CurrentInstallerType { get {
-                return (!HyperVSwitch.SafeNativeMethods.IsProcessorFeaturePresent(HyperVSwitch.ProcessorFeature.PF_VIRT_FIRMWARE_ENABLED)) ? InstallerType.HYPER_V : InstallerType.NO_HYPER_V;
+                if (CurrentPlatform.Version.Major >= 10)
+                    return (!HyperVSwitch.SafeNativeMethods.IsProcessorFeaturePresent(HyperVSwitch.ProcessorFeature.PF_VIRT_FIRMWARE_ENABLED)) ? InstallerType.HYPER_V : InstallerType.NO_HYPER_V;
+                else
+                    return InstallerType.NO_HYPER_V;
             } }
 
        

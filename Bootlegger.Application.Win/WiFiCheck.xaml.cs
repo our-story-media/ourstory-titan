@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls.Dialogs;
-
+using Bootlegger.App.Win.locale;
 
 namespace Bootlegger.App.Win
 {
@@ -39,7 +39,7 @@ namespace Bootlegger.App.Win
             if (App.BootleggerApp.WiFiSettingsOk)
                 (Application.Current.MainWindow as MainWindow)._mainFrame.Content = new Running();
             else
-                if (await(App.Current.MainWindow as MetroWindow).ShowMessageAsync("Invalid Network", "Check Network settings and try again.", MessageDialogStyle.AffirmativeAndNegative, new MetroDialogSettings() { AffirmativeButtonText = "Continue Anyway", NegativeButtonText = "Manually Change Settings" }) == MessageDialogResult.Affirmative)
+                if (await(App.Current.MainWindow as MetroWindow).ShowMessageAsync(Strings.InvalidNetwork, Strings.CheckNetworkSettingsAndTryAgain, MessageDialogStyle.AffirmativeAndNegative, new MetroDialogSettings() { AffirmativeButtonText = Strings.ContinueAnyway, NegativeButtonText = Strings.ManuallyChangeSettings }) == MessageDialogResult.Affirmative)
                     (Application.Current.MainWindow as MainWindow)._mainFrame.Content = new Running();
         }
     }

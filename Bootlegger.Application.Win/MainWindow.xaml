@@ -9,11 +9,15 @@
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1"
         WindowStartupLocation="CenterScreen"
+        xmlns:p = "clr-namespace:Bootlegger.App.Win.locale"
         WindowTitleBrush="Transparent"
-        Title="Our Story Titan" Height="400" Width="600" ResizeMode="CanMinimize" IsMaxRestoreButtonEnabled="False">
+        Title="{x:Static p:Strings.AppTitle}" Height="400" Width="600" ResizeMode="CanMinimize" IsMaxRestoreButtonEnabled="False">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button Content="Documentation" Click="Button_Click" />
+            <Button Content="{x:Static p:Strings.Documentation}" Click="Button_Click" />
+            <ComboBox DisplayMemberPath="DisplayName" x:Name="langs" BorderThickness="0" SelectionChanged="Langs_SelectionChanged">
+                
+            </ComboBox>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     

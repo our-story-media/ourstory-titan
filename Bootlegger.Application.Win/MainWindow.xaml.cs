@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls.Dialogs;
+using System.Globalization;
 
 namespace Bootlegger.App.Win
 {
@@ -30,6 +31,47 @@ namespace Bootlegger.App.Win
             Loaded += MainWindow_Initialized;
             Closing += MainWindow_Closing;
             MouseDown += Window_MouseDown;
+            Closed += MainWindow_Closed;
+
+            List<CultureInfo> items = new List<CultureInfo>()
+            {
+                    CultureInfo.CreateSpecificCulture("en"),
+                    CultureInfo.CreateSpecificCulture("fr"),
+                    CultureInfo.CreateSpecificCulture("es"),
+                    CultureInfo.CreateSpecificCulture("ar")
+            };
+            langs.ItemsSource = items;
+
+            
+
+
+            if (items.Contains(Thread.CurrentThread.CurrentUICulture))
+                langs.SelectedItem = Thread.CurrentThread.CurrentUICulture;
+            else
+                langs.SelectedItem = items.First();
+
+            FlowDirection = (Thread.CurrentThread.CurrentUICulture.TextInfo.IsRightToLeft) ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
+        }
+
+        private void MainWindow_Closed(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(LangSwitch))
+            {
+                string lang = LangSwitch;
+
+                Closed -= MainWindow_Closed;
+
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
+                var wnd = new MainWindow();
+                Closed += MainWindow_Closed;
+                wnd.Show();
+                LangSwitch = null;
+            }
+            else
+            {
+                App.Current.Shutdown();
+            }
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -40,9 +82,13 @@ namespace Bootlegger.App.Win
 
         bool canexit = false;
         bool closing = false;
+        public string LangSwitch { get; private set; } = null;
 
         private async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (LangSwitch != null)
+                return;
+
             if (closing)
             {
                 e.Cancel = true;
@@ -54,7 +100,8 @@ namespace Bootlegger.App.Win
             if (!canexit)
             {
                 e.Cancel = true;
-                var tt = await (App.Current.MainWindow as MetroWindow).ShowMessageAsync("Continue?", "Closing this application will prevent access to Our Story", MessageDialogStyle.AffirmativeAndNegative);
+
+                var tt = await (App.Current.MainWindow as MetroWindow).ShowMessageAsync(locale.Strings.ContinueDialogTitle, locale.Strings.CloseWarning, MessageDialogStyle.AffirmativeAndNegative);
                 if (tt == MessageDialogResult.Affirmative)
                 {
                     closing = true;
@@ -97,6 +144,22 @@ namespace Bootlegger.App.Win
         {
             //open help:
             App.BootleggerApp.OpenDocs();
+        }
+
+        private void Langs_Selected(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Langs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+
+            if (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName != (e.AddedItems[0] as CultureInfo).TwoLetterISOLanguageName)
+            {
+                LangSwitch = (e.AddedItems[0] as CultureInfo).Name;
+                Close();
+            }
         }
     }
 }

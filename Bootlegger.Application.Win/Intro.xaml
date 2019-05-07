@@ -7,15 +7,16 @@
       xmlns:local="clr-namespace:Bootlegger.App.Win"
       xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" x:Class="Bootlegger.App.Win.Intro"
       mc:Ignorable="d" 
+    xmlns:p="clr-namespace:Bootlegger.App.Win.locale"
       d:DesignHeight="400" d:DesignWidth="800">
 
     <Grid>
         <Grid VerticalAlignment="Bottom">
-            <Button x:Name="continuebtn" Margin="10" Style="{DynamicResource SquareButtonStyle}" Content="Continue"  HorizontalAlignment="Right" Padding="8" VerticalAlignment="Bottom" BorderThickness="0.5" Custom:ControlsHelper.ContentCharacterCasing="Upper"/>
+            <Button x:Name="continuebtn" Margin="10" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.Continue}"  HorizontalAlignment="Right" Padding="8" VerticalAlignment="Bottom" BorderThickness="0.5" Custom:ControlsHelper.ContentCharacterCasing="Upper"/>
         </Grid>
         <StackPanel Margin="20" Orientation="Vertical">
-            <Label Padding="0" Content="Welcome to Our Story" Height="60" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="36"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFA4A4A4" FontFamily="Segoe UI Light" Height="84" Width="360" FontSize="18" Text="Additional software may need to be installed and take some additional time. Please be patient..."/>
+            <Label Padding="0" Content="{x:Static p:Strings.Welcome}" Height="60" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="36"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFA4A4A4" FontFamily="Segoe UI Light" Height="84" Width="360" FontSize="18" Text="{x:Static p:Strings.AdditionalSoftware}"/>
             <!--<Image Margin="0,40,0,0" Source="logo_white.png" HorizontalAlignment="Center" Height="60"/>-->
 
         </StackPanel>

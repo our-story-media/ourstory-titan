@@ -7,18 +7,19 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Bootlegger.App.Win"
+    xmlns:p="clr-namespace:Bootlegger.App.Win.locale"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="800">
     <Grid>
         <StackPanel Orientation="Vertical" Margin="20">
-            <Label Padding="0" Content="Downloading Content" Height="60" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="36"/>
+            <Label Padding="0" Content="{x:Static p:Strings.DownloadingContent}" Height="60" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="36"/>
             <Label x:Name="progresslabel" Content="Label" VerticalAlignment="Top" Padding="0" HorizontalAlignment="Left" HorizontalContentAlignment="Right" FontSize="18" Background="{x:Null}" Foreground="#FF9B9B9B" />
 
             <Controls:MetroProgressBar x:Name="progress" HorizontalAlignment="Stretch" VerticalAlignment="Top" Maximum="1" Margin="0,10,0,5"/>
             <StackPanel x:Name="layersstack" Orientation="Vertical"/>
         </StackPanel>
         <Grid VerticalAlignment="Bottom" >
-            <Button x:Name="continuebtn_Copy" Padding="8" Style="{DynamicResource SquareButtonStyle}" BorderThickness="0.5" Content="cancel" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Bottom" Click="continuebtn_Copy_Click" Controls:ControlsHelper.ContentCharacterCasing="Upper"/>
+            <Button x:Name="continuebtn_Copy" Padding="8" Style="{DynamicResource SquareButtonStyle}" BorderThickness="0.5" Content="{x:Static p:Strings.cancel}" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Bottom" Click="continuebtn_Copy_Click" Controls:ControlsHelper.ContentCharacterCasing="Upper"/>
         </Grid>
     </Grid>
 </ContentControl>

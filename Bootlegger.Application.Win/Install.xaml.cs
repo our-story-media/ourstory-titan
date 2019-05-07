@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls.Dialogs;
 using System.Threading;
 using Bootlegger.App.Lib;
+using Bootlegger.App.Win.locale;
 
 namespace Bootlegger.App.Win
 {
@@ -71,21 +72,21 @@ namespace Bootlegger.App.Win
 
                 if (!App.BootleggerApp.IsDockerInstalled)
                 {
-                    status.Text = "Downloading Docker Installer...";
+                    status.Text = Strings.DownloadingDocker;
                     CURRENTFILE = filetype.DOCKER;
                     await App.BootleggerApp.DownloadInstaller(cancel.Token);
 
-                    status.Text = "Installing Docker...";
+                    status.Text = Strings.InstallingDocker;
                     await App.BootleggerApp.RunInstaller(cancel.Token);
                 }
 
-                status.Text = "Starting Docker...";
+                status.Text = Strings.StartingDocker;
 
                 progress.IsIndeterminate = true;
 
                 await App.BootleggerApp.StartDocker(cancel.Token);
 
-                status.Text = "Loading Our Story Components...";
+                status.Text = Strings.LoadingComponents;
 
                 progress.IsIndeterminate = true;
 
@@ -105,7 +106,7 @@ namespace Bootlegger.App.Win
             catch (Exception ex)
             {
                 App.BootleggerApp.Log.Error(ex);
-                var tt = await (App.Current.MainWindow as MetroWindow).ShowMessageAsync("Error", $"There was a problem installing Our Story. {ex.Message}. Please restart and try again.", MessageDialogStyle.Affirmative);
+                var tt = await (App.Current.MainWindow as MetroWindow).ShowMessageAsync(Strings.Error, string.Format(Strings.ErrorDialog, ex.Message),MessageDialogStyle.Affirmative);
                 Environment.Exit(1);
                 //Console.WriteLine(ex.Message);
             }
@@ -114,7 +115,7 @@ namespace Bootlegger.App.Win
         private void BootleggerApp_OnNextDownload(int arg1, int arg2, double arg3)
         {
             progress.IsIndeterminate = false;
-            status.Text = $"Downloading {arg1} of {arg2}...\nThis may take some time...";
+            status.Text = string.Format(Strings.DownloadWarning, arg1, arg2);
             progress.Value = arg3;
         }
 
@@ -128,7 +129,7 @@ namespace Bootlegger.App.Win
         {
             progress.IsIndeterminate = false;
 
-            status.Text = $"Downloading {((CURRENTFILE==filetype.DOCKER)? "Docker Installer" : "Our Story Components")}\n{Math.Round((obj?.BytesReceived/(1024.0*1024.0)).Value,2)}MB of {Math.Round((double)(obj?.TotalBytesToReceive/(1024.0*1024.0)).Value,2)}MB...";
+            status.Text = $"{Strings.Downloading} {((CURRENTFILE==filetype.DOCKER)? Strings.DockerInstaller : Strings.OurStoryBits)}\n{Math.Round((obj?.BytesReceived/(1024.0*1024.0)).Value,2)}MB of {Math.Round((double)(obj?.TotalBytesToReceive/(1024.0*1024.0)).Value,2)}MB...";
             progress.Value = obj.ProgressPercentage/100;
         }
 

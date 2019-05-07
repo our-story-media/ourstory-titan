@@ -7,56 +7,57 @@
       xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" x:Class="Bootlegger.App.Win.Running"
       mc:Ignorable="d" 
      xmlns:nlog ="clr-namespace:NlogViewer;assembly=NlogViewer"
+    xmlns:p = "clr-namespace:Bootlegger.App.Win.locale"
       d:DesignHeight="400" d:DesignWidth="400">
 
     <Grid>
         <TabControl>
-            <TabItem Header="Settings" >
+            <TabItem Header="{x:Static p:Strings.Settings}" >
                 <StackPanel Margin="20" Orientation="Vertical" Grid.Column="0">
                     <!--<Label Padding="0" Content="Running" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="36" Height="60"/>-->
                     <StackPanel Margin="0,0,0.286,0" Orientation="Horizontal">
                         <Custom:ProgressRing Width="24" Height="24" x:Name="progressring" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-                        <Label Padding="0" x:Name="progress" Content="starting..." Margin="5,0,-0.286,0" FontSize="18" Foreground="#CCE51400"/>
+                        <Label Padding="0" x:Name="progress" Content="{x:Static p:Strings.starting}" Margin="5,0,-0.286,0" FontSize="18" Foreground="#CCE51400"/>
                     </StackPanel>
                     <DockPanel >
-                        <Label Content="Admin"/>
+                        <Label Content="{x:Static p:Strings.Admin}"/>
                         <Rectangle Fill="WhiteSmoke" Height="1" Stroke="WhiteSmoke" Opacity="0.2"/>
                     </DockPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <Button Margin="5" x:Name="continuebtn" Style="{DynamicResource SquareButtonStyle}" Content="Open Dashboard" BorderThickness="0.5" Padding="8" Click="continuebtn_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper"/>
-                        <Button Margin="5" x:Name="continuebtn_Copy" Style="{DynamicResource SquareButtonStyle}" Content="open Video Files folder"  BorderThickness="0.5" Padding="8" Click="continuebtn_Copy_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper"/>
+                        <Button Margin="5" x:Name="continuebtn" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.OpenDashboard}" BorderThickness="0.5" Padding="8" Click="continuebtn_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper"/>
+                        <Button Margin="5" x:Name="continuebtn_Copy" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.OpenFiles}"  BorderThickness="0.5" Padding="8" Click="continuebtn_Copy_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper"/>
                     </StackPanel>
                     <DockPanel >
-                        <Label Content="Backup"/>
+                        <Label Content="{x:Static p:Strings.Backup}"/>
                         <Rectangle Fill="WhiteSmoke" Height="1" Stroke="WhiteSmoke" Opacity="0.2"/>
                     </DockPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Button Margin="5" x:Name="backupbtn" Style="{DynamicResource SquareButtonStyle}" Content="Backup Data" BorderThickness="0.5" Padding="8" Click="backupbtn_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper"/>
-                        <Button Margin="5" x:Name="restorebtn" Style="{DynamicResource SquareButtonStyle}" Content="Restore Data" BorderThickness="0.5" Padding="8" Click="restorebtn_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper"/>
+                        <Button Margin="5" x:Name="backupbtn" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.BackupData}" BorderThickness="0.5" Padding="8" Click="backupbtn_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper"/>
+                        <Button Margin="5" x:Name="restorebtn" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.RestoreData}" BorderThickness="0.5" Padding="8" Click="restorebtn_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper"/>
                     </StackPanel>
 
                     <DockPanel >
-                        <Label Content="Update"/>
+                        <Label Content="{x:Static p:Strings.Update}"/>
                         <Rectangle Fill="WhiteSmoke" Height="1" Stroke="WhiteSmoke" Opacity="0.2"/>
                     </DockPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Button Margin="5" Grid.Column="0" x:Name="continuebtn_Copy1" Style="{DynamicResource SquareButtonStyle}" Content="update application" BorderThickness="0.5" Padding="8" VerticalAlignment="Bottom" Click="continuebtn_Copy1_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper"/>
+                        <Button Margin="5" Grid.Column="0" x:Name="continuebtn_Copy1" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.UpdateApplication}" BorderThickness="0.5" Padding="8" VerticalAlignment="Bottom" Click="continuebtn_Copy1_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper"/>
                     </StackPanel>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Log">
+            <TabItem Header="{x:Static p:Strings.Log}">
                 <nlog:NlogViewer x:Name="log" Margin="0,0,0,53" />
                 <!--<RichTextBox IsReadOnly="True" Grid.Column="1" x:Name="log" Margin="0,0,0,53" BorderBrush="Transparent" Focusable="False"></RichTextBox>-->
             </TabItem>
         </TabControl>
 
         <Grid VerticalAlignment="Bottom">
-            <Button  Margin="0,0,21,10" Style="{DynamicResource SquareButtonStyle}" Content="Close Application"  HorizontalAlignment="Right" Padding="8" VerticalAlignment="Bottom" BorderThickness="0.5" Custom:ControlsHelper.ContentCharacterCasing="Upper" Click="Button_Click"/>
+            <Button  Margin="0,0,21,10" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.CloseApplication}"  HorizontalAlignment="Right" Padding="8" VerticalAlignment="Bottom" BorderThickness="0.5" Custom:ControlsHelper.ContentCharacterCasing="Upper" Click="Button_Click"/>
         </Grid>
         <DockPanel x:Name="sharewarning" Visibility="Collapsed"  Background="#cc000000">
-            <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" HorizontalAlignment="Center" Text="Please enable Sharing by doing the following:" Foreground="White" Margin="2"/>
-            <TextBlock TextWrapping="Wrap" DockPanel.Dock="Bottom" HorizontalAlignment="Center" Text="This message will disappear when you have completed this step..." Foreground="White" Margin="2"/>
+            <TextBlock DockPanel.Dock="Top" TextWrapping="Wrap" HorizontalAlignment="Center" Text="{x:Static p:Strings.ShareWarning1}" Foreground="White" Margin="2"/>
+            <TextBlock TextWrapping="Wrap" DockPanel.Dock="Bottom" HorizontalAlignment="Center" Text="{x:Static p:Strings.ShareWarning2}" Foreground="White" Margin="2"/>
             <MediaElement HorizontalAlignment="Center" x:Name="video" Source="hypervshare.mp4" LoadedBehavior="Manual" MediaEnded="Video_MediaEnded"/>
             
         </DockPanel>
