@@ -1,8 +1,3 @@
-# .NET Desktop
-# Build and run tests for .NET Desktop or Windows classic desktop solutions.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
-
 trigger:
 - master
 
@@ -11,7 +6,7 @@ pool:
 
 variables:
   solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
+  buildPlatform: 'x86'
   buildConfiguration: 'Release'
 
 steps:
@@ -21,13 +16,34 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: PowerShell@2
+  name: 'DownloadPrerequesits'
+  inputs:
+    filePath: 'Bootlegger.Application.Lib\\downloads\\getinstallers.ps1'
+    workingDirectory: 'Bootlegger.Application.Lib\\downloads'
+
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    msbuildArgs: '/p:RunWixToolsOutOfProc=true'
 
-- task: VSTest@2
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: 'install/OurStoryToolbox.exe'
+#     ArtifactName: 'Toolbox'
+
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: 'install/OurStoryHyperV.exe'
+#     ArtifactName: 'HyperV'
+
+- task: GitHubRelease@0
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    gitHubConnection: 'OurStory GitHub'
+    repositoryName: 'our-story-media/ourstory-titan'
+    action: 'create'
+    title: 'Installer'
+    addChangeLog: false
+    assets: 'install/*.exe'
