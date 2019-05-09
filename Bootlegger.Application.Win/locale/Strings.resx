@@ -288,4 +288,7 @@
   <data name="ManuallyChangeSettings" xml:space="preserve">
     <value>Manually Change Settings</value>
   </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
 </root>

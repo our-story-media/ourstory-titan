@@ -29,7 +29,7 @@ namespace Bootlegger.App.Win
         {
 
             //FOR DEBUGGING:
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("ar");
+            //Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("ar");
 
 
             BootleggerApp = new BootleggerApplication();

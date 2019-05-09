@@ -3,6 +3,7 @@ using Bootlegger.App.Win.locale;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,11 @@ namespace Bootlegger.App.Win
             InitializeComponent();
             Loaded += Running_Loaded;
             Unloaded += Running_Unloaded;
+
+            containers.ItemsSource = App.BootleggerApp.ContainerStatus;
         }
+
+        ObservableCollection<Docker.DotNet.Models.ContainerListResponse> ContainerStatus { get; set; }
 
         private void Running_Unloaded(object sender, RoutedEventArgs e)
         {
@@ -78,24 +83,9 @@ namespace Bootlegger.App.Win
 
         }
 
-        private async void Running_Loaded(object sender, RoutedEventArgs e)
+        private void Running_Loaded(object sender, RoutedEventArgs e)
         {
-            App.BootleggerApp.OnLog += BootleggerApp_OnLog;
-            
             Start();
-        }
-
-        private void BootleggerApp_OnLog(string obj)
-        {
-            //Dispatcher.BeginInvoke(new Action(() =>
-            //{
-            //    obj = Regex.Replace(obj, @"[^\u0020-\u007F]+", string.Empty);
-            //    if (obj.Length > 0)
-            //    {
-            //        log.AppendText($"{DateTime.Now.ToShortTimeString()} - {obj.Trim('\n', '\r')}\r");
-            //        log.ScrollToEnd();
-            //    }
-            //}));
         }
 
         private void continuebtn_Click(object sender, RoutedEventArgs e)

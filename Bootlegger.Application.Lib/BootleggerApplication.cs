@@ -20,6 +20,7 @@ using System.Security.AccessControl;
 using NLog;
 using Plugin.Connectivity;
 using System.Net.NetworkInformation;
+using System.ComponentModel;
 
 namespace Bootlegger.App.Lib
 {
@@ -104,7 +105,7 @@ namespace Bootlegger.App.Lib
                     return InstallerType.NO_HYPER_V;
             } }
 
-       
+
 
         //download the content:
         const string HYPER_V_INSTALLER_REMOTE = "https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe";
@@ -205,7 +206,7 @@ namespace Bootlegger.App.Lib
             process.Exited += (sender, args) =>
             {
 
-                
+
                 if (process.ExitCode < 0)
                 {
                     tcs.SetException(new Exception("Command failed"));
@@ -513,7 +514,7 @@ namespace Bootlegger.App.Lib
             }
         }
 
-        public string ImagesPath { get; set;}
+        public string ImagesPath { get; set; }
 
         public async Task DownloadImages(bool forceupdate, CancellationToken cancel)
         {
@@ -530,7 +531,7 @@ namespace Bootlegger.App.Lib
                 {
                     Log.Info("Using local images.tar file");
                     doonline = false;
-                    await dockerclient.Images.LoadImageAsync(new ImageLoadParameters(), File.OpenRead(ImagesPath),this,cancel);
+                    await dockerclient.Images.LoadImageAsync(new ImageLoadParameters(), File.OpenRead(ImagesPath), this, cancel);
                     Log.Info("Local cached docker load complete");
                     OnNextDownload?.Invoke(1, 1, 1);
                 }
@@ -623,12 +624,12 @@ namespace Bootlegger.App.Lib
 
 
 
-                if (CurrentInstallerType == InstallerType.HYPER_V)
-                {
+               // if (CurrentInstallerType == InstallerType.HYPER_V)
+               // {
                     Log.Info("Stopping existing HTTP port 80 connections");
                     //close any existing http on port 80
                     await RunProcessAsync("net", "stop HTTP /y", false, true);
-                }
+                //}
 
                 if (currentProcess != null && !currentProcess.HasExited)
                 {
@@ -673,6 +674,9 @@ namespace Bootlegger.App.Lib
                     currentProcess.WaitForExit();
                 });
 
+                //start containter monitor:
+                StartMonitor();
+
                 WebClient client = new WebClient();
 
                 bool connected = false;
@@ -695,6 +699,7 @@ namespace Bootlegger.App.Lib
                     }
                 }
 
+                
 
                 return connected;
             }
@@ -705,6 +710,33 @@ namespace Bootlegger.App.Lib
             catch (Exception e)
             {
                 return false;
+            }
+        }
+
+
+
+        void StartMonitor()
+        {
+            BackgroundWorker monitor = new BackgroundWorker();
+            monitor.DoWork += Monitor_DoWork;
+            monitor.RunWorkerAsync();
+        }
+
+
+        public IList<ContainerListResponse> ContainerStatus {get;private set;}
+
+        private async void Monitor_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                IList<ContainerListResponse> containers = await dockerclient.Containers.ListContainersAsync(new ContainersListParameters()
+                {
+                    All = true
+                });
+
+                ContainerStatus = containers;
+
+                Thread.Sleep(5000);
             }
         }
 
@@ -761,7 +793,6 @@ namespace Bootlegger.App.Lib
 
                     await RunProcessAsync(@"docker-machine","stop");
 
-
                     Log.Info($"Stopping Virtualbox VM");
 
                     await RunProcessAsync("VBoxManage.exe", "controlvm default savestate");
@@ -778,21 +809,7 @@ namespace Bootlegger.App.Lib
                     await RunProcessAsync("net", "stop HTTP /y", true, true);
 
                     Log.Info($"Starting docker-toolbox");
-                    
                     await RunProcessAsync(@"C:\Program Files\Git\bin\bash.exe", "-c \" \\\"/c/Program Files/Docker Toolbox/start.sh\\\" \\\"%*\\\"\"",true);
-
-                   
-                    //close any existing http on port 80
-                   
-                    //remove rule:
-                    //await RunProcessAsync("VBoxManage.exe", "controlvm default natpf1 \"rule1, tcp,, 80,, 80\"");
-
-                    //Log.Info($"Port forward 27017");
-
-                    //await RunProcessAsync("VBoxManage.exe", "controlvm default natpf1 \"rule2, tcp,, 27017,, 27017\"");
-
-                    //add rule:
-                    // await RunProcessAsync("VBoxManage.exe", "controlvm default natpf1 \"delete rule1\"",true);
 
                     DockerStarted = true;
                     break;

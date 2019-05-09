@@ -46,6 +46,11 @@
                     </StackPanel>
                 </StackPanel>
             </TabItem>
+            <TabItem Header="{x:Static p:Strings.Status}" >
+                <ListView x:Name="containers">
+                    
+                </ListView>
+            </TabItem>
             <TabItem Header="{x:Static p:Strings.Log}">
                 <nlog:NlogViewer x:Name="log" Margin="0,0,0,53" />
                 <!--<RichTextBox IsReadOnly="True" Grid.Column="1" x:Name="log" Margin="0,0,0,53" BorderBrush="Transparent" Focusable="False"></RichTextBox>-->

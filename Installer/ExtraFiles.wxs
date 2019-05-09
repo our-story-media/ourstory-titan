@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDER" />
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="ExtraFilesComponentGroup">
+            <Component Id="cmp97A090859AF36822DE1D24AA1FDB23F3" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filAB260CB90C9F58B5366667E5B2F0BE1C" KeyPath="yes" Source="$(var.Bootlegger.App.FixNetwork.TargetDir)\FixNetwork.exe" />
+            </Component>
+            <Component Id="cmp7BAE27973E28C790E8A2C8F8472CFE42" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil5538D3120AD89B524178A886B7ED1498" KeyPath="yes" Source="$(var.Bootlegger.App.FixNetwork.TargetDir)\FixNetwork.exe.config" />
+            </Component>
+            <Component Id="cmp8412C782691FBC85E3F722BD089642D1" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil0688DC9790A2D0B6BB2345EC9112A2AF" KeyPath="yes" Source="$(var.Bootlegger.App.FixNetwork.TargetDir)\FixNetwork.pdb" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>
