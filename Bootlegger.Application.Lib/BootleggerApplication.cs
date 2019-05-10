@@ -21,6 +21,7 @@ using NLog;
 using Plugin.Connectivity;
 using System.Net.NetworkInformation;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace Bootlegger.App.Lib
 {
@@ -33,6 +34,7 @@ namespace Bootlegger.App.Lib
             Log = LogManager.GetLogger(typeof(BootleggerApplication).FullName);
             ImagesPath = Path.Combine("downloads", "images.tar");
             Directory.CreateDirectory(Path.Combine("downloads"));
+            ContainerStatus = new List<ContainerListResponse>();
         }
 
         public Logger Log { get; set; }
@@ -621,14 +623,11 @@ namespace Bootlegger.App.Lib
                 //check for drive share enabled
                 await CheckSharedDrives();
 
-
-
-
                // if (CurrentInstallerType == InstallerType.HYPER_V)
                // {
-                    Log.Info("Stopping existing HTTP port 80 connections");
-                    //close any existing http on port 80
-                    await RunProcessAsync("net", "stop HTTP /y", false, true);
+                Log.Info("Stopping existing HTTP port 80 connections");
+                //close any existing http on port 80
+                await RunProcessAsync("net", "stop HTTP /y", true, true);
                 //}
 
                 if (currentProcess != null && !currentProcess.HasExited)
@@ -723,18 +722,44 @@ namespace Bootlegger.App.Lib
         }
 
 
-        public IList<ContainerListResponse> ContainerStatus {get;private set;}
+        public List<ContainerListResponse> ContainerStatus {get;private set;}
+        public event Action OnContainersChanged;
 
         private async void Monitor_DoWork(object sender, DoWorkEventArgs e)
         {
             while (true)
             {
-                IList<ContainerListResponse> containers = await dockerclient.Containers.ListContainersAsync(new ContainersListParameters()
+                List<ContainerListResponse> containers =(await dockerclient.Containers.ListContainersAsync(new ContainersListParameters()
                 {
                     All = true
-                });
+                })).ToList();
 
                 ContainerStatus = containers;
+
+                //get ip information:
+                
+
+                ManagementClass objMC = new ManagementClass("Win32_NetworkAdapterConfiguration");
+                ManagementObjectCollection objMOC = objMC.GetInstances();
+                bool ipaddressok = false;
+                string actualip = "none found";
+                foreach (ManagementObject objMO in objMOC)
+                {
+                    if ((bool)objMO["IPEnabled"])
+                    {
+                        var ip = (objMO["IPAddress"] as string[]);
+
+                        if (ip?[0]?.Equals("10.10.10.1") ?? false)
+                        {
+                            ipaddressok = true;
+                            actualip = "10.10.10.1";
+                        }
+                    }
+                }
+
+                ContainerStatus.Insert(0, new ContainerListResponse() { Image = (ipaddressok) ? "IP Address set correctly" : "Try changing networks", State = (ipaddressok)?"running":"stopped", Status = actualip });
+
+                OnContainersChanged?.Invoke();
 
                 Thread.Sleep(5000);
             }

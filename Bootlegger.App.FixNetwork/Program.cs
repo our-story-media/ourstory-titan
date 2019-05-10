@@ -27,11 +27,13 @@ namespace Bootlegger.App.FixNetwork
                             StartInfo = {
                                 FileName = "netsh",
                                 Arguments = $"interface ip set address \"{networkName}\" dhcp",
-                                CreateNoWindow = true,
-                                WindowStyle = ProcessWindowStyle.Hidden,
+                                CreateNoWindow = false,
+                                WindowStyle = ProcessWindowStyle.Normal,
                                 Verb = "runas"
                             }
                         };
+                        process.Start();
+                        process.WaitForExit();
                     }
 
                 }

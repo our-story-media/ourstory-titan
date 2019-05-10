@@ -47,13 +47,30 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="{x:Static p:Strings.Status}" >
-                <ListView x:Name="containers">
-                    
+                <ListView x:Name="containers" BorderThickness="0" Margin="0,0,0,53">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="1" Orientation="Horizontal">
+                               
+                                <Border Name="indicator" CornerRadius="3" Background="DarkRed" Padding="3,0,3,3" >
+                                    <TextBlock Text="{Binding State}" Margin="0"></TextBlock>
+                                </Border>
+
+                                <TextBlock Foreground="Silver" Margin="4,1,0,0"  FontStyle="Italic" Text="{Binding Status}"></TextBlock>
+                                <TextBlock Margin="4,1,0,0" Text="{Binding Image}"></TextBlock>
+
+                            </StackPanel>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding State}" Value="running">
+                                    <Setter TargetName="indicator" Property="Background" Value="LimeGreen"></Setter>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </TabItem>
             <TabItem Header="{x:Static p:Strings.Log}">
                 <nlog:NlogViewer x:Name="log" Margin="0,0,0,53" />
-                <!--<RichTextBox IsReadOnly="True" Grid.Column="1" x:Name="log" Margin="0,0,0,53" BorderBrush="Transparent" Focusable="False"></RichTextBox>-->
             </TabItem>
         </TabControl>
 

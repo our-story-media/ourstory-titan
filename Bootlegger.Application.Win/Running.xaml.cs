@@ -33,7 +33,9 @@ namespace Bootlegger.App.Win
             Loaded += Running_Loaded;
             Unloaded += Running_Unloaded;
 
-            containers.ItemsSource = App.BootleggerApp.ContainerStatus;
+
+
+//            containers.ItemsSource = App.BootleggerApp.ContainerStatus;
         }
 
         ObservableCollection<Docker.DotNet.Models.ContainerListResponse> ContainerStatus { get; set; }
@@ -86,6 +88,15 @@ namespace Bootlegger.App.Win
         private void Running_Loaded(object sender, RoutedEventArgs e)
         {
             Start();
+            App.BootleggerApp.OnContainersChanged += BootleggerApp_OnContainersChanged;
+        }
+
+        private void BootleggerApp_OnContainersChanged()
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                containers.ItemsSource = App.BootleggerApp.ContainerStatus;
+            }));
         }
 
         private void continuebtn_Click(object sender, RoutedEventArgs e)
