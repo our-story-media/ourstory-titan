@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*" Name="Our Story Titan" Language="1033" Version="1.0.0.0" Manufacturer="Newcastle University" UpgradeCode="07a6b158-3593-4c10-9200-baf92006faeb">
-    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <Package InstallerVersion="301" Compressed="yes" InstallScope="perMachine" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     <MediaTemplate EmbedCab="yes" />
@@ -31,7 +31,7 @@
     </UI>
 
     <DirectoryRef Id="TARGETDIR">
-      <Merge Id="VCRedist" SourceFile="$(var.SolutionDir)Bootlegger.Application.Lib\downloads\Microsoft_VC140_CRT_x86.msm" DiskId="1" Language="0"/>
+      <Merge Id="VCRedist" SourceFile="C:\Program Files (x86)\Common Files\Merge Modules\Microsoft_VC140_CRT_x86.msm" DiskId="1" Language="0"/>
     </DirectoryRef>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
