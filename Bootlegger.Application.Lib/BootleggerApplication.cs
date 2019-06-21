@@ -22,6 +22,8 @@ using Plugin.Connectivity;
 using System.Net.NetworkInformation;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
+using SimpleWifi;
 
 namespace Bootlegger.App.Lib
 {
@@ -34,7 +36,7 @@ namespace Bootlegger.App.Lib
             Log = LogManager.GetLogger(typeof(BootleggerApplication).FullName);
             ImagesPath = Path.Combine("downloads", "images.tar");
             Directory.CreateDirectory(Path.Combine("downloads"));
-            ContainerStatus = new List<ContainerListResponse>();
+            //ContainerStatus = new List<ContainerListResponse>();
         }
 
         public Logger Log { get; set; }
@@ -45,6 +47,9 @@ namespace Bootlegger.App.Lib
 
         public RUNNING_STATE CurrentState { get; private set; }
         public OperatingSystem CurrentPlatform { get; private set; }
+
+        const string DOCKERFORWINDOWS = @"C:\Program Files\Docker\Docker\Docker for Windows.exe";
+        const string DOCKERTOOLBOX = @"C:\Program Files\Docker Toolbox\start.sh";
 
 
         Docker.DotNet.DockerClient dockerclient;
@@ -100,12 +105,26 @@ namespace Bootlegger.App.Lib
             }
         }
 
-        InstallerType CurrentInstallerType { get {
-                if (CurrentPlatform.Version.Major >= 10)
-                    return (!HyperVSwitch.SafeNativeMethods.IsProcessorFeaturePresent(HyperVSwitch.ProcessorFeature.PF_VIRT_FIRMWARE_ENABLED)) ? InstallerType.HYPER_V : InstallerType.NO_HYPER_V;
+        InstallerType CurrentInstallerType
+        {
+            get
+            {
+                //CHANGE THIS!
+
+                //CHANGE TO DETECT WHICH VERSION OF DOCKER YOU HAVE, RATHER THAN WHICH VERSION YOU *SHOULD* HAVE
+
+                if (File.Exists(DOCKERFORWINDOWS))
+                    return InstallerType.HYPER_V;
                 else
                     return InstallerType.NO_HYPER_V;
-            } }
+
+                //if (CurrentPlatform.Version.Major >= 10)
+                //      return (!HyperVSwitch.SafeNativeMethods.IsProcessorFeaturePresent(HyperVSwitch.ProcessorFeature.PF_VIRT_FIRMWARE_ENABLED)) ? InstallerType.HYPER_V : InstallerType.NO_HYPER_V;
+                //  else
+                //      return InstallerType.NO_HYPER_V;
+                //}
+            }
+        }
 
 
 
@@ -134,6 +153,7 @@ namespace Bootlegger.App.Lib
                 Log.Info($"Download not required for {src}");
         }
 
+        
         public async Task DownloadInstaller(CancellationToken cancel)
         {
             Log.Info("Starting download of installer");
@@ -389,23 +409,26 @@ namespace Bootlegger.App.Lib
 
         public async Task UnConfigureNetwork()
         {
-            try
+            if (IsInstalled)
             {
-                string networkName = "";
-                NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
-                foreach (NetworkInterface adapter in interfaces)
+                try
                 {
-                    if (adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 && adapter.OperationalStatus == OperationalStatus.Up)
+                    string networkName = "";
+                    NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
+                    foreach (NetworkInterface adapter in interfaces)
                     {
-                        networkName = adapter.Name;
-                        await RunProcessAsync("netsh", $"interface ip set address \"{networkName}\" dhcp", true, true);
-                    }
+                        if (adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 && adapter.OperationalStatus == OperationalStatus.Up)
+                        {
+                            networkName = adapter.Name;
+                            await RunProcessAsync("netsh", $"interface ip set address \"{networkName}\" dhcp", true, true);
+                        }
 
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
+                catch (Exception e)
+                {
+                    Log.Error(e);
+                }
             }
         }
 
@@ -435,7 +458,14 @@ namespace Bootlegger.App.Lib
             switch (CurrentInstallerType)
             {
                 case InstallerType.HYPER_V:
-                    System.Diagnostics.Process.Start(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "upload");
+                    try
+                    {
+                        System.Diagnostics.Process.Start(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "upload");
+                    }
+                    catch
+                    {
+
+                    }
                     break;
 
                 case InstallerType.NO_HYPER_V:
@@ -443,6 +473,12 @@ namespace Bootlegger.App.Lib
                     break;
 
             }
+        }
+
+        internal void OpenLog()
+        {
+
+            System.Diagnostics.Process.Start($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\OurStoryTitan\log.txt");
         }
 
         public bool WiFiSettingsOk { get
@@ -722,48 +758,246 @@ namespace Bootlegger.App.Lib
         }
 
 
-        public List<ContainerListResponse> ContainerStatus {get;private set;}
-        public event Action OnContainersChanged;
+        //public List<ContainerListResponse> ContainerStatus {get;private set;}
+        public event Action<List<NamedException>> OnRunWarning;
+
+        List<NamedException> CurrentErrors = new List<NamedException>();
+
+        public enum MONITOR_TYPE {Wifi, IP, Docker, Containers, Port}
+
+        //Exception IPEXCEPTION = new NamedException() {
+        //    Name = "IP Address Error",
+        //    Description = "Make sure your network has not changed since starting Our Story."
+        //};
+        ////Exception WIFIEXCEPTION = new Exception();
+        //Exception CONTAINEREXCEPTION = new NamedException()
+        //{
+        //    Name = "Application Problem",
+        //    Description = "Some parts of the Dashboard have stopped working, please restart Our Story"
+        //};
+        //Exception SERVEREXCEPTION = new NamedException()
+        //{
+        //    Name = "Application Access Problem",
+        //    Description = "The Dashboard does not seem to be available to other Devices. Has your network changed?"
+        //};
+        //Exception DRIVESPACEXCEPTION = new NamedException()
+        //{
+        //    Name = "Out of Disk Space",
+        //    Description = "There is not enough disk space to upload or process videos. Please remove old files."
+        //};
+        //Exception WIFIEXCEPTION = new NamedException()
+        //{
+        //    Name = "Out of Disk Space",
+        //    Description = "There is not enough disk space to upload or process videos. Please remove old files."
+        //};
+
+        internal class WiFiException : NamedException
+        {
+
+        }
+        internal class ContainerException : NamedException
+        {
+
+        }
+        internal class ServerException : NamedException
+        {
+
+        }
+
+        internal class DriveException : NamedException
+        {
+
+        }
+        internal class IpException : NamedException
+        {
+
+        }
+
+        NamedException IPEXCEPTION = new IpException();
+        NamedException CONTAINEREXCEPTION = new ContainerException();
+        NamedException SERVEREXCEPTION = new ServerException();
+        NamedException DRIVESPACEXCEPTION = new DriveException();
+        NamedException WIFIEXCEPTION = new WiFiException();
+
+
+        public class NamedException: Exception
+        {
+            public string Name { get; set; }
+            public string Description { get; set; }
+        }
 
         private async void Monitor_DoWork(object sender, DoWorkEventArgs e)
         {
-            while (true)
+            //INIT:
+            var Document = File.ReadAllText(DockerComposeFile);
+            var input = new StringReader(Document);
+            WebClient client = new TimeOutWebClient();
+            
+
+            var KnownContainerCount = 0 ;
+
+            // Load the stream
+            var yaml = new YamlStream();
+            yaml.Load(input);
+            var mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
+
+            foreach (var entry in mapping.Children)
             {
-                List<ContainerListResponse> containers =(await dockerclient.Containers.ListContainersAsync(new ContainersListParameters()
+                if ((entry.Key as YamlScalarNode).Value == "services")
                 {
-                    All = true
-                })).ToList();
-
-                ContainerStatus = containers;
-
-                //get ip information:
-                
-
-                ManagementClass objMC = new ManagementClass("Win32_NetworkAdapterConfiguration");
-                ManagementObjectCollection objMOC = objMC.GetInstances();
-                bool ipaddressok = false;
-                string actualip = "none found";
-                foreach (ManagementObject objMO in objMOC)
-                {
-                    if ((bool)objMO["IPEnabled"])
+                    foreach (var service in (entry.Value as YamlMappingNode).Children)
                     {
-                        var ip = (objMO["IPAddress"] as string[]);
-
-                        if (ip?[0]?.Equals("10.10.10.1") ?? false)
-                        {
-                            ipaddressok = true;
-                            actualip = "10.10.10.1";
-                        }
+                        KnownContainerCount++;
                     }
                 }
+            }
 
-                ContainerStatus.Insert(0, new ContainerListResponse() { Image = (ipaddressok) ? "IP Address set correctly" : "Try changing networks", State = (ipaddressok)?"running":"stopped", Status = actualip });
+            var wifi = new Wifi();
 
-                OnContainersChanged?.Invoke();
+            while (true)
+            {
+                try
+                {
+                    List<ContainerListResponse> containers = (await dockerclient.Containers.ListContainersAsync(new ContainersListParameters()
+                    {
+                        All = true,
+                        Filters = new Dictionary<string, IDictionary<string, bool>>()
+                        {
+                            ["status"] = new Dictionary<string, bool>() { { "running", true } },
+                            ["label"] = new Dictionary<string, bool>() { { "com.docker.compose.project=bootleggerlocal", true } }
+                        }
+                    })).ToList();
+
+                    //TODO: Check containers against the known list:
+
+                    if (containers.Count != KnownContainerCount)
+                    {
+                        if (!CurrentErrors.Contains(CONTAINEREXCEPTION))
+                            CurrentErrors.Add(CONTAINEREXCEPTION);
+                    }
+                    else
+                    {
+                        CurrentErrors.Remove(CONTAINEREXCEPTION);
+                    }
+
+                    //CHECK WIFI CONNECTION:
+
+
+                    //CHECK IP
+                    //get ip information:
+                    ManagementClass objMC = new ManagementClass("Win32_NetworkAdapterConfiguration");
+                    ManagementObjectCollection objMOC = objMC.GetInstances();
+                    bool ipaddressok = false;
+                    //string actualip = "none found";
+                    foreach (ManagementObject objMO in objMOC)
+                    {
+                        if ((bool)objMO["IPEnabled"])
+                        {
+                            var ip = (objMO["IPAddress"] as string[]);
+
+                            if (ip?[0]?.Equals("10.10.10.1") ?? false)
+                            {
+                                ipaddressok = true;
+                                //actualip = "10.10.10.1";
+                            }
+                        }
+                    }
+
+                    if (!ipaddressok)
+                    {
+                        if (!CurrentErrors.Contains(IPEXCEPTION))
+                            CurrentErrors.Add(IPEXCEPTION);
+                    }
+                    else
+                    {
+                        CurrentErrors.Remove(IPEXCEPTION);
+                    }
+
+                   
+
+                    //CHECK DISK SPACE:
+
+                    try
+                    {
+                        DriveInfo driveInfo = new DriveInfo(@"C:");
+                        long FreeSpace = driveInfo.AvailableFreeSpace / 1024 / 1024;
+                        if (FreeSpace < 1000)
+                        {
+                            if (!CurrentErrors.Contains(DRIVESPACEXCEPTION))
+                                CurrentErrors.Add(DRIVESPACEXCEPTION);
+                        }
+                        else
+                        {
+                            CurrentErrors.Remove(DRIVESPACEXCEPTION);
+                        }
+                    }
+                    catch (System.IO.IOException)
+                    {
+                        //Console.WriteLine(errorMesage);
+                    }
+
+
+                    //Windows.Networking.Connectivity.NetworkInformation.GetConnectionProfiles();
+                    
+                    //WIFI:
+                    if (wifi.ConnectionStatus != WifiStatus.Connected)
+                    {
+                        if (!CurrentErrors.Contains(WIFIEXCEPTION))
+                            CurrentErrors.Add(WIFIEXCEPTION);
+                    }
+                    else
+                    {
+                        CurrentErrors.Remove(WIFIEXCEPTION);
+                    }
+
+
+                    OnRunWarning?.Invoke(CurrentErrors);
+
+                    //CHECK APPLICATION
+                    bool connected = false;
+                    try
+                    {
+
+                        var result = await client.DownloadStringTaskAsync($"http://10.10.10.1/status");
+                        connected = true;
+                    }
+                    catch
+                    {
+
+                    }
+
+                    if (!connected)
+                    {
+                        if (!CurrentErrors.Contains(SERVEREXCEPTION))
+                            CurrentErrors.Add(SERVEREXCEPTION);
+                    }
+                    else
+                        CurrentErrors.Remove(SERVEREXCEPTION);
+
+                }
+                catch (Exception ex)
+                {
+                    CurrentErrors.Add(new NamedException() { Name="Unknown",Description = ex.Message});
+                }
+                finally
+                {
+                    OnRunWarning?.Invoke(CurrentErrors);
+                }
 
                 Thread.Sleep(5000);
+                
             }
         }
+        private class TimeOutWebClient : WebClient
+        {
+            protected override WebRequest GetWebRequest(Uri uri)
+            {
+                WebRequest w = base.GetWebRequest(uri);
+                w.Timeout = (int)TimeSpan.FromSeconds(2).TotalMilliseconds;
+                return w;
+            }
+        }
+
 
         public bool DockerStarted { get; set; }
 
@@ -786,6 +1020,9 @@ namespace Bootlegger.App.Lib
 
         }
 
+
+
+
         public async Task StartDocker(CancellationToken cancel)
         {
             Log.Info("Starting docker");
@@ -795,7 +1032,14 @@ namespace Bootlegger.App.Lib
                 case InstallerType.HYPER_V:
                     Log.Info("Starting Docker for Windows");
 
-                    Process.Start(@"C:\Program Files\Docker\Docker\Docker for Windows.exe");
+                    var exitcode = await RunProcessAsync(DOCKERFORWINDOWS,"",false,false);
+                    if (exitcode == 1)
+                    {
+                        Log.Error($"Cant start docker for Windows");
+                        throw new DockerApiException(HttpStatusCode.BadGateway, "Cant start docker for Windows");
+                    }
+                 
+
                     break;
 
                 case InstallerType.NO_HYPER_V:
@@ -851,6 +1095,11 @@ namespace Bootlegger.App.Lib
                 Log.Error(new TimeoutException());
                 throw new TimeoutException();
             }
+        }
+
+        private void Process_Exited(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         async Task WaitForDockerToStart()
@@ -966,4 +1215,8 @@ namespace Bootlegger.App.Lib
             }
         }
     }
+
+
+   
 }
+ 

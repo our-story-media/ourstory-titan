@@ -14,6 +14,9 @@ using System.Reflection;
 using System.Resources;
 using System.Threading;
 using System.Globalization;
+using CefSharp;
+using CefSharp.Wpf;
+using System.Windows.Media;
 
 namespace Bootlegger.App.Win
 {
@@ -31,6 +34,21 @@ namespace Bootlegger.App.Win
             //FOR DEBUGGING:
             //Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("ar");
 
+            //Monitor parent process exit and close subprocesses if parent process exits first
+            //This will at some point in the future becomes the default
+
+            CefSharpSettings.SubprocessExitIfParentProcessClosed = true;
+            Cef.EnableHighDPISupport();
+            
+            var settings = new CefSettings()
+            {
+                
+            //By default CefSharp will use an in-memory cache, you need to specify a Cache Folder to persist data
+            //CachePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CefSharp\\Cache")
+        };
+            //settings.CefCommandLineArgs.Add("disable-gpu", "1");
+            //Perform dependency check to make sure all relevant resources are in our output directory.
+            Cef.Initialize(settings, performDependencyCheck: true, browserProcessHandler: null);
 
             BootleggerApp = new BootleggerApplication();
            

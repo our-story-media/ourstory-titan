@@ -17,6 +17,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls.Dialogs;
 using System.Globalization;
+using System.Reflection;
+using System.IO;
 
 namespace Bootlegger.App.Win
 {
@@ -121,7 +123,9 @@ namespace Bootlegger.App.Win
             progress.Visibility = Visibility.Hidden;
 
             //HACK FOR DEGUB
-            //App.BootleggerApp.IsInstalled = false;
+            //App.BootleggerApp.IsInstalled = true;
+            //_mainFrame.Content = new Running();
+            //return;
 
             if (App.BootleggerApp.IsInstalled && App.BootleggerApp.IsDockerInstalled)
             {
@@ -136,7 +140,7 @@ namespace Bootlegger.App.Win
             }
             else
             {
-                _mainFrame.Content = new Install();
+                _mainFrame.Content = new Install(false);
             }
         }
 
@@ -159,6 +163,19 @@ namespace Bootlegger.App.Win
             {
                 LangSwitch = (e.AddedItems[0] as CultureInfo).Name;
                 Close();
+            }
+        }
+
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "Bootlegger.App.Win.credits.txt";
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string result = reader.ReadToEnd();
+                await(App.Current.MainWindow as MetroWindow).ShowMessageAsync(locale.Strings.CreditsTitle, result, MessageDialogStyle.Affirmative);
             }
         }
     }

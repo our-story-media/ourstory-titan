@@ -127,7 +127,7 @@
     <value>Admin</value>
   </data>
   <data name="AppTitle" xml:space="preserve">
-    <value>Our Story Titan (en)</value>
+    <value>Our Story Dashboard</value>
   </data>
   <data name="Back" xml:space="preserve">
     <value>Back</value>
@@ -160,7 +160,7 @@
     <value>Download Files</value>
   </data>
   <data name="DownloadingContent" xml:space="preserve">
-    <value>Downloading Content</value>
+    <value>Downloading Updates</value>
   </data>
   <data name="InstallRequirements" xml:space="preserve">
     <value>Install Requirements</value>
@@ -290,5 +290,50 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="AppErrorDesc" xml:space="preserve">
+    <value>Some parts of the Dashboard have stopped working, please restart Our Story</value>
+  </data>
+  <data name="AppErrorName" xml:space="preserve">
+    <value>Application Problem</value>
+  </data>
+  <data name="DashboardErrorDesc" xml:space="preserve">
+    <value>The Dashboard does not seem to be available to other Devices. Has your network changed?</value>
+  </data>
+  <data name="DashboardErrorName" xml:space="preserve">
+    <value>Application Access Problem</value>
+  </data>
+  <data name="DiskSpaceErrorDesc" xml:space="preserve">
+    <value>There is not enough disk space to upload or process videos. Please remove old files.</value>
+  </data>
+  <data name="DiskSpaceErrorName" xml:space="preserve">
+    <value>Out of Disk Space</value>
+  </data>
+  <data name="IpErrorDesc" xml:space="preserve">
+    <value>Make sure your network has not changed since starting Our Story.</value>
+  </data>
+  <data name="IpErrorName" xml:space="preserve">
+    <value>IP Address Error</value>
+  </data>
+  <data name="WiFiErrorDesc" xml:space="preserve">
+    <value>You are not connected to any WiFi network. Please check your settings.</value>
+  </data>
+  <data name="WiFiErrorName" xml:space="preserve">
+    <value>WiFi Not Connected</value>
+  </data>
+  <data name="UpdateDescription" xml:space="preserve">
+    <value>To update Our Story to a new version we need the images.tar file.</value>
+  </data>
+  <data name="CreditsTitle" xml:space="preserve">
+    <value>Credits</value>
+  </data>
+  <data name="Forward" xml:space="preserve">
+    <value>Forward</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
   </data>
 </root>

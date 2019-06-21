@@ -97,7 +97,25 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Our Story Titan (en).
+        ///   Looks up a localized string similar to Some parts of the Dashboard have stopped working, please restart Our Story.
+        /// </summary>
+        public static string AppErrorDesc {
+            get {
+                return ResourceManager.GetString("AppErrorDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application Problem.
+        /// </summary>
+        public static string AppErrorName {
+            get {
+                return ResourceManager.GetString("AppErrorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Our Story Dashboard.
         /// </summary>
         public static string AppTitle {
             get {
@@ -205,6 +223,60 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Credits.
+        /// </summary>
+        public static string CreditsTitle {
+            get {
+                return ResourceManager.GetString("CreditsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dashboard.
+        /// </summary>
+        public static string Dashboard {
+            get {
+                return ResourceManager.GetString("Dashboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Dashboard does not seem to be available to other Devices. Has your network changed?.
+        /// </summary>
+        public static string DashboardErrorDesc {
+            get {
+                return ResourceManager.GetString("DashboardErrorDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application Access Problem.
+        /// </summary>
+        public static string DashboardErrorName {
+            get {
+                return ResourceManager.GetString("DashboardErrorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is not enough disk space to upload or process videos. Please remove old files..
+        /// </summary>
+        public static string DiskSpaceErrorDesc {
+            get {
+                return ResourceManager.GetString("DiskSpaceErrorDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Out of Disk Space.
+        /// </summary>
+        public static string DiskSpaceErrorName {
+            get {
+                return ResourceManager.GetString("DiskSpaceErrorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Docker Installer.
         /// </summary>
         public static string DockerInstaller {
@@ -241,7 +313,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Downloading Content.
+        ///   Looks up a localized string similar to Downloading Updates.
         /// </summary>
         public static string DownloadingContent {
             get {
@@ -295,6 +367,15 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forward.
+        /// </summary>
+        public static string Forward {
+            get {
+                return ResourceManager.GetString("Forward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Initiating Download....
         /// </summary>
         public static string InitiatingDownload {
@@ -327,6 +408,24 @@ namespace Bootlegger.App.Win.locale {
         public static string InvalidNetwork {
             get {
                 return ResourceManager.GetString("InvalidNetwork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make sure your network has not changed since starting Our Story..
+        /// </summary>
+        public static string IpErrorDesc {
+            get {
+                return ResourceManager.GetString("IpErrorDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP Address Error.
+        /// </summary>
+        public static string IpErrorName {
+            get {
+                return ResourceManager.GetString("IpErrorName", resourceCulture);
             }
         }
         
@@ -435,6 +534,15 @@ namespace Bootlegger.App.Win.locale {
         public static string ProgressLabel {
             get {
                 return ResourceManager.GetString("ProgressLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string Refresh {
+            get {
+                return ResourceManager.GetString("Refresh", resourceCulture);
             }
         }
         
@@ -556,6 +664,15 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To update Our Story to a new version we need the images.tar file..
+        /// </summary>
+        public static string UpdateDescription {
+            get {
+                return ResourceManager.GetString("UpdateDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome to Our Story.
         /// </summary>
         public static string Welcome {
@@ -579,6 +696,24 @@ namespace Bootlegger.App.Win.locale {
         public static string WiFi2 {
             get {
                 return ResourceManager.GetString("WiFi2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are not connected to any WiFi network. Please check your settings..
+        /// </summary>
+        public static string WiFiErrorDesc {
+            get {
+                return ResourceManager.GetString("WiFiErrorDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WiFi Not Connected.
+        /// </summary>
+        public static string WiFiErrorName {
+            get {
+                return ResourceManager.GetString("WiFiErrorName", resourceCulture);
             }
         }
     }

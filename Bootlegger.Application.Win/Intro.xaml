@@ -16,10 +16,10 @@
         </Grid>
         <StackPanel Margin="20" Orientation="Vertical">
             <Label Padding="0" Content="{x:Static p:Strings.Welcome}" Height="60" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="36"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFA4A4A4" FontFamily="Segoe UI Light" Height="84" Width="360" FontSize="18" Text="{x:Static p:Strings.AdditionalSoftware}"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#333" FontFamily="Segoe UI Light" Height="84" Width="360" FontSize="18" Text="{x:Static p:Strings.AdditionalSoftware}"/>
             <!--<Image Margin="0,40,0,0" Source="logo_white.png" HorizontalAlignment="Center" Height="60"/>-->
 
         </StackPanel>
-
+        <Path Data="M0,274.08548 L300.05709,274.08548" Height="0.5" Stretch="Fill" Stroke="Black" VerticalAlignment="Bottom" Opacity="0.5" Margin="0,0,0,52"/>
     </Grid>
 </ContentControl>

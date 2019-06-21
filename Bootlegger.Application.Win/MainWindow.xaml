@@ -10,21 +10,20 @@
         BorderThickness="1"
         WindowStartupLocation="CenterScreen"
         xmlns:p = "clr-namespace:Bootlegger.App.Win.locale"
-        WindowTitleBrush="Transparent"
-        Title="{x:Static p:Strings.AppTitle}" Height="400" Width="600" ResizeMode="CanMinimize" IsMaxRestoreButtonEnabled="False">
+        
+        Title="{x:Static p:Strings.AppTitle}" Height="768" Width="1124" ResizeMode="CanResizeWithGrip" MinWidth="1024" MinHeight="768" IsMaxRestoreButtonEnabled="True">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="{x:Static p:Strings.Documentation}" Click="Button_Click" />
-            <ComboBox DisplayMemberPath="DisplayName" x:Name="langs" BorderThickness="0" SelectionChanged="Langs_SelectionChanged">
-                
+            <ComboBox DisplayMemberPath="DisplayName" Background="Transparent" x:Name="langs" BorderThickness="0" SelectionChanged="Langs_SelectionChanged">
+
             </ComboBox>
+            <Button Content="{x:Static p:Strings.CreditsTitle}" Click="Button_Click_1"/>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     
-
     <Grid>
         <Controls:TransitioningContentControl x:Name="_mainFrame" Transition="LeftReplace" />
         <Controls:ProgressRing x:Name="progress" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-        <Path Data="M0,274.08548 L300.05709,274.08548" Height="0.5" Stretch="Fill" Stroke="White" VerticalAlignment="Bottom" Opacity="0.5" Margin="0,0,0,52"/>
     </Grid>
 </Controls:MetroWindow>

@@ -10,14 +10,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)BootleggerApplication.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Certificate.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Crypto.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DockerNotRunningException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)crypto\Certificate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)crypto\Crypto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)exceptions\DockerNotRunningException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NoImagesException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)RSAParameterTraits.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SafeNativeMethods.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)exceptions\NoImagesException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)crypto\RSAParameterTraits.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)helpers\SafeNativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)docker-compose.windows.yml">
@@ -37,5 +37,10 @@
     </None>
     <None Include="$(MSBuildThisFileDirectory)downloads\getimages.cmd" />
     <None Include="$(MSBuildThisFileDirectory)downloads\getinstallers.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)exceptions\" />
+    <Folder Include="$(MSBuildThisFileDirectory)crypto\" />
+    <Folder Include="$(MSBuildThisFileDirectory)helpers\" />
   </ItemGroup>
 </Project>

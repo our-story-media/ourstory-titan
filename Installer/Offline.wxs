@@ -7,6 +7,9 @@
     <MediaTemplate EmbedCab="yes" />
 
     <Feature Id="ProductFeature" Title="Our Story Titan" Level="1">
+      <Feature Id="VCRedist" Title="Visual C++ 8.0 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
+        <MergeRef Id="VCRedist"/>
+      </Feature>
       <ComponentGroupRef Id="ProductFilesComponentGroup" />
       <ComponentGroupRef Id="ExtraFilesComponentGroup" />
       <ComponentRef Id="ApplicationShortcut" />
@@ -26,6 +29,10 @@
     </UI>
     <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Our Story Titan" />-->
     </UI>
+
+    <DirectoryRef Id="TARGETDIR">
+      <Merge Id="VCRedist" SourceFile="$(var.SolutionDir)Bootlegger.Application.Lib\downloads\Microsoft_VC140_CRT_x86.msm" DiskId="1" Language="0"/>
+    </DirectoryRef>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
@@ -75,6 +82,8 @@
 
       </Component>
     </DirectoryRef>
+
+    
 
 
     <!--

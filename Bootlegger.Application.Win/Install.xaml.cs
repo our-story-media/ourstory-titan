@@ -25,14 +25,18 @@ namespace Bootlegger.App.Win
     /// </summary>
     public partial class Install
     {
-        public Install()
+        public Install(bool update)
         {
             InitializeComponent();
             Loaded += InstallDocker_Loaded;
-            //progress.Maximum = 100;
+            if (update)
+            {
+                title.Content = locale.Strings.Update;
+                description.Text = locale.Strings.UpdateDescription;
+            }
         }
 
-        
+
         CancellationTokenSource cancel = new CancellationTokenSource();
 
         private void InstallDocker_Loaded(object sender, RoutedEventArgs e)
@@ -40,7 +44,6 @@ namespace Bootlegger.App.Win
             cancel = new CancellationTokenSource();
 
             App.BootleggerApp.Log.Info("Install started");
-
             imagesbtn.Visibility = Visibility.Visible;
         }
 
@@ -74,10 +77,10 @@ namespace Bootlegger.App.Win
                 {
                     status.Text = Strings.DownloadingDocker;
                     CURRENTFILE = filetype.DOCKER;
-                    await App.BootleggerApp.DownloadInstaller(cancel.Token);
-
-                    status.Text = Strings.InstallingDocker;
-                    await App.BootleggerApp.RunInstaller(cancel.Token);
+                    //await App.BootleggerApp.DownloadInstaller(cancel.Token);
+                    throw new DockerNotRunningException();
+                    //status.Text = Strings.InstallingDocker;
+                    //await App.BootleggerApp.RunInstaller(cancel.Token);
                 }
 
                 status.Text = Strings.StartingDocker;

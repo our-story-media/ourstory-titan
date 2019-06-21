@@ -29,7 +29,7 @@ namespace Bootlegger.App.Win
 
         private void Continuebtn_Click(object sender, RoutedEventArgs e)
         {
-            (Application.Current.MainWindow as MainWindow)._mainFrame.Content = new Install();
+            (Application.Current.MainWindow as MainWindow)._mainFrame.Content = new Install(false);
         }
     }
 }
