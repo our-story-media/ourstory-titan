@@ -69,7 +69,9 @@
                 <Button ToolTip="{x:Static p:Strings.OpenDashboard}" Margin="4,4,4,0" Height="32" Width="32" Grid.Column="0" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" BorderThickness="0.5" Padding="8" VerticalAlignment="Bottom" Custom:ControlsHelper.ContentCharacterCasing="Upper" Click="Button_Click_6">
                     <iconPacks:PackIconMaterial Kind="Web" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
-                <Grid VerticalAlignment="Stretch"></Grid>
+                <Button ToolTip="{x:Static p:Strings.GetApp}" Margin="4,4,4,0" Height="32" Width="32" Grid.Column="0" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" BorderThickness="0.5" Padding="8" VerticalAlignment="Bottom" Custom:ControlsHelper.ContentCharacterCasing="Upper" Click="Button_Click_7">
+                    <iconPacks:PackIconMaterial Kind="Android" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </Button>
 
                 <Button ToolTip="{x:Static p:Strings.CloseApplication}" Margin="4,4,4,0" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" Click="Button_Click" Height="32" Width="32" BorderThickness="0.5">
                     <iconPacks:PackIconMaterial Kind="ExitToApp" VerticalAlignment="Center" HorizontalAlignment="Center" />

@@ -18,11 +18,8 @@ using CertificatesToDBandBack;
 using System.Security.Cryptography;
 using System.Security.AccessControl;
 using NLog;
-using Plugin.Connectivity;
 using System.Net.NetworkInformation;
 using System.ComponentModel;
-using System.Collections.ObjectModel;
-using System.Runtime.Serialization;
 using SimpleWifi;
 
 namespace Bootlegger.App.Lib
@@ -49,7 +46,6 @@ namespace Bootlegger.App.Lib
         public OperatingSystem CurrentPlatform { get; private set; }
 
         const string DOCKERFORWINDOWS = @"C:\Program Files\Docker\Docker\Docker for Windows.exe";
-        const string DOCKERTOOLBOX = @"C:\Program Files\Docker Toolbox\start.sh";
 
 
         Docker.DotNet.DockerClient dockerclient;
@@ -109,26 +105,16 @@ namespace Bootlegger.App.Lib
         {
             get
             {
-                //CHANGE THIS!
-
-                //CHANGE TO DETECT WHICH VERSION OF DOCKER YOU HAVE, RATHER THAN WHICH VERSION YOU *SHOULD* HAVE
+                //DETECT WHICH VERSION OF DOCKER YOU HAVE, RATHER THAN WHICH VERSION YOU *SHOULD* HAVE
 
                 if (File.Exists(DOCKERFORWINDOWS))
                     return InstallerType.HYPER_V;
                 else
                     return InstallerType.NO_HYPER_V;
-
-                //if (CurrentPlatform.Version.Major >= 10)
-                //      return (!HyperVSwitch.SafeNativeMethods.IsProcessorFeaturePresent(HyperVSwitch.ProcessorFeature.PF_VIRT_FIRMWARE_ENABLED)) ? InstallerType.HYPER_V : InstallerType.NO_HYPER_V;
-                //  else
-                //      return InstallerType.NO_HYPER_V;
-                //}
             }
         }
 
-
-
-        //download the content:
+        //Content locations:
         const string HYPER_V_INSTALLER_REMOTE = "https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe";
         const string HYPER_V_INSTALLER_LOCAL = "DockerForWindows.exe";
         const string INSTALLER_REMOTE = "https://github.com/docker/toolbox/releases/download/v18.09.1/DockerToolbox-18.09.1.exe";
@@ -455,24 +441,25 @@ namespace Bootlegger.App.Lib
 
         internal void OpenFolder()
         {
-            switch (CurrentInstallerType)
-            {
-                case InstallerType.HYPER_V:
-                    try
-                    {
-                        System.Diagnostics.Process.Start(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "upload");
-                    }
-                    catch
-                    {
+            System.Diagnostics.Process.Start(@"C:\Users\Public\ourstorycontent");
+            //switch (CurrentInstallerType)
+            //{
+            //    case InstallerType.HYPER_V:
+            //        try
+            //        {
+            //            System.Diagnostics.Process.Start(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "upload");
+            //        }
+            //        catch
+            //        {
 
-                    }
-                    break;
+            //        }
+            //        break;
 
-                case InstallerType.NO_HYPER_V:
-                    System.Diagnostics.Process.Start(@"C:\Users\Public\ourstorycontent");
-                    break;
+            //    case InstallerType.NO_HYPER_V:
+            //        System.Diagnostics.Process.Start(@"C:\Users\Public\ourstorycontent");
+            //        break;
 
-            }
+            //}
         }
 
         internal void OpenLog()
@@ -506,6 +493,11 @@ namespace Bootlegger.App.Lib
         public void OpenAdminPanel()
         {
             System.Diagnostics.Process.Start("http://localhost");
+        }
+
+        public void OpenAppLocation()
+        {
+            System.Diagnostics.Process.Start(Path.Combine(Directory.GetCurrentDirectory(),"install"));
         }
 
         public void OpenDocs()
@@ -548,7 +540,7 @@ namespace Bootlegger.App.Lib
         {
             get
             {
-                return (CurrentInstallerType == InstallerType.HYPER_V) ? "docker-compose.windows.yml" : "docker-compose.toolbox.yml";
+                return (CurrentInstallerType == InstallerType.HYPER_V) ? "docker-compose.yml" : "docker-compose.yml";
             }
         }
 
@@ -643,6 +635,7 @@ namespace Bootlegger.App.Lib
         public event Action<string> OnLog;
 
         Process currentProcess;
+       
 
         //start containers...
         public async Task<bool> RunServer(CancellationToken cancel)
@@ -659,8 +652,16 @@ namespace Bootlegger.App.Lib
                 //check for drive share enabled
                 await CheckSharedDrives();
 
-               // if (CurrentInstallerType == InstallerType.HYPER_V)
-               // {
+                //create folder:
+                //if (CurrentInstallerType == InstallerType.HYPER_V)
+                //{
+                var folder = @"C:\Users\Public\ourstorycontent";
+                Log.Info($"Creating Folder {folder}");
+                Directory.CreateDirectory(folder);
+                //}
+
+                // if (CurrentInstallerType == InstallerType.HYPER_V)
+                // {
                 Log.Info("Stopping existing HTTP port 80 connections");
                 //close any existing http on port 80
                 await RunProcessAsync("net", "stop HTTP /y", true, true);
@@ -757,39 +758,11 @@ namespace Bootlegger.App.Lib
             monitor.RunWorkerAsync();
         }
 
-
-        //public List<ContainerListResponse> ContainerStatus {get;private set;}
         public event Action<List<NamedException>> OnRunWarning;
 
         List<NamedException> CurrentErrors = new List<NamedException>();
 
         public enum MONITOR_TYPE {Wifi, IP, Docker, Containers, Port}
-
-        //Exception IPEXCEPTION = new NamedException() {
-        //    Name = "IP Address Error",
-        //    Description = "Make sure your network has not changed since starting Our Story."
-        //};
-        ////Exception WIFIEXCEPTION = new Exception();
-        //Exception CONTAINEREXCEPTION = new NamedException()
-        //{
-        //    Name = "Application Problem",
-        //    Description = "Some parts of the Dashboard have stopped working, please restart Our Story"
-        //};
-        //Exception SERVEREXCEPTION = new NamedException()
-        //{
-        //    Name = "Application Access Problem",
-        //    Description = "The Dashboard does not seem to be available to other Devices. Has your network changed?"
-        //};
-        //Exception DRIVESPACEXCEPTION = new NamedException()
-        //{
-        //    Name = "Out of Disk Space",
-        //    Description = "There is not enough disk space to upload or process videos. Please remove old files."
-        //};
-        //Exception WIFIEXCEPTION = new NamedException()
-        //{
-        //    Name = "Out of Disk Space",
-        //    Description = "There is not enough disk space to upload or process videos. Please remove old files."
-        //};
 
         internal class WiFiException : NamedException
         {
@@ -818,7 +791,6 @@ namespace Bootlegger.App.Lib
         NamedException SERVEREXCEPTION = new ServerException();
         NamedException DRIVESPACEXCEPTION = new DriveException();
         NamedException WIFIEXCEPTION = new WiFiException();
-
 
         public class NamedException: Exception
         {

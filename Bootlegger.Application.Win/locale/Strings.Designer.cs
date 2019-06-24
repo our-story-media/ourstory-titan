@@ -376,6 +376,15 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Locate Android Application.
+        /// </summary>
+        public static string GetApp {
+            get {
+                return ResourceManager.GetString("GetApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Initiating Download....
         /// </summary>
         public static string InitiatingDownload {

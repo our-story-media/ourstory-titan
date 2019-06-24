@@ -18,7 +18,7 @@
             <ComboBox DisplayMemberPath="DisplayName" Background="Transparent" x:Name="langs" BorderThickness="0" SelectionChanged="Langs_SelectionChanged">
 
             </ComboBox>
-            <Button Content="{x:Static p:Strings.CreditsTitle}" Click="Button_Click_1"/>
+            <!--<Button Content="{x:Static p:Strings.CreditsTitle}" Click="Button_Click_1"/>-->
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     

@@ -336,4 +336,7 @@
   <data name="Refresh" xml:space="preserve">
     <value>Refresh</value>
   </data>
+  <data name="GetApp" xml:space="preserve">
+    <value>Locate Android Application</value>
+  </data>
 </root>

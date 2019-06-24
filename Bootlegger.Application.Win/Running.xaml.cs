@@ -263,5 +263,10 @@ namespace Bootlegger.App.Win
         {
             App.BootleggerApp.OpenAdminPanel();
         }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            App.BootleggerApp.OpenAppLocation();
+        }
     }
 }

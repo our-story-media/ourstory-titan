@@ -22,12 +22,6 @@
 
     <UI>
       <UIRef Id="WixUI_Minimal" />
-      <!--<Publish Dialog="ExitDialog"
-            Control="Finish"
-            Event="DoAction"
-            Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
-    </UI>
-    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Our Story Titan" />-->
     </UI>
 
     <DirectoryRef Id="TARGETDIR">
@@ -36,7 +30,6 @@
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
-        <!--<Directory Id="ProductFilesComponentGroup"></Directory>-->
         <Directory Id="INSTALLFOLDER" Name="Our Story Titan">
         
         </Directory>
@@ -55,7 +48,7 @@
           <RemoveFolder Id="DesktopFolder" On="uninstall"/>
           <RegistryValue
               Root="HKCU"
-              Key="Software/MyAppName"
+              Key="Software/OurStoryTitan"
               Name="installed"
               Type="integer"
               Value="1"
@@ -83,15 +76,6 @@
       </Component>
     </DirectoryRef>
 
-    
-
-
-    <!--
-    <Property Id="WixShellExecTarget" Value="[#Our Story Titan.exe]" />
-    <CustomAction Id="LaunchApplication"
-        BinaryKey="WixCA"
-        DllEntry="WixShellExec"
-        Impersonate="yes" />-->
 
     <InstallExecuteSequence>
       <ScheduleReboot After="InstallFinalize"/>
