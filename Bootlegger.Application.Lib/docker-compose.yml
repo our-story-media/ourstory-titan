@@ -11,7 +11,7 @@ services:
     restart: on-failure
     image: bootlegger/nginx-local
     ports:
-      - "80:80"
+      - "8845:80"
     volumes:
       - "/c/Users/public/ourstorycontent:/usr/src/app/upload"
     volumes_from:
@@ -56,3 +56,5 @@ services:
       - beanstalk
     volumes:
       - "/c/Users/public/ourstorycontent:/usr/src/app/upload"
+    environment:
+      sails_master_url: "http://10.10.10.1:8845"

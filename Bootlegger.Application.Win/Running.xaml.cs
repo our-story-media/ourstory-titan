@@ -83,7 +83,7 @@ namespace Bootlegger.App.Win
                     sharewarning.Visibility = Visibility.Collapsed;
                     //progressring.Visibility = Visibility.Collapsed;
                     var culture = Thread.CurrentThread.CurrentUICulture;
-                    Browser.Address = "http://localhost/auth/locale/"+culture.TwoLetterISOLanguageName;
+                    Browser.Address = $"http://localhost:{BootleggerApplication.PORT}/auth/locale/{culture.TwoLetterISOLanguageName}";
                     statusled.Background = FindResource("green") as Brush;
                     ledshadow.Color = Colors.Green;
                     progresswrapper.Visibility = Visibility.Collapsed;

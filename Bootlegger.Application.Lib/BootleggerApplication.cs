@@ -1,26 +1,26 @@
-﻿using Docker.DotNet;
+﻿using CertificatesToDBandBack;
+using Docker.DotNet;
 using Docker.DotNet.Models;
+using Docker.DotNet.X509;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using NLog;
+using SimpleWifi;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Management;
 using System.Net;
+using System.Net.NetworkInformation;
+using System.Security.AccessControl;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using YamlDotNet.RepresentationModel;
-using System.Management;
-using System.Linq;
-using Docker.DotNet.X509;
-using System.Security.Cryptography.X509Certificates;
-using CertificatesToDBandBack;
-using System.Security.Cryptography;
-using System.Security.AccessControl;
-using NLog;
-using System.Net.NetworkInformation;
-using System.ComponentModel;
-using SimpleWifi;
 
 namespace Bootlegger.App.Lib
 {
@@ -96,7 +96,10 @@ namespace Bootlegger.App.Lib
             }
         }
 
-        public bool IsOnlineInstaller { get {
+        public bool IsOnlineInstaller
+        {
+            get
+            {
                 return Plugin.Connectivity.CrossConnectivity.Current.IsConnected && Plugin.Connectivity.CrossConnectivity.Current.ConnectionTypes.Contains(Plugin.Connectivity.Abstractions.ConnectionType.WiFi);
             }
         }
@@ -139,7 +142,7 @@ namespace Bootlegger.App.Lib
                 Log.Info($"Download not required for {src}");
         }
 
-        
+
         public async Task DownloadInstaller(CancellationToken cancel)
         {
             Log.Info("Starting download of installer");
@@ -429,7 +432,7 @@ namespace Bootlegger.App.Lib
                     if (adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 && adapter.OperationalStatus == OperationalStatus.Up)
                     {
                         networkName = adapter.Name;
-                        await RunProcessAsync("netsh", $"interface ip set address \"{networkName}\" static 10.10.10.1 255.255.255.0 10.10.10.254", true, true);
+                        await RunProcessAsync("netsh", $"interface ip set address \"{networkName}\" static {IP} 255.255.255.0 10.10.10.254", true, true);
                     }
                 }
             }
@@ -468,7 +471,9 @@ namespace Bootlegger.App.Lib
             System.Diagnostics.Process.Start($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\OurStoryTitan\log.txt");
         }
 
-        public bool WiFiSettingsOk { get
+        public bool WiFiSettingsOk
+        {
+            get
             {
                 ManagementClass objMC =
               new ManagementClass("Win32_NetworkAdapterConfiguration");
@@ -480,7 +485,7 @@ namespace Bootlegger.App.Lib
                     {
                         var ip = (objMO["IPAddress"] as string[]);
 
-                        if (ip?[0]?.Equals("10.10.10.1") ?? false)
+                        if (ip?[0]?.Equals(IP) ?? false)
                         {
                             return true;
                         }
@@ -497,7 +502,7 @@ namespace Bootlegger.App.Lib
 
         public void OpenAppLocation()
         {
-            System.Diagnostics.Process.Start(Path.Combine(Directory.GetCurrentDirectory(),"install"));
+            System.Diagnostics.Process.Start(Path.Combine(Directory.GetCurrentDirectory(), "install"));
         }
 
         public void OpenDocs()
@@ -527,7 +532,7 @@ namespace Bootlegger.App.Lib
                     writer.Close();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -616,7 +621,7 @@ namespace Bootlegger.App.Lib
                                 throw new Exception($"Forcing image pull: {im.FromImage}");
                             var exists = await dockerclient.Images.InspectImageAsync(im.FromImage, cancel);
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             await dockerclient.Images.CreateImageAsync(im, null, this, cancel);
                         }
@@ -635,7 +640,9 @@ namespace Bootlegger.App.Lib
         public event Action<string> OnLog;
 
         Process currentProcess;
-       
+
+        public const int PORT = 8845;
+
 
         //start containers...
         public async Task<bool> RunServer(CancellationToken cancel)
@@ -662,9 +669,9 @@ namespace Bootlegger.App.Lib
 
                 // if (CurrentInstallerType == InstallerType.HYPER_V)
                 // {
-                Log.Info("Stopping existing HTTP port 80 connections");
+                //Log.Info("Stopping existing HTTP port 80 connections");
                 //close any existing http on port 80
-                await RunProcessAsync("net", "stop HTTP /y", true, true);
+                //await RunProcessAsync("net", "stop HTTP /y", true, true);
                 //}
 
                 if (currentProcess != null && !currentProcess.HasExited)
@@ -722,7 +729,7 @@ namespace Bootlegger.App.Lib
                     try
                     {
                         Log.Info("Attempting connection to localhost...");
-                        var result = await client.DownloadStringTaskAsync($"http://localhost/status");
+                        var result = await client.DownloadStringTaskAsync($"http://localhost:{PORT}/status");
                         connected = true;
                     }
                     catch
@@ -735,7 +742,7 @@ namespace Bootlegger.App.Lib
                     }
                 }
 
-                
+
 
                 return connected;
             }
@@ -743,7 +750,7 @@ namespace Bootlegger.App.Lib
             {
                 throw fe;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -762,7 +769,7 @@ namespace Bootlegger.App.Lib
 
         List<NamedException> CurrentErrors = new List<NamedException>();
 
-        public enum MONITOR_TYPE {Wifi, IP, Docker, Containers, Port}
+        public enum MONITOR_TYPE { Wifi, IP, Docker, Containers, Port }
 
         internal class WiFiException : NamedException
         {
@@ -792,7 +799,9 @@ namespace Bootlegger.App.Lib
         NamedException DRIVESPACEXCEPTION = new DriveException();
         NamedException WIFIEXCEPTION = new WiFiException();
 
-        public class NamedException: Exception
+        const string IP = "10.10.10.1";
+
+        public class NamedException : Exception
         {
             public string Name { get; set; }
             public string Description { get; set; }
@@ -804,9 +813,9 @@ namespace Bootlegger.App.Lib
             var Document = File.ReadAllText(DockerComposeFile);
             var input = new StringReader(Document);
             WebClient client = new TimeOutWebClient();
-            
 
-            var KnownContainerCount = 0 ;
+
+            var KnownContainerCount = 0;
 
             // Load the stream
             var yaml = new YamlStream();
@@ -867,7 +876,7 @@ namespace Bootlegger.App.Lib
                         {
                             var ip = (objMO["IPAddress"] as string[]);
 
-                            if (ip?[0]?.Equals("10.10.10.1") ?? false)
+                            if (ip?[0]?.Equals(IP) ?? false)
                             {
                                 ipaddressok = true;
                                 //actualip = "10.10.10.1";
@@ -885,7 +894,7 @@ namespace Bootlegger.App.Lib
                         CurrentErrors.Remove(IPEXCEPTION);
                     }
 
-                   
+
 
                     //CHECK DISK SPACE:
 
@@ -910,7 +919,7 @@ namespace Bootlegger.App.Lib
 
 
                     //Windows.Networking.Connectivity.NetworkInformation.GetConnectionProfiles();
-                    
+
                     //WIFI:
                     if (wifi.ConnectionStatus != WifiStatus.Connected)
                     {
@@ -930,7 +939,7 @@ namespace Bootlegger.App.Lib
                     try
                     {
 
-                        var result = await client.DownloadStringTaskAsync($"http://10.10.10.1/status");
+                        var result = await client.DownloadStringTaskAsync($"http://{IP}:{PORT}/status");
                         connected = true;
                     }
                     catch
@@ -949,7 +958,7 @@ namespace Bootlegger.App.Lib
                 }
                 catch (Exception ex)
                 {
-                    CurrentErrors.Add(new NamedException() { Name="Unknown",Description = ex.Message});
+                    CurrentErrors.Add(new NamedException() { Name = "Unknown", Description = ex.Message });
                 }
                 finally
                 {
@@ -957,7 +966,7 @@ namespace Bootlegger.App.Lib
                 }
 
                 Thread.Sleep(5000);
-                
+
             }
         }
         private class TimeOutWebClient : WebClient
@@ -1004,13 +1013,13 @@ namespace Bootlegger.App.Lib
                 case InstallerType.HYPER_V:
                     Log.Info("Starting Docker for Windows");
 
-                    var exitcode = await RunProcessAsync(DOCKERFORWINDOWS,"",false,false);
+                    var exitcode = await RunProcessAsync(DOCKERFORWINDOWS, "", false, false);
                     if (exitcode == 1)
                     {
                         Log.Error($"Cant start docker for Windows");
                         throw new DockerApiException(HttpStatusCode.BadGateway, "Cant start docker for Windows");
                     }
-                 
+
 
                     break;
 
@@ -1026,21 +1035,22 @@ namespace Bootlegger.App.Lib
                     string userHomePath = Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
                     string dockercache = Path.Combine(userHomePath, ".docker", "machine", "cache", "boot2docker.iso");
                     Directory.CreateDirectory(Path.Combine(userHomePath, ".docker", "machine", "cache"));
-                    if (!File.Exists(dockercache)){
-                        File.Copy(@"C:\Program Files\Docker Toolbox\boot2docker.iso", dockercache,true);
+                    if (!File.Exists(dockercache))
+                    {
+                        File.Copy(@"C:\Program Files\Docker Toolbox\boot2docker.iso", dockercache, true);
                     }
 
                     Log.Info($"Stopping docker-machine");
 
-                    await RunProcessAsync(@"docker-machine","stop");
+                    await RunProcessAsync(@"docker-machine", "stop");
 
                     Log.Info($"Stopping Virtualbox VM");
 
                     await RunProcessAsync("VBoxManage.exe", "controlvm default savestate");
 
-                    Log.Info($"Port forward 80");
+                    Log.Info($"Port forward {PORT}");
                     //port forward rules:
-                    await RunProcessAsync("VBoxManage.exe", "modifyvm \"default\" --natpf1 \"rule1, tcp,, 80,, 80\"");
+                    await RunProcessAsync("VBoxManage.exe", $"modifyvm \"default\" --natpf1 \"rule1, tcp,, {PORT},, {PORT}\"");
 
                     Log.Info($"Port forward 27017");
 
@@ -1050,7 +1060,7 @@ namespace Bootlegger.App.Lib
                     await RunProcessAsync("net", "stop HTTP /y", true, true);
 
                     Log.Info($"Starting docker-toolbox");
-                    await RunProcessAsync(@"C:\Program Files\Git\bin\bash.exe", "-c \" \\\"/c/Program Files/Docker Toolbox/start.sh\\\" \\\"%*\\\"\"",true);
+                    await RunProcessAsync(@"C:\Program Files\Git\bin\bash.exe", "-c \" \\\"/c/Program Files/Docker Toolbox/start.sh\\\" \\\"%*\\\"\"", true);
 
                     DockerStarted = true;
                     break;
@@ -1077,25 +1087,25 @@ namespace Bootlegger.App.Lib
         async Task WaitForDockerToStart()
         {
             //wait until docker actually started...
-           
-                bool found = false;
-                while (!found)
+
+            bool found = false;
+            while (!found)
+            {
+                try
                 {
-                    try
-                    {
 
-                        await StartDockerClient();
-                        var info = await dockerclient.System.GetSystemInfoAsync();
+                    await StartDockerClient();
+                    var info = await dockerclient.System.GetSystemInfoAsync();
 
-                        found = true;
-                    }
-                    catch (Exception e)
-                    {
-                        Log.Error(e);
-                    }
-                    await Task.Delay(5000);
+                    found = true;
                 }
-           
+                catch (Exception e)
+                {
+                    Log.Error(e);
+                }
+                await Task.Delay(5000);
+            }
+
         }
 
         public async Task CheckSharedDrives()
@@ -1122,7 +1132,7 @@ namespace Bootlegger.App.Lib
             {
                 try
                 {
-                    var result = await client.DownloadStringTaskAsync($"http://10.10.10.1/status");
+                    var result = await client.DownloadStringTaskAsync($"http://{IP}:{PORT}/status");
                     connected = true;
                 }
                 catch
@@ -1136,7 +1146,7 @@ namespace Bootlegger.App.Lib
             }
 
             if (!connected)
-               Log.Error($"Cannot connect to local server");
+                Log.Error($"Cannot connect to local server");
 
 
             return connected;
@@ -1149,7 +1159,7 @@ namespace Bootlegger.App.Lib
             {
                 currentProcess.Close();
             }
-            
+
             try
             {
                 await RunProcessAsync("docker-compose", $"-f {DockerComposeFile} -p bootleggerlocal stop");
@@ -1189,6 +1199,5 @@ namespace Bootlegger.App.Lib
     }
 
 
-   
+
 }
- 
