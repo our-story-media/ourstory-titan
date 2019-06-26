@@ -10,21 +10,23 @@
     xmlns:p="clr-namespace:Bootlegger.App.Win.locale"
       d:DesignHeight="400" d:DesignWidth="400">
     <Grid>
-        <Grid VerticalAlignment="Bottom">
-            <Button x:Name="continuebtn" Margin="0,0,21,10" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.Continue}"  HorizontalAlignment="Right" Padding="8" VerticalAlignment="Bottom" BorderThickness="0.5" Custom:ControlsHelper.ContentCharacterCasing="Upper" Click="Continuebtn_Click_1"/>
-        </Grid>
+        <!--<Grid VerticalAlignment="Bottom">
+            
+        </Grid>-->
         <StackPanel Margin="20" Orientation="Vertical">
             <Label Padding="0" Content="{x:Static p:Strings.Connectivity}" Height="60" VerticalAlignment="Top" FontFamily="Segoe UI Light" FontSize="36"/>
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#333" FontFamily="Segoe UI Light" Width="360" FontSize="18" Height="78"><Run Text="{x:Static p:Strings.WiFi}"/><LineBreak/><Run Text="{x:Static p:Strings.WiFi2}"/></TextBlock>
-            <StackPanel Orientation="Horizontal"/>
+
+            <Button x:Name="continuebtn" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.Continue}"  HorizontalAlignment="Right" Padding="8" VerticalAlignment="Bottom" BorderThickness="0.5" Custom:ControlsHelper.ContentCharacterCasing="Upper" Click="Continuebtn_Click_1"/>
+            <!--<StackPanel Orientation="Horizontal"/>-->
+
+            <!--<StackPanel Orientation="Horizontal"/>
 
             <StackPanel Orientation="Horizontal"/>
 
-            <StackPanel Orientation="Horizontal"/>
-
-            <StackPanel Orientation="Horizontal"/>
+            <StackPanel Orientation="Horizontal"/>-->
 
         </StackPanel>
-        <Path Data="M0,274.08548 L300.05709,274.08548" Height="0.5" Stretch="Fill" Stroke="White" VerticalAlignment="Bottom" Opacity="0.5" Margin="0,0,0,52"/>
+        <!--<Path Data="M0,274.08548 L300.05709,274.08548" Height="0.5" Stretch="Fill" Stroke="White" VerticalAlignment="Bottom" Opacity="0.5" Margin="0,0,0,52"/>-->
     </Grid>
 </ContentControl>

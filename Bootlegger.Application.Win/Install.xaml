@@ -25,12 +25,12 @@
                 <Button x:Name="continuebtn" HorizontalAlignment="Right" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.DownloadFiles}" DockPanel.Dock="Right" Click="continuebtn_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper" BorderThickness="0.5" Padding="8"/>
                 <TextBlock Foreground="#333" HorizontalAlignment="Stretch" TextAlignment="Center" VerticalAlignment="Center" Text="{x:Static p:Strings.Or}"></TextBlock>
             </DockPanel>
+            <Button x:Name="continuebtn_Copy" Margin="0,20,0,0" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.Back}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="continuebtn_Copy_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper" BorderThickness="0.5" Padding="8"/>
 
         </StackPanel>
         <Grid VerticalAlignment="Bottom">
-            <Button x:Name="continuebtn_Copy" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.Back}" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Bottom" Click="continuebtn_Copy_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper" BorderThickness="0.5" Padding="8"/>
-
+            
         </Grid>
-        <Path Data="M0,274.08548 L300.05709,274.08548" Height="0.5" Stretch="Fill" Stroke="Black" VerticalAlignment="Bottom" Opacity="0.5" Margin="0,0,0,52"/>
+        <!--<Path Data="M0,274.08548 L300.05709,274.08548" Height="0.5" Stretch="Fill" Stroke="Black" VerticalAlignment="Bottom" Opacity="0.5" Margin="0,0,0,52"/>-->
     </Grid>
 </ContentControl>

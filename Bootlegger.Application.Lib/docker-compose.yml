@@ -49,12 +49,12 @@ services:
 
   web:
     restart: on-failure
-    image: bootlegger/ourstory-server:latest
+    image: bootlegger/ourstory-server:dev
     depends_on: 
       - redis
       - mongo
       - beanstalk
     volumes:
       - "/c/Users/public/ourstorycontent:/usr/src/app/upload"
-    environment:
-      sails_master_url: "http://10.10.10.1:8845"
+#    environment:
+#      sails_master_url: "http://10.10.10.1:8845"

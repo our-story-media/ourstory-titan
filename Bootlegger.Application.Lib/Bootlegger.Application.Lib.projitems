@@ -23,7 +23,9 @@
     <Content Include="$(MSBuildThisFileDirectory)docker-compose.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="$(MSBuildThisFileDirectory)install\README.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)install\README.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="$(MSBuildThisFileDirectory).env">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
