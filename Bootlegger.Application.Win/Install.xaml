@@ -22,8 +22,8 @@
             <TextBlock x:Name="locationmsg" Text="{x:Static p:Strings.LocateImages}" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,0,0,6" Foreground="#FF333333" FontFamily="Segoe UI Light" FontSize="16"></TextBlock>
             <DockPanel x:Name="buttons">
                 <Button x:Name="imagesbtn" Style="{DynamicResource SquareButtonStyle}" DockPanel.Dock="Left" Content="{x:Static p:Strings.LoadImages}" HorizontalAlignment="Left" Custom:ControlsHelper.ContentCharacterCasing="Upper" BorderThickness="0.5" Padding="8" Click="Imagesbtn_Click"/>
-                <Button x:Name="continuebtn" HorizontalAlignment="Right" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.DownloadFiles}" DockPanel.Dock="Right" Click="continuebtn_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper" BorderThickness="0.5" Padding="8"/>
-                <TextBlock Foreground="#333" HorizontalAlignment="Stretch" TextAlignment="Center" VerticalAlignment="Center" Text="{x:Static p:Strings.Or}"></TextBlock>
+                <Button Visibility="Collapsed" x:Name="continuebtn" HorizontalAlignment="Right" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.DownloadFiles}" DockPanel.Dock="Right" Click="continuebtn_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper" BorderThickness="0.5" Padding="8"/>
+                <TextBlock Foreground="#333" Visibility="Collapsed" HorizontalAlignment="Stretch" TextAlignment="Center" VerticalAlignment="Center" Text="{x:Static p:Strings.Or}"></TextBlock>
             </DockPanel>
             <Button x:Name="continuebtn_Copy" Margin="0,20,0,0" Style="{DynamicResource SquareButtonStyle}" Content="{x:Static p:Strings.Back}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="continuebtn_Copy_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper" BorderThickness="0.5" Padding="8"/>
 

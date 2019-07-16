@@ -772,7 +772,11 @@ namespace Bootlegger.App.Lib
             {
                 throw fe;
             }
-            catch (Exception)
+            catch (TaskCanceledException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
             {
                 return false;
             }

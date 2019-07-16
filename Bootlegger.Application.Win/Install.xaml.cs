@@ -25,10 +25,12 @@ namespace Bootlegger.App.Win
     /// </summary>
     public partial class Install
     {
+        bool isupdate = false;
         public Install(bool update)
         {
             InitializeComponent();
             Loaded += InstallDocker_Loaded;
+            this.isupdate = update;
             if (update)
             {
                 title.Content = locale.Strings.Update;
@@ -51,7 +53,11 @@ namespace Bootlegger.App.Win
         {
             //back
             cancel.Cancel();
-            (Application.Current.MainWindow as MainWindow)._mainFrame.Content = new Intro();
+            if (!isupdate)
+                (Application.Current.MainWindow as MainWindow)._mainFrame.Content = new Intro();
+            else
+                (Application.Current.MainWindow as MainWindow)._mainFrame.Content = new Running();
+
         }
         
         enum filetype { DOCKER, TAR};
@@ -81,6 +87,11 @@ namespace Bootlegger.App.Win
                     throw new DockerNotRunningException();
                     //status.Text = Strings.InstallingDocker;
                     //await App.BootleggerApp.RunInstaller(cancel.Token);
+                }
+
+                if (isupdate)
+                {
+                    await App.BootleggerApp.StopServer();
                 }
 
                 status.Text = Strings.StartingDocker;

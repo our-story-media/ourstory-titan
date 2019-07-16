@@ -93,18 +93,25 @@ namespace Bootlegger.App.Win
                 }
                 else
                 {
-                    progress.Content = Strings.ProblemStartingApplication;
-                    sharewarning.Visibility = Visibility.Collapsed;
-                    //progressring.Visibility = Visibility.Collapsed;
-                    statusled.Background = FindResource("red") as Brush;
-                    ledshadow.Color = Colors.Red;
-
-                    progresswrapper.Visibility = Visibility.Collapsed;
-                    //SHOW MASSIVE WARNING
-                    var tt = await (App.Current.MainWindow as MetroWindow).ShowMessageAsync(locale.Strings.Error, string.Format(locale.Strings.ErrorDialog,""), MessageDialogStyle.AffirmativeAndNegative);
-                    if (tt == MessageDialogResult.Affirmative)
+                    if (!cts.IsCancellationRequested)
                     {
-                        (App.Current.MainWindow as MetroWindow).Close();
+                        progress.Content = Strings.ProblemStartingApplication;
+                        sharewarning.Visibility = Visibility.Collapsed;
+                        //progressring.Visibility = Visibility.Collapsed;
+                        statusled.Background = FindResource("red") as Brush;
+                        ledshadow.Color = Colors.Red;
+
+                        progresswrapper.Visibility = Visibility.Collapsed;
+                        //SHOW MASSIVE WARNING
+                        var tt = await (App.Current.MainWindow as MetroWindow).ShowMessageAsync(locale.Strings.Error, string.Format(locale.Strings.ErrorDialog, ""), MessageDialogStyle.AffirmativeAndNegative);
+                        if (tt == MessageDialogResult.Affirmative)
+                        {
+                            (App.Current.MainWindow as MetroWindow).Close();
+                        }
+                    }
+                    else
+                    {
+                        //was cancelled:
                     }
 
                 }
@@ -123,8 +130,6 @@ namespace Bootlegger.App.Win
 
                 Start();
             }
-
-
         }
 
         private void Running_Loaded(object sender, RoutedEventArgs e)
