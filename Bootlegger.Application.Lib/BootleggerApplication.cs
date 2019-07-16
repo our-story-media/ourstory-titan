@@ -1120,27 +1120,60 @@ namespace Bootlegger.App.Lib
                         File.Copy(@"C:\Program Files\Docker Toolbox\boot2docker.iso", dockercache, true);
                     }
 
-                    Log.Info($"Stopping docker-machine");
+                    //ONLY DO THE FOLLOWING IF PORT FORWARDING IS NOT ALREADY SETUP:
+                    //var result = await RunProcessAsyncResult("VBoxManage.exe", "showvminfo default");
 
-                    await RunProcessAsync(@"docker-machine", "stop");
+                    //try
+                    //{
+                        var process = Process.Start(new ProcessStartInfo("VBoxManage.exe", "showvminfo default")
+                        {
+                            RedirectStandardOutput = true,
+                            UseShellExecute = false
+                        });
 
-                    Log.Info($"Stopping Virtualbox VM");
+                        var result = process.StandardOutput.ReadToEnd();
+                        process.WaitForExit();
+                    //}
+                    //catch (Exception e)
+                    //{
 
-                    await RunProcessAsync("VBoxManage.exe", "controlvm default savestate");
+                    //}
+                    
+                    //var result = "";
 
-                    Log.Info($"Port forward {PORT}");
-                    //port forward rules:
-                    await RunProcessAsync("VBoxManage.exe", $"modifyvm \"default\" --natpf1 \"rule1, tcp,, {PORT},, {PORT}\"");
+                    //VBoxManage.exe showvminfo default
+                    // host port = 8845, guest ip = , guest port = 8845
 
-                    Log.Info($"Port forward 27017");
+                    if (!result.Contains("host port = 8845xxx"))
+                    {
 
-                    await RunProcessAsync("VBoxManage.exe", "modifyvm \"default\" --natpf1 \"rule2, tcp,, 27017,, 27017\"");
+                        Log.Info($"Stopping docker-machine");
 
-                    Log.Info("Stopping existing HTTP port 80 connections");
-                    await RunProcessAsync("net", "stop HTTP /y", true, true);
+                        await RunProcessAsync(@"docker-machine", "stop", true);
+
+                        Log.Info($"Stopping Virtualbox VM");
+
+                        await RunProcessAsync("VBoxManage.exe", "controlvm default savestate");
+
+                        Log.Info($"Port forward {PORT}");
+                        //port forward rules:
+                        await RunProcessAsync("VBoxManage.exe", $"modifyvm \"default\" --natpf1 \"rule1, tcp,, {PORT},, {PORT}\"");
+
+                        Log.Info($"Port forward 27017");
+
+                        await RunProcessAsync("VBoxManage.exe", "modifyvm \"default\" --natpf1 \"rule2, tcp,, 27017,, 27017\"");
+
+                        //Log.Info("Stopping existing HTTP port 80 connections");
+                        //await RunProcessAsync("net", "stop HTTP /y", true, true);
+
+                        //"C:\Program Files\Git\bin\bash.exe" --login -i "C:\Program Files\Docker Toolbox\start.sh"
+
+                    }
 
                     Log.Info($"Starting docker-toolbox");
                     await RunProcessAsync(@"C:\Program Files\Git\bin\bash.exe", "-c \" \\\"/c/Program Files/Docker Toolbox/start.sh\\\" \\\"%*\\\"\"", true);
+
+                    //await RunProcessAsync(@"C:\Program Files\Git\bin\bash.exe", "--login -i \"C:\\Program Files\\Docker Toolbox\\start.sh\"", true);
 
                     DockerStarted = true;
                     break;

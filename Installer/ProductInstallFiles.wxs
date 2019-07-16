@@ -6,7 +6,6 @@
             <Directory Id="dir9AE38F4F5CB5E565E774521E138F44FD" Name="es" />
             <Directory Id="dirB55DFDA91FEE7CCCBC65CA7493B75748" Name="fr" />
             <Directory Id="dirCA02E4A7CC6C21D952C5059DC56408F4" Name="GPUCache" />
-            <Directory Id="dirA3AA24F7AF880B18EBCDA4619254E342" Name="install" />
             <Directory Id="dir07100F2E598E14B511BAF734827AE4AB" Name="locales" />
             <Directory Id="dir248D31DDF01545F6DE1ADFFB1B0E0D98" Name="swiftshader" />
         </DirectoryRef>
@@ -588,12 +587,6 @@
             </Component>
             <Component Id="cmp3B66DCEB0789C8C518943D089A4199DD" Directory="dirCA02E4A7CC6C21D952C5059DC56408F4" Guid="*">
                 <File Id="fil28E93CE868CB9B868ADCBF0F50DDA1ED" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\GPUCache\index" />
-            </Component>
-            <Component Id="cmpE26F1AA5F0BE3D475852A765B98BB696" Directory="dirA3AA24F7AF880B18EBCDA4619254E342" Guid="*">
-                <File Id="fil842F293853A3F0AB0C3390FF97F77281" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\install\OurStoryTitan.apk" />
-            </Component>
-            <Component Id="cmp45F745C0742456BD68290DB2915362A3" Directory="dirA3AA24F7AF880B18EBCDA4619254E342" Guid="*">
-                <File Id="fil711C507AA8A306D4B7C9DD72A87598D7" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\install\README.txt" />
             </Component>
             <Component Id="cmp93B53FD801CE3270DE5D9AF01811CD8F" Directory="dir07100F2E598E14B511BAF734827AE4AB" Guid="*">
                 <File Id="fil32C51E9E820B1FEE0FB7D2E6E3650736" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\locales\am.pak" />

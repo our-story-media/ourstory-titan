@@ -28,7 +28,8 @@
     <DirectoryRef Id="TARGETDIR">
       <Merge Id="VCRedist" SourceFile="C:\Program Files (x86)\Common Files\Merge Modules\Microsoft_VC140_CRT_x86.msm" DiskId="1" Language="0"/>
       <Component Id="FirewallException" Guid="373cc123-7453-4c73-b236-ee66b4e5e950">
-        <fire:FirewallException Id="FWX3" Name="Our Story Titan" Profile="all" Program="C:\program files\docker\docker\resources\vpnkit.exe" Port="8845" Protocol="tcp" Scope="any" />
+        <fire:FirewallException Id="FWX3" Name="Our Story Titan (HyperV)" Profile="all" Program="C:\program files\docker\docker\resources\vpnkit.exe" Port="8845" Protocol="tcp" Scope="any" />
+        <fire:FirewallException Id="FWX2" Name="Our Story Titan (Virtualbox)" Profile="all" Port="8845" Protocol="tcp" Scope="any" />
       </Component>
     </DirectoryRef>
 
