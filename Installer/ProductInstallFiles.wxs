@@ -5,6 +5,7 @@
             <Directory Id="dir287BEF6301389D2501D7D15A87596D90" Name="ar" />
             <Directory Id="dir9AE38F4F5CB5E565E774521E138F44FD" Name="es" />
             <Directory Id="dirB55DFDA91FEE7CCCBC65CA7493B75748" Name="fr" />
+            <Directory Id="dirCA02E4A7CC6C21D952C5059DC56408F4" Name="GPUCache" />
             <Directory Id="dirA3AA24F7AF880B18EBCDA4619254E342" Name="install" />
             <Directory Id="dir07100F2E598E14B511BAF734827AE4AB" Name="locales" />
             <Directory Id="dir248D31DDF01545F6DE1ADFFB1B0E0D98" Name="swiftshader" />
@@ -87,6 +88,9 @@
             <Component Id="cmp41DC9741013CA4AD62A4A5FF421F08BC" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil84B847A9F8DABE6B95AF875695C9E6D1" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\d3dcompiler_47.dll" />
             </Component>
+            <Component Id="cmp606EB7ABF006368C60735078DEFF8B91" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filDF37FFDBAF794FB705610E0A82AF4AEA" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\debug.log" />
+            </Component>
             <Component Id="cmp953E935EFD854363EA5BE90BEB265A15" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil1663242DBF722C40CBAF8839CC52B5ED" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\devtools_resources.pak" />
             </Component>
@@ -95,6 +99,12 @@
             </Component>
             <Component Id="cmp192934A067225EB42452B26BA12E45E5" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="filA229F8F78740FBFBFC75888FC3E4ADBA" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\DnsClient.xml" />
+            </Component>
+            <Component Id="cmp247F7E4BC6A9AD1F8EDA11657F30A6B9" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil02C75B905ACE6488582C7B2615663D71" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\docker-compose.toolbox.yml" />
+            </Component>
+            <Component Id="cmpFC104E466817F550392DBD8D35399D3C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil930855C8C62553F5BF53E6A33B3F81C6" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\docker-compose.windows.yml" />
             </Component>
             <Component Id="cmp4A0356DEF55BC24F0AD047BF4ACD4F05" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="filD582B2F1862B4CAA696E691E660E8DCE" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\docker-compose.yml" />
@@ -558,8 +568,29 @@
             <Component Id="cmp8F02BC5F07195FE3A22C1A5701ACD0AC" Directory="dirB55DFDA91FEE7CCCBC65CA7493B75748" Guid="*">
                 <File Id="fil5BE37A5477576C17356773407D851DD1" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\fr\Our Story Titan.resources.dll" />
             </Component>
+            <Component Id="cmpD98D5A90C5CF76F1CF3ABB6B654DE9BB" Directory="dirCA02E4A7CC6C21D952C5059DC56408F4" Guid="*">
+                <File Id="fil72C8998E84524852D93DAE53BDD96DCC" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\GPUCache\data_0" />
+            </Component>
+            <Component Id="cmp5F4053DB10BABA21190A2AC13E40B62F" Directory="dirCA02E4A7CC6C21D952C5059DC56408F4" Guid="*">
+                <File Id="fil7BFFC2B6D94359068CFF6FB407C977ED" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\GPUCache\data_1" />
+            </Component>
+            <Component Id="cmp7999F54A3D4545C6540F010CD9BFF92F" Directory="dirCA02E4A7CC6C21D952C5059DC56408F4" Guid="*">
+                <File Id="filBA3BD400D0DFB7304CEB577521B97A35" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\GPUCache\data_2" />
+            </Component>
+            <Component Id="cmp7FB19E27B662424B82391A756DD9965E" Directory="dirCA02E4A7CC6C21D952C5059DC56408F4" Guid="*">
+                <File Id="fil982A836EC9CB30E83EE561E12828CD57" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\GPUCache\data_3" />
+            </Component>
+            <Component Id="cmpED9306A49B148A8511A9EE69E8BB3B22" Directory="dirCA02E4A7CC6C21D952C5059DC56408F4" Guid="*">
+                <File Id="fil3AE4B324E101AF20D9D2C2D9B1D134F4" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\GPUCache\f_000001" />
+            </Component>
+            <Component Id="cmp3B66DCEB0789C8C518943D089A4199DD" Directory="dirCA02E4A7CC6C21D952C5059DC56408F4" Guid="*">
+                <File Id="fil28E93CE868CB9B868ADCBF0F50DDA1ED" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\GPUCache\index" />
+            </Component>
             <Component Id="cmpE26F1AA5F0BE3D475852A765B98BB696" Directory="dirA3AA24F7AF880B18EBCDA4619254E342" Guid="*">
                 <File Id="fil842F293853A3F0AB0C3390FF97F77281" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\install\OurStoryTitan.apk" />
+            </Component>
+            <Component Id="cmp45F745C0742456BD68290DB2915362A3" Directory="dirA3AA24F7AF880B18EBCDA4619254E342" Guid="*">
+                <File Id="fil711C507AA8A306D4B7C9DD72A87598D7" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\install\README.txt" />
             </Component>
             <Component Id="cmp93B53FD801CE3270DE5D9AF01811CD8F" Directory="dir07100F2E598E14B511BAF734827AE4AB" Guid="*">
                 <File Id="fil32C51E9E820B1FEE0FB7D2E6E3650736" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\locales\am.pak" />

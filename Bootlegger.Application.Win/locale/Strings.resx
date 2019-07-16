@@ -339,4 +339,10 @@
   <data name="GetApp" xml:space="preserve">
     <value>Locate Android Application</value>
   </data>
+  <data name="WiFiPolicyErrorDesc" xml:space="preserve">
+    <value>Your WiFi network is not marked as 'Private'. Please go to Windows Settings to change this.</value>
+  </data>
+  <data name="WiFiPolicyErrorName" xml:space="preserve">
+    <value>WiFi Profile Issue</value>
+  </data>
 </root>

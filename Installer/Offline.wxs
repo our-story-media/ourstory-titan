@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:fire="http://schemas.microsoft.com/wix/FirewallExtension">
   <Product Id="*" Name="Our Story Titan" Language="1033" Version="1.0.0.0" Manufacturer="Newcastle University" UpgradeCode="07a6b158-3593-4c10-9200-baf92006faeb">
     <Package InstallerVersion="301" Compressed="yes" InstallScope="perMachine" />
 
@@ -14,6 +14,7 @@
       <ComponentGroupRef Id="ExtraFilesComponentGroup" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="ApplicationShortcutDesktop" />
+      <ComponentRef Id="FirewallException" />
     </Feature>
 
     <WixVariable Id="WixUILicenseRtf" Value="$(var.Bootlegger.App.Win.ProjectDir)/Readme.rtf" />
@@ -26,12 +27,15 @@
 
     <DirectoryRef Id="TARGETDIR">
       <Merge Id="VCRedist" SourceFile="C:\Program Files (x86)\Common Files\Merge Modules\Microsoft_VC140_CRT_x86.msm" DiskId="1" Language="0"/>
+      <Component Id="FirewallException" Guid="373cc123-7453-4c73-b236-ee66b4e5e950">
+        <fire:FirewallException Id="FWX3" Name="Our Story Titan" Profile="all" Program="C:\program files\docker\docker\resources\vpnkit.exe" Port="8845" Protocol="tcp" Scope="any" />
+      </Component>
     </DirectoryRef>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
         <Directory Id="INSTALLFOLDER" Name="Our Story Titan">
-        
+          
         </Directory>
       </Directory>
 
@@ -53,9 +57,12 @@
               Type="integer"
               Value="1"
               KeyPath="yes"/>
+          
         </Component>
       </Directory>
     </Directory>
+
+    
 
 
 

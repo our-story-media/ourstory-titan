@@ -137,7 +137,7 @@
 
                           />-->
 
-            <Border BorderThickness="0.5,0.5,0,0" BorderBrush="Silver">
+            <Border BorderThickness="1,1,0,0" BorderBrush="#eee">
                 <wpf:ChromiumWebBrowser x:Name="Browser"
                                 Address="about:blank">
                 </wpf:ChromiumWebBrowser>

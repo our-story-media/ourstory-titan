@@ -1,6 +1,7 @@
 ﻿using Bootlegger.App.Lib;
 using Bootlegger.App.Win.locale;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,11 +35,25 @@ namespace Bootlegger.App.Win
             Loaded += Running_Loaded;
             Unloaded += Running_Unloaded;
 
-            //Browser.SnapsToDevicePixels = true;
-            //Browser.UseLayoutRounding = true;
-            Browser.LoadingStateChanged += Browser_LoadingStateChanged;
+            //Browser.LoadingStateChanged += Browser_LoadingStateChanged;
+            //Browser.LoadError += Browser_LoadError;
             Browser.TitleChanged += Browser_TitleChanged;
         }
+
+     
+        //private void Browser_LoadError(object sender, CefSharp.LoadErrorEventArgs e)
+        //{
+        //    Dispatcher.Invoke(() =>
+        //    {
+        //        if (e.FailedUrl.Equals("ourstory://videos"))
+        //        {
+        //            App.BootleggerApp.OpenFolder();
+                    
+                    
+        //        }
+        //        Console.WriteLine(Browser.Address);
+        //    });
+        //}
 
         private void Browser_TitleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -47,21 +62,6 @@ namespace Bootlegger.App.Win
                 pagetitle.Text = Browser.Title;
             });
         }
-
-        private void Browser_LoadingStateChanged(object sender, CefSharp.LoadingStateChangedEventArgs e)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                if (Browser.Address.Equals("ourstory://videos"))
-                {
-                    App.BootleggerApp.OpenFolder();
-                }
-                Console.WriteLine(Browser.Address);
-            });
-
-        }
-
-        ObservableCollection<Docker.DotNet.Models.ContainerListResponse> ContainerStatus { get; set; }
 
         private void Running_Unloaded(object sender, RoutedEventArgs e)
         {
@@ -72,6 +72,7 @@ namespace Bootlegger.App.Win
 
         async void Start()
         {
+            errors.Visibility = Visibility.Collapsed;
             progress.Content = Strings.StartingApplication;
             progresswrapper.Visibility = Visibility.Visible;
             //Browser.Address = "google.com";
@@ -87,6 +88,8 @@ namespace Bootlegger.App.Win
                     statusled.Background = FindResource("green") as Brush;
                     ledshadow.Color = Colors.Green;
                     progresswrapper.Visibility = Visibility.Collapsed;
+                    errors.Visibility = Visibility.Visible;
+
                 }
                 else
                 {
@@ -97,6 +100,13 @@ namespace Bootlegger.App.Win
                     ledshadow.Color = Colors.Red;
 
                     progresswrapper.Visibility = Visibility.Collapsed;
+                    //SHOW MASSIVE WARNING
+                    var tt = await (App.Current.MainWindow as MetroWindow).ShowMessageAsync(locale.Strings.Error, string.Format(locale.Strings.ErrorDialog,""), MessageDialogStyle.AffirmativeAndNegative);
+                    if (tt == MessageDialogResult.Affirmative)
+                    {
+                        (App.Current.MainWindow as MetroWindow).Close();
+                    }
+
                 }
             }
             catch (FileLoadException)
@@ -161,6 +171,11 @@ namespace Bootlegger.App.Win
                             case WiFiException c:
                                 err.Name = locale.Strings.WiFiErrorName;
                                 err.Description = locale.Strings.WiFiErrorDesc;
+                                break;
+
+                            case WiFiPolicyException c:
+                                err.Name = locale.Strings.WiFiPolicyErrorName;
+                                err.Description = locale.Strings.WiFiPolicyErrorDesc;
                                 break;
                         }
                     }

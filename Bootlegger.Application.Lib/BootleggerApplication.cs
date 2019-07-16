@@ -4,8 +4,10 @@ using Docker.DotNet.Models;
 using Docker.DotNet.X509;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using NETWORKLIST;
 using NLog;
 using SimpleWifi;
+using SimpleWifi.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -507,7 +509,7 @@ namespace Bootlegger.App.Lib
 
         public void OpenDocs()
         {
-            System.Diagnostics.Process.Start("https://guide.ourstory.video");
+            System.Diagnostics.Process.Start("https://guide.ourstory.dev");
         }
 
 
@@ -667,12 +669,32 @@ namespace Bootlegger.App.Lib
                 Directory.CreateDirectory(folder);
                 //}
 
-                // if (CurrentInstallerType == InstallerType.HYPER_V)
-                // {
-                //Log.Info("Stopping existing HTTP port 80 connections");
-                //close any existing http on port 80
-                //await RunProcessAsync("net", "stop HTTP /y", true, true);
-                //}
+                if (CurrentInstallerType == InstallerType.HYPER_V)
+                {
+                    Log.Info($"Setting WiFi Policy for Firewall");
+                    WlanClient wlan = new WlanClient();
+                    var intf = wlan.Interfaces.First();
+                    var profilename = intf.CurrentConnection.profileName;
+                    bool matchespolicy = false;
+                    var manager = new NetworkListManagerClass();
+                    var connectedNetworks = manager.GetNetworks(NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_CONNECTED).Cast<INetwork>();
+
+                    foreach (var network in connectedNetworks)
+                    {
+                        if (profilename == network.GetName())
+                        {
+                            //network in profile list is same as network in wifi connection:
+                            var cat = network.GetCategory();
+
+                            if (cat != NLM_NETWORK_CATEGORY.NLM_NETWORK_CATEGORY_PRIVATE)
+                            {
+                                network.SetCategory(NLM_NETWORK_CATEGORY.NLM_NETWORK_CATEGORY_PRIVATE);
+                                Log.Info($"Success setting WiFi Policy for Firewall to Private");
+
+                            }
+                        }
+                    }
+                }
 
                 if (currentProcess != null && !currentProcess.HasExited)
                 {
@@ -771,6 +793,13 @@ namespace Bootlegger.App.Lib
 
         public enum MONITOR_TYPE { Wifi, IP, Docker, Containers, Port }
 
+
+
+        internal class WiFiPolicyException : NamedException
+        {
+
+        }
+
         internal class WiFiException : NamedException
         {
 
@@ -798,6 +827,7 @@ namespace Bootlegger.App.Lib
         NamedException SERVEREXCEPTION = new ServerException();
         NamedException DRIVESPACEXCEPTION = new DriveException();
         NamedException WIFIEXCEPTION = new WiFiException();
+        NamedException WIFIPOLICYEXCEPTION = new WiFiPolicyException();
 
         const string IP = "10.10.10.1";
 
@@ -834,6 +864,8 @@ namespace Bootlegger.App.Lib
             }
 
             var wifi = new Wifi();
+            WlanClient wlan = new WlanClient();
+
 
             while (true)
             {
@@ -917,9 +949,6 @@ namespace Bootlegger.App.Lib
                         //Console.WriteLine(errorMesage);
                     }
 
-
-                    //Windows.Networking.Connectivity.NetworkInformation.GetConnectionProfiles();
-
                     //WIFI:
                     if (wifi.ConnectionStatus != WifiStatus.Connected)
                     {
@@ -929,6 +958,43 @@ namespace Bootlegger.App.Lib
                     else
                     {
                         CurrentErrors.Remove(WIFIEXCEPTION);
+                        //wifi is connected, so check for public/private
+                       
+
+                       
+                        //check for network on right policy otherwise firewall rule wont work...
+                        if (CurrentInstallerType == InstallerType.HYPER_V)
+                        {
+                            var manager = new NetworkListManagerClass();
+                            var connectedNetworks = manager.GetNetworks(NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_CONNECTED).Cast<INetwork>();
+                            var intf = wlan.Interfaces.First();
+                            var profilename = intf.CurrentConnection.profileName;
+                            bool matchespolicy = false;
+
+                            foreach (var network in connectedNetworks)
+                            {
+                                //Console.WriteLine(network.GetName() + " ");
+                                if (profilename == network.GetName())
+                                {
+                                    //network in profile list is same as network in wifi connection:
+
+                                    var cat = network.GetCategory();
+
+                                    if (cat == NLM_NETWORK_CATEGORY.NLM_NETWORK_CATEGORY_PRIVATE)
+                                        matchespolicy = true;
+                                }
+                            }
+
+                            if (!matchespolicy)
+                            {
+                                if (!CurrentErrors.Contains(WIFIPOLICYEXCEPTION))
+                                    CurrentErrors.Add(WIFIPOLICYEXCEPTION);
+                            }
+                            else
+                            {
+                                CurrentErrors.Remove(WIFIPOLICYEXCEPTION);
+                            }
+                        }
                     }
 
 

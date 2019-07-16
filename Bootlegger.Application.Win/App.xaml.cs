@@ -28,6 +28,24 @@ namespace Bootlegger.App.Win
     public partial class App : Application
     {
         public static BootleggerApplication BootleggerApp { get; private set; }
+
+        class OurStorySchemeHandlerFactory : ISchemeHandlerFactory
+        {
+            public IResourceHandler Create(IBrowser browser, IFrame frame, string schemeName, IRequest request)
+            {
+                if (request.Url == "ourstory://videos/")
+                {
+                    App.BootleggerApp.OpenFolder();
+                    browser.StopLoad();
+                    return null;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         static App()
         {
 
@@ -42,10 +60,17 @@ namespace Bootlegger.App.Win
             
             var settings = new CefSettings()
             {
-                
-            //By default CefSharp will use an in-memory cache, you need to specify a Cache Folder to persist data
-            //CachePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CefSharp\\Cache")
-        };
+
+
+
+            };
+
+            settings.RegisterScheme(new CefCustomScheme()
+            {
+                IsStandard = true,
+                SchemeName = "ourstory",
+                SchemeHandlerFactory = new OurStorySchemeHandlerFactory()
+            });
             //settings.CefCommandLineArgs.Add("disable-gpu", "1");
             //Perform dependency check to make sure all relevant resources are in our output directory.
             Cef.Initialize(settings, performDependencyCheck: true, browserProcessHandler: null);

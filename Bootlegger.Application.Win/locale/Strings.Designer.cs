@@ -725,5 +725,23 @@ namespace Bootlegger.App.Win.locale {
                 return ResourceManager.GetString("WiFiErrorName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your WiFi network is not marked as &apos;Private&apos;. Please go to Windows Settings to change this..
+        /// </summary>
+        public static string WiFiPolicyErrorDesc {
+            get {
+                return ResourceManager.GetString("WiFiPolicyErrorDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WiFi Profile Issue.
+        /// </summary>
+        public static string WiFiPolicyErrorName {
+            get {
+                return ResourceManager.GetString("WiFiPolicyErrorName", resourceCulture);
+            }
+        }
     }
 }
