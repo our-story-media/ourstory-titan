@@ -1,10 +1,13 @@
-version: "2"
+version: "3"
 
 volumes:
   mongo-data:
     external: false
   redis-data:
     external: false
+  www:
+  data:
+  assets:
 
 services:
   nginx-local:
@@ -14,8 +17,10 @@ services:
       - "8845:80"
     volumes:
       - "/c/Users/public/ourstorycontent:/usr/src/app/upload"
-    volumes_from:
-      - web
+      - www:/usr/src/app/www:ro
+      - data:/usr/src/app/data:ro
+      - assets:/usr/src/app/assets:ro
+   
 
   redis:
     restart: on-failure
@@ -38,14 +43,15 @@ services:
 
   worker:
     restart: on-failure
-    image: bootlegger/ourstory-worker:latest
+    image: bootlegger/ourstory-worker:dev
     depends_on:
       - mongo
       - beanstalk
-    volumes_from:
-      - web
     volumes:
       - "/c/Users/public/ourstorycontent:/usr/src/app/upload"
+      - www:/usr/src/app/www:ro
+      - data:/usr/src/app/data:ro
+      - assets:/usr/src/app/assets:ro
 
   web:
     restart: on-failure
@@ -56,5 +62,10 @@ services:
       - beanstalk
     volumes:
       - "/c/Users/public/ourstorycontent:/usr/src/app/upload"
-#    environment:
-#      sails_master_url: "http://10.10.10.1:8845"
+      - www:/usr/src/app/www
+      - data:/usr/src/app/data
+      - assets:/usr/src/app/assets
+    environment:
+      sails_master_url: "http://10.10.10.1:8845"
+      sails_FAKES3URL: "http://10.10.10.1:8845/upload/"
+      sails_FAKES3URL_TRANSCODE: "http://10.10.10.1:8845/upload/transcode/upload/"

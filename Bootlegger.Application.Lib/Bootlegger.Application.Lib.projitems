@@ -23,9 +23,6 @@
     <Content Include="$(MSBuildThisFileDirectory)docker-compose.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="$(MSBuildThisFileDirectory)install\README.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="$(MSBuildThisFileDirectory).env">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -37,9 +34,6 @@
     </None>
     <None Include="$(MSBuildThisFileDirectory)downloads\getimages.cmd" />
     <None Include="$(MSBuildThisFileDirectory)downloads\getinstallers.ps1" />
-    <None Include="$(MSBuildThisFileDirectory)install\OurStoryTitan.apk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)exceptions\" />

@@ -655,6 +655,15 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Try Fix Now.
+        /// </summary>
+        public static string TryFix {
+            get {
+                return ResourceManager.GetString("TryFix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update.
         /// </summary>
         public static string Update {
@@ -678,6 +687,15 @@ namespace Bootlegger.App.Win.locale {
         public static string UpdateDescription {
             get {
                 return ResourceManager.GetString("UpdateDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please Note: Videos do not play in this application. Open the Dashboard in a Browser using the button on the left..
+        /// </summary>
+        public static string VideoPlayback {
+            get {
+                return ResourceManager.GetString("VideoPlayback", resourceCulture);
             }
         }
         

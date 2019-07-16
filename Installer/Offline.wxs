@@ -17,9 +17,9 @@
       <ComponentRef Id="FirewallException" />
     </Feature>
 
-    <WixVariable Id="WixUILicenseRtf" Value="$(var.Bootlegger.App.Win.ProjectDir)/Readme.rtf" />
+    <!--<WixVariable Id="WixUILicenseRtf" Value="$(var.Bootlegger.App.Win.ProjectDir)/Readme.rtf" />
     <WixVariable Id="WixUIBannerBmp" Value="$(var.Bootlegger.App.Win.ProjectDir)/logo_install.bmp" />
-    <WixVariable Id="WixUIDialogBmp" Value="$(var.Bootlegger.App.Win.ProjectDir)/logo_back.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="$(var.Bootlegger.App.Win.ProjectDir)/logo_back.bmp" />-->
 
     <UI>
       <UIRef Id="WixUI_Minimal" />

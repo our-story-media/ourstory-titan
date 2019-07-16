@@ -66,6 +66,8 @@ namespace Bootlegger.App.Win
         private void Running_Unloaded(object sender, RoutedEventArgs e)
         {
             cts.Cancel();
+            Browser.Address = "about:blank";
+            App.BootleggerApp.StopMonitor();
         }
 
         CancellationTokenSource cts = new CancellationTokenSource();
@@ -156,7 +158,7 @@ namespace Bootlegger.App.Win
                             case IpException c:
                                 err.Name = locale.Strings.IpErrorName;
                                 err.Description = locale.Strings.IpErrorDesc;
-
+                                err.HasAction = true;
                                 break;
 
                             case ContainerException c:
@@ -181,6 +183,7 @@ namespace Bootlegger.App.Win
                             case WiFiPolicyException c:
                                 err.Name = locale.Strings.WiFiPolicyErrorName;
                                 err.Description = locale.Strings.WiFiPolicyErrorDesc;
+                                err.HasAction = true;
                                 break;
                         }
                     }
@@ -287,6 +290,21 @@ namespace Bootlegger.App.Win
         private void Button_Click_7(object sender, RoutedEventArgs e)
         {
             App.BootleggerApp.OpenAppLocation();
+        }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+            var err = (sender as Button).DataContext;
+            switch (err)
+            {
+                case IpException c:
+                    App.BootleggerApp.ConfigureNetwork("10.10.10.1", "255.255.255.0");
+                    break;
+
+                case WiFiPolicyException c:
+                    App.BootleggerApp.SetWiFiPolicy();
+                    break;
+            }
         }
     }
 }

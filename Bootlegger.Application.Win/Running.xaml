@@ -32,8 +32,14 @@
             </RadialGradientBrush>
         </ResourceDictionary>
     </ContentControl.Resources>
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Text="{x:Static p:Strings.VideoPlayback}"></TextBlock>
+            </StatusBarItem>
 
-    <Grid>
+        </StatusBar>
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -65,20 +71,17 @@
                 <Button ToolTip="{x:Static p:Strings.Log}" Margin="4,4,4,0" Height="32" Width="32" Grid.Column="0" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" BorderThickness="0.5" Padding="8" VerticalAlignment="Bottom" Custom:ControlsHelper.ContentCharacterCasing="Upper" Click="Button_Click_2">
                     <iconPacks:PackIconMaterial Kind="Text" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
-                
+
                 <Button ToolTip="{x:Static p:Strings.OpenDashboard}" Margin="4,4,4,0" Height="32" Width="32" Grid.Column="0" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" BorderThickness="0.5" Padding="8" VerticalAlignment="Bottom" Custom:ControlsHelper.ContentCharacterCasing="Upper" Click="Button_Click_6">
                     <iconPacks:PackIconMaterial Kind="Web" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
-                <Button ToolTip="{x:Static p:Strings.GetApp}" Margin="4,4,4,0" Height="32" Width="32" Grid.Column="0" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" BorderThickness="0.5" Padding="8" VerticalAlignment="Bottom" Custom:ControlsHelper.ContentCharacterCasing="Upper" Click="Button_Click_7">
+                <!--<Button ToolTip="{x:Static p:Strings.GetApp}" Margin="4,4,4,0" Height="32" Width="32" Grid.Column="0" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" BorderThickness="0.5" Padding="8" VerticalAlignment="Bottom" Custom:ControlsHelper.ContentCharacterCasing="Upper" Click="Button_Click_7">
                     <iconPacks:PackIconMaterial Kind="Android" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                </Button>
+                </Button>-->
 
                 <Button ToolTip="{x:Static p:Strings.CloseApplication}" Margin="4,4,4,0" Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}" Click="Button_Click" Height="32" Width="32" BorderThickness="0.5">
                     <iconPacks:PackIconMaterial Kind="ExitToApp" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
-
-
-                
             </StackPanel>
         </Border>
 
@@ -86,9 +89,9 @@
         <!--<TabControl Grid.Column="1">-->
         <!--<ContentPresenter-->
         <!--<TabItem Header="{x:Static p:Strings.Dashboard}" Visibility="c">-->
-       
+
         <DockPanel Grid.Column="1" x:Name="dashboard">
-            
+
             <ToolBarTray DockPanel.Dock="Top" Height="32" Margin="0,1,0,0">
 
                 <ToolBar ToolBarTray.IsLocked="True" Height="32">
@@ -103,23 +106,28 @@
                     </Button>
                     <TextBlock x:Name="pagetitle" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="24,0,0,0" TextAlignment="Center"></TextBlock>
                 </ToolBar>
-                
+
             </ToolBarTray>
 
             <!--<Border Height="0.5" Background="Black"></Border>-->
 
-                <Border Height="Auto" VerticalAlignment="Top" DockPanel.Dock="Top" >
+            <Border Height="Auto" VerticalAlignment="Top" DockPanel.Dock="Top" >
                 <DockPanel>
                     <ItemsControl DockPanel.Dock="Top" x:Name="errors">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <DockPanel Background="DarkOrange">
                                     <iconPacks:PackIconMaterial Kind="AlertCircleOutline" Foreground="White" Width="32" Height="32" Margin="12,12,0,12" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <Button Custom:ControlsHelper.ContentCharacterCasing="Upper" DockPanel.Dock="Right" BorderThickness="0" Background="Transparent" Style="{DynamicResource SquareButtonStyle}" x:Name="button" Click="Button_Click_8" Content="{x:Static p:Strings.TryFix}"></Button>
                                     <TextBlock FontSize="14" Margin="12,12,12,0" Foreground="White" FontWeight="Bold" DockPanel.Dock="Top" Text="{Binding Name}"></TextBlock>
                                     <Border Background="White" Opacity="0.3" Height=".5" DockPanel.Dock="Bottom"></Border>
                                     <TextBlock FontSize="14" Margin="12,0,12,12" Foreground="White" DockPanel.Dock="Bottom" Text="{Binding Description}"></TextBlock>
-                                    
                                 </DockPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding HasAction}" Value="False">
+                                        <Setter TargetName="button" Property="Visibility" Value="Collapsed"></Setter>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -159,7 +167,7 @@
             <TextBlock TextWrapping="Wrap" DockPanel.Dock="Bottom" HorizontalAlignment="Center" Text="{x:Static p:Strings.ShareWarning2}" Foreground="White" Margin="2"/>
             <MediaElement HorizontalAlignment="Center" x:Name="video" Source="hypervshare.mp4" LoadedBehavior="Manual" MediaEnded="Video_MediaEnded"/>
         </DockPanel>
-        
+
 
         <Border x:Name="progresswrapper" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#33000000" CornerRadius="12" Padding="12,6,12,6">
             <DockPanel>
@@ -167,5 +175,8 @@
                 <Label Padding="0" x:Name="progress" Content="{x:Static p:Strings.starting}" FontSize="16"/>
             </DockPanel>
         </Border>
+
     </Grid>
+   
+    </DockPanel>
 </ContentControl>

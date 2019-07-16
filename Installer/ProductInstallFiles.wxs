@@ -121,6 +121,9 @@
             <Component Id="cmpBDBA16CBEE531189F4ADEB44F36FA9CA" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil22B9AE685C747A265E9A4BC34E90558B" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\icudtl.dat" />
             </Component>
+            <Component Id="cmp4885AA6D988339A2BD30CA0F495D413A" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filDD46DE7F563DFDAFE02555DD646EE11D" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Interop.NETWORKLIST.dll" />
+            </Component>
             <Component Id="cmp2DBF8B1ADC63628B6A8AC335F1979A4C" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="filD0581EC9D860B37C7035787902F55D10" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\libcef.dll" />
             </Component>

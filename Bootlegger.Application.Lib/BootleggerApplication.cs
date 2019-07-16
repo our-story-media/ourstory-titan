@@ -128,72 +128,72 @@ namespace Bootlegger.App.Lib
 
         enum InstallerType { HYPER_V, NO_HYPER_V };
 
-        internal async Task DownloadImagesTar(CancellationToken token)
-        {
-            string src = TAR_FILE_LOCATION;
-            string dst = "images.tar";
-            if (!File.Exists(Path.Combine("downloads", dst)))
-            {
-                Log.Info($"Initiating download of {src}");
-                await DownloadFileInBackground(src, Path.Combine("downloads", dst + ".download"), token);
-                Log.Info("Download of installer complete");
-                File.Move(Path.Combine("downloads", dst + ".download"), Path.Combine("downloads", dst));
-                Log.Info("Moving download file to correct name");
-            }
-            else
-                Log.Info($"Download not required for {src}");
-        }
+        //internal async Task DownloadImagesTar(CancellationToken token)
+        //{
+        //    string src = TAR_FILE_LOCATION;
+        //    string dst = "images.tar";
+        //    if (!File.Exists(Path.Combine("downloads", dst)))
+        //    {
+        //        Log.Info($"Initiating download of {src}");
+        //        await DownloadFileInBackground(src, Path.Combine("downloads", dst + ".download"), token);
+        //        Log.Info("Download of installer complete");
+        //        File.Move(Path.Combine("downloads", dst + ".download"), Path.Combine("downloads", dst));
+        //        Log.Info("Moving download file to correct name");
+        //    }
+        //    else
+        //        Log.Info($"Download not required for {src}");
+        //}
 
 
-        public async Task DownloadInstaller(CancellationToken cancel)
-        {
-            Log.Info("Starting download of installer");
-            string src = "";
-            string dst = "";
-            switch (CurrentInstallerType)
-            {
-                case InstallerType.HYPER_V:
-                    src = HYPER_V_INSTALLER_REMOTE;
-                    dst = $"{HYPER_V_INSTALLER_LOCAL}";
-                    break;
+        //public async Task DownloadInstaller(CancellationToken cancel)
+        //{
+        //    Log.Info("Starting download of installer");
+        //    string src = "";
+        //    string dst = "";
+        //    switch (CurrentInstallerType)
+        //    {
+        //        case InstallerType.HYPER_V:
+        //            src = HYPER_V_INSTALLER_REMOTE;
+        //            dst = $"{HYPER_V_INSTALLER_LOCAL}";
+        //            break;
 
-                case InstallerType.NO_HYPER_V:
-                    src = INSTALLER_REMOTE;
-                    dst = $"{INSTALLER_LOCAL}";
-                    break;
-            }
+        //        case InstallerType.NO_HYPER_V:
+        //            src = INSTALLER_REMOTE;
+        //            dst = $"{INSTALLER_LOCAL}";
+        //            break;
+        //    }
 
-            if (!File.Exists(Path.Combine("downloads", dst)))
-            {
-                Log.Info($"Initiating download of {src}");
-                await DownloadFileInBackground(src, Path.Combine("downloads", dst + ".download"), cancel);
-                Log.Info("Download of installer complete");
-                File.Move(Path.Combine("downloads", dst + ".download"), Path.Combine("downloads", dst));
-                Log.Info("Moving download file to correct name");
-            }
-            else
-                Log.Info($"Download not required for {src}");
+        //    if (!File.Exists(Path.Combine("downloads", dst)))
+        //    {
+        //        Log.Info($"Initiating download of {src}");
+        //        await DownloadFileInBackground(src, Path.Combine("downloads", dst + ".download"), cancel);
+        //        Log.Info("Download of installer complete");
+        //        File.Move(Path.Combine("downloads", dst + ".download"), Path.Combine("downloads", dst));
+        //        Log.Info("Moving download file to correct name");
+        //    }
+        //    else
+        //        Log.Info($"Download not required for {src}");
 
-        }
+        //}
 
         public event Action<DownloadProgressChangedEventArgs> OnFileDownloadProgress;
 
-        public async Task DownloadFileInBackground(string src, string dst, CancellationToken cancel)
-        {
-            WebClient client = new WebClient();
-            cancel.Register(client.CancelAsync);
-            Uri uri = new Uri(src);
+        //public async Task DownloadFileInBackground(string src, string dst, CancellationToken cancel)
+        //{
+        //    WebClient client = new WebClient();
+        //    cancel.Register(client.CancelAsync);
+        //    Uri uri = new Uri(src);
 
-            // Specify that the DownloadFileCallback method gets called
-            // when the download completes.
-            //client.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCallback2);
-            // Specify a progress notification handler.
-            client.DownloadProgressChanged += (o, e) =>
-            {
-                OnFileDownloadProgress?.Invoke(e);
-            };
-            await client.DownloadFileTaskAsync(uri, dst);
-        }
+        //    // Specify that the DownloadFileCallback method gets called
+        //    // when the download completes.
+        //    //client.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCallback2);
+        //    // Specify a progress notification handler.
+        //    client.DownloadProgressChanged += (o, e) =>
+        //    {
+        //        OnFileDownloadProgress?.Invoke(e);
+        //    };
+        //    await client.DownloadFileTaskAsync(uri, dst);
+        //}
 
         Task<int> RunProcessAsync(string fileName, string arg, bool show = false, bool runas = false)
         {
@@ -499,7 +499,7 @@ namespace Bootlegger.App.Lib
 
         public void OpenAdminPanel()
         {
-            System.Diagnostics.Process.Start("http://localhost");
+            System.Diagnostics.Process.Start($"http://localhost:{PORT}");
         }
 
         public void OpenAppLocation()
@@ -645,6 +645,32 @@ namespace Bootlegger.App.Lib
 
         public const int PORT = 8845;
 
+        public void SetWiFiPolicy()
+        {
+            Log.Info($"Setting WiFi Policy for Firewall");
+            WlanClient wlan = new WlanClient();
+            var intf = wlan.Interfaces.First();
+            var profilename = intf.CurrentConnection.profileName;
+            var manager = new NetworkListManagerClass();
+            var connectedNetworks = manager.GetNetworks(NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_CONNECTED).Cast<INetwork>();
+
+            foreach (var network in connectedNetworks)
+            {
+                var netname = network.GetName();
+                if (profilename == netname)
+                {
+                    //network in profile list is same as network in wifi connection:
+                    var cat = network.GetCategory();
+
+                    if (cat != NLM_NETWORK_CATEGORY.NLM_NETWORK_CATEGORY_PRIVATE)
+                    {
+                        network.SetCategory(NLM_NETWORK_CATEGORY.NLM_NETWORK_CATEGORY_PRIVATE);
+                        Log.Info($"Success setting WiFi Policy for Firewall to Private");
+
+                    }
+                }
+            }
+        }
 
         //start containers...
         public async Task<bool> RunServer(CancellationToken cancel)
@@ -671,29 +697,7 @@ namespace Bootlegger.App.Lib
 
                 if (CurrentInstallerType == InstallerType.HYPER_V)
                 {
-                    Log.Info($"Setting WiFi Policy for Firewall");
-                    WlanClient wlan = new WlanClient();
-                    var intf = wlan.Interfaces.First();
-                    var profilename = intf.CurrentConnection.profileName;
-                    bool matchespolicy = false;
-                    var manager = new NetworkListManagerClass();
-                    var connectedNetworks = manager.GetNetworks(NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_CONNECTED).Cast<INetwork>();
-
-                    foreach (var network in connectedNetworks)
-                    {
-                        if (profilename == network.GetName())
-                        {
-                            //network in profile list is same as network in wifi connection:
-                            var cat = network.GetCategory();
-
-                            if (cat != NLM_NETWORK_CATEGORY.NLM_NETWORK_CATEGORY_PRIVATE)
-                            {
-                                network.SetCategory(NLM_NETWORK_CATEGORY.NLM_NETWORK_CATEGORY_PRIVATE);
-                                Log.Info($"Success setting WiFi Policy for Firewall to Private");
-
-                            }
-                        }
-                    }
+                    SetWiFiPolicy();
                 }
 
                 if (currentProcess != null && !currentProcess.HasExited)
@@ -782,13 +786,18 @@ namespace Bootlegger.App.Lib
             }
         }
 
-
+        BackgroundWorker monitor;
 
         void StartMonitor()
         {
-            BackgroundWorker monitor = new BackgroundWorker();
+            monitor = new BackgroundWorker();
             monitor.DoWork += Monitor_DoWork;
             monitor.RunWorkerAsync();
+        }
+
+        public void StopMonitor()
+        {
+            monitor?.Dispose();
         }
 
         public event Action<List<NamedException>> OnRunWarning;
@@ -839,6 +848,7 @@ namespace Bootlegger.App.Lib
         {
             public string Name { get; set; }
             public string Description { get; set; }
+            public bool HasAction { get; set; }
         }
 
         private async void Monitor_DoWork(object sender, DoWorkEventArgs e)
@@ -1052,24 +1062,24 @@ namespace Bootlegger.App.Lib
 
         public bool DockerStarted { get; set; }
 
-        public static void AddDirectorySecurity(string FileName, string Account, FileSystemRights Rights, AccessControlType ControlType)
-        {
-            // Create a new DirectoryInfo object.
-            DirectoryInfo dInfo = new DirectoryInfo(FileName);
+        //public static void AddDirectorySecurity(string FileName, string Account, FileSystemRights Rights, AccessControlType ControlType)
+        //{
+        //    // Create a new DirectoryInfo object.
+        //    DirectoryInfo dInfo = new DirectoryInfo(FileName);
 
-            // Get a DirectorySecurity object that represents the 
-            // current security settings.
-            DirectorySecurity dSecurity = dInfo.GetAccessControl();
+        //    // Get a DirectorySecurity object that represents the 
+        //    // current security settings.
+        //    DirectorySecurity dSecurity = dInfo.GetAccessControl();
 
-            // Add the FileSystemAccessRule to the security settings. 
-            dSecurity.AddAccessRule(new FileSystemAccessRule(Account,
-                                                            Rights,
-                                                            ControlType));
+        //    // Add the FileSystemAccessRule to the security settings. 
+        //    dSecurity.AddAccessRule(new FileSystemAccessRule(Account,
+        //                                                    Rights,
+        //                                                    ControlType));
 
-            // Set the new access settings.
-            dInfo.SetAccessControl(dSecurity);
+        //    // Set the new access settings.
+        //    dInfo.SetAccessControl(dSecurity);
 
-        }
+        //}
 
 
 
@@ -1149,11 +1159,6 @@ namespace Bootlegger.App.Lib
             }
         }
 
-        private void Process_Exited(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         async Task WaitForDockerToStart()
         {
             //wait until docker actually started...
@@ -1192,35 +1197,51 @@ namespace Bootlegger.App.Lib
             }
         }
 
-        public async Task<bool> LiveServerCheck(CancellationToken cancel)
+        public async Task UpdateVolumes()
         {
-            WebClient client = new WebClient();
-
-            bool connected = false;
-            int count = 0;
-            while (!connected && count < 3 && !cancel.IsCancellationRequested)
+            try
             {
-                try
-                {
-                    var result = await client.DownloadStringTaskAsync($"http://{IP}:{PORT}/status");
-                    connected = true;
-                }
-                catch
-                {
-                    await Task.Delay(10000);
-                }
-                finally
-                {
-                    count++;
-                }
+                await RunProcessAsync("docker-compose", $"-f {DockerComposeFile} -p bootleggerlocal down");
+                await RunProcessAsync("docker", $"volume rm bootleggerlocal_www");
+                await RunProcessAsync("docker", $"volume rm bootleggerlocal_data");
+                await RunProcessAsync("docker", $"volume rm bootleggerlocal_assets");
             }
-
-            if (!connected)
-                Log.Error($"Cannot connect to local server");
-
-
-            return connected;
+            catch (Exception e)
+            {
+                //cant stop?
+                Log.Error(e);
+            }
         }
+
+        //public async Task<bool> LiveServerCheck(CancellationToken cancel)
+        //{
+        //    WebClient client = new WebClient();
+
+        //    bool connected = false;
+        //    int count = 0;
+        //    while (!connected && count < 3 && !cancel.IsCancellationRequested)
+        //    {
+        //        try
+        //        {
+        //            var result = await client.DownloadStringTaskAsync($"http://{IP}:{PORT}/status");
+        //            connected = true;
+        //        }
+        //        catch
+        //        {
+        //            await Task.Delay(10000);
+        //        }
+        //        finally
+        //        {
+        //            count++;
+        //        }
+        //    }
+
+        //    if (!connected)
+        //        Log.Error($"Cannot connect to local server");
+
+
+        //    return connected;
+        //}
 
         //stop containers
         public async Task StopServer()

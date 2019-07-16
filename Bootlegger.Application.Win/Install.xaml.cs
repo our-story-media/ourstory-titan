@@ -104,14 +104,17 @@ namespace Bootlegger.App.Win
 
                 progress.IsIndeterminate = true;
 
-                if (remote_download)
-                {
-                    CURRENTFILE = filetype.TAR;
-                    await App.BootleggerApp.DownloadImagesTar(cancel.Token);
-                }
+                //if (remote_download)
+                //{
+                //    CURRENTFILE = filetype.TAR;
+                //    await App.BootleggerApp.DownloadImagesTar(cancel.Token);
+                //}
 
                 //load images into system:
                 await App.BootleggerApp.DownloadImages(false, cancel.Token);
+
+                if (isupdate)
+                    await App.BootleggerApp.UpdateVolumes();
 
                 App.BootleggerApp.IsInstalled = true;
 
