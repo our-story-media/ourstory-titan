@@ -142,11 +142,29 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Backup complete and saved in your Our Story installation location..
+        /// </summary>
+        public static string BackupComplete {
+            get {
+                return ResourceManager.GetString("BackupComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Backup Data.
         /// </summary>
         public static string BackupData {
             get {
                 return ResourceManager.GetString("BackupData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured performing a backup. Please try again..
+        /// </summary>
+        public static string BackupError {
+            get {
+                return ResourceManager.GetString("BackupError", resourceCulture);
             }
         }
         
@@ -718,7 +736,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Make sure you are connected to your deployment WiFi before continuing..
+        ///   Looks up a localized string similar to Connect to your deployment WiFi and we will attempt to autoconfigure settings when you press continue..
         /// </summary>
         public static string WiFi2 {
             get {

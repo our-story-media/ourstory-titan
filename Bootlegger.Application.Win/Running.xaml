@@ -111,30 +111,13 @@
 
             <!--<Border Height="0.5" Background="Black"></Border>-->
 
-            <Border Height="Auto" VerticalAlignment="Top" DockPanel.Dock="Top" >
-                <DockPanel>
-                    <ItemsControl DockPanel.Dock="Top" x:Name="errors">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <DockPanel Background="DarkOrange">
-                                    <iconPacks:PackIconMaterial Kind="AlertCircleOutline" Foreground="White" Width="32" Height="32" Margin="12,12,0,12" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                    <Button Custom:ControlsHelper.ContentCharacterCasing="Upper" DockPanel.Dock="Right" BorderThickness="0" Background="Transparent" Style="{DynamicResource SquareButtonStyle}" x:Name="button" Click="Button_Click_8" Content="{x:Static p:Strings.TryFix}"></Button>
-                                    <TextBlock FontSize="14" Margin="12,12,12,0" Foreground="White" FontWeight="Bold" DockPanel.Dock="Top" Text="{Binding Name}"></TextBlock>
-                                    <Border Background="White" Opacity="0.3" Height=".5" DockPanel.Dock="Bottom"></Border>
-                                    <TextBlock FontSize="14" Margin="12,0,12,12" Foreground="White" DockPanel.Dock="Bottom" Text="{Binding Description}"></TextBlock>
-                                </DockPanel>
-                                <DataTemplate.Triggers>
-                                    <DataTrigger Binding="{Binding HasAction}" Value="False">
-                                        <Setter TargetName="button" Property="Visibility" Value="Collapsed"></Setter>
-                                    </DataTrigger>
-                                </DataTemplate.Triggers>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+            <!--<Border Height="Auto" VerticalAlignment="Top" DockPanel.Dock="Top" >-->
+                <!--<DockPanel>-->
+                    
                     <!--<Button Style="{DynamicResource FlatButtonStyle}" Background="Transparent" BorderBrush="White" Content="{x:Static p:Strings.RestoreData}" BorderThickness="0.5" Padding="8" Click="restorebtn_Click" Custom:ControlsHelper.ContentCharacterCasing="Upper"/>-->
-                </DockPanel>
+                <!--</DockPanel>-->
 
-            </Border>
+            <!--</Border>-->
             <!--<ProgressBar HorizontalAlignment="Right" DockPanel.Dock="Top"
 
                          IsIndeterminate="{Binding Browser.IsLoading}"
@@ -146,10 +129,36 @@
                           />-->
 
             <Border BorderThickness="1,1,0,0" BorderBrush="#eee">
-                <wpf:ChromiumWebBrowser x:Name="Browser"
+                    <Grid>
+                        <wpf:ChromiumWebBrowser x:Name="Browser"
                                 Address="about:blank">
-                </wpf:ChromiumWebBrowser>
-            </Border>
+                        </wpf:ChromiumWebBrowser>
+                        <ItemsControl HorizontalAlignment="Right" x:Name="errors">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                    <Border CornerRadius="6" Background="DarkOrange" Margin="4">
+                                        <Border.Effect>
+                                            <DropShadowEffect x:Name="ledshadow" BlurRadius="12" Direction="0"  RenderingBias="Performance" ShadowDepth="0" Color="Black" Opacity="0.8" />
+                                        </Border.Effect>
+                                        <DockPanel >
+                                    <iconPacks:PackIconMaterial Kind="AlertCircleOutline" Foreground="White" Width="32" Height="32" Margin="12,12,0,12" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <Button Custom:ControlsHelper.ContentCharacterCasing="Upper" DockPanel.Dock="Right" Height="20" Margin="4" Foreground="White" BorderThickness="0" Background="Transparent" Style="{DynamicResource SquareButtonStyle}" x:Name="button" Click="Button_Click_8" Content="{x:Static p:Strings.TryFix}"></Button>
+                                            <TextBlock FontSize="14" Margin="12,12,12,0" Foreground="White" FontWeight="Bold" DockPanel.Dock="Top" Text="{Binding Name}"></TextBlock>
+                                            <TextBlock FontSize="14" Margin="12,0,12,12" Foreground="White" DockPanel.Dock="Bottom" Text="{Binding Description}"></TextBlock>
+                                        </DockPanel>
+                                    </Border>
+                                    <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding HasAction}" Value="False">
+                                        <Setter TargetName="button" Property="Visibility" Value="Collapsed"></Setter>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    
+                    </Grid>
+                </Border>
 
         </DockPanel>
 

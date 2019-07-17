@@ -211,7 +211,7 @@
     <value>Your current WiFi settings are not correct.</value>
   </data>
   <data name="WiFi2" xml:space="preserve">
-    <value>Make sure you are connected to your deployment WiFi before continuing.</value>
+    <value>Connect to your deployment WiFi and we will attempt to autoconfigure settings when you press continue.</value>
   </data>
   <data name="AdditionalDownloads" xml:space="preserve">
     <value>Additional downloads are required, please make sure you have internet connectivity before continuing</value>
@@ -350,5 +350,11 @@
   </data>
   <data name="VideoPlayback" xml:space="preserve">
     <value>Please Note: Videos do not play in this application. Open the Dashboard in a Browser using the button on the left.</value>
+  </data>
+  <data name="BackupComplete" xml:space="preserve">
+    <value>Backup complete and saved in your Our Story installation location.</value>
+  </data>
+  <data name="BackupError" xml:space="preserve">
+    <value>An error occured performing a backup. Please try again.</value>
   </data>
 </root>

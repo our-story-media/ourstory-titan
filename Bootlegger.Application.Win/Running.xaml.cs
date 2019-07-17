@@ -4,22 +4,12 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static Bootlegger.App.Lib.BootleggerApplication;
 
 namespace Bootlegger.App.Win
@@ -219,7 +209,16 @@ namespace Bootlegger.App.Win
         private async void backupbtn_Click(object sender, RoutedEventArgs e)
         {
             backupbtn.IsEnabled = false;
-            await App.BootleggerApp.BackupDatabase();
+            try
+            {
+                await App.BootleggerApp.BackupDatabase();
+                var tt = await (App.Current.MainWindow as MetroWindow).ShowMessageAsync(locale.Strings.Backup, locale.Strings.BackupComplete, MessageDialogStyle.Affirmative);
+            }
+            catch (Exception ex)
+            {
+                App.BootleggerApp.Log.Error(ex);
+                var tt = await (App.Current.MainWindow as MetroWindow).ShowMessageAsync(locale.Strings.Backup, locale.Strings.BackupError, MessageDialogStyle.Affirmative);
+            }
             backupbtn.IsEnabled = true;
         }
 
@@ -227,7 +226,7 @@ namespace Bootlegger.App.Win
         {
             try
             {
-                var diag = new Avalon.Windows.Dialogs.FolderBrowserDialog() { BrowseFiles = false };
+                var diag = new Avalon.Windows.Dialogs.FolderBrowserDialog() { BrowseFiles = false, SelectedPath = Directory.GetCurrentDirectory() };
                 var folder = diag.ShowDialog();
 
                 if (diag.SelectedPath != null)
@@ -240,6 +239,7 @@ namespace Bootlegger.App.Win
             catch (Exception ex)
             {
                 App.BootleggerApp.Log.Error(ex);
+                restorebtn.IsEnabled = true;
             }
         }
 

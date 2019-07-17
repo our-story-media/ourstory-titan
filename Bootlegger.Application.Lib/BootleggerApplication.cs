@@ -447,24 +447,6 @@ namespace Bootlegger.App.Lib
         internal void OpenFolder()
         {
             System.Diagnostics.Process.Start(@"C:\Users\Public\ourstorycontent");
-            //switch (CurrentInstallerType)
-            //{
-            //    case InstallerType.HYPER_V:
-            //        try
-            //        {
-            //            System.Diagnostics.Process.Start(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "upload");
-            //        }
-            //        catch
-            //        {
-
-            //        }
-            //        break;
-
-            //    case InstallerType.NO_HYPER_V:
-            //        System.Diagnostics.Process.Start(@"C:\Users\Public\ourstorycontent");
-            //        break;
-
-            //}
         }
 
         internal void OpenLog()
@@ -515,8 +497,6 @@ namespace Bootlegger.App.Lib
 
         public async Task BackupDatabase()
         {
-            try
-            {
                 var dirname = DateTime.Now.ToFileTime();
                 Directory.CreateDirectory($"backup\\{dirname}");
                 var client = new MongoClient("mongodb://localhost:27017");
@@ -533,11 +513,6 @@ namespace Bootlegger.App.Lib
                     await writer.FlushAsync();
                     writer.Close();
                 }
-            }
-            catch (Exception)
-            {
-
-            }
         }
 
         List<ImagesCreateParameters> imagestodownload;
@@ -1144,12 +1119,12 @@ namespace Bootlegger.App.Lib
                     //VBoxManage.exe showvminfo default
                     // host port = 8845, guest ip = , guest port = 8845
 
-                    if (!result.Contains("host port = 8845xxx"))
+                    if (!result.Contains("host port = 8845"))
                     {
 
-                        Log.Info($"Stopping docker-machine");
+                        //Log.Info($"Stopping docker-machine");
 
-                        await RunProcessAsync(@"docker-machine", "stop", true);
+                        //await RunProcessAsync(@"docker-machine", "stop", true);
 
                         Log.Info($"Stopping Virtualbox VM");
 
