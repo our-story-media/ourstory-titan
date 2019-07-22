@@ -55,6 +55,8 @@ Once this initial step has completed, you are presented with a check. At this po
 
 ![](imgs/1.png)
 
-The Our Story application will then start. When the status shows as `Running` you can select the `OPEN DASHBOARD` button to configure the Application for deployment.
+The Our Story application will then start. When the light in the top left goes green, the `Dashboard` will appear in the window. You can then configured your shoots.
+
+Buttons down the side of the window provide extra functionality such as backup and opening the folder where the videos are located.
 
 ![](imgs/2.png)

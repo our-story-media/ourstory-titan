@@ -61,17 +61,24 @@ namespace Bootlegger.App.Win
             {
                 string lang = LangSwitch;
 
+                App.BootleggerApp.Log.Info($"Changing Locale to {LangSwitch}");
+
                 Closed -= MainWindow_Closed;
 
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
 
                 var wnd = new MainWindow();
-                Closed += MainWindow_Closed;
-                wnd.Show();
+                Close();
+
                 LangSwitch = null;
+                wnd.Show();
+                App.BootleggerApp.Log.Info($"Changed Locale to {lang}");
+               
+                //Closed += MainWindow_Closed;
             }
             else
             {
+                App.BootleggerApp.Log.Info($"Shutting down without Locale Switch");
                 App.Current.Shutdown();
             }
         }
@@ -88,6 +95,7 @@ namespace Bootlegger.App.Win
 
         private async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            App.BootleggerApp.Log.Info($"Closing Window");
             if (LangSwitch != null)
                 return;
 
@@ -96,8 +104,6 @@ namespace Bootlegger.App.Win
                 e.Cancel = true;
                 return;
             }
-
-
 
             if (!canexit)
             {
@@ -120,6 +126,7 @@ namespace Bootlegger.App.Win
 
         private void MainWindow_Initialized(object sender, EventArgs e)
         {
+            App.BootleggerApp.Log.Info($"Init Window");
             progress.Visibility = Visibility.Hidden;
 
             //HACK FOR DEGUB
