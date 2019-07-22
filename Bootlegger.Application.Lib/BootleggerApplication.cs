@@ -1211,7 +1211,6 @@ namespace Bootlegger.App.Lib
             {
                 await RunProcessAsync("docker-compose", $"-f {DockerComposeFile} -p bootleggerlocal down");
                 await RunProcessAsync("docker", $"volume rm bootleggerlocal_www");
-                await RunProcessAsync("docker", $"volume rm bootleggerlocal_data");
                 await RunProcessAsync("docker", $"volume rm bootleggerlocal_assets");
             }
             catch (Exception e)
