@@ -15,7 +15,7 @@
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="{x:Static p:Strings.Documentation}" Click="Button_Click" />
-            <ComboBox DisplayMemberPath="DisplayName" Background="Transparent" x:Name="langs" BorderThickness="0" SelectionChanged="Langs_SelectionChanged">
+            <ComboBox DisplayMemberPath="NativeName" Background="Transparent" x:Name="langs" BorderThickness="0" SelectionChanged="Langs_SelectionChanged">
 
             </ComboBox>
             <!--<Button Content="{x:Static p:Strings.CreditsTitle}" Click="Button_Click_1"/>-->
