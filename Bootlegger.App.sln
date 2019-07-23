@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bootlegger.App.Win", "Bootlegger.Application.Win\Bootlegger.App.Win.csproj", "{90C52F7F-6BB0-4C96-A303-F3F8DCCF7BC5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7A7A0689-52A7-4C95-89C3-B9809E36FD5B} = {7A7A0689-52A7-4C95-89C3-B9809E36FD5B}
+	EndProjectSection
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Bootlegger.App.Lib", "Bootlegger.Application.Lib\Bootlegger.App.Lib.shproj", "{E5823482-93CC-4F26-9C35-4A1EFE2DA35F}"
 EndProject
