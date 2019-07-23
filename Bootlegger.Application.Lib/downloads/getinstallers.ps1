@@ -9,9 +9,6 @@ wget "https://github.com/docker/toolbox/releases/download/v18.09.1/DockerToolbox
 "Downloading Dot Net 4.6.1 Offline Installer...";
 wget "https://download.microsoft.com/download/E/4/1/E4173890-A24A-4936-9FC9-AF930FE3FA40/NDP461-KB3102436-x86-x64-AllOS-ENU.exe" -OutFile NDP461-KB3102436-x86-x64-AllOS-ENU.exe;
 
-"Downloading Our Story Titan Android App...";
-wget "https://github.com/our-story-media/ourstory-android/archive/titan.apk" -OutFile ..\install\OurStoryTitan.apk;
-
 
 #Docker for windows:
 #DockerForWindows.exe install --quiet
