@@ -46,6 +46,26 @@ namespace Bootlegger.App.Win
             }
         }
 
+        public static void ChangeCulture(CultureInfo lang)
+        {
+
+            App.BootleggerApp.Log.Info($"Changing Locale to {lang}");
+
+            Thread.CurrentThread.CurrentUICulture = lang;
+            Thread.CurrentThread.CurrentCulture = lang;
+
+            var oldWindow = Application.Current.MainWindow as MainWindow;
+            oldWindow.ChangingCultures = true;
+
+            Application.Current.MainWindow = new MainWindow();
+            Application.Current.MainWindow.Show();
+
+            oldWindow.Close();
+
+            App.BootleggerApp.Log.Info($"Changed Locale to {lang}");
+
+        }
+
         static App()
         {
 
@@ -84,25 +104,25 @@ namespace Bootlegger.App.Win
         }
 
         
-        public static bool IsUserAdministrator()
-        {
-            bool isAdmin;
-            try
-            {
-                WindowsIdentity user = WindowsIdentity.GetCurrent();
-                WindowsPrincipal principal = new WindowsPrincipal(user);
-                isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                isAdmin = false;
-            }
-            catch (Exception ex)
-            {
-                isAdmin = false;
-            }
-            return isAdmin;
-        }
+        //public static bool IsUserAdministrator()
+        //{
+        //    bool isAdmin;
+        //    try
+        //    {
+        //        WindowsIdentity user = WindowsIdentity.GetCurrent();
+        //        WindowsPrincipal principal = new WindowsPrincipal(user);
+        //        isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
+        //    }
+        //    catch (UnauthorizedAccessException ex)
+        //    {
+        //        isAdmin = false;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        isAdmin = false;
+        //    }
+        //    return isAdmin;
+        //}
 
         //public static List<string> ListLocales()
         //{

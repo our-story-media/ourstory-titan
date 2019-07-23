@@ -27,6 +27,7 @@ namespace Bootlegger.App.Win
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        public bool ChangingCultures = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -57,28 +58,9 @@ namespace Bootlegger.App.Win
 
         private void MainWindow_Closed(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(LangSwitch))
+            if (!ChangingCultures)
             {
-                string lang = LangSwitch;
-
-                App.BootleggerApp.Log.Info($"Changing Locale to {LangSwitch}");
-
-                Closed -= MainWindow_Closed;
-
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
-
-                var wnd = new MainWindow();
-                Close();
-
-                LangSwitch = null;
-                wnd.Show();
-                App.BootleggerApp.Log.Info($"Changed Locale to {lang}");
-               
-                //Closed += MainWindow_Closed;
-            }
-            else
-            {
-                App.BootleggerApp.Log.Info($"Shutting down without Locale Switch");
+                App.BootleggerApp.Log.Info($"Shutting down Application");
                 App.Current.Shutdown();
             }
         }
@@ -91,13 +73,16 @@ namespace Bootlegger.App.Win
 
         bool canexit = false;
         bool closing = false;
-        public string LangSwitch { get; private set; } = null;
 
         private async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             App.BootleggerApp.Log.Info($"Closing Window");
-            if (LangSwitch != null)
+
+            if (ChangingCultures)
+            {
+                App.BootleggerApp.Log.Info($"Changing Cultures, so don't do closing actions");
                 return;
+            }
 
             if (closing)
             {
@@ -157,19 +142,13 @@ namespace Bootlegger.App.Win
             App.BootleggerApp.OpenDocs();
         }
 
-        private void Langs_Selected(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         private void Langs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-
             if (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName != (e.AddedItems[0] as CultureInfo).TwoLetterISOLanguageName)
             {
-                LangSwitch = (e.AddedItems[0] as CultureInfo).Name;
-                Close();
+                //LangSwitch = (e.AddedItems[0] as CultureInfo).Name;
+                App.ChangeCulture((e.AddedItems[0] as CultureInfo));
+                //Close();
             }
         }
 
