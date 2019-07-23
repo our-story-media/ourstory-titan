@@ -118,105 +118,243 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AdditionalComponents" xml:space="preserve">
-    <value>Our Story requires additional components to be installed.</value>
+    <value>تتطلب قصتنا تركيب مكونات إضافية.</value>
   </data>
   <data name="AdditionalSoftware" xml:space="preserve">
-    <value>Additional software may need to be installed and take some additional time. Please be patient...</value>
+    <value>قد تحتاج برامج إضافية إلى تثبيت وتستغرق بعض الوقت الإضافي. يرجى التحلي بالصبر...</value>
   </data>
   <data name="Admin" xml:space="preserve">
-    <value>Admin</value>
+    <value>المشرف</value>
   </data>
   <data name="AppTitle" xml:space="preserve">
-    <value>Our Story Titan</value>
+    <value>لوحة معلومات قصتنا</value>
   </data>
   <data name="Back" xml:space="preserve">
-    <value>Back</value>
+    <value>إلى الخلف</value>
   </data>
   <data name="Backup" xml:space="preserve">
-    <value>Backup</value>
+    <value>النسخ الاحتياطي</value>
   </data>
   <data name="BackupData" xml:space="preserve">
-    <value>Backup Data</value>
+    <value>بيانات النسخ الاحتياطي</value>
   </data>
   <data name="cancel" xml:space="preserve">
-    <value>cancel</value>
+    <value>إلغاء الأمر</value>
   </data>
   <data name="CloseApplication" xml:space="preserve">
-    <value>Close Application</value>
+    <value>إغلاق التطبيق</value>
   </data>
   <data name="Connectivity" xml:space="preserve">
-    <value>Connectivity</value>
+    <value>الاتصال</value>
   </data>
   <data name="Continue" xml:space="preserve">
-    <value>Continue</value>
+    <value>مواصله</value>
   </data>
   <data name="ContinueDialogTitle" xml:space="preserve">
-    <value>Continue?</value>
+    <value>مواصله؟</value>
   </data>
   <data name="Documentation" xml:space="preserve">
-    <value>Documentation</value>
+    <value>الوثائق</value>
   </data>
   <data name="DownloadFiles" xml:space="preserve">
-    <value>Download Files</value>
+    <value>تحميل الملفات</value>
   </data>
   <data name="DownloadingContent" xml:space="preserve">
-    <value>Downloading Content</value>
+    <value>تنزيل التحديثات</value>
   </data>
   <data name="InstallRequirements" xml:space="preserve">
-    <value>Install Requirements</value>
+    <value>تثبيت المتطلبات</value>
   </data>
   <data name="LoadImages" xml:space="preserve">
-    <value>Locate Images.tar file</value>
+    <value>حدد موقع ملف Images.tar</value>
   </data>
   <data name="LocateImages" xml:space="preserve">
-    <value>Locate the images.tar file that came with your installation files, or go online to download the remaining components.</value>
+    <value>حدد موقع الملف images.tar الذي جاء مع ملفات التثبيت، أو انتقل عبر الإنترنت لتنزيل المكونات المتبقية.</value>
   </data>
   <data name="Log" xml:space="preserve">
-    <value>Log</value>
+    <value>سجل</value>
   </data>
   <data name="OpenDashboard" xml:space="preserve">
-    <value>Open Dashboard</value>
+    <value>فتح لوحة المعلومات</value>
   </data>
   <data name="OpenFiles" xml:space="preserve">
-    <value>Open Video Folder</value>
+    <value>فتح مجلد الفيديو</value>
   </data>
   <data name="Or" xml:space="preserve">
-    <value>Or</value>
+    <value>او</value>
   </data>
   <data name="RestoreData" xml:space="preserve">
-    <value>Restore Data</value>
+    <value>استعادة البيانات</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>اعدادات</value>
   </data>
   <data name="ShareWarning1" xml:space="preserve">
-    <value>Please enable Sharing by doing the following:</value>
+    <value>الرجاء تمكين المشاركة عن طريق القيام بما يلي:</value>
   </data>
   <data name="ShareWarning2" xml:space="preserve">
-    <value>This message will disappear when you have completed this step...</value>
+    <value>ستختفي هذه الرسالة عند إكمال هذه الخطوة...</value>
   </data>
   <data name="starting" xml:space="preserve">
-    <value>starting...</value>
+    <value>بدء...</value>
   </data>
   <data name="Update" xml:space="preserve">
-    <value>Update</value>
+    <value>تحديث</value>
   </data>
   <data name="UpdateApplication" xml:space="preserve">
-    <value>Update Application</value>
+    <value>تحديث التطبيق</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Welcome to Our Story</value>
+    <value>مرحبا بكم في قصتنا</value>
   </data>
   <data name="WiFi" xml:space="preserve">
-    <value>Your current WiFi settings are not correct.</value>
+    <value>إعدادات WiFi الحالية غير صحيحة.</value>
   </data>
   <data name="WiFi2" xml:space="preserve">
-    <value>Make sure you are connected to your deployment WiFi before continuing.</value>
+    <value>قم بالاتصال بشبكة Wi-Fi الخاصة بك في النشر وسنحاول تكوين الإعدادات تلقائيًا عند الضغط على المتابعة.</value>
   </data>
   <data name="AdditionalDownloads" xml:space="preserve">
-    <value>Additional downloads are required, please make sure you have internet connectivity before continuing</value>
+    <value>مطلوب تنزيلات إضافية، يرجى التأكد من أن لديك اتصال بالإنترنت قبل المتابعة</value>
   </data>
   <data name="PleaseWait" xml:space="preserve">
-    <value>please wait...</value>
+    <value>الرجاء الانتظار...</value>
+  </data>
+  <data name="CloseWarning" xml:space="preserve">
+    <value>إغلاق هذا التطبيق سوف يمنع الوصول إلى قصتنا</value>
+  </data>
+  <data name="DownloadingProgress" xml:space="preserve">
+    <value>تنزيل {0} من {1}</value>
+  </data>
+  <data name="ResettingNetwork" xml:space="preserve">
+    <value>يتم الآن إعادة تعيين شبكة الاتصال...</value>
+  </data>
+  <data name="StoppingApplication" xml:space="preserve">
+    <value>يتم الآن إيقاف التطبيق...</value>
+  </data>
+  <data name="InitiatingDownload" xml:space="preserve">
+    <value>بدء التحميل...</value>
+  </data>
+  <data name="ProgressLabel" xml:space="preserve">
+    <value>{0} {1} من {2}</value>
+  </data>
+  <data name="DownloadingDocker" xml:space="preserve">
+    <value>يتم الآن تنزيل مثبت المرسى...</value>
+  </data>
+  <data name="InstallingDocker" xml:space="preserve">
+    <value>يتم الآن تثبيت المرسى...</value>
+  </data>
+  <data name="StartingDocker" xml:space="preserve">
+    <value>بدء تشغيل المرسى...</value>
+  </data>
+  <data name="LoadingComponents" xml:space="preserve">
+    <value>تحميل مكونات قصتنا...</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>الخطا</value>
+  </data>
+  <data name="ErrorDialog" xml:space="preserve">
+    <value>كانت هناك مشكلة في تثبيت قصتنا. {0}. الرجاء إعادة التشغيل والمحاولة مرة أخرى.</value>
+  </data>
+  <data name="DownloadWarning" xml:space="preserve">
+    <value>قد يستغرق تنزيل {0} {1}...\n هذا بعض الوقت...</value>
+  </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>تحميل</value>
+  </data>
+  <data name="DockerInstaller" xml:space="preserve">
+    <value>المثبت المرسى</value>
+  </data>
+  <data name="OurStoryBits" xml:space="preserve">
+    <value>مكونات قصتنا</value>
+  </data>
+  <data name="StartingApplication" xml:space="preserve">
+    <value>بدء التطبيق</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>تشغيل</value>
+  </data>
+  <data name="ProblemStartingApplication" xml:space="preserve">
+    <value>مشكلة في بدء التطبيق!</value>
+  </data>
+  <data name="InvalidNetwork" xml:space="preserve">
+    <value>شبكة غير صالحة</value>
+  </data>
+  <data name="CheckNetworkSettingsAndTryAgain" xml:space="preserve">
+    <value>تحقق من إعدادات الشبكة وحاول مرة أخرى.</value>
+  </data>
+  <data name="ContinueAnyway" xml:space="preserve">
+    <value>متابعة على أي حال</value>
+  </data>
+  <data name="ManuallyChangeSettings" xml:space="preserve">
+    <value>تغيير الإعدادات يدويًا</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>حاله</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>لوحه القياده</value>
+  </data>
+  <data name="AppErrorDesc" xml:space="preserve">
+    <value>توقفت بعض أجزاء لوحة المعلومات عن العمل، الرجاء إعادة تشغيل قصتنا</value>
+  </data>
+  <data name="AppErrorName" xml:space="preserve">
+    <value>مشكلة التطبيق</value>
+  </data>
+  <data name="DashboardErrorDesc" xml:space="preserve">
+    <value>لا يبدو أن لوحة المعلومات متوفرة للأجهزة الأخرى. هل تغيرت شبكتك؟</value>
+  </data>
+  <data name="DashboardErrorName" xml:space="preserve">
+    <value>مشكلة الوصول إلى التطبيق</value>
+  </data>
+  <data name="DiskSpaceErrorDesc" xml:space="preserve">
+    <value>لا توجد مساحة كافية على القرص لتحميل مقاطع الفيديو أو معالجتها. الرجاء إزالة الملفات القديمة.</value>
+  </data>
+  <data name="DiskSpaceErrorName" xml:space="preserve">
+    <value>خارج مساحة القرص</value>
+  </data>
+  <data name="IpErrorDesc" xml:space="preserve">
+    <value>تأكد من أن شبكتك لم تتغير منذ بدء تشغيل قصتنا.</value>
+  </data>
+  <data name="IpErrorName" xml:space="preserve">
+    <value>خطأ في عنوان IP</value>
+  </data>
+  <data name="WiFiErrorDesc" xml:space="preserve">
+    <value>أنت غير متصل بأي شبكة Wi-Fi. الرجاء التحقق من الإعدادات الخاصة بك.</value>
+  </data>
+  <data name="WiFiErrorName" xml:space="preserve">
+    <value>واي فاي غير متصل</value>
+  </data>
+  <data name="UpdateDescription" xml:space="preserve">
+    <value>لتحديث قصتنا إلى إصدار جديد نحن بحاجة إلى ملف images.tar.</value>
+  </data>
+  <data name="CreditsTitle" xml:space="preserve">
+    <value>الائتمانات</value>
+  </data>
+  <data name="Forward" xml:space="preserve">
+    <value>الي الامام</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="GetApp" xml:space="preserve">
+    <value>تحديد موقع تطبيق أندرويد</value>
+  </data>
+  <data name="TryFix" xml:space="preserve">
+    <value>حاول إصلاح الآن</value>
+  </data>
+  <data name="WiFiPolicyErrorDesc" xml:space="preserve">
+    <value>لم يتم وضع علامة على شبكة Wi-Fi على أنها "خاصة". الرجاء الانتقال إلى إعدادات Windows لتغيير هذا.</value>
+  </data>
+  <data name="WiFiPolicyErrorName" xml:space="preserve">
+    <value>قضية ملف تعريف WiFi</value>
+  </data>
+  <data name="VideoPlayback" xml:space="preserve">
+    <value>يرجى ملاحظة: أشرطة الفيديو لا تلعب في هذا التطبيق. افتح لوحة المعلومات في مستعرض باستخدام الزر الموجود على اليسار.</value>
+  </data>
+  <data name="BackupComplete" xml:space="preserve">
+    <value>اكتمال النسخ الاحتياطي وحفظه في موقع تثبيت قصتنا.</value>
+  </data>
+  <data name="BackupError" xml:space="preserve">
+    <value>حدث خطأ أثناء إجراء نسخة احتياطية. الرجاء المحاولة مرة أخرى.</value>
   </data>
 </root>

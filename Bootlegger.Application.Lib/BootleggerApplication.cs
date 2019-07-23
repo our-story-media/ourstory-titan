@@ -491,7 +491,7 @@ namespace Bootlegger.App.Lib
 
         public void OpenDocs()
         {
-            System.Diagnostics.Process.Start("https://guide.ourstory.dev");
+            System.Diagnostics.Process.Start("https://ourstory.dev/guide/");
         }
 
 

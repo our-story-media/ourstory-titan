@@ -118,105 +118,243 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AdditionalComponents" xml:space="preserve">
-    <value>Our Story requires additional components to be installed.</value>
+    <value>Notre histoire nécessite l'installation de composants supplémentaires.</value>
   </data>
   <data name="AdditionalSoftware" xml:space="preserve">
-    <value>Additional software may need to be installed and take some additional time. Please be patient...</value>
+    <value>Un logiciel supplémentaire peut avoir besoin d'être installé et prendre un certain temps supplémentaire. S'il vous plaît être patient ...</value>
   </data>
   <data name="Admin" xml:space="preserve">
-    <value>Admin</value>
+    <value>Tâches</value>
   </data>
   <data name="AppTitle" xml:space="preserve">
-    <value>Our Story Titan (fr)</value>
+    <value>Notre tableau de bord de l'histoire</value>
   </data>
   <data name="Back" xml:space="preserve">
-    <value>Back</value>
+    <value>Précédent</value>
   </data>
   <data name="Backup" xml:space="preserve">
-    <value>Backup</value>
+    <value>Appui</value>
   </data>
   <data name="BackupData" xml:space="preserve">
-    <value>Backup Data</value>
+    <value>Données de sauvegarde</value>
   </data>
   <data name="cancel" xml:space="preserve">
-    <value>cancel</value>
+    <value>Annuler</value>
   </data>
   <data name="CloseApplication" xml:space="preserve">
-    <value>Close Application</value>
+    <value>Fermer l'application</value>
   </data>
   <data name="Connectivity" xml:space="preserve">
-    <value>Connectivity</value>
+    <value>Connectivité</value>
   </data>
   <data name="Continue" xml:space="preserve">
-    <value>Continue</value>
+    <value>Continuer</value>
   </data>
   <data name="ContinueDialogTitle" xml:space="preserve">
-    <value>Continue?</value>
+    <value>Continuer?</value>
   </data>
   <data name="Documentation" xml:space="preserve">
     <value>Documentation</value>
   </data>
   <data name="DownloadFiles" xml:space="preserve">
-    <value>Download Files</value>
+    <value>Télécharger des fichiers</value>
   </data>
   <data name="DownloadingContent" xml:space="preserve">
-    <value>Downloading Content</value>
+    <value>Téléchargement des mises à jour</value>
   </data>
   <data name="InstallRequirements" xml:space="preserve">
-    <value>Install Requirements</value>
+    <value>Conditions d'installation</value>
   </data>
   <data name="LoadImages" xml:space="preserve">
-    <value>Locate Images.tar file</value>
+    <value>Localiser le fichier Images.tar</value>
   </data>
   <data name="LocateImages" xml:space="preserve">
-    <value>Locate the images.tar file that came with your installation files, or go online to download the remaining components.</value>
+    <value>Localisez le fichier images.tar qui est venu avec vos fichiers d'installation, ou allez en ligne pour télécharger les composants restants.</value>
   </data>
   <data name="Log" xml:space="preserve">
-    <value>Log</value>
+    <value>Rapport</value>
   </data>
   <data name="OpenDashboard" xml:space="preserve">
-    <value>Open Dashboard</value>
+    <value>Tableau de bord ouvert</value>
   </data>
   <data name="OpenFiles" xml:space="preserve">
-    <value>Open Video Folder</value>
+    <value>Ouvrez le dossier vidéo</value>
   </data>
   <data name="Or" xml:space="preserve">
-    <value>Or</value>
+    <value>ou</value>
   </data>
   <data name="RestoreData" xml:space="preserve">
-    <value>Restore Data</value>
+    <value>Restaurer les données</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Paramètres</value>
   </data>
   <data name="ShareWarning1" xml:space="preserve">
-    <value>Please enable Sharing by doing the following:</value>
+    <value>S'il vous plaît activer le partage en faisant ce qui suit:</value>
   </data>
   <data name="ShareWarning2" xml:space="preserve">
-    <value>This message will disappear when you have completed this step...</value>
+    <value>Ce message disparaîtra lorsque vous aurez terminé cette étape...</value>
   </data>
   <data name="starting" xml:space="preserve">
-    <value>starting...</value>
+    <value>démarrage...</value>
   </data>
   <data name="Update" xml:space="preserve">
-    <value>Update</value>
+    <value>mettre à jour</value>
   </data>
   <data name="UpdateApplication" xml:space="preserve">
-    <value>Update Application</value>
+    <value>Demande de mise à jour</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Welcome to Our Story</value>
+    <value>Bienvenue dans notre histoire</value>
   </data>
   <data name="WiFi" xml:space="preserve">
-    <value>Your current WiFi settings are not correct.</value>
+    <value>Vos paramètres WiFi actuels ne sont pas corrects.</value>
   </data>
   <data name="WiFi2" xml:space="preserve">
-    <value>Make sure you are connected to your deployment WiFi before continuing.</value>
+    <value>Connectez-vous à votre connexion WiFi de déploiement et nous tenterons d'automatiser les paramètres lorsque vous appuyez sur continuez.</value>
   </data>
   <data name="AdditionalDownloads" xml:space="preserve">
-    <value>Additional downloads are required, please make sure you have internet connectivity before continuing</value>
+    <value>Des téléchargements supplémentaires sont nécessaires, s'il vous plaît assurez-vous que vous avez la connectivité Internet avant de continuer</value>
   </data>
   <data name="PleaseWait" xml:space="preserve">
-    <value>please wait...</value>
+    <value>Veuillez patienter...</value>
+  </data>
+  <data name="CloseWarning" xml:space="preserve">
+    <value>La fermeture de cette application empêchera l'accès à Notre histoire</value>
+  </data>
+  <data name="DownloadingProgress" xml:space="preserve">
+    <value>Téléchargement de {0} de {1}</value>
+  </data>
+  <data name="ResettingNetwork" xml:space="preserve">
+    <value>Resetting Network...</value>
+  </data>
+  <data name="StoppingApplication" xml:space="preserve">
+    <value>Arrêt de l'application...</value>
+  </data>
+  <data name="InitiatingDownload" xml:space="preserve">
+    <value>Initiation Télécharger...</value>
+  </data>
+  <data name="ProgressLabel" xml:space="preserve">
+    <value>{0} {1} de {2}</value>
+  </data>
+  <data name="DownloadingDocker" xml:space="preserve">
+    <value>Téléchargement Docker Installateur...</value>
+  </data>
+  <data name="InstallingDocker" xml:space="preserve">
+    <value>Installation de Docker...</value>
+  </data>
+  <data name="StartingDocker" xml:space="preserve">
+    <value>Démarrer Docker...</value>
+  </data>
+  <data name="LoadingComponents" xml:space="preserve">
+    <value>Chargement de nos composantes de l'histoire...</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="ErrorDialog" xml:space="preserve">
+    <value>Il y avait un problème d'installation de notre histoire. S'il vous plaît redémarrer et essayer à nouveau.</value>
+  </data>
+  <data name="DownloadWarning" xml:space="preserve">
+    <value>Téléchargement de {0} de {1}... \nCela peut prendre un certain temps...</value>
+  </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>Téléchargement</value>
+  </data>
+  <data name="DockerInstaller" xml:space="preserve">
+    <value>Installateur Docker</value>
+  </data>
+  <data name="OurStoryBits" xml:space="preserve">
+    <value>Nos composantes de l'histoire</value>
+  </data>
+  <data name="StartingApplication" xml:space="preserve">
+    <value>Demande de départ</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>action de courir</value>
+  </data>
+  <data name="ProblemStartingApplication" xml:space="preserve">
+    <value>Problème de démarrage de l'application!</value>
+  </data>
+  <data name="InvalidNetwork" xml:space="preserve">
+    <value>Réseau invalide</value>
+  </data>
+  <data name="CheckNetworkSettingsAndTryAgain" xml:space="preserve">
+    <value>Vérifiez les paramètres du réseau et réessayez.</value>
+  </data>
+  <data name="ContinueAnyway" xml:space="preserve">
+    <value>Continuer quoi qu'il en soit</value>
+  </data>
+  <data name="ManuallyChangeSettings" xml:space="preserve">
+    <value>Modification manuelle des paramètres</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Tableau de bord</value>
+  </data>
+  <data name="AppErrorDesc" xml:space="preserve">
+    <value>Certaines parties du tableau de bord ont cessé de fonctionner, s'il vous plaît redémarrer notre histoire</value>
+  </data>
+  <data name="AppErrorName" xml:space="preserve">
+    <value>Problème d'application</value>
+  </data>
+  <data name="DashboardErrorDesc" xml:space="preserve">
+    <value>Le tableau de bord ne semble pas être disponible pour les autres appareils. Votre réseau a-t-il changé ?</value>
+  </data>
+  <data name="DashboardErrorName" xml:space="preserve">
+    <value>Problème d'accès aux applications</value>
+  </data>
+  <data name="DiskSpaceErrorDesc" xml:space="preserve">
+    <value>Il n'y a pas assez d'espace disque pour télécharger ou traiter des vidéos. S'il vous plaît supprimer les anciens fichiers.</value>
+  </data>
+  <data name="DiskSpaceErrorName" xml:space="preserve">
+    <value>Hors de l'espace de disque</value>
+  </data>
+  <data name="IpErrorDesc" xml:space="preserve">
+    <value>Assurez-vous que votre réseau n'a pas changé depuis le début de Notre histoire.</value>
+  </data>
+  <data name="IpErrorName" xml:space="preserve">
+    <value>Erreur d'adresse IP</value>
+  </data>
+  <data name="WiFiErrorDesc" xml:space="preserve">
+    <value>Vous n'êtes connecté à aucun réseau WiFi. Veuillez vérifier vos paramètres.</value>
+  </data>
+  <data name="WiFiErrorName" xml:space="preserve">
+    <value>WiFi non connecté</value>
+  </data>
+  <data name="UpdateDescription" xml:space="preserve">
+    <value>Pour mettre à jour Notre histoire à une nouvelle version, nous avons besoin du fichier images.tar.</value>
+  </data>
+  <data name="CreditsTitle" xml:space="preserve">
+    <value>Crédits</value>
+  </data>
+  <data name="Forward" xml:space="preserve">
+    <value>En avant</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Rafraîchir</value>
+  </data>
+  <data name="GetApp" xml:space="preserve">
+    <value>Localiser l'application Android</value>
+  </data>
+  <data name="TryFix" xml:space="preserve">
+    <value>Essayez Fix Now</value>
+  </data>
+  <data name="WiFiPolicyErrorDesc" xml:space="preserve">
+    <value>Votre réseau WiFi n'est pas marqué comme «privé». S'il vous plaît aller à Paramètres Windows pour changer cela.</value>
+  </data>
+  <data name="WiFiPolicyErrorName" xml:space="preserve">
+    <value>Problème de profil WiFi</value>
+  </data>
+  <data name="VideoPlayback" xml:space="preserve">
+    <value>Remarque : les vidéos ne sont pas diffusées dans cette application. Ouvrez le tableau de bord dans un navigateur à l'aide du bouton à gauche.</value>
+  </data>
+  <data name="BackupComplete" xml:space="preserve">
+    <value>Sauvegarde complète et sauvegardée dans votre emplacement d'installation Our Story.</value>
+  </data>
+  <data name="BackupError" xml:space="preserve">
+    <value>Une erreur s'est produite en effectuant une sauvegarde. S'll vous plaît, réessayez.</value>
   </data>
 </root>
