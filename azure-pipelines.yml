@@ -29,21 +29,12 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:RunWixToolsOutOfProc=true'
 
-# - task: PublishBuildArtifacts@1
-#   inputs:
-#     PathtoPublish: 'install/OurStoryToolbox.exe'
-#     ArtifactName: 'Toolbox'
-
-# - task: PublishBuildArtifacts@1
-#   inputs:
-#     PathtoPublish: 'install/OurStoryHyperV.exe'
-#     ArtifactName: 'HyperV'
 
 - task: GitHubRelease@0
   inputs:
     gitHubConnection: 'OurStory GitHub'
     repositoryName: 'our-story-media/ourstory-titan'
     action: 'create'
-    title: 'Installer'
+    title: 'Our Story Titan Installer'
     addChangeLog: false
     assets: 'install/*.exe'
