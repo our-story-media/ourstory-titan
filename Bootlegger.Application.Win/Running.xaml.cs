@@ -62,9 +62,11 @@ namespace Bootlegger.App.Win
 
         CancellationTokenSource cts = new CancellationTokenSource();
 
+        bool started = false;
+
         async void Start()
         {
-            errors.Visibility = Visibility.Collapsed;
+            errorwrapper.Visibility = Visibility.Collapsed; 
             progress.Content = Strings.StartingApplication;
             progresswrapper.Visibility = Visibility.Visible;
             //Browser.Address = "google.com";
@@ -80,11 +82,13 @@ namespace Bootlegger.App.Win
                     statusled.Background = FindResource("green") as Brush;
                     ledshadow.Color = Colors.Green;
                     progresswrapper.Visibility = Visibility.Collapsed;
-                    errors.Visibility = Visibility.Visible;
+                    started = true;
+                    //errorwrapper.Visibility = Visibility.Visible;
 
                 }
                 else
                 {
+                    started = true;
                     if (!cts.IsCancellationRequested)
                     {
                         progress.Content = Strings.ProblemStartingApplication;
@@ -184,11 +188,14 @@ namespace Bootlegger.App.Win
 
                     if (CurrentErrors.Count > 0)
                     {
+                        if (started)
+                            errorwrapper.Visibility = Visibility.Visible;
                         statusled.Background = FindResource("red") as Brush;
                         ledshadow.Color = Colors.Red;
                     }
                     else
                     {
+                        errorwrapper.Visibility = Visibility.Collapsed;
                         statusled.Background = FindResource("green") as Brush;
                         ledshadow.Color = Colors.Green;
                     }
@@ -304,6 +311,31 @@ namespace Bootlegger.App.Win
                 case WiFiPolicyException c:
                     App.BootleggerApp.SetWiFiPolicy();
                     break;
+            }
+        }
+
+        private void Button_Click_9(object sender, RoutedEventArgs e)
+        {
+            //show errors:
+            if (errors.Visibility == Visibility.Collapsed)
+            {
+                errors.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errors.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void Hidebtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (errors.Visibility == Visibility.Collapsed)
+            {
+                errors.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errors.Visibility = Visibility.Collapsed;
             }
         }
     }
