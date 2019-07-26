@@ -121,14 +121,14 @@ namespace Bootlegger.App.Win
 
             if (App.BootleggerApp.IsInstalled && App.BootleggerApp.IsDockerInstalled)
             {
-                if (App.BootleggerApp.WiFiSettingsOk)
-                {
-                    _mainFrame.Content = new Running();
-                }
-                else
-                {
-                    _mainFrame.Content = new WiFiCheck();
-                }
+                //if (App.BootleggerApp.WiFiSettingsOk)
+                //{
+                _mainFrame.Content = new Running();
+                //}
+                //else
+                //{
+                    //_mainFrame.Content = new WiFiCheck();
+                //}
             }
             else
             {

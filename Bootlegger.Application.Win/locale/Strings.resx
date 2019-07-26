@@ -280,10 +280,10 @@
     <value>Invalid Network</value>
   </data>
   <data name="CheckNetworkSettingsAndTryAgain" xml:space="preserve">
-    <value>Check Network settings and try again.</value>
+    <value>Allow this application to automatically change settings for you?</value>
   </data>
   <data name="ContinueAnyway" xml:space="preserve">
-    <value>Continue Anyway</value>
+    <value>Automatically Change Settings</value>
   </data>
   <data name="ManuallyChangeSettings" xml:space="preserve">
     <value>Manually Change Settings</value>

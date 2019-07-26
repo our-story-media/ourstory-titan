@@ -3,6 +3,7 @@
     <Fragment>
         <DirectoryRef Id="INSTALLFOLDER">
             <Directory Id="dir287BEF6301389D2501D7D15A87596D90" Name="ar" />
+            <Directory Id="dirCCE1D62295D7C7BABB075112B8BF025B" Name="backup" />
             <Directory Id="dir9AE38F4F5CB5E565E774521E138F44FD" Name="es" />
             <Directory Id="dirB55DFDA91FEE7CCCBC65CA7493B75748" Name="fr" />
             <Directory Id="dirCA02E4A7CC6C21D952C5059DC56408F4" Name="GPUCache" />
@@ -564,6 +565,24 @@
             <Component Id="cmp9A086FE1DE57EE9A0081C73045B946EB" Directory="dir287BEF6301389D2501D7D15A87596D90" Guid="*">
                 <File Id="filF438736BD78D1FFECA05E68C3BE0994B" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\ar\Our Story Titan.resources.dll" />
             </Component>
+            <Component Id="cmp27C72CA2B42614F6AB444C3F498FFA1E" Directory="dirA1669078209AC2E5A35E5C8F9F0E9B48" Guid="*">
+                <File Id="fil0FE218276EBE2BE08A2600CEA9152038" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\backup\132084943775305221\event.json" />
+            </Component>
+            <Component Id="cmpFBC0A50B5945654DB7E71EEFC8537C3D" Directory="dirA1669078209AC2E5A35E5C8F9F0E9B48" Guid="*">
+                <File Id="fil2D7C9377FECA413E5A3FDB669170C143" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\backup\132084943775305221\eventtemplate.json" />
+            </Component>
+            <Component Id="cmp21279091800E1B1B1DAB1ECBB80A5782" Directory="dirA1669078209AC2E5A35E5C8F9F0E9B48" Guid="*">
+                <File Id="filA5E69C6B557D4593A69B462E13991A02" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\backup\132084943775305221\log.json" />
+            </Component>
+            <Component Id="cmpA2D90C4C0CBC9F67DB5A49099F99B8B0" Directory="dirA1669078209AC2E5A35E5C8F9F0E9B48" Guid="*">
+                <File Id="filD7C8BCAF93D5EFD344B47699FBF925BF" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\backup\132084943775305221\shot.json" />
+            </Component>
+            <Component Id="cmpB1827EF1E72AFBBFD0197FEAB32A375F" Directory="dirA1669078209AC2E5A35E5C8F9F0E9B48" Guid="*">
+                <File Id="fil49730C4D2914173499BE14B38C9F48F3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\backup\132084943775305221\user.json" />
+            </Component>
+            <Component Id="cmp8E076250FFBD4D8DD0A328D04566C373" Directory="dirA1669078209AC2E5A35E5C8F9F0E9B48" Guid="*">
+                <File Id="fil3C805C9A498381031E830F7DBB45314B" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\backup\132084943775305221\whitelabel.json" />
+            </Component>
             <Component Id="cmp5757FBD6855F5AC691323B8856478267" Directory="dir9AE38F4F5CB5E565E774521E138F44FD" Guid="*">
                 <File Id="fil49F5D5DEEDD7DFFACE8F766267A4262D" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\es\Our Story Titan.resources.dll" />
             </Component>
@@ -584,6 +603,12 @@
             </Component>
             <Component Id="cmpED9306A49B148A8511A9EE69E8BB3B22" Directory="dirCA02E4A7CC6C21D952C5059DC56408F4" Guid="*">
                 <File Id="fil3AE4B324E101AF20D9D2C2D9B1D134F4" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\GPUCache\f_000001" />
+            </Component>
+            <Component Id="cmp456A78A813AD53865AA22043E8DBB9CF" Directory="dirCA02E4A7CC6C21D952C5059DC56408F4" Guid="*">
+                <File Id="fil53C4178C8AB325D87376DB8616A6220B" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\GPUCache\f_000002" />
+            </Component>
+            <Component Id="cmp242C56D17960DE9FD531722027BE8F59" Directory="dirCA02E4A7CC6C21D952C5059DC56408F4" Guid="*">
+                <File Id="filEF29A83F5439FDC00ED81CA41F6657A8" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\GPUCache\f_000003" />
             </Component>
             <Component Id="cmp3B66DCEB0789C8C518943D089A4199DD" Directory="dirCA02E4A7CC6C21D952C5059DC56408F4" Guid="*">
                 <File Id="fil28E93CE868CB9B868ADCBF0F50DDA1ED" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\GPUCache\index" />
@@ -754,5 +779,10 @@
                 <File Id="fil4B6A38C48F99A0356005118F3481E4F7" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\swiftshader\libGLESv2.dll" />
             </Component>
         </ComponentGroup>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirCCE1D62295D7C7BABB075112B8BF025B">
+            <Directory Id="dirA1669078209AC2E5A35E5C8F9F0E9B48" Name="132084943775305221" />
+        </DirectoryRef>
     </Fragment>
 </Wix>

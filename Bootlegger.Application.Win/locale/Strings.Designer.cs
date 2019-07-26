@@ -178,7 +178,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check Network settings and try again..
+        ///   Looks up a localized string similar to Allow this application to automatically change settings for you?.
         /// </summary>
         public static string CheckNetworkSettingsAndTryAgain {
             get {
@@ -223,7 +223,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Continue Anyway.
+        ///   Looks up a localized string similar to Automatically Change Settings.
         /// </summary>
         public static string ContinueAnyway {
             get {

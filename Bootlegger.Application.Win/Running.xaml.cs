@@ -83,7 +83,18 @@ namespace Bootlegger.App.Win
                     ledshadow.Color = Colors.Green;
                     progresswrapper.Visibility = Visibility.Collapsed;
                     started = true;
-                    //errorwrapper.Visibility = Visibility.Visible;
+
+                    //ADDED WIFI CHECK TO RUNNING SCREEN:
+                    if (!App.BootleggerApp.WiFiSettingsOk)
+                    {
+                        //(Application.Current.MainWindow as MainWindow)._mainFrame.Content = new Running();
+                        //else
+                        if (await (App.Current.MainWindow as MetroWindow).ShowMessageAsync(Strings.InvalidNetwork, Strings.CheckNetworkSettingsAndTryAgain, MessageDialogStyle.AffirmativeAndNegative, new MetroDialogSettings() { AffirmativeButtonText = Strings.ContinueAnyway, NegativeButtonText = Strings.ManuallyChangeSettings }) == MessageDialogResult.Affirmative)
+                        {
+                            App.BootleggerApp.ConfigureNetwork("10.10.10.1", "255.255.255.0");
+                        }
+                    }
+                        //(Application.Current.MainWindow as MainWindow)._mainFrame.Content = new Running();
 
                 }
                 else

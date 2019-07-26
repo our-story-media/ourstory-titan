@@ -20,7 +20,7 @@
 
 		<Chain>
       <PackageGroupRef Id="NetFx461Redist"/>
-      <ExePackage InstallCommand="/VERYSILENT /SUPPRESSMSGBOXES" Id="Docker" SourceFile="$(var.SolutionDir)Bootlegger.Application.Lib\downloads\DockerToolbox.exe">
+      <ExePackage InstallCommand='/VERYSILENT /SUPPRESSMSGBOXES' Id="Docker" SourceFile="$(var.SolutionDir)Bootlegger.Application.Lib\downloads\DockerToolbox.exe">
       </ExePackage>
       <MsiPackage Visible="no" Id="OurStory" SourceFile="$(var.Installer.TargetPath)">
       </MsiPackage>

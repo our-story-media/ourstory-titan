@@ -522,7 +522,7 @@ namespace Bootlegger.App.Lib
         {
             get
             {
-                return (CurrentInstallerType == InstallerType.HYPER_V) ? "docker-compose.yml" : "docker-compose.yml";
+                return System.AppContext.BaseDirectory + ((CurrentInstallerType == InstallerType.HYPER_V) ? "docker-compose.yml" : "docker-compose.yml");
             }
         }
 
@@ -828,38 +828,42 @@ namespace Bootlegger.App.Lib
 
         private async void Monitor_DoWork(object sender, DoWorkEventArgs e)
         {
-            //INIT:
-            var Document = File.ReadAllText(DockerComposeFile);
-            var input = new StringReader(Document);
-            WebClient client = new TimeOutWebClient();
-
-
-            var KnownContainerCount = 0;
-
-            // Load the stream
-            var yaml = new YamlStream();
-            yaml.Load(input);
-            var mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
-
-            foreach (var entry in mapping.Children)
+            try
             {
-                if ((entry.Key as YamlScalarNode).Value == "services")
+                //INIT:
+                var Document = File.ReadAllText(DockerComposeFile);
+                var input = new StringReader(Document);
+           
+                WebClient client = new TimeOutWebClient();
+
+
+                var KnownContainerCount = 0;
+
+                // Load the stream
+                var yaml = new YamlStream();
+                yaml.Load(input);
+                var mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
+
+                foreach (var entry in mapping.Children)
                 {
-                    foreach (var service in (entry.Value as YamlMappingNode).Children)
+                    if ((entry.Key as YamlScalarNode).Value == "services")
                     {
-                        KnownContainerCount++;
+                        foreach (var service in (entry.Value as YamlMappingNode).Children)
+                        {
+                            KnownContainerCount++;
+                        }
                     }
                 }
-            }
 
-            var wifi = new Wifi();
-            WlanClient wlan = new WlanClient();
-
+                var wifi = new Wifi();
+                WlanClient wlan = new WlanClient();
+            
 
             while (true)
             {
                 try
                 {
+                        
                     List<ContainerListResponse> containers = (await dockerclient.Containers.ListContainersAsync(new ContainersListParameters()
                     {
                         All = true,
@@ -1023,6 +1027,12 @@ namespace Bootlegger.App.Lib
                 Thread.Sleep(5000);
 
             }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                Monitor_DoWork(sender,e);
+            }
         }
         private class TimeOutWebClient : WebClient
         {
@@ -1113,7 +1123,7 @@ namespace Bootlegger.App.Lib
                     //{
 
                     //}
-                    
+
                     //var result = "";
 
                     //VBoxManage.exe showvminfo default
@@ -1124,7 +1134,7 @@ namespace Bootlegger.App.Lib
 
                         //Log.Info($"Stopping docker-machine");
 
-                        //await RunProcessAsync(@"docker-machine", "stop", true);
+                        await RunProcessAsync(@"docker-machine", "stop", true);
 
                         Log.Info($"Stopping Virtualbox VM");
 
@@ -1142,11 +1152,23 @@ namespace Bootlegger.App.Lib
                         //await RunProcessAsync("net", "stop HTTP /y", true, true);
 
                         //"C:\Program Files\Git\bin\bash.exe" --login -i "C:\Program Files\Docker Toolbox\start.sh"
+                        Log.Info($"Adding Shared Folder");
+
+                        await RunProcessAsync("VBoxManage.exe", $"sharedfolder add default --name \"c/Users\" --hostpath \"\\\\?\\c:\\Users\" --automount");
+
+
+                        //docker-machine ssh default sudo mount -t vboxsf c/Users /c/Users/
+                        //sudo mount -t vboxsf c/Users /c/Users/
 
                     }
 
                     Log.Info($"Starting docker-toolbox");
                     await RunProcessAsync(@"C:\Program Files\Git\bin\bash.exe", "-c \" \\\"/c/Program Files/Docker Toolbox/start.sh\\\" \\\"%*\\\"\"", true);
+
+                    Log.Info($"Mounting Shared Folder");
+
+                    await RunProcessAsync("docker-machine", $"ssh default sudo mount -t vboxsf c/Users /c/Users/");
+
 
                     //await RunProcessAsync(@"C:\Program Files\Git\bin\bash.exe", "--login -i \"C:\\Program Files\\Docker Toolbox\\start.sh\"", true);
 
