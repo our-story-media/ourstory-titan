@@ -683,7 +683,7 @@ namespace Bootlegger.App.Lib
                 currentProcess = new Process();
                 currentProcess.StartInfo = new ProcessStartInfo("docker-compose");
                 currentProcess.StartInfo.WorkingDirectory = Directory.GetCurrentDirectory();
-                currentProcess.StartInfo.Arguments = $"-f {DockerComposeFile} -p bootleggerlocal up -d";
+                currentProcess.StartInfo.Arguments = $"-f \"{DockerComposeFile}\" -p bootleggerlocal up -d";
                 //currentProcess.StartInfo.Verb = "RUNAS";
                 //currentProcess.StartInfo.Environment.Add("MYIP", GetLocalIPAddress());
                 currentProcess.StartInfo.UseShellExecute = false;
@@ -1231,7 +1231,7 @@ namespace Bootlegger.App.Lib
         {
             try
             {
-                await RunProcessAsync("docker-compose", $"-f {DockerComposeFile} -p bootleggerlocal down");
+                await RunProcessAsync("docker-compose", $"-f \"{DockerComposeFile}\" -p bootleggerlocal down");
                 await RunProcessAsync("docker", $"volume rm bootleggerlocal_www");
                 await RunProcessAsync("docker", $"volume rm bootleggerlocal_assets");
             }
@@ -1282,7 +1282,7 @@ namespace Bootlegger.App.Lib
 
             try
             {
-                await RunProcessAsync("docker-compose", $"-f {DockerComposeFile} -p bootleggerlocal stop");
+                await RunProcessAsync("docker-compose", $"-f \"{DockerComposeFile}\" -p bootleggerlocal stop");
             }
             catch (Exception e)
             {

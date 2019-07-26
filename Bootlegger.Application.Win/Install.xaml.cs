@@ -118,7 +118,7 @@ namespace Bootlegger.App.Win
 
                 App.BootleggerApp.IsInstalled = true;
 
-                (Application.Current.MainWindow as MainWindow)._mainFrame.Content = new WiFiCheck();
+                (Application.Current.MainWindow as MainWindow)._mainFrame.Content = new Running();
             }
             catch (Exception ex)
             {

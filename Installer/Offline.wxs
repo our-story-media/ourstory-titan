@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:fire="http://schemas.microsoft.com/wix/FirewallExtension">
-  <Product Id="*" Name="Our Story Titan" Language="1033" Version="1.0.0.0" Manufacturer="Newcastle University" UpgradeCode="07a6b158-3593-4c10-9200-baf92006faeb">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension" xmlns:fire="http://schemas.microsoft.com/wix/FirewallExtension">
+  <Product Id="*" Name="Our Story Titan" Language="1033" Version="1.0.0.0" Manufacturer="Our Story Media" UpgradeCode="07a6b158-3593-4c10-9200-baf92006faeb">
     <Package InstallerVersion="301" Compressed="yes" InstallScope="perMachine" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -15,7 +15,14 @@
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="ApplicationShortcutDesktop" />
       <ComponentRef Id="FirewallException" />
+      <ComponentRef Id="CleanupMainApplicationFolder" />
     </Feature>
+
+    <?define AppRegKey = "Software\OurStory\OurStoryTitan" ?>
+
+    <Property Id="INSTALLFLAGFOLDER">
+      <RegistrySearch Key="$(var.AppRegKey)" Root="HKCU" Type="raw" Id="APPLICATIONFOLDER_REGSEARCH" Name="InstallFilePath"  />
+    </Property>
 
     <!--<WixVariable Id="WixUILicenseRtf" Value="$(var.Bootlegger.App.Win.ProjectDir)/Readme.rtf" />
     <WixVariable Id="WixUIBannerBmp" Value="$(var.Bootlegger.App.Win.ProjectDir)/logo_install.bmp" />
@@ -33,10 +40,15 @@
       </Component>
     </DirectoryRef>
 
+
+      
+
+
     <Directory Id="TARGETDIR" Name="SourceDir">
+
       <Directory Id="ProgramFilesFolder">
         <Directory Id="INSTALLFOLDER" Name="Our Story Titan">
-          
+
         </Directory>
       </Directory>
 
@@ -58,7 +70,7 @@
               Type="integer"
               Value="1"
               KeyPath="yes"/>
-          
+
         </Component>
       </Directory>
     </Directory>
@@ -81,6 +93,12 @@
         <RegistryValue Root="HKCU" Key="Software\Microsoft\OurStoryTitan" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
         <RegistryValue Root="HKCU" Key="Software\Microsoft\Windows\CurrentVersion\RunOnce" Name="ourstory-firstrun" Type="string" Value="[INSTALLFOLDER]Our Story Titan.exe"/>
 
+      </Component>
+      <Component Id="CleanupMainApplicationFolder" Guid="*">
+        <RegistryValue Root="HKCU" Key="$(var.AppRegKey)" Name="InstallFilePath" Type="string" Value="[AppDataFolder]OurStoryTitan" KeyPath="yes" />
+        <!-- We need to use APPLICATIONFOLDER variable here or RemoveFolderEx
+             will not remove on "install". -->
+        <util:RemoveFolderEx On="uninstall" Property="INSTALLFLAGFOLDER" />
       </Component>
     </DirectoryRef>
 
