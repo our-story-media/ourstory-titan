@@ -82,8 +82,15 @@ echo "This script installs Our Story Titan. If you do not wish to continue, pres
 sleep 5
 
 # Install Docker:
+echo "Installing Docker"
 
 curl -sSL https://get.docker.com | sh
+
+echo "Installing docker-compose"
+
+sudo curl -L --fail https://github.com/docker/compose/releases/download/1.24.1/run.sh -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
 
 # Download Images:
 
@@ -119,7 +126,7 @@ echo " Incomming device: $INC"
 echo " WiFi device: $WIFI"
 
 #apt-get -y upgrade
-apt-get -y install hostapd isc-dhcp-server iptables
+sudo apt-get -y install hostapd isc-dhcp-server iptables
 
 # check wlan0 available
 
@@ -133,8 +140,8 @@ if ! ifconfig -a | grep "$INC"; then
 fi
 
 # modify dhcp.conf
-sed -i.bak 's/option domain-name/\#option domain-name/g' /etc/dhcp/dhcpd.conf
-sed -i 's/#authoritative;/authoritative;/g' /etc/dhcp/dhcpd.conf
+sudo sed -i.bak 's/option domain-name/\#option domain-name/g' /etc/dhcp/dhcpd.conf
+sudo sed -i 's/#authoritative;/authoritative;/g' /etc/dhcp/dhcpd.conf
 
 # add ip addresses
 CONF="
@@ -147,10 +154,10 @@ subnet $IP_RANGE.0 netmask 255.255.255.0 {
   option domain-name "local";
 }
 "
-echo "$CONF" >> /etc/dhcp/dhcpd.conf
+sudo echo "$CONF" >> /etc/dhcp/dhcpd.conf
 
 # set where DHCP runs
-sed -i.bak "s/\(INTERFACES *= *\).*/\1\"$WIFI\"/" /etc/default/isc-dhcp-server
+sudo sed -i.bak "s/\(INTERFACES *= *\).*/\1\"$WIFI\"/" /etc/default/isc-dhcp-server
 
 # set static ip address for $WIFI
 INTERF_CONF="
@@ -170,8 +177,8 @@ iface $WIFI inet static
   address $IP_RANGE.1
   netmask 255.255.255.0
 "
-echo "$INTERF_CONF" > /etc/network/interfaces
-ifconfig $WLAN $IP_RANGE.1
+sudo echo "$INTERF_CONF" > /etc/network/interfaces
+sudo ifconfig $WLAN $IP_RANGE.1
 
 # setup hostapd.conf
 CONF_HOST="interface=$WIFI
@@ -186,37 +193,37 @@ wpa_passphrase=$PASSPHRASE
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP"
-echo "$CONF_HOST" > /etc/hostapd/hostapd.conf
+sudo echo "$CONF_HOST" > /etc/hostapd/hostapd.conf
 # replace SSID and Passphrase
 
 # deamon config
-sed -i.bak 's/#DAEMON_CONF=""/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/g' /etc/default/hostapd
+sudo sed -i.bak 's/#DAEMON_CONF=""/DAEMON_CONF="\/etc\/hostapd\/hostapd.conf"/g' /etc/default/hostapd
 
 # add ip-forward=1
-echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
-echo 1 > /proc/sys/net/ipv4/ip_forward
+sudo echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+sudo echo 1 > /proc/sys/net/ipv4/ip_forward
 
 # add iptables
-iptables -t nat -F
-iptables -F
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-iptables -A FORWARD -i $INC -o $WIFI -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -A FORWARD -i $WIFI -o $INC -j ACCEPT
+sudo iptables -t nat -F
+sudo iptables -F
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+sudo iptables -A FORWARD -i $INC -o $WIFI -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i $WIFI -o $INC -j ACCEPT
 
 # Added by TB: redirect all traffic to port 80 on the local machine.
-iptables -t nat -A PREROUTING -d 0/0 -p tcp –dport 80 -j DNAT –to 10.0.0.1:80
+sudo iptables -t nat -A PREROUTING -d 0/0 -p tcp –dport 80 -j DNAT –to 10.0.0.1:80
 
 # save iptables
-iptables-save > /etc/iptables.ipv4.nat
+sudo iptables-save > /etc/iptables.ipv4.nat
 
 # load on boot
-echo '#!/bin/sh' > /etc/network/if-up.d/iptables
-echo "echo 'RUNNING iptables restore now'" >> /etc/network/if-up.d/iptables
-echo "iptables-restore < /etc/iptables.ipv4.nat" >> /etc/network/if-up.d/iptables
-echo "exit 0;" >> /etc/network/if-up.d/iptables
+sudo echo '#!/bin/sh' > /etc/network/if-up.d/iptables
+sudo echo "echo 'RUNNING iptables restore now'" >> /etc/network/if-up.d/iptables
+sudo echo "iptables-restore < /etc/iptables.ipv4.nat" >> /etc/network/if-up.d/iptables
+sudo echo "exit 0;" >> /etc/network/if-up.d/iptables
 
-chmod +x /etc/network/if-up.d/iptables
+sudo chmod +x /etc/network/if-up.d/iptables
 
 # test access point
 echo "AP Installation done!"
-/usr/sbin/hostapd /etc/hostapd/hostapd.conf & 
+sudo /usr/sbin/hostapd /etc/hostapd/hostapd.conf & 
