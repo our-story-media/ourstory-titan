@@ -84,11 +84,11 @@ sleep 5
 # Install Docker:
 echo "Installing Docker"
 
-if command_exists docker; then
-  echo "Docker already installed"
-else
+#if command_exists docker; then
+#  echo "Docker already installed"
+#else
   #curl -sSL https://get.docker.com | sh
-fi
+#fi
 
 sudo usermod -aG docker $USER
 
