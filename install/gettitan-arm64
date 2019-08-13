@@ -84,7 +84,13 @@ sleep 5
 # Install Docker:
 echo "Installing Docker"
 
-curl -sSL https://get.docker.com | sh
+if command_exists docker; then
+  echo "Docker already installed"
+else
+  curl -sSL https://get.docker.com | sh
+fi
+
+sudo usermod -aG docker $USER
 
 echo "Installing docker-compose"
 
@@ -227,3 +233,8 @@ sudo chmod +x /etc/network/if-up.d/iptables
 # test access point
 echo "AP Installation done!"
 sudo /usr/sbin/hostapd /etc/hostapd/hostapd.conf & 
+
+
+command_exists() {
+	command -v "$@" > /dev/null 2>&1
+}
