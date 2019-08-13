@@ -1,0 +1,67 @@
+version: "3.6"
+
+volumes:
+  mongo-data:
+    external: false
+  redis-data:
+    external: false
+  www:
+  data:
+  assets:
+
+services:
+  nginx-local:
+    restart: on-failure
+    image: bootlegger/nginx-local:arm64
+    ports:
+      - "80:80"
+    volumes:
+      - ./uploads:/usr/src/app/upload
+      - www:/usr/src/app/www:ro
+      - data:/usr/src/app/data:ro
+      - assets:/usr/src/app/assets:ro
+   
+
+  redis:
+    restart: on-failure
+    image: redis:alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+
+  mongo:
+    restart: on-failure
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  beanstalk:
+    restart: on-failure 
+    image: bootlegger/beanstalk:arm64
+
+  worker:
+    restart: on-failure
+    image: bootlegger/ourstory-worker:arm64
+    depends_on:
+      - mongo
+      - beanstalk
+    volumes:
+      - ./uploads:/usr/src/app/upload
+      - www:/usr/src/app/www:ro
+      - data:/usr/src/app/data:ro
+      - assets:/usr/src/app/assets:ro
+
+  web:
+    restart: on-failure
+    image: bootlegger/ourstory-server:arm64
+    depends_on: 
+      - redis
+      - mongo
+      - beanstalk
+    volumes:
+      - ./uploads:/usr/src/app/upload
+      - www:/usr/src/app/www
+      - data:/usr/src/app/data
+      - assets:/usr/src/app/assets
