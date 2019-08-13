@@ -94,7 +94,7 @@ sudo usermod -aG docker $USER
 
 echo "Installing docker-compose"
 
-sudo apt install python-pip libffi-dev
+sudo apt install python-pip libffi-dev python-backports.ssl-match-hostname
 
 sudo pip install docker-compose
 
