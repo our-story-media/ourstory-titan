@@ -21,7 +21,7 @@ volumes:
 services:
   nginx-local:
     restart: on-failure
-    image: bootlegger/nginx-local:v7
+    image: bootlegger/nginx-local:armv7
     ports:
       - "80:80"
     volumes:
@@ -40,9 +40,7 @@ services:
 
   mongo:
     restart: on-failure
-    image: mongo
-    ports:
-      - "27017:27017"
+    image: webhippie/mongodb
     volumes:
       - mongo-data:/data/db
 
