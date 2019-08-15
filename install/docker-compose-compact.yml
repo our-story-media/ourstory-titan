@@ -1,0 +1,24 @@
+version: "3.6"
+
+volumes:
+  mongo-data:
+    external: false
+  redis-data:
+    external: false
+
+services:
+  web:
+    restart: on-failure
+    build: .
+    ports:
+      - "80:80"
+      - "1337:1337"
+    extra_hosts: 
+      - "redis:127.0.0.1"
+      - "mongo:127.0.0.1"
+      - "beanstalk:127.0.0.1"
+      - "web:127.0.0.1"
+    volumes:
+      - ./uploads:/usr/src/app/upload
+      - mongo-data:/data/db
+      - redis-data:/redis

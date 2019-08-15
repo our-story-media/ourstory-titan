@@ -21,7 +21,7 @@ volumes:
 services:
   nginx-local:
     restart: on-failure
-    image: bootlegger/nginx-local:armv7
+    image: bootlegger/nginx-local
     ports:
       - "80:80"
     volumes:

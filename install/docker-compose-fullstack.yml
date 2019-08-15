@@ -12,7 +12,7 @@ volumes:
 services:
   nginx-local:
     restart: on-failure
-    image: bootlegger/nginx-local:arm64
+    image: bootlegger/nginx-local
     ports:
       - "80:80"
     volumes:
@@ -20,7 +20,6 @@ services:
       - www:/usr/src/app/www:ro
       - data:/usr/src/app/data:ro
       - assets:/usr/src/app/assets:ro
-   
 
   redis:
     restart: on-failure
@@ -31,7 +30,7 @@ services:
 
   mongo:
     restart: on-failure
-    image: mongo
+    image: webhippie/mongodb
     ports:
       - "27017:27017"
     volumes:
@@ -39,11 +38,11 @@ services:
 
   beanstalk:
     restart: on-failure 
-    image: bootlegger/beanstalk:arm64
+    image: bootlegger/beanstalk:armv7
 
   worker:
     restart: on-failure
-    image: bootlegger/ourstory-worker:arm64
+    image: bootlegger/ourstory-worker:armv7
     depends_on:
       - mongo
       - beanstalk
@@ -55,7 +54,7 @@ services:
 
   web:
     restart: on-failure
-    image: bootlegger/ourstory-server:arm64
+    image: bootlegger/ourstory-server:armv7
     depends_on: 
       - redis
       - mongo
