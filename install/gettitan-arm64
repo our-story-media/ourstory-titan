@@ -6,74 +6,7 @@
 
 # DO NOT run this file at every boot as it will try to install Docker from the internet!
 
-DOCKER_COMPOSE=`cat <<-END
-version: "3.6"
 
-volumes:
-  mongo-data:
-    external: false
-  redis-data:
-    external: false
-  www:
-  data:
-  assets:
-
-services:
-  nginx-local:
-    restart: on-failure
-    image: bootlegger/nginx-local
-    ports:
-      - "80:80"
-    volumes:
-      - ./uploads:/usr/src/app/upload
-      - www:/usr/src/app/www:ro
-      - data:/usr/src/app/data:ro
-      - assets:/usr/src/app/assets:ro
-   
-
-  redis:
-    restart: on-failure
-    image: redis:alpine
-    command: redis-server --appendonly yes
-    volumes:
-      - redis-data:/data
-
-  mongo:
-    restart: on-failure
-    image: webhippie/mongodb
-    volumes:
-      - mongo-data:/data/db
-
-  beanstalk:
-    restart: on-failure 
-    image: bootlegger/beanstalk:armv7
-
-  worker:
-    restart: on-failure
-    image: bootlegger/ourstory-worker:armv7
-    depends_on:
-      - mongo
-      - beanstalk
-    volumes:
-      - ./uploads:/usr/src/app/upload
-      - www:/usr/src/app/www:ro
-      - data:/usr/src/app/data:ro
-      - assets:/usr/src/app/assets:ro
-
-  web:
-    restart: on-failure
-    image: bootlegger/ourstory-server:armv7
-    depends_on: 
-      - redis
-      - mongo
-      - beanstalk
-    volumes:
-      - ./uploads:/usr/src/app/upload
-      - www:/usr/src/app/www
-      - data:/usr/src/app/data
-      - assets:/usr/src/app/assets
-END
-`
 
 echo "This script installs Our Story Titan. If you do not wish to continue, press CTL-C now..."
 
@@ -82,34 +15,38 @@ sleep 5
 # Install Docker:
 echo "Installing Docker"
 
-#if command_exists docker; then
-#  echo "Docker already installed"
-#else
-  #curl -sSL https://get.docker.com | sh
-#fi
+if ! type "docker" > /dev/null; then
+  echo "Docker already installed"
+else
+  curl -sSL https://get.docker.com | sh
+fi
+
+exit
 
 sudo usermod -aG docker $USER
 
-echo "Installing docker-compose"
+# echo "Installing docker-compose"
 
-sudo apt install python-pip libffi-dev python-backports.ssl-match-hostname
+# sudo apt install python-pip libffi-dev python-backports.ssl-match-hostname
 
-sudo pip install docker-compose
+# sudo pip install docker-compose
 
 # Download Images:
 
-echo "$DOCKER_COMPOSE" > docker-compose.yml
+# echo "$DOCKER_COMPOSE" > docker-compose.yml
 
 echo "Pulling Images to Local Cache"
-sudo docker-compose pull
+sudo docker pull bootlegger/titan-compact
 
-echo "Putting docker-compose in Startup"
+sudo docker run --restart --ports  bootlegger/titan-compact
+
+# echo "Putting docker-compose in Startup"
 
 # Put this in the boot up file:
 #docker-compose up -d
 
 
-
+exit
 
 echo "Setting up Access Point"
 
@@ -233,6 +170,6 @@ echo "AP Installation done!"
 sudo /usr/sbin/hostapd /etc/hostapd/hostapd.conf & 
 
 
-command_exists() {
-	command -v "$@" > /dev/null 2>&1
-}
+# command_exists() {
+# 	command -v "$@" > /dev/null 2>&1
+# }
