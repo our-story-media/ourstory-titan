@@ -8,3 +8,8 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
+
+steps:
+- script: "echo '{ \"experimental\": true }' | sudo tee /etc/docker/daemon.json"
+- script: sudo service docker restart
+- script: install/build-compact.sh
