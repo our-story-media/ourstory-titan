@@ -13,7 +13,7 @@ steps:
 
 # - script: "echo '{ \"experimental\": true }' | sudo tee /etc/docker/daemon.json"
 # - script: sudo service docker restart
-- script: docker version -f
+- script: docker version
   env:
     DOCKER_CLI_EXPERIMENTAL: enabled
 - script: install/build-compact.sh
