@@ -9,6 +9,7 @@ volumes:
 services:
   web:
     restart: on-failure
+    image: bootlegger/titan-compact
     build: .
     ports:
       - "80:80"

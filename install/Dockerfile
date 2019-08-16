@@ -1,7 +1,8 @@
 FROM node:8-stretch
+
 ARG TARGETPLATFORM
-RUN echo "BUILDING FOR $TARGETPLATFORM"
-RUN if [ "$TARGETPLATFORM" = "linux/arm/v7" ] ; then wget https://andyfelong.com/downloads/mongodb_stretch_3_0_14_core.zip && \
+
+RUN echo "BUILDING FOR $TARGETPLATFORM" && if [ "$TARGETPLATFORM" = "linux/arm/v7" ] ; then wget https://andyfelong.com/downloads/mongodb_stretch_3_0_14_core.zip && \
         unzip mongodb_stretch_3_0_14_core.zip && \
         adduser --ingroup nogroup --shell /etc/false --disabled-password --gecos "" \
         --no-create-home mongodb && \
@@ -13,15 +14,12 @@ RUN if [ "$TARGETPLATFORM" = "linux/arm/v7" ] ; then wget https://andyfelong.com
         cd .. && \
         rm -R core && \
         rm mongodb_stretch_3_0_14_core.zip ; \
-    fi
-
-
-RUN PACKAGES="" && \ 
+    fi && \
+    PACKAGES="" && \ 
     if [ ! "$TARGETPLATFORM" = "linux/arm/v7" ] ; then PACKAGES="mongodb" ; fi && \
     apt-get update -q && \
-    apt-get install -q -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y nginx redis-server beanstalkd libav-tools melt $PACKAGES
-
-RUN git clone --depth=1 https://github.com/our-story-media/ourstory-server && git clone --depth=1 https://github.com/our-story-media/ourstory-worker
+    apt-get install -q -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y nginx redis-server beanstalkd libav-tools melt $PACKAGES && \
+    git clone --depth=1 https://github.com/our-story-media/ourstory-server && git clone --depth=1 https://github.com/our-story-media/ourstory-worker
 
 WORKDIR /ourstory-server
 
@@ -37,11 +35,11 @@ RUN npm install grunt-cli && \
 	npm cache clean --force
 
 WORKDIR /ourstory-worker
+
 RUN npm i --silent && \
     mkdir ~/.fonts && cp -r ./fonts/* ~/.fonts && chmod -R 644 ~/.fonts && fc-cache && \
     mkdir -p /usr/src && \
     ln -s /ourstory-server /usr/src/app && \
-    mkdir /templates && \
     mkdir -p /etc/nginx/vhost.d && \
     rm /etc/nginx/sites-enabled/default && \
     ln -s /ourstory-server/docker/bootlegger.conf /etc/nginx/vhost.d/default && \
@@ -56,6 +54,4 @@ VOLUME /redis
 
 COPY "entrypoint.sh" .
 
-RUN chmod +x entrypoint.sh
-
-CMD [ "./entrypoint.sh" ]
+CMD [ "bash", "./entrypoint.sh" ]
