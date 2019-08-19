@@ -6,8 +6,6 @@
 
 # DO NOT run this file at every boot as it will try to install Docker from the internet!
 
-
-
 echo "This script installs Our Story Titan. If you do not wish to continue, press CTL-C now..."
 
 sleep 5
@@ -36,9 +34,12 @@ sudo usermod -aG docker $USER
 # echo "$DOCKER_COMPOSE" > docker-compose.yml
 
 echo "Pulling Images to Local Cache"
+
 sudo docker pull bootlegger/titan-compact
 
-sudo docker run --restart --ports  bootlegger/titan-compact
+echo "Starting Titan"
+
+sudo docker run --restart --ports "80:80" -v "./upload:/usr/src/app/upload" bootlegger/titan-compact
 
 # echo "Putting docker-compose in Startup"
 
