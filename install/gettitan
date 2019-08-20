@@ -21,7 +21,7 @@ echo "Installing Docker"
 if [ -x "$(command -v docker)" ]; then
   echo "Docker already installed"
 else
-  curl -sSL https://get.docker.com | sh
+  curl -sSLk https://get.docker.com | sh
 fi
 
 echo "Adding user to docker group"
