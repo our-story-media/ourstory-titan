@@ -24,8 +24,6 @@ else
   curl -sSL https://get.docker.com | sh
 fi
 
-exit
-
 echo "Adding user to docker group"
 
 sudo usermod -aG docker $USER
