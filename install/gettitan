@@ -34,7 +34,7 @@ sudo docker pull bootlegger/titan-compact
 
 echo "Starting Titan"
 
-sudo docker run --restart --add-host=redis:127.0.0.1 --add-host=mongo:127.0.0.1 --add-host=beanstalk:127.0.0.1 --add-host=web:127.0.0.1 --ports "80:80" -v "./upload:/usr/src/app/upload" bootlegger/titan-compact
+sudo docker run --restart --add-host=redis:127.0.0.1 --add-host=mongo:127.0.0.1 --add-host=beanstalk:127.0.0.1 --add-host=web:127.0.0.1 -p "80:80" -v "./upload:/usr/src/app/upload" bootlegger/titan-compact
 
 echo "Marking as Installed"
 touch .titaninstalled
