@@ -6,4 +6,4 @@ steps:
   image: docker:dind
   commands:
   - sleep 5 # give docker enough time to start
-  - cd install && ./build-compact.sh
+  - install/build-compact.sh
