@@ -4,21 +4,6 @@ name: default
 steps:
 - name: build
   image: docker:dind
-  volumes:
-  - name: dockersock
-    path: /var/run
   commands:
   - sleep 5 # give docker enough time to start
   - cd install && ./build-compact.sh
-
-services:
-- name: docker
-  image: docker:dind
-  privileged: true
-  volumes:
-  - name: dockersock
-    path: /var/run
-
-volumes:
-- name: dockersock
-  temp: {}
