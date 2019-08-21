@@ -36,7 +36,7 @@ echo "Starting Titan"
 
 MAC_ADDRESS=`ifconfig eth0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
 
-sudo docker run --restart always --log-driver none -e sails_LOGINCODE=$MAC_ADDRESS --add-host=redis:127.0.0.1 --add-host=mongo:127.0.0.1 --add-host=beanstalk:127.0.0.1 --add-host=web:127.0.0.1 -p "80:80" -v "$(pwd)/upload:/usr/src/app/upload" bootlegger/titan-compact
+sudo docker run --restart always --log-driver none -e sails_LOGINCODE=$MAC_ADDRESS --add-host=redis:127.0.0.1 --add-host=mongo:127.0.0.1 --add-host=beanstalk:127.0.0.1 --add-host=web:127.0.0.1 -p "80:88" -p "8845:80" -v "$(pwd)/upload:/usr/src/app/upload" bootlegger/titan-compact
 
 echo "Marking as Installed"
 touch .titaninstalled

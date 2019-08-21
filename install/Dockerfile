@@ -48,6 +48,8 @@ RUN npm i --silent && \
     mkdir -p /data/db && \
     mkdir -p /redis
 
+COPY "redirect.conf"  /etc/nginx/conf.d/redirect.conf
+
 RUN sed -i '/resolver 127\.0\.0\.11 valid=30s;/d' /ourstory-server/docker/server.local.conf
 
 RUN sed -i 's/set \$upstream http:\/\/web:1337;/set \$upstream http:\/\/127.0.0.1:1337;/' /ourstory-server/docker/server.local.conf

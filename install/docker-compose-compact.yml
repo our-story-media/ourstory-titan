@@ -12,8 +12,8 @@ services:
     image: bootlegger/titan-compact
     build: .
     ports:
-      - "80:80"
-      - "1337:1337"
+      - "80:88"
+      - "8845:80"
     extra_hosts: 
       - "redis:127.0.0.1"
       - "mongo:127.0.0.1"
