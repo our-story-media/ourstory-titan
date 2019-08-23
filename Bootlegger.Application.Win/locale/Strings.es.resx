@@ -118,31 +118,31 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AdditionalComponents" xml:space="preserve">
-    <value>Nuestra historia requiere componentes adicionales para ser instalado.</value>
+    <value>Indaba requiere la instalación de componentes adicionales.</value>
   </data>
   <data name="AdditionalSoftware" xml:space="preserve">
-    <value>Es posible que sea necesario instalar software adicional y tomar algún tiempo adicional. Por favor, sea paciente...</value>
+    <value>Es posible que sea necesario instalar software adicional y tomar un tiempo adicional. Por favor sea paciente...</value>
   </data>
   <data name="Admin" xml:space="preserve">
-    <value>Admin</value>
+    <value>Administración</value>
   </data>
   <data name="AppTitle" xml:space="preserve">
-    <value>Nuestro panel de historia</value>
+    <value>Tablero de Indaba</value>
   </data>
   <data name="Back" xml:space="preserve">
-    <value>Atrás</value>
+    <value>atrás</value>
   </data>
   <data name="Backup" xml:space="preserve">
-    <value>Copia de seguridad</value>
+    <value>Apoyo</value>
   </data>
   <data name="BackupData" xml:space="preserve">
-    <value>Datos de copia de seguridad</value>
+    <value>Los datos de copia de seguridad</value>
   </data>
   <data name="cancel" xml:space="preserve">
-    <value>Cancelar</value>
+    <value>cancelar</value>
   </data>
   <data name="CloseApplication" xml:space="preserve">
-    <value>Cerrar aplicación</value>
+    <value>Cierra la aplicación</value>
   </data>
   <data name="Connectivity" xml:space="preserve">
     <value>Conectividad</value>
@@ -160,25 +160,25 @@
     <value>Descargar archivos</value>
   </data>
   <data name="DownloadingContent" xml:space="preserve">
-    <value>Descarga de actualizaciones</value>
+    <value>Descargando actualizaciones</value>
   </data>
   <data name="InstallRequirements" xml:space="preserve">
-    <value>Requisitos de instalación</value>
+    <value>Instalar requisitos</value>
   </data>
   <data name="LoadImages" xml:space="preserve">
-    <value>Localizar archivo Images.tar</value>
+    <value>Ubicar el archivo Images.tar</value>
   </data>
   <data name="LocateImages" xml:space="preserve">
-    <value>Busque el archivo images.tar incluido con los archivos de instalación o vaya en línea para descargar los componentes restantes.</value>
+    <value>Localice el archivo images.tar que vino con sus archivos de instalación, o conéctese en línea para descargar los componentes restantes.</value>
   </data>
   <data name="Log" xml:space="preserve">
-    <value>Registro</value>
+    <value>Iniciar sesión</value>
   </data>
   <data name="OpenDashboard" xml:space="preserve">
-    <value>Abrir panel</value>
+    <value>Panel abierto</value>
   </data>
   <data name="OpenFiles" xml:space="preserve">
-    <value>Abrir carpeta de vídeo</value>
+    <value>Abrir carpeta de video</value>
   </data>
   <data name="Or" xml:space="preserve">
     <value>O</value>
@@ -187,88 +187,88 @@
     <value>Restaurar datos</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Configuración</value>
+    <value>Configuraciones</value>
   </data>
   <data name="ShareWarning1" xml:space="preserve">
     <value>Habilite Compartir haciendo lo siguiente:</value>
   </data>
   <data name="ShareWarning2" xml:space="preserve">
-    <value>Este mensaje desaparecerá cuando haya completado este paso...</value>
+    <value>Este mensaje desaparecerá cuando haya completado este paso ...</value>
   </data>
   <data name="starting" xml:space="preserve">
     <value>comenzando...</value>
   </data>
   <data name="Update" xml:space="preserve">
-    <value>actualizar</value>
+    <value>Actualizar</value>
   </data>
   <data name="UpdateApplication" xml:space="preserve">
-    <value>Actualizar aplicación</value>
+    <value>Actualizar solicitud</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Bienvenidos a nuestra historia</value>
+    <value>Bienvenido a Indaba</value>
   </data>
   <data name="WiFi" xml:space="preserve">
-    <value>La configuración actual de WiFi no es correcta.</value>
+    <value>Su configuración WiFi actual no es correcta.</value>
   </data>
   <data name="WiFi2" xml:space="preserve">
-    <value>Conéctese a su WiFi de implementación e intentaremos configurar automáticamente la configuración cuando pulse Continuar.</value>
+    <value>Conéctese a su WiFi de implementación e intentaremos configurar automáticamente la configuración cuando presione continuar.</value>
   </data>
   <data name="AdditionalDownloads" xml:space="preserve">
     <value>Se requieren descargas adicionales, asegúrese de tener conectividad a Internet antes de continuar</value>
   </data>
   <data name="PleaseWait" xml:space="preserve">
-    <value>Espera...</value>
+    <value>por favor espera...</value>
   </data>
   <data name="CloseWarning" xml:space="preserve">
-    <value>Cerrar esta aplicación impedirá el acceso a Nuestra Historia</value>
+    <value>Cerrar esta aplicación impedirá el acceso a Indaba</value>
   </data>
   <data name="DownloadingProgress" xml:space="preserve">
-    <value>Descarga de {0} de {1}</value>
+    <value>Descargando {0} de {1}</value>
   </data>
   <data name="ResettingNetwork" xml:space="preserve">
-    <value>Restablecimiento de la red...</value>
+    <value>Restableciendo red ...</value>
   </data>
   <data name="StoppingApplication" xml:space="preserve">
-    <value>Detener la aplicación...</value>
+    <value>Deteniendo la aplicación ...</value>
   </data>
   <data name="InitiatingDownload" xml:space="preserve">
-    <value>Iniciando la descarga...</value>
+    <value>Iniciando descarga ...</value>
   </data>
   <data name="ProgressLabel" xml:space="preserve">
     <value>{0} {1} de {2}</value>
   </data>
   <data name="DownloadingDocker" xml:space="preserve">
-    <value>Descarga de Docker Installer...</value>
+    <value>Descargando Docker Installer ...</value>
   </data>
   <data name="InstallingDocker" xml:space="preserve">
-    <value>Instalación de Docker...</value>
+    <value>Instalación de Docker ...</value>
   </data>
   <data name="StartingDocker" xml:space="preserve">
-    <value>Inicio de Docker...</value>
+    <value>Iniciando Docker ...</value>
   </data>
   <data name="LoadingComponents" xml:space="preserve">
-    <value>Cargando nuestros componentes de la historia...</value>
+    <value>Cargando componentes de Indaba ...</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
   <data name="ErrorDialog" xml:space="preserve">
-    <value>Se ha producido un problema al instalar Nuestra historia. Por favor, reinicie e inténtelo de nuevo.</value>
+    <value>Hubo un problema al instalar Indaba. {0}. Por favor reinicie e intente nuevamente.</value>
   </data>
   <data name="DownloadWarning" xml:space="preserve">
-    <value>Descargar el número {0} de {1}... \nEsto puede llevar algún tiempo...</value>
+    <value>Descargando {0} de {1} ... \ nEsto puede llevar algún tiempo ...</value>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>Descargar</value>
+    <value>Descargando</value>
   </data>
   <data name="DockerInstaller" xml:space="preserve">
     <value>Docker Installer</value>
   </data>
   <data name="OurStoryBits" xml:space="preserve">
-    <value>Nuestros componentes de la historia</value>
+    <value>Componentes Indaba</value>
   </data>
   <data name="StartingApplication" xml:space="preserve">
-    <value>Inicio de la aplicación</value>
+    <value>Solicitud de inicio</value>
   </data>
   <data name="Running" xml:space="preserve">
     <value>Corriendo</value>
@@ -277,13 +277,13 @@
     <value>Problema al iniciar la aplicación!</value>
   </data>
   <data name="InvalidNetwork" xml:space="preserve">
-    <value>Red no válida</value>
+    <value>Red inválida</value>
   </data>
   <data name="CheckNetworkSettingsAndTryAgain" xml:space="preserve">
-    <value>Compruebe la configuración de red e inténtelo de nuevo.</value>
+    <value>¿Permitir que esta aplicación cambie automáticamente la configuración por usted?</value>
   </data>
   <data name="ContinueAnyway" xml:space="preserve">
-    <value>Continuar de todos modos</value>
+    <value>Cambiar automáticamente la configuración</value>
   </data>
   <data name="ManuallyChangeSettings" xml:space="preserve">
     <value>Cambiar manualmente la configuración</value>
@@ -295,37 +295,37 @@
     <value>Tablero</value>
   </data>
   <data name="AppErrorDesc" xml:space="preserve">
-    <value>Algunas partes del panel han dejado de funcionar, reinicie Nuestra historia</value>
+    <value>Algunas partes del panel han dejado de funcionar, reinicie Indaba</value>
   </data>
   <data name="AppErrorName" xml:space="preserve">
     <value>Problema de aplicación</value>
   </data>
   <data name="DashboardErrorDesc" xml:space="preserve">
-    <value>El panel no parece estar disponible para otros dispositivos. ¿Ha cambiado su red?</value>
+    <value>El Tablero no parece estar disponible para otros dispositivos. ¿Ha cambiado tu red?</value>
   </data>
   <data name="DashboardErrorName" xml:space="preserve">
-    <value>Problema de acceso a aplicaciones</value>
+    <value>Problema de acceso a la aplicación</value>
   </data>
   <data name="DiskSpaceErrorDesc" xml:space="preserve">
-    <value>No hay suficiente espacio en disco para cargar o procesar vídeos. Por favor, elimine los archivos antiguos.</value>
+    <value>No hay suficiente espacio en disco para cargar o procesar videos. Por favor, elimine los archivos antiguos.</value>
   </data>
   <data name="DiskSpaceErrorName" xml:space="preserve">
-    <value>Fuera del espacio en disco</value>
+    <value>Sin espacio en el disco</value>
   </data>
   <data name="IpErrorDesc" xml:space="preserve">
-    <value>Asegúrese de que su red no ha cambiado desde el inicio de Nuestra Historia.</value>
+    <value>Asegúrese de que su red no haya cambiado desde que inició Indaba.</value>
   </data>
   <data name="IpErrorName" xml:space="preserve">
     <value>Error de dirección IP</value>
   </data>
   <data name="WiFiErrorDesc" xml:space="preserve">
-    <value>No está conectado a ninguna red WiFi. Compruebe la configuración.</value>
+    <value>No estás conectado a ninguna red WiFi. Por favor verifique su configuración.</value>
   </data>
   <data name="WiFiErrorName" xml:space="preserve">
     <value>WiFi no conectado</value>
   </data>
   <data name="UpdateDescription" xml:space="preserve">
-    <value>Para actualizar Nuestra historia a una nueva versión necesitamos el archivo images.tar.</value>
+    <value>Para actualizar Indaba a una nueva versión, necesitamos el archivo images.tar.</value>
   </data>
   <data name="CreditsTitle" xml:space="preserve">
     <value>Créditos</value>
@@ -334,27 +334,27 @@
     <value>Adelante</value>
   </data>
   <data name="Refresh" xml:space="preserve">
-    <value>Actualizar</value>
+    <value>Refrescar</value>
   </data>
   <data name="GetApp" xml:space="preserve">
-    <value>Localizar aplicación Android</value>
+    <value>Localizar aplicación de Android</value>
   </data>
   <data name="TryFix" xml:space="preserve">
-    <value>Prueba Fix Now</value>
+    <value>Intenta arreglar ahora</value>
   </data>
   <data name="WiFiPolicyErrorDesc" xml:space="preserve">
-    <value>Su red WiFi no está marcada como "Privada". Vaya a Configuración de Windows para cambiar esto.</value>
+    <value>Su red WiFi no está marcada como 'Privada'. Vaya a Configuración de Windows para cambiar esto.</value>
   </data>
   <data name="WiFiPolicyErrorName" xml:space="preserve">
-    <value>Problema de perfil WiFi</value>
+    <value>Problema con el perfil de WiFi</value>
   </data>
   <data name="VideoPlayback" xml:space="preserve">
-    <value>Nota importante: Los vídeos no se reproducen en esta aplicación. Abra el panel en un explorador con el botón de la izquierda.</value>
+    <value>Nota: los videos no se reproducen en esta aplicación. Abra el Tablero en un navegador con el botón de la izquierda.</value>
   </data>
   <data name="BackupComplete" xml:space="preserve">
-    <value>Copia de seguridad completa y guardada en la ubicación de instalación de Our Story.</value>
+    <value>Copia de seguridad completa y guardada en su ubicación de instalación de Indaba.</value>
   </data>
   <data name="BackupError" xml:space="preserve">
-    <value>Se ha producido un error al realizar una copia de seguridad. Por favor, inténtelo de nuevo.</value>
+    <value>Se produjo un error al realizar una copia de seguridad. Inténtalo de nuevo.</value>
   </data>
 </root>

@@ -3,7 +3,6 @@
     <Fragment>
         <DirectoryRef Id="INSTALLFOLDER">
             <Directory Id="dir287BEF6301389D2501D7D15A87596D90" Name="ar" />
-            <Directory Id="dirCCE1D62295D7C7BABB075112B8BF025B" Name="backup" />
             <Directory Id="dir9AE38F4F5CB5E565E774521E138F44FD" Name="es" />
             <Directory Id="dirB55DFDA91FEE7CCCBC65CA7493B75748" Name="fr" />
             <Directory Id="dirCA02E4A7CC6C21D952C5059DC56408F4" Name="GPUCache" />
@@ -88,9 +87,6 @@
             <Component Id="cmp41DC9741013CA4AD62A4A5FF421F08BC" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil84B847A9F8DABE6B95AF875695C9E6D1" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\d3dcompiler_47.dll" />
             </Component>
-            <Component Id="cmp606EB7ABF006368C60735078DEFF8B91" Directory="INSTALLFOLDER" Guid="*">
-                <File Id="filDF37FFDBAF794FB705610E0A82AF4AEA" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\debug.log" />
-            </Component>
             <Component Id="cmp953E935EFD854363EA5BE90BEB265A15" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil1663242DBF722C40CBAF8839CC52B5ED" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\devtools_resources.pak" />
             </Component>
@@ -99,12 +95,6 @@
             </Component>
             <Component Id="cmp192934A067225EB42452B26BA12E45E5" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="filA229F8F78740FBFBFC75888FC3E4ADBA" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\DnsClient.xml" />
-            </Component>
-            <Component Id="cmp247F7E4BC6A9AD1F8EDA11657F30A6B9" Directory="INSTALLFOLDER" Guid="*">
-                <File Id="fil02C75B905ACE6488582C7B2615663D71" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\docker-compose.toolbox.yml" />
-            </Component>
-            <Component Id="cmpFC104E466817F550392DBD8D35399D3C" Directory="INSTALLFOLDER" Guid="*">
-                <File Id="fil930855C8C62553F5BF53E6A33B3F81C6" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\docker-compose.windows.yml" />
             </Component>
             <Component Id="cmp4A0356DEF55BC24F0AD047BF4ACD4F05" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="filD582B2F1862B4CAA696E691E660E8DCE" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\docker-compose.yml" />
@@ -120,6 +110,15 @@
             </Component>
             <Component Id="cmpBDBA16CBEE531189F4ADEB44F36FA9CA" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil22B9AE685C747A265E9A4BC34E90558B" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\icudtl.dat" />
+            </Component>
+            <Component Id="cmp9053C757A40804D88627F617D5695FF5" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil931BACFB05BBF42573F135948D325626" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Indaba Titan.exe" />
+            </Component>
+            <Component Id="cmpDF54FCA29600B9CE97781451669DE325" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filD669EAD4ACBF1044B899627D23E93139" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Indaba Titan.exe.config" />
+            </Component>
+            <Component Id="cmpF098B76F8B7B624348EDC587DCDEECA7" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil8142A207D9A810AFF9137A9D8E5C28A9" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Indaba Titan.pdb" />
             </Component>
             <Component Id="cmp4885AA6D988339A2BD30CA0F495D413A" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="filDD46DE7F563DFDAFE02555DD646EE11D" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Interop.NETWORKLIST.dll" />
@@ -195,15 +194,6 @@
             </Component>
             <Component Id="cmp55A5B3F445AF3A217E89CF12969C1F9C" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil752362D57B82E66E20BF92551B05FFA8" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\NlogViewer.dll" />
-            </Component>
-            <Component Id="cmp1F8720F5B8DAAA40D4A8326CC518E91C" Directory="INSTALLFOLDER" Guid="*">
-                <File Id="fil10DA0E1233BB7897C7E5C30E724463B3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Our Story Titan.exe" />
-            </Component>
-            <Component Id="cmp1BCC96BB71A74DBD392CF9E5D374A77D" Directory="INSTALLFOLDER" Guid="*">
-                <File Id="fil7F72573306AB7FC6C8401FE7325C79A3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Our Story Titan.exe.config" />
-            </Component>
-            <Component Id="cmp90DC23B5A811714FF91DF30083456181" Directory="INSTALLFOLDER" Guid="*">
-                <File Id="fil6F591C232FCD875613A5D6A78916D6B9" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Our Story Titan.pdb" />
             </Component>
             <Component Id="cmp0D5C48EF079E77130CE3AD09F12D9108" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil984AB1273B9303F7E2436858049B29D1" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\Plugin.Connectivity.Abstractions.dll" />
@@ -562,32 +552,14 @@
             <Component Id="cmp83BD19894EC15C0C2E31E9560E9907DE" Directory="INSTALLFOLDER" Guid="*">
                 <File Id="fil34DC90438224002070A1516BFD40825F" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\YamlDotNet.xml" />
             </Component>
-            <Component Id="cmp9A086FE1DE57EE9A0081C73045B946EB" Directory="dir287BEF6301389D2501D7D15A87596D90" Guid="*">
-                <File Id="filF438736BD78D1FFECA05E68C3BE0994B" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\ar\Our Story Titan.resources.dll" />
+            <Component Id="cmp7E6F46136DE0F78C69582436E3C7A16C" Directory="dir287BEF6301389D2501D7D15A87596D90" Guid="*">
+                <File Id="fil320DF5D8AFC9DB75064D9BABE5878813" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\ar\Indaba Titan.resources.dll" />
             </Component>
-            <Component Id="cmp27C72CA2B42614F6AB444C3F498FFA1E" Directory="dirA1669078209AC2E5A35E5C8F9F0E9B48" Guid="*">
-                <File Id="fil0FE218276EBE2BE08A2600CEA9152038" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\backup\132084943775305221\event.json" />
+            <Component Id="cmpB461F24285A775CBA1939FF9E6A28443" Directory="dir9AE38F4F5CB5E565E774521E138F44FD" Guid="*">
+                <File Id="filB05811BECA94AD13522EB7A98D557AF1" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\es\Indaba Titan.resources.dll" />
             </Component>
-            <Component Id="cmpFBC0A50B5945654DB7E71EEFC8537C3D" Directory="dirA1669078209AC2E5A35E5C8F9F0E9B48" Guid="*">
-                <File Id="fil2D7C9377FECA413E5A3FDB669170C143" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\backup\132084943775305221\eventtemplate.json" />
-            </Component>
-            <Component Id="cmp21279091800E1B1B1DAB1ECBB80A5782" Directory="dirA1669078209AC2E5A35E5C8F9F0E9B48" Guid="*">
-                <File Id="filA5E69C6B557D4593A69B462E13991A02" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\backup\132084943775305221\log.json" />
-            </Component>
-            <Component Id="cmpA2D90C4C0CBC9F67DB5A49099F99B8B0" Directory="dirA1669078209AC2E5A35E5C8F9F0E9B48" Guid="*">
-                <File Id="filD7C8BCAF93D5EFD344B47699FBF925BF" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\backup\132084943775305221\shot.json" />
-            </Component>
-            <Component Id="cmpB1827EF1E72AFBBFD0197FEAB32A375F" Directory="dirA1669078209AC2E5A35E5C8F9F0E9B48" Guid="*">
-                <File Id="fil49730C4D2914173499BE14B38C9F48F3" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\backup\132084943775305221\user.json" />
-            </Component>
-            <Component Id="cmp8E076250FFBD4D8DD0A328D04566C373" Directory="dirA1669078209AC2E5A35E5C8F9F0E9B48" Guid="*">
-                <File Id="fil3C805C9A498381031E830F7DBB45314B" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\backup\132084943775305221\whitelabel.json" />
-            </Component>
-            <Component Id="cmp5757FBD6855F5AC691323B8856478267" Directory="dir9AE38F4F5CB5E565E774521E138F44FD" Guid="*">
-                <File Id="fil49F5D5DEEDD7DFFACE8F766267A4262D" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\es\Our Story Titan.resources.dll" />
-            </Component>
-            <Component Id="cmp8F02BC5F07195FE3A22C1A5701ACD0AC" Directory="dirB55DFDA91FEE7CCCBC65CA7493B75748" Guid="*">
-                <File Id="fil5BE37A5477576C17356773407D851DD1" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\fr\Our Story Titan.resources.dll" />
+            <Component Id="cmpC63250E01E53D78E0421A78AD08FB566" Directory="dirB55DFDA91FEE7CCCBC65CA7493B75748" Guid="*">
+                <File Id="fil10A4BED530FE4E09848E0A9FA4D7AF26" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\fr\Indaba Titan.resources.dll" />
             </Component>
             <Component Id="cmpD98D5A90C5CF76F1CF3ABB6B654DE9BB" Directory="dirCA02E4A7CC6C21D952C5059DC56408F4" Guid="*">
                 <File Id="fil72C8998E84524852D93DAE53BDD96DCC" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\GPUCache\data_0" />
@@ -779,10 +751,5 @@
                 <File Id="fil4B6A38C48F99A0356005118F3481E4F7" KeyPath="yes" Source="$(var.Bootlegger.App.Win.TargetDir)\swiftshader\libGLESv2.dll" />
             </Component>
         </ComponentGroup>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dirCCE1D62295D7C7BABB075112B8BF025B">
-            <Directory Id="dirA1669078209AC2E5A35E5C8F9F0E9B48" Name="132084943775305221" />
-        </DirectoryRef>
     </Fragment>
 </Wix>

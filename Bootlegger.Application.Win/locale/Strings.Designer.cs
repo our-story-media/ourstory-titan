@@ -61,7 +61,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Our Story requires additional components to be installed..
+        ///   Looks up a localized string similar to Indaba requires additional components to be installed..
         /// </summary>
         public static string AdditionalComponents {
             get {
@@ -97,7 +97,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Some parts of the Dashboard have stopped working, please restart Our Story.
+        ///   Looks up a localized string similar to Some parts of the Dashboard have stopped working, please restart Indaba.
         /// </summary>
         public static string AppErrorDesc {
             get {
@@ -115,7 +115,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Our Story Dashboard.
+        ///   Looks up a localized string similar to Indaba Dashboard.
         /// </summary>
         public static string AppTitle {
             get {
@@ -142,7 +142,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Backup complete and saved in your Our Story installation location..
+        ///   Looks up a localized string similar to Backup complete and saved in your Indaba installation location..
         /// </summary>
         public static string BackupComplete {
             get {
@@ -196,7 +196,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Closing this application will prevent access to Our Story.
+        ///   Looks up a localized string similar to Closing this application will prevent access to Indaba.
         /// </summary>
         public static string CloseWarning {
             get {
@@ -376,7 +376,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There was a problem installing Our Story. {0}. Please restart and try again..
+        ///   Looks up a localized string similar to There was a problem installing Indaba. {0}. Please restart and try again..
         /// </summary>
         public static string ErrorDialog {
             get {
@@ -439,7 +439,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Make sure your network has not changed since starting Our Story..
+        ///   Looks up a localized string similar to Make sure your network has not changed since starting Indaba..
         /// </summary>
         public static string IpErrorDesc {
             get {
@@ -466,7 +466,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading Our Story Components....
+        ///   Looks up a localized string similar to Loading Indaba Components....
         /// </summary>
         public static string LoadingComponents {
             get {
@@ -529,7 +529,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Our Story Components.
+        ///   Looks up a localized string similar to Indaba Components.
         /// </summary>
         public static string OurStoryBits {
             get {
@@ -700,7 +700,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To update Our Story to a new version we need the images.tar file..
+        ///   Looks up a localized string similar to To update Indaba to a new version we need the images.tar file..
         /// </summary>
         public static string UpdateDescription {
             get {
@@ -718,7 +718,7 @@ namespace Bootlegger.App.Win.locale {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to Our Story.
+        ///   Looks up a localized string similar to Welcome to Indaba.
         /// </summary>
         public static string Welcome {
             get {

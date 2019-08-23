@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
-  <Bundle Name="Our Story Titan" Version="1.0.0.0" Manufacturer="Newcastle University" IconSourceFile="$(var.SolutionDir)Bootlegger.Application.Win\web_hi_res_512_icon.ico" UpgradeCode="baea7c67-a469-4b75-b01e-c69c5e81205b">
+  <Bundle Name="Indaba Titan" Version="1.0.0.0" Manufacturer="Monash University" IconSourceFile="$(var.SolutionDir)Bootlegger.Application.Win\web_hi_res_512_icon.ico" UpgradeCode="baea7c67-a469-4b75-b01e-c69c5e81205b">
     <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLargeLicense">
       <bal:WixStandardBootstrapperApplication
-                  LaunchTarget="[ProgramFilesFolder]\Our Story Titan\Our Story Titan.exe"
+                  LaunchTarget="[ProgramFilesFolder]\Indaba Titan\Indaba Titan.exe"
                   LicenseFile="$(var.SolutionDir)\Bootlegger.Application.Win\Readme.rtf"
                   LogoFile="$(var.SolutionDir)\Bootlegger.Application.Win\logo.bmp"
                   SuppressOptionsUI="yes"

@@ -118,22 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AdditionalComponents" xml:space="preserve">
-    <value>Notre histoire nécessite l'installation de composants supplémentaires.</value>
+    <value>Indaba nécessite l'installation de composants supplémentaires.</value>
   </data>
   <data name="AdditionalSoftware" xml:space="preserve">
-    <value>Un logiciel supplémentaire peut avoir besoin d'être installé et prendre un certain temps supplémentaire. S'il vous plaît être patient ...</value>
+    <value>Des logiciels supplémentaires peuvent devoir être installés et prendre un peu plus de temps. S'il vous plaît soyez patient ...</value>
   </data>
   <data name="Admin" xml:space="preserve">
-    <value>Tâches</value>
+    <value>Admin</value>
   </data>
   <data name="AppTitle" xml:space="preserve">
-    <value>Notre tableau de bord de l'histoire</value>
+    <value>Tableau de bord Indaba</value>
   </data>
   <data name="Back" xml:space="preserve">
-    <value>Précédent</value>
+    <value>Retour</value>
   </data>
   <data name="Backup" xml:space="preserve">
-    <value>Appui</value>
+    <value>Sauvegarde</value>
   </data>
   <data name="BackupData" xml:space="preserve">
     <value>Données de sauvegarde</value>
@@ -157,106 +157,106 @@
     <value>Documentation</value>
   </data>
   <data name="DownloadFiles" xml:space="preserve">
-    <value>Télécharger des fichiers</value>
+    <value>Telecharger des fichiers</value>
   </data>
   <data name="DownloadingContent" xml:space="preserve">
     <value>Téléchargement des mises à jour</value>
   </data>
   <data name="InstallRequirements" xml:space="preserve">
-    <value>Conditions d'installation</value>
+    <value>Exigences d'installation</value>
   </data>
   <data name="LoadImages" xml:space="preserve">
     <value>Localiser le fichier Images.tar</value>
   </data>
   <data name="LocateImages" xml:space="preserve">
-    <value>Localisez le fichier images.tar qui est venu avec vos fichiers d'installation, ou allez en ligne pour télécharger les composants restants.</value>
+    <value>Localisez le fichier images.tar fourni avec vos fichiers d'installation ou connectez-vous en ligne pour télécharger les composants restants.</value>
   </data>
   <data name="Log" xml:space="preserve">
-    <value>Rapport</value>
+    <value>Bûche</value>
   </data>
   <data name="OpenDashboard" xml:space="preserve">
     <value>Tableau de bord ouvert</value>
   </data>
   <data name="OpenFiles" xml:space="preserve">
-    <value>Ouvrez le dossier vidéo</value>
+    <value>Ouvrir le dossier vidéo</value>
   </data>
   <data name="Or" xml:space="preserve">
-    <value>ou</value>
+    <value>Ou</value>
   </data>
   <data name="RestoreData" xml:space="preserve">
     <value>Restaurer les données</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Paramètres</value>
+    <value>Réglages</value>
   </data>
   <data name="ShareWarning1" xml:space="preserve">
-    <value>S'il vous plaît activer le partage en faisant ce qui suit:</value>
+    <value>Activez le partage en procédant comme suit:</value>
   </data>
   <data name="ShareWarning2" xml:space="preserve">
-    <value>Ce message disparaîtra lorsque vous aurez terminé cette étape...</value>
+    <value>Ce message disparaîtra lorsque vous aurez terminé cette étape ...</value>
   </data>
   <data name="starting" xml:space="preserve">
-    <value>démarrage...</value>
+    <value>départ...</value>
   </data>
   <data name="Update" xml:space="preserve">
-    <value>mettre à jour</value>
+    <value>Mettre à jour</value>
   </data>
   <data name="UpdateApplication" xml:space="preserve">
-    <value>Demande de mise à jour</value>
+    <value>Mettre à jour l'application</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Bienvenue dans notre histoire</value>
+    <value>Bienvenue chez Indaba</value>
   </data>
   <data name="WiFi" xml:space="preserve">
     <value>Vos paramètres WiFi actuels ne sont pas corrects.</value>
   </data>
   <data name="WiFi2" xml:space="preserve">
-    <value>Connectez-vous à votre connexion WiFi de déploiement et nous tenterons d'automatiser les paramètres lorsque vous appuyez sur continuez.</value>
+    <value>Connectez-vous à votre réseau Wi-Fi de déploiement et nous tenterons de configurer automatiquement les paramètres lorsque vous cliquez sur Continuer.</value>
   </data>
   <data name="AdditionalDownloads" xml:space="preserve">
-    <value>Des téléchargements supplémentaires sont nécessaires, s'il vous plaît assurez-vous que vous avez la connectivité Internet avant de continuer</value>
+    <value>Des téléchargements supplémentaires sont nécessaires. Assurez-vous de disposer de la connectivité Internet avant de continuer.</value>
   </data>
   <data name="PleaseWait" xml:space="preserve">
-    <value>Veuillez patienter...</value>
+    <value>S'il vous plaît, attendez...</value>
   </data>
   <data name="CloseWarning" xml:space="preserve">
-    <value>La fermeture de cette application empêchera l'accès à Notre histoire</value>
+    <value>La fermeture de cette application empêchera l'accès à Indaba</value>
   </data>
   <data name="DownloadingProgress" xml:space="preserve">
-    <value>Téléchargement de {0} de {1}</value>
+    <value>Téléchargement de {0} sur {1}</value>
   </data>
   <data name="ResettingNetwork" xml:space="preserve">
-    <value>Resetting Network...</value>
+    <value>Réinitialisation du réseau ...</value>
   </data>
   <data name="StoppingApplication" xml:space="preserve">
-    <value>Arrêt de l'application...</value>
+    <value>Arrêt de l'application ...</value>
   </data>
   <data name="InitiatingDownload" xml:space="preserve">
-    <value>Initiation Télécharger...</value>
+    <value>Lancer le téléchargement ...</value>
   </data>
   <data name="ProgressLabel" xml:space="preserve">
-    <value>{0} {1} de {2}</value>
+    <value>{0} {1} sur {2}</value>
   </data>
   <data name="DownloadingDocker" xml:space="preserve">
-    <value>Téléchargement Docker Installateur...</value>
+    <value>Téléchargement du programme d'installation de Docker ...</value>
   </data>
   <data name="InstallingDocker" xml:space="preserve">
-    <value>Installation de Docker...</value>
+    <value>Installation de Docker ...</value>
   </data>
   <data name="StartingDocker" xml:space="preserve">
-    <value>Démarrer Docker...</value>
+    <value>Démarrer Docker ...</value>
   </data>
   <data name="LoadingComponents" xml:space="preserve">
-    <value>Chargement de nos composantes de l'histoire...</value>
+    <value>Chargement des composants Indaba ...</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Erreur</value>
   </data>
   <data name="ErrorDialog" xml:space="preserve">
-    <value>Il y avait un problème d'installation de notre histoire. S'il vous plaît redémarrer et essayer à nouveau.</value>
+    <value>Un problème est survenu lors de l'installation d'Indaba. {0}. Veuillez redémarrer et réessayer.</value>
   </data>
   <data name="DownloadWarning" xml:space="preserve">
-    <value>Téléchargement de {0} de {1}... \nCela peut prendre un certain temps...</value>
+    <value>Téléchargement de {0} sur {1} ... \ nCela peut prendre un certain temps ...</value>
   </data>
   <data name="Downloading" xml:space="preserve">
     <value>Téléchargement</value>
@@ -265,13 +265,13 @@
     <value>Installateur Docker</value>
   </data>
   <data name="OurStoryBits" xml:space="preserve">
-    <value>Nos composantes de l'histoire</value>
+    <value>Composants Indaba</value>
   </data>
   <data name="StartingApplication" xml:space="preserve">
-    <value>Demande de départ</value>
+    <value>Application de départ</value>
   </data>
   <data name="Running" xml:space="preserve">
-    <value>action de courir</value>
+    <value>Fonctionnement</value>
   </data>
   <data name="ProblemStartingApplication" xml:space="preserve">
     <value>Problème de démarrage de l'application!</value>
@@ -280,13 +280,13 @@
     <value>Réseau invalide</value>
   </data>
   <data name="CheckNetworkSettingsAndTryAgain" xml:space="preserve">
-    <value>Vérifiez les paramètres du réseau et réessayez.</value>
+    <value>Autoriser cette application à modifier automatiquement les paramètres pour vous?</value>
   </data>
   <data name="ContinueAnyway" xml:space="preserve">
-    <value>Continuer quoi qu'il en soit</value>
+    <value>Modifier automatiquement les paramètres</value>
   </data>
   <data name="ManuallyChangeSettings" xml:space="preserve">
-    <value>Modification manuelle des paramètres</value>
+    <value>Modifier manuellement les paramètres</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Statut</value>
@@ -295,43 +295,43 @@
     <value>Tableau de bord</value>
   </data>
   <data name="AppErrorDesc" xml:space="preserve">
-    <value>Certaines parties du tableau de bord ont cessé de fonctionner, s'il vous plaît redémarrer notre histoire</value>
+    <value>Certaines parties du tableau de bord ont cessé de fonctionner. Veuillez redémarrer Indaba.</value>
   </data>
   <data name="AppErrorName" xml:space="preserve">
     <value>Problème d'application</value>
   </data>
   <data name="DashboardErrorDesc" xml:space="preserve">
-    <value>Le tableau de bord ne semble pas être disponible pour les autres appareils. Votre réseau a-t-il changé ?</value>
+    <value>Le tableau de bord ne semble pas être disponible pour les autres appareils. Votre réseau a-t-il changé?</value>
   </data>
   <data name="DashboardErrorName" xml:space="preserve">
     <value>Problème d'accès aux applications</value>
   </data>
   <data name="DiskSpaceErrorDesc" xml:space="preserve">
-    <value>Il n'y a pas assez d'espace disque pour télécharger ou traiter des vidéos. S'il vous plaît supprimer les anciens fichiers.</value>
+    <value>Il n'y a pas assez d'espace disque pour télécharger ou traiter des vidéos. Veuillez supprimer les anciens fichiers.</value>
   </data>
   <data name="DiskSpaceErrorName" xml:space="preserve">
-    <value>Hors de l'espace de disque</value>
+    <value>Espace disque insuffisant</value>
   </data>
   <data name="IpErrorDesc" xml:space="preserve">
-    <value>Assurez-vous que votre réseau n'a pas changé depuis le début de Notre histoire.</value>
+    <value>Assurez-vous que votre réseau n'a pas changé depuis le démarrage d'Indaba.</value>
   </data>
   <data name="IpErrorName" xml:space="preserve">
     <value>Erreur d'adresse IP</value>
   </data>
   <data name="WiFiErrorDesc" xml:space="preserve">
-    <value>Vous n'êtes connecté à aucun réseau WiFi. Veuillez vérifier vos paramètres.</value>
+    <value>Vous n'êtes connecté à aucun réseau WiFi. S'il vous plaît vérifier vos paramètres.</value>
   </data>
   <data name="WiFiErrorName" xml:space="preserve">
     <value>WiFi non connecté</value>
   </data>
   <data name="UpdateDescription" xml:space="preserve">
-    <value>Pour mettre à jour Notre histoire à une nouvelle version, nous avons besoin du fichier images.tar.</value>
+    <value>Pour mettre à jour Indaba vers une nouvelle version, nous avons besoin du fichier images.tar.</value>
   </data>
   <data name="CreditsTitle" xml:space="preserve">
     <value>Crédits</value>
   </data>
   <data name="Forward" xml:space="preserve">
-    <value>En avant</value>
+    <value>Vers l'avant</value>
   </data>
   <data name="Refresh" xml:space="preserve">
     <value>Rafraîchir</value>
@@ -340,21 +340,21 @@
     <value>Localiser l'application Android</value>
   </data>
   <data name="TryFix" xml:space="preserve">
-    <value>Essayez Fix Now</value>
+    <value>Essayez de réparer maintenant</value>
   </data>
   <data name="WiFiPolicyErrorDesc" xml:space="preserve">
-    <value>Votre réseau WiFi n'est pas marqué comme «privé». S'il vous plaît aller à Paramètres Windows pour changer cela.</value>
+    <value>Votre réseau WiFi n'est pas marqué comme "Privé". Veuillez aller dans les paramètres Windows pour changer cela.</value>
   </data>
   <data name="WiFiPolicyErrorName" xml:space="preserve">
     <value>Problème de profil WiFi</value>
   </data>
   <data name="VideoPlayback" xml:space="preserve">
-    <value>Remarque : les vidéos ne sont pas diffusées dans cette application. Ouvrez le tableau de bord dans un navigateur à l'aide du bouton à gauche.</value>
+    <value>Remarque: les vidéos ne sont pas lues dans cette application. Ouvrez le tableau de bord dans un navigateur à l’aide du bouton situé à gauche.</value>
   </data>
   <data name="BackupComplete" xml:space="preserve">
-    <value>Sauvegarde complète et sauvegardée dans votre emplacement d'installation Our Story.</value>
+    <value>Sauvegarde terminée et enregistrée dans votre emplacement d'installation Indaba.</value>
   </data>
   <data name="BackupError" xml:space="preserve">
-    <value>Une erreur s'est produite en effectuant une sauvegarde. S'll vous plaît, réessayez.</value>
+    <value>Une erreur est survenue lors de la sauvegarde. Veuillez réessayer.</value>
   </data>
 </root>

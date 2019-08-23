@@ -6,7 +6,7 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>c9d2bc9f-261a-49ec-8925-0af50f93814b</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>Our Story Titan</OutputName>
+    <OutputName>Indaba Titan</OutputName>
     <OutputType>Package</OutputType>
     <Name>Installer</Name>
   </PropertyGroup>

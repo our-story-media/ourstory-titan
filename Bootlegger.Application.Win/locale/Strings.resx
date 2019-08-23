@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AdditionalComponents" xml:space="preserve">
-    <value>Our Story requires additional components to be installed.</value>
+    <value>Indaba requires additional components to be installed.</value>
   </data>
   <data name="AdditionalSoftware" xml:space="preserve">
     <value>Additional software may need to be installed and take some additional time. Please be patient...</value>
@@ -127,7 +127,7 @@
     <value>Admin</value>
   </data>
   <data name="AppTitle" xml:space="preserve">
-    <value>Our Story Dashboard</value>
+    <value>Indaba Dashboard</value>
   </data>
   <data name="Back" xml:space="preserve">
     <value>Back</value>
@@ -205,7 +205,7 @@
     <value>Update Application</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Welcome to Our Story</value>
+    <value>Welcome to Indaba</value>
   </data>
   <data name="WiFi" xml:space="preserve">
     <value>Your current WiFi settings are not correct.</value>
@@ -220,7 +220,7 @@
     <value>please wait...</value>
   </data>
   <data name="CloseWarning" xml:space="preserve">
-    <value>Closing this application will prevent access to Our Story</value>
+    <value>Closing this application will prevent access to Indaba</value>
   </data>
   <data name="DownloadingProgress" xml:space="preserve">
     <value>Downloading {0} of {1}</value>
@@ -247,13 +247,13 @@
     <value>Starting Docker...</value>
   </data>
   <data name="LoadingComponents" xml:space="preserve">
-    <value>Loading Our Story Components...</value>
+    <value>Loading Indaba Components...</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
   <data name="ErrorDialog" xml:space="preserve">
-    <value>There was a problem installing Our Story. {0}. Please restart and try again.</value>
+    <value>There was a problem installing Indaba. {0}. Please restart and try again.</value>
   </data>
   <data name="DownloadWarning" xml:space="preserve">
     <value>Downloading {0} of {1}...\nThis may take some time...</value>
@@ -265,7 +265,7 @@
     <value>Docker Installer</value>
   </data>
   <data name="OurStoryBits" xml:space="preserve">
-    <value>Our Story Components</value>
+    <value>Indaba Components</value>
   </data>
   <data name="StartingApplication" xml:space="preserve">
     <value>Starting Application</value>
@@ -295,7 +295,7 @@
     <value>Dashboard</value>
   </data>
   <data name="AppErrorDesc" xml:space="preserve">
-    <value>Some parts of the Dashboard have stopped working, please restart Our Story</value>
+    <value>Some parts of the Dashboard have stopped working, please restart Indaba</value>
   </data>
   <data name="AppErrorName" xml:space="preserve">
     <value>Application Problem</value>
@@ -313,7 +313,7 @@
     <value>Out of Disk Space</value>
   </data>
   <data name="IpErrorDesc" xml:space="preserve">
-    <value>Make sure your network has not changed since starting Our Story.</value>
+    <value>Make sure your network has not changed since starting Indaba.</value>
   </data>
   <data name="IpErrorName" xml:space="preserve">
     <value>IP Address Error</value>
@@ -325,7 +325,7 @@
     <value>WiFi Not Connected</value>
   </data>
   <data name="UpdateDescription" xml:space="preserve">
-    <value>To update Our Story to a new version we need the images.tar file.</value>
+    <value>To update Indaba to a new version we need the images.tar file.</value>
   </data>
   <data name="CreditsTitle" xml:space="preserve">
     <value>Credits</value>
@@ -352,7 +352,7 @@
     <value>Please Note: Videos do not play in this application. Open the Dashboard in a Browser using the button on the left.</value>
   </data>
   <data name="BackupComplete" xml:space="preserve">
-    <value>Backup complete and saved in your Our Story installation location.</value>
+    <value>Backup complete and saved in your Indaba installation location.</value>
   </data>
   <data name="BackupError" xml:space="preserve">
     <value>An error occured performing a backup. Please try again.</value>

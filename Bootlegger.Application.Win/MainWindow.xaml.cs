@@ -114,6 +114,8 @@ namespace Bootlegger.App.Win
             App.BootleggerApp.Log.Info($"Init Window");
             progress.Visibility = Visibility.Hidden;
 
+            MachineId.Text = App.BootleggerApp.GetMachineId();
+
             //HACK FOR DEGUB
             //App.BootleggerApp.IsInstalled = true;
             //_mainFrame.Content = new Running();

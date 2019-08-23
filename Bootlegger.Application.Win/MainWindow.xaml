@@ -14,11 +14,14 @@
         Title="{x:Static p:Strings.AppTitle}" Height="768" Width="1124" ResizeMode="CanResizeWithGrip" MinWidth="1024" MinHeight="768" IsMaxRestoreButtonEnabled="True">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
+            <Border  VerticalAlignment="Stretch" Padding="6">
+                <TextBlock Opacity="0.6" x:Name="MachineId" VerticalAlignment="Center"/>
+            </Border>
             <Button Content="{x:Static p:Strings.Documentation}" Click="Button_Click" />
             <ComboBox DisplayMemberPath="NativeName" Background="Transparent" x:Name="langs" BorderThickness="0" SelectionChanged="Langs_SelectionChanged">
 
             </ComboBox>
-            <!--<Button Content="{x:Static p:Strings.CreditsTitle}" Click="Button_Click_1"/>-->
+            
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     

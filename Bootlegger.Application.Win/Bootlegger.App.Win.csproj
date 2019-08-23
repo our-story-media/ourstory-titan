@@ -11,7 +11,7 @@
     <ProjectGuid>{90C52F7F-6BB0-4C96-A303-F3F8DCCF7BC5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Bootlegger.App.Win</RootNamespace>
-    <AssemblyName>Our Story Titan</AssemblyName>
+    <AssemblyName>Indaba Titan</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -32,8 +32,8 @@
     <InstallUrl>https://raw.githubusercontent.com/digitalinteraction/ourstory-titan/master/install/online/</InstallUrl>
     <UpdateUrl>https://raw.githubusercontent.com/digitalinteraction/ourstory-titan/master/install/online/</UpdateUrl>
     <SupportUrl>https://guide.ourstory.video</SupportUrl>
-    <ProductName>Our Story Titan</ProductName>
-    <PublisherName>Newcastle University</PublisherName>
+    <ProductName>Indaba Titan</ProductName>
+    <PublisherName>Monash University</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.0</ApplicationVersion>
@@ -314,10 +314,12 @@
     <EmbeddedResource Include="locale\Strings.ar.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.ar.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="locale\Strings.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.fr.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="locale\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -326,6 +328,7 @@
     <EmbeddedResource Include="locale\Strings.es.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.es.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <Resource Include="logo_install.bmp" />
     <Resource Include="logo_back.bmp" />

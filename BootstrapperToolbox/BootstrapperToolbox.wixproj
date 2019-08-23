@@ -6,7 +6,7 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>baea7c67-a469-4b75-b01e-c69c5e81205b</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>OurStoryToolbox</OutputName>
+    <OutputName>IndabaToolbox</OutputName>
     <OutputType>Bundle</OutputType>
     <Name>BootstrapperToolbox</Name>
   </PropertyGroup>

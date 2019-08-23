@@ -54,7 +54,7 @@ namespace Bootlegger.App.Lib
 
         #region Installer
 
-        private string InstallPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OurStoryTitan", "installed");
+        private string InstallPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "IndabaTitan", "installed");
 
         public bool IsInstalled
         {
@@ -452,7 +452,7 @@ namespace Bootlegger.App.Lib
         internal void OpenLog()
         {
 
-            System.Diagnostics.Process.Start($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\OurStoryTitan\log.txt");
+            System.Diagnostics.Process.Start($@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\IndabaTitan\log.txt");
         }
 
         public bool WiFiSettingsOk
@@ -491,7 +491,7 @@ namespace Bootlegger.App.Lib
 
         public void OpenDocs()
         {
-            System.Diagnostics.Process.Start("https://ourstory.dev/guide/");
+            System.Diagnostics.Process.Start("https://indaba.dev/guide/");
         }
 
 
@@ -679,9 +679,14 @@ namespace Bootlegger.App.Lib
                 {
                     currentProcess.Close();
                 }
+
+                //Get unique ID:
+                var machineid = GetMachineId();
+
                 //if not running:
                 currentProcess = new Process();
                 currentProcess.StartInfo = new ProcessStartInfo("docker-compose");
+                currentProcess.StartInfo.Environment.Add("LOGINCODE", machineid);
                 currentProcess.StartInfo.WorkingDirectory = Directory.GetCurrentDirectory();
                 currentProcess.StartInfo.Arguments = $"-f \"{DockerComposeFile}\" -p bootleggerlocal up -d";
                 //currentProcess.StartInfo.Verb = "RUNAS";
@@ -763,6 +768,23 @@ namespace Bootlegger.App.Lib
 
         BackgroundWorker monitor;
 
+        public string GetMachineId()
+        {
+            string cpuInfo = string.Empty;
+            ManagementClass mc = new ManagementClass("win32_processor");
+            ManagementObjectCollection moc = mc.GetInstances();
+
+            foreach (ManagementObject mo in moc)
+            {
+                if (cpuInfo == "")
+                {
+                    //Get only the first CPU's ID
+                    cpuInfo = mo.Properties["processorID"].Value.ToString();
+                    break;
+                }
+            }
+            return cpuInfo.Substring(cpuInfo.Length - 8);
+        }
         void StartMonitor()
         {
             monitor = new BackgroundWorker();

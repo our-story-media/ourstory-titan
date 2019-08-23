@@ -118,46 +118,46 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AdditionalComponents" xml:space="preserve">
-    <value>تتطلب قصتنا تركيب مكونات إضافية.</value>
+    <value>يتطلب Indaba مكونات إضافية ليتم تثبيتها.</value>
   </data>
   <data name="AdditionalSoftware" xml:space="preserve">
-    <value>قد تحتاج برامج إضافية إلى تثبيت وتستغرق بعض الوقت الإضافي. يرجى التحلي بالصبر...</value>
+    <value>قد يلزم تثبيت برنامج إضافي ويستغرق بعض الوقت الإضافي. يرجى التحلي بالصبر ...</value>
   </data>
   <data name="Admin" xml:space="preserve">
-    <value>المشرف</value>
+    <value>مشرف</value>
   </data>
   <data name="AppTitle" xml:space="preserve">
-    <value>لوحة معلومات قصتنا</value>
+    <value>إندابا لوحة القيادة</value>
   </data>
   <data name="Back" xml:space="preserve">
-    <value>إلى الخلف</value>
+    <value>الى الخلف</value>
   </data>
   <data name="Backup" xml:space="preserve">
-    <value>النسخ الاحتياطي</value>
+    <value>دعم</value>
   </data>
   <data name="BackupData" xml:space="preserve">
-    <value>بيانات النسخ الاحتياطي</value>
+    <value>نسخ إحتياطي للبيانات</value>
   </data>
   <data name="cancel" xml:space="preserve">
-    <value>إلغاء الأمر</value>
+    <value>إلغاء</value>
   </data>
   <data name="CloseApplication" xml:space="preserve">
-    <value>إغلاق التطبيق</value>
+    <value>تطبيق وثيقة</value>
   </data>
   <data name="Connectivity" xml:space="preserve">
     <value>الاتصال</value>
   </data>
   <data name="Continue" xml:space="preserve">
-    <value>مواصله</value>
+    <value>استمر</value>
   </data>
   <data name="ContinueDialogTitle" xml:space="preserve">
-    <value>مواصله؟</value>
+    <value>استمر؟</value>
   </data>
   <data name="Documentation" xml:space="preserve">
-    <value>الوثائق</value>
+    <value>كابل بيانات</value>
   </data>
   <data name="DownloadFiles" xml:space="preserve">
-    <value>تحميل الملفات</value>
+    <value>تحميل ملفات</value>
   </data>
   <data name="DownloadingContent" xml:space="preserve">
     <value>تنزيل التحديثات</value>
@@ -169,34 +169,34 @@
     <value>حدد موقع ملف Images.tar</value>
   </data>
   <data name="LocateImages" xml:space="preserve">
-    <value>حدد موقع الملف images.tar الذي جاء مع ملفات التثبيت، أو انتقل عبر الإنترنت لتنزيل المكونات المتبقية.</value>
+    <value>حدد موقع ملف images.tar المرفق مع ملفات التثبيت الخاصة بك ، أو انتقل إلى الإنترنت لتنزيل المكونات المتبقية.</value>
   </data>
   <data name="Log" xml:space="preserve">
     <value>سجل</value>
   </data>
   <data name="OpenDashboard" xml:space="preserve">
-    <value>فتح لوحة المعلومات</value>
+    <value>افتح لوحة القيادة</value>
   </data>
   <data name="OpenFiles" xml:space="preserve">
-    <value>فتح مجلد الفيديو</value>
+    <value>افتح مجلد الفيديو</value>
   </data>
   <data name="Or" xml:space="preserve">
-    <value>او</value>
+    <value>أو</value>
   </data>
   <data name="RestoreData" xml:space="preserve">
-    <value>استعادة البيانات</value>
+    <value>إستعادة البيانات</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>اعدادات</value>
+    <value>الإعدادات</value>
   </data>
   <data name="ShareWarning1" xml:space="preserve">
-    <value>الرجاء تمكين المشاركة عن طريق القيام بما يلي:</value>
+    <value>يرجى تمكين المشاركة عن طريق القيام بما يلي:</value>
   </data>
   <data name="ShareWarning2" xml:space="preserve">
-    <value>ستختفي هذه الرسالة عند إكمال هذه الخطوة...</value>
+    <value>ستختفي هذه الرسالة عند الانتهاء من هذه الخطوة ...</value>
   </data>
   <data name="starting" xml:space="preserve">
-    <value>بدء...</value>
+    <value>ابتداء...</value>
   </data>
   <data name="Update" xml:space="preserve">
     <value>تحديث</value>
@@ -205,73 +205,73 @@
     <value>تحديث التطبيق</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>مرحبا بكم في قصتنا</value>
+    <value>مرحبا بكم في إندابا</value>
   </data>
   <data name="WiFi" xml:space="preserve">
     <value>إعدادات WiFi الحالية غير صحيحة.</value>
   </data>
   <data name="WiFi2" xml:space="preserve">
-    <value>قم بالاتصال بشبكة Wi-Fi الخاصة بك في النشر وسنحاول تكوين الإعدادات تلقائيًا عند الضغط على المتابعة.</value>
+    <value>قم بالاتصال بشبكة WiFi النشر الخاصة بك وسنحاول تكوين الإعدادات تلقائيًا عند الضغط على "متابعة".</value>
   </data>
   <data name="AdditionalDownloads" xml:space="preserve">
-    <value>مطلوب تنزيلات إضافية، يرجى التأكد من أن لديك اتصال بالإنترنت قبل المتابعة</value>
+    <value>يلزم تنزيلات إضافية ، يرجى التأكد من أن لديك اتصال بالإنترنت قبل المتابعة</value>
   </data>
   <data name="PleaseWait" xml:space="preserve">
-    <value>الرجاء الانتظار...</value>
+    <value>ارجوك انتظر...</value>
   </data>
   <data name="CloseWarning" xml:space="preserve">
-    <value>إغلاق هذا التطبيق سوف يمنع الوصول إلى قصتنا</value>
+    <value>إغلاق هذا التطبيق سيمنع الوصول إلى إندابا</value>
   </data>
   <data name="DownloadingProgress" xml:space="preserve">
     <value>تنزيل {0} من {1}</value>
   </data>
   <data name="ResettingNetwork" xml:space="preserve">
-    <value>يتم الآن إعادة تعيين شبكة الاتصال...</value>
+    <value>إعادة ضبط الشبكة ...</value>
   </data>
   <data name="StoppingApplication" xml:space="preserve">
-    <value>يتم الآن إيقاف التطبيق...</value>
+    <value>إيقاف التطبيق ...</value>
   </data>
   <data name="InitiatingDownload" xml:space="preserve">
-    <value>بدء التحميل...</value>
+    <value>جارٍ بدء التنزيل ...</value>
   </data>
   <data name="ProgressLabel" xml:space="preserve">
     <value>{0} {1} من {2}</value>
   </data>
   <data name="DownloadingDocker" xml:space="preserve">
-    <value>يتم الآن تنزيل مثبت المرسى...</value>
+    <value>جارٍ تنزيل Docker Installer ...</value>
   </data>
   <data name="InstallingDocker" xml:space="preserve">
-    <value>يتم الآن تثبيت المرسى...</value>
+    <value>جارٍ تثبيت Docker ...</value>
   </data>
   <data name="StartingDocker" xml:space="preserve">
-    <value>بدء تشغيل المرسى...</value>
+    <value>جارٍ البدء في وضع الإرساء ...</value>
   </data>
   <data name="LoadingComponents" xml:space="preserve">
-    <value>تحميل مكونات قصتنا...</value>
+    <value>جارٍ تحميل مكونات Indaba ...</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>الخطا</value>
+    <value>خطأ</value>
   </data>
   <data name="ErrorDialog" xml:space="preserve">
-    <value>كانت هناك مشكلة في تثبيت قصتنا. {0}. الرجاء إعادة التشغيل والمحاولة مرة أخرى.</value>
+    <value>حدثت مشكلة أثناء تثبيت Indaba. {0}. الرجاء إعادة التشغيل والمحاولة مرة أخرى.</value>
   </data>
   <data name="DownloadWarning" xml:space="preserve">
-    <value>قد يستغرق تنزيل {0} {1}...\n هذا بعض الوقت...</value>
+    <value>جارٍ التنزيل {0} من {1} ... \ n قد يستغرق هذا بعض الوقت ...</value>
   </data>
   <data name="Downloading" xml:space="preserve">
-    <value>تحميل</value>
+    <value>جارى التحميل</value>
   </data>
   <data name="DockerInstaller" xml:space="preserve">
-    <value>المثبت المرسى</value>
+    <value>المثبت عامل الميناء</value>
   </data>
   <data name="OurStoryBits" xml:space="preserve">
-    <value>مكونات قصتنا</value>
+    <value>مكونات إندابا</value>
   </data>
   <data name="StartingApplication" xml:space="preserve">
     <value>بدء التطبيق</value>
   </data>
   <data name="Running" xml:space="preserve">
-    <value>تشغيل</value>
+    <value>جري</value>
   </data>
   <data name="ProblemStartingApplication" xml:space="preserve">
     <value>مشكلة في بدء التطبيق!</value>
@@ -280,58 +280,58 @@
     <value>شبكة غير صالحة</value>
   </data>
   <data name="CheckNetworkSettingsAndTryAgain" xml:space="preserve">
-    <value>تحقق من إعدادات الشبكة وحاول مرة أخرى.</value>
+    <value>هل تسمح لهذا التطبيق بتغيير الإعدادات تلقائيًا لك؟</value>
   </data>
   <data name="ContinueAnyway" xml:space="preserve">
-    <value>متابعة على أي حال</value>
+    <value>تغيير الإعدادات تلقائيًا</value>
   </data>
   <data name="ManuallyChangeSettings" xml:space="preserve">
     <value>تغيير الإعدادات يدويًا</value>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>حاله</value>
+    <value>الحالة</value>
   </data>
   <data name="Dashboard" xml:space="preserve">
-    <value>لوحه القياده</value>
+    <value>لوحة القيادة</value>
   </data>
   <data name="AppErrorDesc" xml:space="preserve">
-    <value>توقفت بعض أجزاء لوحة المعلومات عن العمل، الرجاء إعادة تشغيل قصتنا</value>
+    <value>توقف بعض أجزاء لوحة المعلومات عن العمل ، يرجى إعادة تشغيل Indaba</value>
   </data>
   <data name="AppErrorName" xml:space="preserve">
     <value>مشكلة التطبيق</value>
   </data>
   <data name="DashboardErrorDesc" xml:space="preserve">
-    <value>لا يبدو أن لوحة المعلومات متوفرة للأجهزة الأخرى. هل تغيرت شبكتك؟</value>
+    <value>لا يبدو أن لوحة المعلومات متاحة للأجهزة الأخرى. هل تغيرت شبكتك؟</value>
   </data>
   <data name="DashboardErrorName" xml:space="preserve">
     <value>مشكلة الوصول إلى التطبيق</value>
   </data>
   <data name="DiskSpaceErrorDesc" xml:space="preserve">
-    <value>لا توجد مساحة كافية على القرص لتحميل مقاطع الفيديو أو معالجتها. الرجاء إزالة الملفات القديمة.</value>
+    <value>لا توجد مساحة كافية على القرص لتحميل مقاطع الفيديو أو معالجتها. يرجى إزالة الملفات القديمة.</value>
   </data>
   <data name="DiskSpaceErrorName" xml:space="preserve">
-    <value>خارج مساحة القرص</value>
+    <value>انتهت مساحة التخزين</value>
   </data>
   <data name="IpErrorDesc" xml:space="preserve">
-    <value>تأكد من أن شبكتك لم تتغير منذ بدء تشغيل قصتنا.</value>
+    <value>تأكد من عدم تغير شبكتك منذ بدء تشغيل Indaba.</value>
   </data>
   <data name="IpErrorName" xml:space="preserve">
     <value>خطأ في عنوان IP</value>
   </data>
   <data name="WiFiErrorDesc" xml:space="preserve">
-    <value>أنت غير متصل بأي شبكة Wi-Fi. الرجاء التحقق من الإعدادات الخاصة بك.</value>
+    <value>أنت غير متصل بأي شبكة WiFi. يرجى التحقق من الإعدادات الخاصة بك.</value>
   </data>
   <data name="WiFiErrorName" xml:space="preserve">
     <value>واي فاي غير متصل</value>
   </data>
   <data name="UpdateDescription" xml:space="preserve">
-    <value>لتحديث قصتنا إلى إصدار جديد نحن بحاجة إلى ملف images.tar.</value>
+    <value>لتحديث Indaba إلى إصدار جديد ، نحتاج إلى ملف images.tar.</value>
   </data>
   <data name="CreditsTitle" xml:space="preserve">
-    <value>الائتمانات</value>
+    <value>قروض</value>
   </data>
   <data name="Forward" xml:space="preserve">
-    <value>الي الامام</value>
+    <value>إلى الأمام</value>
   </data>
   <data name="Refresh" xml:space="preserve">
     <value>تحديث</value>
@@ -343,18 +343,18 @@
     <value>حاول إصلاح الآن</value>
   </data>
   <data name="WiFiPolicyErrorDesc" xml:space="preserve">
-    <value>لم يتم وضع علامة على شبكة Wi-Fi على أنها "خاصة". الرجاء الانتقال إلى إعدادات Windows لتغيير هذا.</value>
+    <value>لم يتم وضع علامة على شبكة WiFi الخاصة بك. يرجى الذهاب إلى إعدادات ويندوز لتغيير هذا.</value>
   </data>
   <data name="WiFiPolicyErrorName" xml:space="preserve">
-    <value>قضية ملف تعريف WiFi</value>
+    <value>الملف الشخصي واي فاي القضية</value>
   </data>
   <data name="VideoPlayback" xml:space="preserve">
-    <value>يرجى ملاحظة: أشرطة الفيديو لا تلعب في هذا التطبيق. افتح لوحة المعلومات في مستعرض باستخدام الزر الموجود على اليسار.</value>
+    <value>يرجى ملاحظة: الفيديو لا تلعب في هذا التطبيق. افتح لوحة المعلومات في متصفح باستخدام الزر الموجود على اليسار.</value>
   </data>
   <data name="BackupComplete" xml:space="preserve">
-    <value>اكتمال النسخ الاحتياطي وحفظه في موقع تثبيت قصتنا.</value>
+    <value>النسخ الاحتياطي كاملة وحفظها في موقع التثبيت Indaba الخاص بك.</value>
   </data>
   <data name="BackupError" xml:space="preserve">
-    <value>حدث خطأ أثناء إجراء نسخة احتياطية. الرجاء المحاولة مرة أخرى.</value>
+    <value>حدث خطأ أثناء إجراء نسخة احتياطية. حاول مرة اخرى.</value>
   </data>
 </root>

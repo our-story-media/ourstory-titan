@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension" xmlns:fire="http://schemas.microsoft.com/wix/FirewallExtension">
-  <Product Id="*" Name="Our Story Titan" Language="1033" Version="1.0.0.0" Manufacturer="Our Story Media" UpgradeCode="07a6b158-3593-4c10-9200-baf92006faeb">
+  <Product Id="*" Name="Indaba Titan" Language="1033" Version="1.0.0.0" Manufacturer="Monash University" UpgradeCode="07a6b158-3593-4c10-9200-baf92006faeb">
     <Package InstallerVersion="301" Compressed="yes" InstallScope="perMachine" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     <MediaTemplate EmbedCab="yes" />
 
-    <Feature Id="ProductFeature" Title="Our Story Titan" Level="1">
+    <Feature Id="ProductFeature" Title="Indaba Titan" Level="1">
       <Feature Id="VCRedist" Title="Visual C++ 8.0 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
         <MergeRef Id="VCRedist"/>
       </Feature>
@@ -18,7 +18,7 @@
       <ComponentRef Id="CleanupMainApplicationFolder" />
     </Feature>
 
-    <?define AppRegKey = "Software\OurStory\OurStoryTitan" ?>
+    <?define AppRegKey = "Software\Indaba\IndabaTitan" ?>
 
     <Property Id="INSTALLFLAGFOLDER">
       <RegistrySearch Key="$(var.AppRegKey)" Root="HKCU" Type="raw" Id="APPLICATIONFOLDER_REGSEARCH" Name="InstallFilePath"  />
@@ -35,8 +35,8 @@
     <DirectoryRef Id="TARGETDIR">
       <Merge Id="VCRedist" SourceFile="C:\Program Files (x86)\Common Files\Merge Modules\Microsoft_VC140_CRT_x86.msm" DiskId="1" Language="0"/>
       <Component Id="FirewallException" Guid="373cc123-7453-4c73-b236-ee66b4e5e950">
-        <fire:FirewallException Id="FWX3" Name="Our Story Titan (HyperV)" Profile="all" Program="C:\program files\docker\docker\resources\vpnkit.exe" Port="8845" Protocol="tcp" Scope="any" />
-        <fire:FirewallException Id="FWX2" Name="Our Story Titan (Virtualbox)" Profile="all" Port="8845" Protocol="tcp" Scope="any" />
+        <fire:FirewallException Id="FWX3" Name="Indaba Titan (HyperV)" Profile="all" Program="C:\program files\docker\docker\resources\vpnkit.exe" Port="8845" Protocol="tcp" Scope="any" />
+        <fire:FirewallException Id="FWX2" Name="Indaba Titan (Virtualbox)" Profile="all" Port="8845" Protocol="tcp" Scope="any" />
       </Component>
     </DirectoryRef>
 
@@ -47,25 +47,25 @@
     <Directory Id="TARGETDIR" Name="SourceDir">
 
       <Directory Id="ProgramFilesFolder">
-        <Directory Id="INSTALLFOLDER" Name="Our Story Titan">
+        <Directory Id="INSTALLFOLDER" Name="Indaba Titan">
 
         </Directory>
       </Directory>
 
       <Directory Id="ProgramMenuFolder">
-        <Directory Id="ApplicationProgramsFolder" Name="Our Story Titan"/>
+        <Directory Id="ApplicationProgramsFolder" Name="Indaba Titan"/>
       </Directory>
 
       <Directory Id="DesktopFolder" Name="Desktop">
         <Component Id="ApplicationShortcutDesktop" Guid="*">
           <Shortcut Id="ApplicationDesktopShortcut"
-              Name="Our Story"
-              Target="[INSTALLFOLDER]Our Story Titan.exe"
+              Name="Indaba"
+              Target="[INSTALLFOLDER]Indaba Titan.exe"
               WorkingDirectory="INSTALLFOLDER"/>
           <RemoveFolder Id="DesktopFolder" On="uninstall"/>
           <RegistryValue
               Root="HKCU"
-              Key="Software/OurStoryTitan"
+              Key="Software/IndabaTitan"
               Name="installed"
               Type="integer"
               Value="1"
@@ -82,20 +82,20 @@
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="ApplicationShortcut" Guid="*">
         <Shortcut Id="ApplicationStartMenuShortcut"
-                  Name="Our Story Titan"
-                  Target="[INSTALLFOLDER]Our Story Titan.exe"
+                  Name="Indaba Titan"
+                  Target="[INSTALLFOLDER]Indaba Titan.exe"
                   WorkingDirectory="INSTALLFOLDER"/>
         <Shortcut Id="FixNetworkShortcut"
                  Name="Fix Network"
                  Target="[INSTALLFOLDER]FixNetwork.exe"
                  WorkingDirectory="INSTALLFOLDER"/>
         <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
-        <RegistryValue Root="HKCU" Key="Software\Microsoft\OurStoryTitan" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
-        <RegistryValue Root="HKCU" Key="Software\Microsoft\Windows\CurrentVersion\RunOnce" Name="ourstory-firstrun" Type="string" Value="[INSTALLFOLDER]Our Story Titan.exe"/>
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\IndabaTitan" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\Windows\CurrentVersion\RunOnce" Name="ourstory-firstrun" Type="string" Value="[INSTALLFOLDER]Indaba Titan.exe"/>
 
       </Component>
       <Component Id="CleanupMainApplicationFolder" Guid="*">
-        <RegistryValue Root="HKCU" Key="$(var.AppRegKey)" Name="InstallFilePath" Type="string" Value="[AppDataFolder]OurStoryTitan" KeyPath="yes" />
+        <RegistryValue Root="HKCU" Key="$(var.AppRegKey)" Name="InstallFilePath" Type="string" Value="[AppDataFolder]IndabaTitan" KeyPath="yes" />
         <!-- We need to use APPLICATIONFOLDER variable here or RemoveFolderEx
              will not remove on "install". -->
         <util:RemoveFolderEx On="uninstall" Property="INSTALLFLAGFOLDER" />

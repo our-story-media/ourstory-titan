@@ -69,3 +69,4 @@ services:
       sails_master_url: "http://10.10.10.1:8845"
       sails_FAKES3URL: "http://10.10.10.1:8845/upload/"
       sails_FAKES3URL_TRANSCODE: "http://10.10.10.1:8845/upload/transcode/upload/"
+      sails_LOGINCODE: ${LOGINCODE}
