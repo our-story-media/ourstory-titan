@@ -1097,12 +1097,19 @@ namespace Bootlegger.App.Lib
                     Environment.SetEnvironmentVariable("VBOX_MSI_INSTALL_PATH", @"C:\Program Files\Oracle\VirtualBox\");
 
                     Log.Info($"Moving boot2docker if does not exist");
-                    string userHomePath = Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
-                    string dockercache = Path.Combine(userHomePath, ".docker", "machine", "cache", "boot2docker.iso");
-                    Directory.CreateDirectory(Path.Combine(userHomePath, ".docker", "machine", "cache"));
-                    if (!File.Exists(dockercache))
+                    try
                     {
-                        File.Copy(@"C:\Program Files\Docker Toolbox\boot2docker.iso", dockercache, true);
+                        string userHomePath = Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+                        string dockercache = Path.Combine(userHomePath, ".docker", "machine", "cache", "boot2docker.iso");
+                        Directory.CreateDirectory(Path.Combine(userHomePath, ".docker", "machine", "cache"));
+                        if (!File.Exists(dockercache))
+                        {
+                            File.Copy(@"C:\Program Files\Docker Toolbox\boot2docker.iso", dockercache, true);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error(e);
                     }
 
                     //ONLY DO THE FOLLOWING IF PORT FORWARDING IS NOT ALREADY SETUP:
