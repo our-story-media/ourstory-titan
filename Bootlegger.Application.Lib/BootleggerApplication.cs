@@ -83,7 +83,7 @@ namespace Bootlegger.App.Lib
                         return File.Exists(@"C:\Program Files\Docker Toolbox\docker.exe");
                     case InstallerType.HYPER_V:
                     default:
-                        return File.Exists(@"C:\Program Files\Docker\Docker\Docker for Windows.exe");
+                        return File.Exists(@"C:\Program Files\Docker\Docker\Docker Desktop.exe");
                 }
             }
         }
