@@ -47,7 +47,7 @@ namespace Bootlegger.App.Lib
         public RUNNING_STATE CurrentState { get; private set; }
         public OperatingSystem CurrentPlatform { get; private set; }
 
-        const string DOCKERFORWINDOWS = @"C:\Program Files\Docker\Docker\Docker for Windows.exe";
+        const string DOCKERFORWINDOWS = @"C:\Program Files\Docker\Docker\Docker Desktop.exe";
 
 
         Docker.DotNet.DockerClient dockerclient;
