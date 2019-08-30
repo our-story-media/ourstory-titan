@@ -17,8 +17,9 @@ RUN echo "BUILDING FOR $TARGETPLATFORM" && if [ "$TARGETPLATFORM" = "linux/arm/v
     fi && \
     PACKAGES="" && \ 
     if [ ! "$TARGETPLATFORM" = "linux/arm/v7" ] ; then PACKAGES="mongodb" ; fi && \
+    wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | apt-key add - && echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/4.2 main" | tee /etc/apt/sources.list.d/mongodb-org-4.2.list && \
     apt-get update -q && \
-    apt-get install -q -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y nginx redis-server beanstalkd libav-tools melt $PACKAGES && \
+    apt-get install -q -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y nginx redis-server beanstalkd libav-tools melt mongodb-org-tools $PACKAGES && \
     git clone --depth=1 https://github.com/our-story-media/ourstory-server && git clone --depth=1 https://github.com/our-story-media/ourstory-worker
 
 WORKDIR /ourstory-server
