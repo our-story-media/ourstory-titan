@@ -35,6 +35,6 @@ steps:
     gitHubConnection: 'OurStory GitHub'
     repositoryName: 'our-story-media/ourstory-titan'
     action: 'create'
-    title: 'Our Story Titan Installer'
+    title: 'Indaba Titan Installer'
     addChangeLog: false
     assets: 'install/*.exe'
