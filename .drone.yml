@@ -1,0 +1,17 @@
+---
+name: default
+kind: pipeline
+type: docker
+
+platform:
+  os: linux
+  arch: arm
+
+steps:
+- name: docker  
+  image: plugins/docker
+  settings:
+    repo: bootlegger/titan-compact
+    dockerfile: install/Dockerfile
+    auto_tag: true
+    secrets: [ docker_username, docker_password ]
