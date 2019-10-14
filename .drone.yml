@@ -10,8 +10,6 @@ platform:
 steps:
 - name: docker  
   image: plugins/docker
-  environment:
-    TARGETPLATFORM: 'linux/arm/v7'
   settings:
     repo: bootlegger/titan-compact
     dockerfile: install/Dockerfile
@@ -20,4 +18,5 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-      
+    build_args:
+      TARGETPLATFORM: 'linux/arm/v7'
