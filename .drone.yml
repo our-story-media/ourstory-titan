@@ -10,6 +10,8 @@ platform:
 steps:
 - name: docker  
   image: plugins/docker
+  environment:
+    TARGETPLATFORM: linux/arm/v7
   settings:
     repo: bootlegger/titan-compact
     dockerfile: install/Dockerfile
