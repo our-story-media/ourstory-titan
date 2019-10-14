@@ -19,4 +19,4 @@ steps:
     password:
       from_secret: docker_password
     build_args:
-      TARGETPLATFORM: 'linux/arm/v7'
+      - TARGETPLATFORM=linux/arm/v7
