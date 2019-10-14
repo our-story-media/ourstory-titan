@@ -268,3 +268,4 @@ paket-files/
 # !install/images.tar
 *.apk
 uploads
+node_modules

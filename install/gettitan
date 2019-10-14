@@ -33,13 +33,51 @@ else
   sudo docker pull bootlegger/titan-compact
 fi
 
+if [ -f ".supervisorinstalled" ]; then
+
+  echo "Installing Supervisor"
+
+  echo "Downloading Supervisor"
+
+  curl https://raw.githubusercontent.com/our-story-media/ourstory-titan/master/install/supervisor/build/indaba-supervisor -s -o indaba-supervisor
+
+  echo "Changing Mode on Supervisor"
+
+  chmod +x indaba-supervisor
+
+  echo "Add supervisor to startup"
+
+  echo "$(pwd)/indaba-supervisor & > $(pwd)/supervisor.log 2>&1" >> /etc/rc.local
+  
+  touch .supervisorinstalled
+
+fi
+
 echo "Starting Titan"
+
+docker volume create indaba-db
+docker volume create indaba-redis
 
 MAC_ADDRESS=`ifconfig eth0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
 
-sudo docker run --restart always --log-driver none -e sails_LOGINCODE=$MAC_ADDRESS --add-host=redis:127.0.0.1 --add-host=mongo:127.0.0.1 --add-host=beanstalk:127.0.0.1 --add-host=web:127.0.0.1 -p "80:88" -p "8845:80" -v "$(pwd)/upload:/usr/src/app/upload" bootlegger/titan-compact
+sudo docker run --name indaba -d --restart always --log-driver local \
+ -e sails_LOGINCODE=$MAC_ADDRESS \
+ --add-host=redis:127.0.0.1 \
+ --add-host=mongo:127.0.0.1 \
+ --add-host=beanstalk:127.0.0.1 \
+ --add-host=web:127.0.0.1 \
+ -e sails_master_url="http://10.10.10.1:8845" \
+ -e sails_FAKES3URL="http://10.10.10.1:8845/upload/" \
+ -e sails_FAKES3URL_TRANSCODE="http://10.10.10.1:8845/upload/transcode/upload/" \
+ -p "80:88" \
+ -p "8845:80" \
+ -v indaba-db:/data/db \
+ -v indaba-redis:/etc/redis/database \
+ -v "$(pwd)/upload:/usr/src/app/upload" \
+ bootlegger/titan-compact
 
 echo "Marking as Installed"
+
 touch .titaninstalled
 
 exit
