@@ -33,7 +33,7 @@ else
   sudo docker pull bootlegger/titan-compact
 fi
 
-if [ -f ".supervisorinstalled" ]; then
+if [ ! -f ".supervisorinstalled" ]; then
 
   echo "Installing Supervisor"
 
@@ -47,8 +47,16 @@ if [ -f ".supervisorinstalled" ]; then
 
   echo "Add supervisor to startup"
 
-  echo "$(pwd)/indaba-supervisor & > $(pwd)/supervisor.log 2>&1" >> /etc/rc.local
-  
+  #fix for RPi4 Buster
+
+  # /lib/systemd/system/systemd-udevd.service
+  # change to PrivateMounts=no (requires a reboot)
+
+  sudo sed "s/PrivateMounts=.*/PrivateMounts=no/g" /lib/systemd/system/systemd-udevd.service
+
+  sudo sed -i -e "$ i\sudo bash -c '$(pwd)/indaba-supervisor > $(pwd)/supervisor.log 2>&1' &" /etc/rc.local
+  # sudo echo "sudo bash -c '$(pwd)/indaba-supervisor > $(pwd)/supervisor.log 2>&1' &" >> /etc/rc.local
+
   touch .supervisorinstalled
 
 fi
@@ -72,12 +80,32 @@ sudo docker run --name indaba -d --restart always --log-driver local \
  -p "80:88" \
  -p "8845:80" \
  -v indaba-db:/data/db \
- -v indaba-redis:/etc/redis/database \
+ -v indaba-redis:/redis \
  -v "$(pwd)/upload:/usr/src/app/upload" \
  bootlegger/titan-compact
+
+echo "Changing perms of ./upload"
+
+sudo chmod 777 upload
+
+echo "Printing Password"
+
+echo $MAC_ADDRESS >> password.txt
 
 echo "Marking as Installed"
 
 touch .titaninstalled
+
+echo "Power Saving Options"
+
+echo "Disable HDMI"
+
+sudo /opt/vc/bin/tvservice -o
+
+echo "Disable WiFi + BLE"
+
+sudo echo "dtoverlay=pi3-disable-wifi" >> /boot/config.txt
+ 
+sudo echo "dtoverlay=pi3-disable-bt" >> /boot/config.txt
 
 exit

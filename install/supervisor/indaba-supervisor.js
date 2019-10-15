@@ -9,6 +9,12 @@ console.log("Starting...")
 let numdrives = -1;
 let alreadyprocessing = false;
 
+async function runExec(cmd) {
+    const { stdout, stderr } = await exec(cmd, {cwd:'/home/pi'});
+    console.log(stdout);
+    console.error(stderr);
+  }
+
 async function update(pathin) {
     console.log("Performing Update...");
 
@@ -20,7 +26,7 @@ async function update(pathin) {
         console.log("Stopping Current Container");
 
         try {
-            await exec("docker stop indaba");
+            await runExec("docker stop indaba");
         }
         catch (e) {
             console.log(e);
@@ -28,12 +34,12 @@ async function update(pathin) {
 
         console.log("Loading New Image");
 
-        await exec(`docker load --input "${filename}"`);
+        await runExec(`docker load --input "${filename}"`);
 
         console.log("Removing Old Image");
 
         try {
-            await exec("docker rm indaba");
+            await runExec("docker rm indaba");
         }
         catch (e) {
             console.log(e);
@@ -42,7 +48,7 @@ async function update(pathin) {
         console.log("Removing Install Marker");
 
         try {
-            await exec("rm .titaninstalled");
+            await runExec("rm .titaninstalled");
         }
         catch (e) {
             console.log(e);
@@ -50,8 +56,7 @@ async function update(pathin) {
 
         console.log("Run Install Script to Complete Update");
 
-        await exec("./gettitan");
-
+        await runExec("./gettitan");
     }
     else {
         console.error('No indaba-update.tar file!');
@@ -73,7 +78,7 @@ async function start() {
 
             let usb = _.find(drives, { isUSB: true });
 
-            // console.log(usb);
+            console.log(usb);
             numdrives = _.size(drives);
 
             //run update
@@ -88,6 +93,7 @@ async function start() {
         }
     }
     catch (e) {
+        console.log("UPDATE FAILED!");
         console.error(e);
         setTimeout(start, 5000);
     }

@@ -45,6 +45,7 @@ RUN npm i --silent && \
     ln -s /ourstory-server/docker/bootlegger.conf /etc/nginx/vhost.d/default && \
     ln -sb /ourstory-server/fallback/index.html /usr/share/nginx/html/index.html && \
     ln -s /ourstory-server/docker/server.local.conf /etc/nginx/conf.d/default.conf && \
+    ln -s /ourstory-server/upload/ /ourstory-worker/ && \
     mkdir -p /data/db && \
     mkdir -p /redis
 
