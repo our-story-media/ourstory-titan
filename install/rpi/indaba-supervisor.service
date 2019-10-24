@@ -1,0 +1,11 @@
+[Unit]
+Description=Indaba Supervisor
+After=docker.service
+
+[Service]
+Type=simple
+ExecStart=/bin/bash -c 'exec /indaba/indaba-supervisor >> /indaba/supervisor.log 2>&1'
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

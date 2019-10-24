@@ -1,0 +1,10 @@
+[Unit]
+Description=Indaba Bootstrapper
+After=docker.service
+
+[Service]
+Type=simple
+ExecStart=/bin/bash -c 'exec /indaba/gettitan >> /indaba/install.log 2>&1'
+
+[Install]
+WantedBy=multi-user.target

@@ -1,26 +1,74 @@
+require('console-stamp')(console);
 const drivelist = require('drivelist');
 const _ = require('lodash');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const fs = require('fs');
+const mkdir = util.promisify(require('fs').mkdir);
+const cp = util.promisify(require('fs').copyFile);
 const path = require('path');
 
 console.log("Starting...")
 let numdrives = -1;
 let alreadyprocessing = false;
 
-async function runExec(cmd) {
-    const { stdout, stderr } = await exec(cmd, {cwd:'/home/pi'});
-    console.log(stdout);
-    console.error(stderr);
-  }
+function runExec(cmd) {
+    const exec = require('child_process').exec;
+    return new Promise((resolve, reject) => {
+        exec(cmd, (error, stdout, stderr) => {
+            console.log(stdout);
+            console.error(stderr);
+            if (error) {
+                console.warn(error);
+            }
+            resolve(stdout ? stdout : stderr);
+        });
+    });
+}
 
 async function update(pathin) {
+
+    console.log("Backup Logs...");
+
+    let logdir = `logs-${Math.floor(Date.now() / 1000)}`;
+
+    console.log(`Creating ${logdir}`);
+
+    try {
+        await mkdir(`${path.join(pathin, 'indaba-logs')}`);
+    }
+    catch (e) { 
+        console.error(e);
+    }
+
+    try {
+        await mkdir(`${path.join(pathin, 'indaba-logs', logdir)}`);
+    }
+    catch (e) { 
+        console.error(e);
+    }
+
+    try
+    {
+        await runExec(`cp /indaba/*.log "${path.join(pathin, 'indaba-logs', logdir)}"`);
+    }
+    catch (e)
+    {
+        console.error(e);
+    }
+
+    try {
+        await runExec(`docker logs indaba > "${path.join(pathin, 'indaba-logs', `${logdir}/docker.log`)}"`);
+    }
+    catch (e) {
+        console.error("Failed to Write Logs");
+        console.error(e);
+    }
+
     console.log("Performing Update...");
 
     let filename = path.join(pathin, 'indaba-update.tar');
-    // let updatefile = fs.readdirSync(path);
-    // console.log(updatefile);
+
     if (fs.existsSync(filename)) {
 
         console.log("Stopping Current Container");
@@ -29,7 +77,7 @@ async function update(pathin) {
             await runExec("docker stop indaba");
         }
         catch (e) {
-            console.log(e);
+            console.error(e);
         }
 
         console.log("Loading New Image");
@@ -42,7 +90,7 @@ async function update(pathin) {
             await runExec("docker rm indaba");
         }
         catch (e) {
-            console.log(e);
+            console.error(e);
         }
 
         console.log("Removing Install Marker");
@@ -51,7 +99,7 @@ async function update(pathin) {
             await runExec("rm .titaninstalled");
         }
         catch (e) {
-            console.log(e);
+            console.error(e);
         }
 
         console.log("Run Install Script to Complete Update");
@@ -65,7 +113,10 @@ async function update(pathin) {
 
 async function start() {
 
+    // console.log(process.env);
+
     try {
+        // await runExec('ls');
 
         let drives = await drivelist.list();
 
@@ -93,7 +144,7 @@ async function start() {
         }
     }
     catch (e) {
-        console.log("UPDATE FAILED!");
+        console.error("UPDATE FAILED!");
         console.error(e);
         setTimeout(start, 5000);
     }

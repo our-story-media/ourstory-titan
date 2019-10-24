@@ -269,3 +269,4 @@ paket-files/
 *.apk
 uploads
 node_modules
+pi-gen

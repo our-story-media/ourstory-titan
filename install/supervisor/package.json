@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "indaba-supervisor.js"
+    "start": "node indaba-supervisor.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "console-stamp": "^3.0.0-rc2.0",
     "drivelist": "8.0.7",
     "lodash": "^4.17.15"
   }

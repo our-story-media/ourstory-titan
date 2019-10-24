@@ -1,79 +1,104 @@
 #!/bin/bash
-
 # Designed for Debian based OS
 
 # This file is for installing Indaba Titan as part of a packaged build workflow (i.e. building a Raspberry PI image).
 
 # DO NOT run this file at every boot as it will try to install Docker from the internet!
 
+echo_time() {
+  echo '['`date +"%F %T"`']' $*
+}
+
+mkdir -p /indaba/upload
+
+cd /indaba
+
 if [ -f ".titaninstalled" ]; then
-  echo "Titan is already installed. To re-install, remove the .titaninstalled file in this directory."
+  echo_time "Titan is already installed. To re-install, remove the .titaninstalled file in /indaba."
   exit
 fi
 
-echo "This script installs Indaba Titan. If you do not wish to continue, press CTL-C now..."
+echo_time "This script installs Indaba Titan. If you do not wish to continue, press CTL-C now..."
 
 sleep 5
 
 # Install Docker:
-echo "Installing Docker"
+echo_time "Installing Docker"
 
 if [ -x "$(command -v docker)" ]; then
-  echo "Docker already installed"
+  echo_time "Docker already installed"
 else
   curl -sSL https://get.docker.com | sh
-  echo "Adding user to docker group"
+  echo_time "Adding user to docker group"
   sudo usermod -aG docker $USER
 fi
 
 if docker image inspect bootlegger/titan-compact > /dev/null 2>&1 ; then
-  echo "Image already installed"
+  echo_time "Image already installed"
 else
-  echo "Pulling Images to Local Cache"
-  sudo docker pull bootlegger/titan-compact
+  if [ -f "/indaba/indaba-update.tar" ]; then
+    echo_time "Loading image from file"
+    sudo docker load -i /indaba/indaba-update.tar
+  else
+    echo "Pulling Images to Local Cache"
+    sudo docker pull bootlegger/titan-compact
+  fi
 fi
 
 if [ ! -f ".supervisorinstalled" ]; then
 
-  echo "Installing Supervisor"
+  echo_time "Installing Supervisor"
 
-  echo "Downloading Supervisor"
+  echo_time "Downloading Supervisor"
 
-  curl https://raw.githubusercontent.com/our-story-media/ourstory-titan/master/install/supervisor/build/indaba-supervisor -s -o indaba-supervisor
+  if [ -f "/indaba/indaba-supervisor" ]; then
+    cp /indaba/indaba-supervisor .
+  else
+    curl https://raw.githubusercontent.com/our-story-media/ourstory-titan/master/install/supervisor/build/indaba-supervisor -s -o indaba-supervisor
+  fi
 
-  echo "Changing Mode on Supervisor"
+  echo_time "Changing Mode on Supervisor"
 
   chmod +x indaba-supervisor
 
-  echo "Add supervisor to startup"
+  echo_time "Add supervisor to startup"
 
   #fix for RPi4 Buster
 
   # /lib/systemd/system/systemd-udevd.service
   # change to PrivateMounts=no (requires a reboot)
 
-  sudo sed "s/PrivateMounts=.*/PrivateMounts=no/g" /lib/systemd/system/systemd-udevd.service
+  sudo sed -i "s/PrivateMounts=.*/PrivateMounts=no/g" /lib/systemd/system/systemd-udevd.service
 
-  sudo sed -i -e "$ i\sudo bash -c '$(pwd)/indaba-supervisor > $(pwd)/supervisor.log 2>&1' &" /etc/rc.local
-  # sudo echo "sudo bash -c '$(pwd)/indaba-supervisor > $(pwd)/supervisor.log 2>&1' &" >> /etc/rc.local
+  sudo sed -i -e "$ i\sudo bash -c '/indaba/indaba-supervisor > /indaba/supervisor.log 2>&1' &" /etc/rc.local
 
   touch .supervisorinstalled
 
 fi
 
-echo "Starting Titan"
+echo_time "Changing perms of ./upload"
+
+sudo chmod 777 upload
+
+echo_time "Starting Titan"
 
 docker volume create indaba-db
 docker volume create indaba-redis
 
 MAC_ADDRESS=`ifconfig eth0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
 
-sudo docker run --name indaba -d --restart always --log-driver local \
- -e sails_LOGINCODE=$MAC_ADDRESS \
+sudo docker run \
+ --name indaba -d \
+ --restart always \
+ --log-driver json \
+ --log-opt compress=true \
+ --log-opt max-size=10m \
+ --log-opt max-file=5 \
  --add-host=redis:127.0.0.1 \
  --add-host=mongo:127.0.0.1 \
  --add-host=beanstalk:127.0.0.1 \
  --add-host=web:127.0.0.1 \
+ -e sails_LOGINCODE=$MAC_ADDRESS \
  -e sails_master_url="http://10.10.10.1:8845" \
  -e sails_FAKES3URL="http://10.10.10.1:8845/upload/" \
  -e sails_FAKES3URL_TRANSCODE="http://10.10.10.1:8845/upload/transcode/upload/" \
@@ -81,31 +106,30 @@ sudo docker run --name indaba -d --restart always --log-driver local \
  -p "8845:80" \
  -v indaba-db:/data/db \
  -v indaba-redis:/redis \
- -v "$(pwd)/upload:/usr/src/app/upload" \
+ -v "/indaba/upload:/usr/src/app/upload" \
+ --privileged \
  bootlegger/titan-compact
 
-echo "Changing perms of ./upload"
-
-sudo chmod 777 upload
-
-echo "Printing Password"
+echo_time "Printing Password"
 
 echo $MAC_ADDRESS >> password.txt
 
-echo "Marking as Installed"
+echo_time "Marking as Installed"
 
 touch .titaninstalled
 
-echo "Power Saving Options"
+echo_time "Power Saving Options"
 
-echo "Disable HDMI"
+# echo "Disable HDMI"
 
-sudo /opt/vc/bin/tvservice -o
+# sudo /opt/vc/bin/tvservice -o
 
-echo "Disable WiFi + BLE"
+echo_time "Disable WiFi + BLE"
 
-sudo echo "dtoverlay=pi3-disable-wifi" >> /boot/config.txt
+sudo `echo_time` echo "dtoverlay=pi3-disable-wifi" >> /boot/config.txt
  
-sudo echo "dtoverlay=pi3-disable-bt" >> /boot/config.txt
+sudo `echo_time` echo "dtoverlay=pi3-disable-bt" >> /boot/config.txt
+
+sudo reboot -r +1 &
 
 exit
