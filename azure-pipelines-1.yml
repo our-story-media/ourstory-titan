@@ -23,3 +23,9 @@ stages:
     - task: Bash@3
       inputs:
         filePath: './install/rpi/build.sh'
+        workingDirectory: $(Build.SourcesDirectory)/install/rpi/
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: './install/rpi/pi-gen/deploy'
+        ArtifactName: 'Disk Image'
+        publishLocation: 'Container'
