@@ -13,6 +13,16 @@ mkdir -p /indaba/upload
 
 cd /indaba
 
+if [ -f ".resizedfs" ]; then
+  echo_time "Filesystem already resized"
+else
+  echo_time "Filesystem needs resize on first boot before anything else can happen"
+  sudo raspi-config --expand-rootfs
+  touch .resizedfs
+  echo_time "Going for reboot in 1 min"
+  sudo shutdown -r +1 &
+fi
+
 if [ -f ".titaninstalled" ]; then
   echo_time "Titan is already installed. To re-install, remove the .titaninstalled file in /indaba."
   exit
@@ -90,7 +100,7 @@ MAC_ADDRESS=`ifconfig eth0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2
 sudo docker run \
  --name indaba -d \
  --restart always \
- --log-driver json \
+ --log-driver json-file \
  --log-opt compress=true \
  --log-opt max-size=10m \
  --log-opt max-file=5 \
@@ -107,6 +117,7 @@ sudo docker run \
  -v indaba-db:/data/db \
  -v indaba-redis:/redis \
  -v "/indaba/upload:/usr/src/app/upload" \
+ -v /media/usb0:/usbdrive \
  --privileged \
  bootlegger/titan-compact
 
@@ -118,18 +129,20 @@ echo_time "Marking as Installed"
 
 touch .titaninstalled
 
-echo_time "Power Saving Options"
+# echo_time "Power Saving Options"
 
 # echo "Disable HDMI"
 
 # sudo /opt/vc/bin/tvservice -o
 
-echo_time "Disable WiFi + BLE"
+# echo_time "Disable WiFi + BLE"
 
-sudo `echo_time` echo "dtoverlay=pi3-disable-wifi" >> /boot/config.txt
+# sudo echo_time echo "dtoverlay=pi3-disable-wifi" >> /boot/config.txt
  
-sudo `echo_time` echo "dtoverlay=pi3-disable-bt" >> /boot/config.txt
+# sudo echo_time echo "dtoverlay=pi3-disable-bt" >> /boot/config.txt
 
-sudo reboot -r +1 &
+echo_time "Going for reboot in 1 min"
+
+sudo shutdown -r +1 &
 
 exit

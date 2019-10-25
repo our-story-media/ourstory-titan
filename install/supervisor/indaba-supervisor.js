@@ -37,23 +37,21 @@ async function update(pathin) {
     try {
         await mkdir(`${path.join(pathin, 'indaba-logs')}`);
     }
-    catch (e) { 
+    catch (e) {
         console.error(e);
     }
 
     try {
         await mkdir(`${path.join(pathin, 'indaba-logs', logdir)}`);
     }
-    catch (e) { 
+    catch (e) {
         console.error(e);
     }
 
-    try
-    {
+    try {
         await runExec(`cp /indaba/*.log "${path.join(pathin, 'indaba-logs', logdir)}"`);
     }
-    catch (e)
-    {
+    catch (e) {
         console.error(e);
     }
 
@@ -111,13 +109,15 @@ async function update(pathin) {
     }
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }  
+
 async function start() {
 
     // console.log(process.env);
 
     try {
-        // await runExec('ls');
-
         let drives = await drivelist.list();
 
         if (numdrives == -1)
@@ -127,21 +127,32 @@ async function start() {
             alreadyprocessing = true;
             console.log('New Drive Detected');
 
+            // await sleep(5000);
+
+            // drives = await drivelist.list();
+
             let usb = _.find(drives, { isUSB: true });
 
-            console.log(usb);
+            // console.log(usb);
+
             numdrives = _.size(drives);
 
-            //run update
-            await update(usb.mountpoints[0].path);
+            if (usb.mountpoints.length > 0) {
+                //run update
+                console.log("Running update from", usb.mountpoints[0].path);
+                await update(usb.mountpoints[0].path);
+            }
+            else {
+                console.log("No Mountpoint", usb);
+            }
 
             alreadyprocessing = false;
-            setTimeout(start, 5000);
         }
         else {
             numdrives = _.size(drives);
-            setTimeout(start, 5000);
         }
+
+        setTimeout(start, 5000);
     }
     catch (e) {
         console.error("UPDATE FAILED!");

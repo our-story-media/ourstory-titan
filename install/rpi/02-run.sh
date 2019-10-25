@@ -35,12 +35,6 @@ curl -sSL https://get.docker.com/ | sh
 # update user group
 usermod -aG docker indaba
 
-# put titan in startup
-# sed -i -e "$ i\sudo bash -c '/indaba/gettitan 2>&1 | tee /indaba/install.log' &" /etc/rc.local
-
-# put supervisor in startup
-# sed -i -e "$ i\sudo bash -c '/indaba/indaba-supervisor >> /indaba/supervisor.log 2>&1' &" /etc/rc.local
-
 touch /indaba/.supervisorinstalled
 
 # disable splash
