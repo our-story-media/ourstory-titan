@@ -20,18 +20,18 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    - task: DownloadPipelineArtifact@1
-      inputs:
-        artifactName: indaba-update
-        targetPath: ./install/rpi/pi-gen/stage2/01-sys-tweaks/files/
+    # - task: DownloadPipelineArtifact@1
+    #   inputs:
+    #     artifactName: indaba-update
+    #     targetPath: ./install/rpi/pi-gen/stage2/01-sys-tweaks/files/
     - task: Bash@3
       inputs:
         filePath: './install/rpi/build-ci.sh'
         workingDirectory: $(Build.SourcesDirectory)/install/rpi/
-    - task: PublishPipelineArtifact@1
-      inputs:
-        targetPath: './install/rpi/pi-gen/stage2/01-sys-tweaks/files/indaba-update.tar'
-        artifactName: indaba-update
+    # - task: PublishPipelineArtifact@1
+    #   inputs:
+    #     targetPath: './install/rpi/pi-gen/stage2/01-sys-tweaks/files/indaba-update.tar'
+    #     artifactName: indaba-update
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: './install/rpi/pi-gen/deploy'
