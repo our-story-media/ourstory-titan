@@ -18,7 +18,7 @@ RUN echo "BUILDING FOR $TARGETPLATFORM" && if [ "$TARGETPLATFORM" = "linux/arm/v
     PACKAGES="" && \ 
     if [ ! "$TARGETPLATFORM" = "linux/arm/v7" ] ; then PACKAGES="mongodb" ; fi && \
     apt-get update -q && \
-    apt-get install -q -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y nginx redis-server beanstalkd libav-tools melt $PACKAGES && \
+    apt-get install -q -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y nginx redis-server beanstalkd libav-tools melt rsync $PACKAGES && \
     git clone --depth=1 https://github.com/our-story-media/ourstory-server && git clone --depth=1 https://github.com/our-story-media/ourstory-worker
 
 WORKDIR /ourstory-server
