@@ -51,7 +51,7 @@ docker-compose up -d
 # Uncomment the following line to speed up building
 # touch ./stage0/SKIP ./stage1/SKIP
 
-DOCKER_BUILDKIT=1 CLEAN=1 CONTINUE=1 ./build-docker.sh
+DOCKER_BUILDKIT=1 APT_PROXY=http://172.17.0.1:3142 CLEAN=1 CONTINUE=1 ./build-docker.sh
 
 sleep 1
 
