@@ -4,6 +4,8 @@ else
     git clone https://github.com/RPi-Distro/pi-gen.git
 fi
 
+apt-get install -f quilt qemu-user-static debootstrap bsdtar
+
 cp config ./pi-gen/config
 
 cp ../supervisor/build/indaba-supervisor ./pi-gen/stage2/01-sys-tweaks/files
