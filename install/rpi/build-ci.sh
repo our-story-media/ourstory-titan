@@ -4,7 +4,7 @@ else
     git clone https://github.com/RPi-Distro/pi-gen.git
 fi
 
-apt-get install -f quilt qemu-user-static debootstrap bsdtar
+sudo apt-get install -f quilt qemu-user-static debootstrap bsdtar
 
 cp config ./pi-gen/config
 
