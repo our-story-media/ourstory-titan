@@ -24,15 +24,15 @@ chmod +x ./pi-gen/stage2/01-sys-tweaks/02-run.sh
 
 rm ./pi-gen/stage2/EXPORT_NOOBS
 
-if [ -f "./pi-gen/stage2/01-sys-tweaks/files/indaba-update.tar" ]; then
-  echo "tar already exists"
-else
+# if [ -f "./pi-gen/stage2/01-sys-tweaks/files/indaba-update.tar" ]; then
+#   echo "tar already exists"
+# else
 
-  docker pull bootlegger/titan-compact:latest
+#   docker pull bootlegger/titan-compact:latest
 
-  docker save -o ./pi-gen/stage2/01-sys-tweaks/files/indaba-update.tar bootlegger/titan-compact:latest
+#   docker save -o ./pi-gen/stage2/01-sys-tweaks/files/indaba-update.tar bootlegger/titan-compact:latest
 
-fi
+# fi
 
 touch ./pi-gen/stage3/SKIP ./pi-gen/stage4/SKIP ./pi-gen/stage5/SKIP
 touch ./pi-gen/stage4/SKIP_IMAGES ./pi-gen/stage5/SKIP_IMAGES
@@ -43,7 +43,7 @@ cd pi-gen
 # Uncomment the following line to speed up building
 # touch ./stage0/SKIP ./stage1/SKIP
 
-./build.sh
+sudo ./build.sh
 
 sleep 1
 
