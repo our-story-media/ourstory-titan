@@ -1,5 +1,6 @@
 ﻿using Bootlegger.App.Lib;
 using Bootlegger.App.Win.locale;
+using CefSharp;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using System;
@@ -19,6 +20,20 @@ namespace Bootlegger.App.Win
     /// </summary>
     public partial class Running
     {
+        class DownloadHandler : IDownloadHandler
+        {
+            public void OnBeforeDownload(IWebBrowser chromiumWebBrowser, IBrowser browser, DownloadItem downloadItem, IBeforeDownloadCallback callback)
+            {
+                
+                callback.Continue(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),"Downloads", downloadItem.SuggestedFileName),true);
+            }
+
+            public void OnDownloadUpdated(IWebBrowser chromiumWebBrowser, IBrowser browser, DownloadItem downloadItem, IDownloadItemCallback callback)
+            {
+                
+            }
+        }
+
         public Running()
         {
             InitializeComponent();
@@ -28,6 +43,7 @@ namespace Bootlegger.App.Win
             //Browser.LoadingStateChanged += Browser_LoadingStateChanged;
             //Browser.LoadError += Browser_LoadError;
             Browser.TitleChanged += Browser_TitleChanged;
+            Browser.DownloadHandler = new DownloadHandler();
         }
 
      
@@ -79,6 +95,12 @@ namespace Bootlegger.App.Win
                     //progressring.Visibility = Visibility.Collapsed;
                     var culture = Thread.CurrentThread.CurrentUICulture;
                     Browser.Address = $"http://localhost:{BootleggerApplication.PORT}/auth/locale/{culture.TwoLetterISOLanguageName}";
+
+
+                    //Browser.Address = "http://jell.yfish.us/";
+                    //Browser.Address = "https://app.indaba.dev";
+
+
                     statusled.Background = FindResource("green") as Brush;
                     ledshadow.Color = Colors.Green;
                     progresswrapper.Visibility = Visibility.Collapsed;

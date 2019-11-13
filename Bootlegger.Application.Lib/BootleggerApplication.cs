@@ -623,27 +623,34 @@ namespace Bootlegger.App.Lib
         public void SetWiFiPolicy()
         {
             Log.Info($"Setting WiFi Policy for Firewall");
-            WlanClient wlan = new WlanClient();
-            var intf = wlan.Interfaces.First();
-            var profilename = intf.CurrentConnection.profileName;
-            var manager = new NetworkListManagerClass();
-            var connectedNetworks = manager.GetNetworks(NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_CONNECTED).Cast<INetwork>();
-
-            foreach (var network in connectedNetworks)
+            try
             {
-                var netname = network.GetName();
-                if (profilename == netname)
+                WlanClient wlan = new WlanClient();
+                var intf = wlan.Interfaces.First();
+                var profilename = intf.CurrentConnection.profileName;
+                var manager = new NetworkListManagerClass();
+                var connectedNetworks = manager.GetNetworks(NLM_ENUM_NETWORK.NLM_ENUM_NETWORK_CONNECTED).Cast<INetwork>();
+
+                foreach (var network in connectedNetworks)
                 {
-                    //network in profile list is same as network in wifi connection:
-                    var cat = network.GetCategory();
-
-                    if (cat != NLM_NETWORK_CATEGORY.NLM_NETWORK_CATEGORY_PRIVATE)
+                    var netname = network.GetName();
+                    if (profilename == netname)
                     {
-                        network.SetCategory(NLM_NETWORK_CATEGORY.NLM_NETWORK_CATEGORY_PRIVATE);
-                        Log.Info($"Success setting WiFi Policy for Firewall to Private");
+                        //network in profile list is same as network in wifi connection:
+                        var cat = network.GetCategory();
 
+                        if (cat != NLM_NETWORK_CATEGORY.NLM_NETWORK_CATEGORY_PRIVATE)
+                        {
+                            network.SetCategory(NLM_NETWORK_CATEGORY.NLM_NETWORK_CATEGORY_PRIVATE);
+                            Log.Info($"Success setting WiFi Policy for Firewall to Private");
+
+                        }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, $"Problem setting WiFi Policy");
             }
         }
 
@@ -1333,16 +1340,16 @@ namespace Bootlegger.App.Lib
         {
             if (value.ProgressMessage != null)
             {
-                Debug.WriteLine(value.Progress.Current);
-                Layers[value.ID] = value.Progress.Current / (double)value.Progress.Total;
-                try
-                {
-                    OnDownloadProgress?.Invoke("Downloading", CurrentDownload, imagestodownload.Count, Layers, CurrentDownload / (double)imagestodownload.Count);
-                }
-                catch
-                {
-                    //unknown message
-                }
+                Debug.WriteLine(value.Stream);
+                //Layers[value.ID] = value.Progress.Current / (double)value.Progress.Total;
+                //try
+                //{
+                //    OnDownloadProgress?.Invoke("Downloading", CurrentDownload, imagestodownload.Count, Layers, CurrentDownload / (double)imagestodownload.Count);
+                //}
+                //catch
+                //{
+                //    //unknown message
+                //}
             }
         }
     }

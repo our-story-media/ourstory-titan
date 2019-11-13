@@ -43,7 +43,7 @@ services:
 
   worker:
     restart: on-failure
-    image: bootlegger/ourstory-worker:dev
+    image: bootlegger/ourstory-worker:latest
     depends_on:
       - mongo
       - beanstalk
@@ -55,7 +55,7 @@ services:
 
   web:
     restart: on-failure
-    image: bootlegger/ourstory-server:dev
+    image: bootlegger/ourstory-server:latest
     depends_on: 
       - redis
       - mongo
