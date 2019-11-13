@@ -109,12 +109,18 @@ namespace Bootlegger.App.Win
             }
         }
 
-        private void MainWindow_Initialized(object sender, EventArgs e)
+
+
+    private void MainWindow_Initialized(object sender, EventArgs e)
         {
             App.BootleggerApp.Log.Info($"Init Window");
             progress.Visibility = Visibility.Hidden;
 
+
+
             MachineId.Text = App.BootleggerApp.GetMachineId();
+            Version.Text = ThisAssembly.Git.BaseTag;
+
 
             //HACK FOR DEGUB
             //App.BootleggerApp.IsInstalled = true;
